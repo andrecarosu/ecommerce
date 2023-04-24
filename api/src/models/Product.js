@@ -2,9 +2,9 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "User",
+    "Product",
     {
-      user_id: {
+      product_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -14,37 +14,44 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      address: {
-        type: DataTypes.STRING,
+
+      normal_price: {
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
-      phone: {
-        type: DataTypes.STRING,
+      discount_price: {
+        type: DataTypes.FLOAT,
+      },
+
+      description: {
+        type: DataTypes.TEXT,
         allowNull: false,
       },
 
-      city: {
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },     
+
+      image: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: DataTypes.STRING,
+      brand: {
+        type: DataTypes.STRING(50),
         allowNull: false,
       },
-      imagen: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        default: "https://cdn-icons-png.flaticon.com/512/711/711769.png",
+
+      state: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        default: true
       },
+      
     },
     {
-      tableName: "User",
-      timestamps: false,
+      tableName: "Product",
+     
     }
   );
 };

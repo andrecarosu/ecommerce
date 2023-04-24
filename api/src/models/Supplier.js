@@ -1,18 +1,21 @@
 const { DataTypes } = require("sequelize");
-
+// Exportamos una funcion que define el modelo
+// Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
+  // defino el modelo
   sequelize.define(
-    "User",
+    "Supplier",
     {
-      user_id: {
+      supplier_id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       address: {
         type: DataTypes.STRING,
@@ -22,28 +25,30 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
-      city: {
-        type: DataTypes.STRING,
+      state: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultVale: true,
+      },
+      contact_name: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+      post: {
+        type: DataTypes.STRING(30),
         allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
-      password: {
+      city: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      imagen: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        default: "https://cdn-icons-png.flaticon.com/512/711/711769.png",
-      },
+      }
     },
     {
-      tableName: "User",
+      tableName: "Supplier",
       timestamps: false,
     }
   );
