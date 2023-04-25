@@ -53,49 +53,34 @@ const {
 
 // Aca vendrian las relaciones
 
+/*---------------relaciones de uno a muchos---------------------*/
+
 User.belongsTo(Type_user, { foreignKey: 'id_type', });
 Type_user.hasMany(User, { foreignKey: 'user_id' });
 
-Producto.hasMany(Motivo_calificacion, { foreignKey: "id_producto" });
-Motivo_calificacion.belongsTo(Producto, { foreignKey: "id_producto" });
+Review.belongsTo(Product, { foreignKey: "product_id" });
+Product.hasMany(Review, { foreignKey: "review_id" });
 
-Ciudad.hasMany(Usuario, { foreignKey: "id_ciudad" });
-Usuario.belongsTo(Ciudad, { foreignKey: "id_ciudad" });
+Product.belongsTo(Category_product, { foreignKey: "category_id" });
+Category_product.hasMany(Product, { foreignKey: "product_id" });
 
-Ciudad.hasMany(Comercio, { foreignKey: "id_ciudad" });
-Comercio.belongsTo(Ciudad, { foreignKey: "id_ciudad" })
+Product.belongsTo(Supplier, { foreignKey: "supplier_id" })
+Supplier.hasMany(Product, { foreignKey: "product_id" });
 
-Comercio.hasMany(Producto, { foreignKey: "id_comercio" })
-Producto.belongsTo(Comercio, { foreignKey: "id_comercio" })
+Order.hasMany(User, { foreignKey: "user_id" })
+User.belongsTo(Order, { foreignKey: "order_id" })
 
-Categoria_comercio.hasMany(Comercio, { foreignKey: "id_categoria_comercio" });
-Comercio.belongsTo(Categoria_comercio, { foreignKey: "id_categoria_comercio" })
+Shopping.hasMany(Supplier, { foreignKey: "supplier_id" });
+Supplier.belongsTo(Shopping, { foreignKey: "shopping_id" })
 
-Categoria_producto.hasMany(Producto, { foreignKey: 'id_categoria_producto' });
-Producto.belongsTo(Categoria_producto, { foreignKey: 'id_categoria_producto' })
+/*---------------relaciones de muchos a muchos---------------------*/
+Product.belongsToMany(Order, { through: Detail_order });
+Order.belongsToMany(Product, { through: Detail_order });
+
+Product.belongsToMany(Shopping, { through: Detail_shopping });
+Shopping.belongsToMany(Product, { through: Detail_shopping });
 
 
-/*----------------------------------------------------------------------*/
-Producto.belongsToMany(Venta, { through: "Detalle_venta" });
-Venta.belongsToMany(Producto, { through: "Detalle_venta" });
-
-Usuario.hasMany(Venta, { foreignKey: "id_usuario" });
-Venta.belongsTo(Usuario, { foreignKey: "id_usuario" });
-
-Venta.hasMany(Detalle_venta, { foreignKey: "id_venta" });
-Detalle_venta.belongsTo(Venta, { foreignKey: "id_venta" })
-
-Producto.hasMany(Detalle_venta, { foreignKey: "id_producto" });
-Detalle_venta.belongsTo(Producto, { foreignKey: "id_producto" })
-
-Comercio.hasMany(Detalle_venta, { foreignKey: "id_comercio" });
-Detalle_venta.belongsTo(Comercio, { foreignKey: "id_comercio" })
-
-Pagos.hasMany(Detalle_venta, { foreignKey: "id_pago" });
-Detalle_venta.belongsTo(Pagos, { foreignKey: "id_pago" })
-
-Comercio.hasMany(Pagos, { foreignKey: "id_comercio" });
-Pagos.belongsTo(Comercio, { foreignKey: "id_comercio" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
