@@ -3,13 +3,13 @@ const { validacionPostUsuario } = require("../validaciones/validacionUsuario")
 
 
 const postUserHandler = async (req, res) => {
-  let { id_tipo_usuario, id_usuario, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, direccion, telefono, id_ciudad, estado, email, password, imagen } = req.body
+  let { type_id, name, address, phone, city, email, password, image} = req.body
  
   try {
 
     validacionPostUsuario(req.body)
     
-    const newUser = await createUsuario(id_tipo_usuario, id_usuario, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, direccion, telefono, id_ciudad, estado, email, password, imagen)
+    const newUser = await createUsuario(type_id, name, address, phone, city, email, password, image)
     res.status(200).send('Registro exitoso')
 
   } catch (error) {

@@ -1,53 +1,14 @@
 const { Router } = require("express");
-const paymentService = require("../service/paymentService")
-const paymentController = require("../controllers/paymentController/paymentController")
-const paymentInstance = new paymentController(new paymentService())
-
 const router = Router();
 
 // Importar todos los routers, Ejemplo: const authRouter = require('./auth.js');
 // Configurar los routers, Ejemplo: router.use('/auth', authRouter);
 
-const carga = require("./carga") //CARGA ciudades, categorias, usuarios, comercios y productos http://localhost:3001/carga
-router.use("/carga", carga)
-
-const productos = require("./producto");
-router.use("/products", productos);
-
-const email = require("./email");
-router.use("/email", email);
-
-const allproducts = require("./allProducts");
-router.use("/allProducts", allproducts);
-
 const usuarios = require("./usuario");
 router.use("/usuario", usuarios);
 
-const categorias = require("./categorias");
-router.use("/categorias", categorias);
 
-const comercio = require("./comercio")
-router.use("/commerce", comercio)
 
-const categoriaComercio = require("./categoriaComercio")
-router.use("/categoriaComercio", categoriaComercio)
-
-const ciudades = require("./ciudad");
-router.use("/ciudad", ciudades);
-
-const venta = require("./venta");
-router.use("/venta", venta)
-
-const pagos = require("./pagos")
-router.use("/pagos", pagos)
-
-router.post("/buy-products", function (req, res, next) {
-  const productos = req.body.productos;
-  // Aquí deberías validar que los ID de los productos sean válidos antes de usarlos
-  // para buscar los productos en la base de datos
-  paymentInstance.getPymentLink(req, res, productos);
-
-});
 
 
 module.exports = router;

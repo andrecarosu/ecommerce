@@ -55,30 +55,30 @@ const {
 
 /*---------------relaciones de uno a muchos---------------------*/
 
-User.belongsTo(Type_user, { foreignKey: 'id_type', });
-Type_user.hasMany(User, { foreignKey: 'user_id' });
+User.belongsTo(Type_user, { foreignKey: 'type_id' });
+Type_user.hasMany(User, { foreignKey: 'type_id' });
 
 Review.belongsTo(Product, { foreignKey: "product_id" });
-Product.hasMany(Review, { foreignKey: "review_id" });
+Product.hasMany(Review, { foreignKey: "product_id" });
 
 Product.belongsTo(Category_product, { foreignKey: "category_id" });
-Category_product.hasMany(Product, { foreignKey: "product_id" });
+Category_product.hasMany(Product, { foreignKey: "category_id" });
 
-Product.belongsTo(Supplier, { foreignKey: "supplier_id" })
-Supplier.hasMany(Product, { foreignKey: "product_id" });
+Product.belongsTo(Supplier, { foreignKey: "supplier_id" });
+Supplier.hasMany(Product, { foreignKey: "supplier_id" });
 
-Order.hasMany(User, { foreignKey: "user_id" })
-User.belongsTo(Order, { foreignKey: "order_id" })
+Order.belongsTo(User, { foreignKey: "user_id" });
+User.hasMany(Order, { foreignKey: "user_id" });
 
-Shopping.hasMany(Supplier, { foreignKey: "supplier_id" });
-Supplier.belongsTo(Shopping, { foreignKey: "shopping_id" })
+Supplier.belongsTo(Shopping, { foreignKey: "shopping_id" });
+Shopping.hasMany(Supplier, { foreignKey: "shopping_id" });
 
 /*---------------relaciones de muchos a muchos---------------------*/
-Product.belongsToMany(Order, { through: Detail_order });
-Order.belongsToMany(Product, { through: Detail_order });
+Product.belongsToMany(Order, { through: "Detail_order" });
+Order.belongsToMany(Product, { through: "Detail_order" });
 
-Product.belongsToMany(Shopping, { through: Detail_shopping });
-Shopping.belongsToMany(Product, { through: Detail_shopping });
+Product.belongsToMany(Shopping, { through: "Detail_shopping" });
+Shopping.belongsToMany(Product, { through: "Detail_shopping" });
 
 
 

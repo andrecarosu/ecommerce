@@ -38,7 +38,7 @@
 //     loginUser
 // }
 
-const { Usuario } = require("../../db");
+const { User } = require("../../db");
 const bcrypt = require("bcrypt");
 const { generateToken } = require('./generateToken');
 const cookie = require('cookie');
@@ -47,7 +47,7 @@ const loginUser = async (user, res) => { // Añadir el parámetro "res" para la 
     console.log('SERVER_LOGIN', user)
 
     try {
-        const db_user = await Usuario.findOne({
+        const db_user = await User.findOne({
             where: {
                 email: user.email,
             }
