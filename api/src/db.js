@@ -55,7 +55,7 @@ const {
 
 /*---------------relaciones de uno a muchos---------------------*/
 
-User.belongsTo(Type_user, { foreignKey: 'id_type', });
+User.belongsTo(Type_user, { foreignKey: 'type_id', });
 Type_user.hasMany(User, { foreignKey: 'user_id' });
 
 Review.belongsTo(Product, { foreignKey: "product_id" });

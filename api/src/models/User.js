@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      imagen: {
+      image: {
         type: DataTypes.STRING,
         allowNull: true,
         default: "https://cdn-icons-png.flaticon.com/512/711/711769.png",
