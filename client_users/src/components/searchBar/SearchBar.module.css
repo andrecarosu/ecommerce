@@ -1,0 +1,28 @@
+.input{
+    border-bottom-left-radius: 0.9375rem;
+    border-top-left-radius: 0.9375rem;
+    border: none;
+    outline: none;
+    background-color:white;
+    padding: 10px;
+    font-size: 15px;
+    margin-right: -1px;
+}
+
+.button{
+    border-bottom-right-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
+    background-color:white;
+    border: none;
+    color: black;
+    width: 50px;
+    padding: 10px;
+    margin-left: -1px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+input, button{
+    display: inline-block;
+    vertical-align: middle;
+}

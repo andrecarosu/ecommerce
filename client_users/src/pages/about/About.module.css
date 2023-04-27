@@ -1,0 +1,31 @@
+.container {
+    min-height: 90vh;
+    width: 100%;
+    padding: 40px 220px;
+    padding-right: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo {
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    font-size: 50px;
+    text-align: right;
+}
+
+.logo {
+    position: absolute;
+    filter: opacity(10%);
+    left: 20px;
+    top: 80px;
+    height: 600px;
+    width: 600px;
+    z-index: -5;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../../assets/images/SoloIconoNegro.png');
+}
