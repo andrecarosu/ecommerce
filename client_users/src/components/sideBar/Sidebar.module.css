@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'poppins', sans-serif;
+}
+
+li {
+  text-align: start;
+  font-weight: lighter;
+  padding:0.5rem ;
+  list-style:none;
+ 
+}
+
+.nav_contenedor {
+  display: flex;
+  flex-direction: column;
+  background:transparent;
+  width: 200px;
+  height: 100%;
+  margin-top: 4.5rem;
+  /* border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px; */
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1); */
+  
+}
+
+.nav {
+  width: 100%;
+  height: 100%;
+  padding-inline:1rem;
+  /* margin-right:3rem; */
+}
+
+.nav_link {
+  color: #303440;
+  display: inline-block;
+  padding: auto;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.list {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  flex-direction: center;
+  /* border-radius: 0 16px 16px 0; */
+  background-color: transparent;
+  /* border-right: 1px solid rgba(0, 0, 0, 0.3); */
+}
+
+.list_item {
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+
+}
+
+
+.list_item_click {
+  cursor: pointer;
+}
+
+.list_button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding-inline: 1rem 0;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #303440;
+
+}
+.list_button img{
+  opacity: 0.5;
+}
+
+
+.list_show {
+  width: 80%;
+  /* margin-left: auto; */
+  /* border-left: 2px solid #303440; */
+  list-style: none;
+  transition: height .4s;
+  height: auto;
+}
+
+.list_show>li {
+  border-radius: 6px;
+  padding-left: 10px;
+  display: block;
+}
+
+.list_button>span:hover {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.list_1,
+.list_2,
+.list_3,
+.list_4,
+.list_5,
+.list_6,
+.list_7,
+.list_8,
+.list_9,
+.list_10,
+.list_11,
+.list_12,
+.list_13,
+.list_14,
+.list_15,
+.list_16,
+.list_17,
+.list_18{
+  margin-left:8px;
+  font-size:0.9rem;
+  
+}
+
+.list_1:active, .list_1:hover,.list_1:focus{
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+  
+}
+
+.list_2:hover,.list_2:active,.list_2:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_3:hover,.list_3:active,.list_3:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_4:hover,.list_4:active,.list_4:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_5:hover,.list_5:active,.list_5:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_6:hover,.list_6:active,.list_6:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_7:hover,.list_7:active,.list_7:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_8:hover,.list_8:active,.list_8:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_9:hover ,.list_9:active,.list_9:focus{
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_10:hover,.list_10:active,.list_10:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_11:hover,.list_11:active,.list_11:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_12:hover,.list_12:active,.list_12:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_13:hover,.list_13:active,.list_13:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_14:hover ,.list_14:active,.list_14:focus{
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_15:hover,.list_15:active,.list_15:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_16:hover,.list_16:active,.list_16:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_17:hover,.list_17:active,.list_17:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.list_18:hover,.list_18:active,.list_18:focus {
+  color: rgb(47, 204, 7);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav_link:hover,.nav_link:active,.nav_link:focus{
+  color: rgb(47, 204, 7);
+
+}

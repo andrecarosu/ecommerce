@@ -41,6 +41,9 @@ module.exports = (sequelize) => {
         allowNull: true,
         default: "https://cdn-icons-png.flaticon.com/512/711/711769.png",
       },
+      estado: {
+        type: DataTypes.BOOLEAN,
+      },
     },
     {
       tableName: "User",
