@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.9"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.1",
+    "react-icons": "^4.8.0",
+    "react-modern-drawer": "^1.2.0"
+  }
+}
