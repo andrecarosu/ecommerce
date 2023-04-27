@@ -1,33 +1,52 @@
-const { Producto } = require("../../db");
+const { Product, Supplier } = require("../../db");
+const { Op } = require("sequelize")
 
-const createProduct = async (
-  nombre,
-  fecha_inicial,
-  fecha_final,
-  descripcion_producto,
-  cantidad,
-  existencia,
-  valor_normal,
-  valor_con_descuento,
-  condicion,
-  imagen,
-  id_categoria_producto,
-  id_comercio
-) => {
-  const newProduct = await Producto.create({
-    nombre,
-    fecha_inicial,
-    fecha_final,
-    descripcion_producto,
-    cantidad,
-    existencia,
-    valor_normal,
-    valor_con_descuento,
-    condicion,
-    imagen,
-    id_categoria_producto,
-    id_comercio
+const createProduct = async ({
+  name,
+  normal_price,
+  discount_price,
+  description,
+  stock,
+  image,
+  brand,
+  state,
+  categories,
+  suppilerName
+
+}) => {
+  const productExistent = await Product.findOne({
+    where: {
+      name: {
+        [Op.iLike]: `%${name}%`,
+      },
+    }
+  })
+
+  if (productExistent) {
+    throw new Error('Este producto ya existe')
+  }
+
+  const newProduct = await Product.create({
+    name,
+    normal_price,
+    discount_price,
+    description,
+    stock,
+    image,
+    brand,
+    state,
   });
+  const supplierSearch = await Supplier.findOne({
+    where: {
+      name: {
+        [Op.iLike]: `%${suppilerName}%`,
+      },
+    }
+  })
+  if (supplierSearch) {
+    await newProduct.setSupplier(supplierSearch)
+  }
+
 
   return newProduct;
 };

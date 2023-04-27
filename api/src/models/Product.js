@@ -5,7 +5,8 @@ module.exports = (sequelize) => {
     "Product",
     {
       product_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -31,7 +32,7 @@ module.exports = (sequelize) => {
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
-      },     
+      },
 
       image: {
         type: DataTypes.STRING,
@@ -47,11 +48,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         default: true
       },
-      
+
     },
     {
       tableName: "Product",
-     
+
     }
   );
 };

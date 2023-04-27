@@ -1,52 +1,43 @@
-const { Producto, Comercio, Categoria_producto } = require("../../db");
+const { Product, Supplier, Category_product, Review, User } = require("../../db");
 const axios = require("axios");
 const { Op } = require("sequelize");
 
 
 const getAllProducts = async () => {
   // buscar en la bbd
-  const databaseProducts = await Producto.findAll({
-    attributes: [
-      "id_producto",
-      "fecha_inicial",
-      "fecha_final",
-      "descripcion_producto",
-      "cantidad",
-      "existencia",
-      "valor_normal",
-      "valor_con_descuento",
-      "condicion",
-      "estado",
-      "imagen",
-      "nombre",
-      "createdAt"
-    ],
+  const databaseProducts = await Product.findAll({//no es necesario listar los atributos, ya los trae
     include: [
       {
-        model: Categoria_producto,
-        attributes: ["nombre_categoria_producto", "imagen_categoria_producto"],
+        model: Category_product,
+        attributes: ["name", "image"],
         required: true,
       },
-      { model: Comercio, attributes: ["nombre_comercio", "id_comercio"] },
+      {
+        model: Supplier,
+        attributes: ["name", "supplier_id"]
+      },
     ],
   });
   return databaseProducts;
 };
 
 const searchProductByName = async (nombre) => {
-  const databaseProducts = await Producto.findAll({
+  const databaseProducts = await Product.findAll({
     where: {
-      nombre: {
+      name: {
         [Op.iLike]: `%${nombre}%`,
       },
     },
     include: [
       {
-        model: Categoria_producto,
-        attributes: ["nombre_categoria_producto", "imagen_categoria_producto"],
+        model: Category_product,
+        attributes: ["name", "image"],
         required: true,
       },
-      { model: Comercio, attributes: ["nombre_comercio"] },
+      {
+        model: Supplier,
+        attributes: ["name", "supplier_id"]
+      },
     ],
   });
 
@@ -54,44 +45,13 @@ const searchProductByName = async (nombre) => {
 };
 
 const getProductById = async (idProduct) => {
-  // let ProductInfo = [];
 
-  // const apiData = await axios.get(
-  //   `https://fakestoreapi.com/products/${idProduct}`
-  // );
-  // const condicionArray = ["Nuevo", "Usado", "Reacondicionado"];
-  // const indiceAleatorio = Math.floor(Math.random() * 3);
-
-  // ProductInfo = {
-  //   id_producto: apiData.data.id,
-  //   nombre: apiData.data.title,
-  //   descripcion_producto: apiData.data.description,
-  //   valor_normal: apiData.data.price,
-  //   valor_con_descuento: apiData.data.price,
-  //   estado: apiData.data.true,
-  //   condicion: condicionArray[indiceAleatorio],
-  //   categoria: apiData.data.category,
-  //   imagen: apiData.data.image,
-  // };
-  //buscar por id de la db
-  const dbdata = await Producto.findByPk(idProduct, {
-    attributes: [
-      "id_producto",
-      "nombre",
-      "fecha_inicial",
-      "fecha_final",
-      "descripcion_producto",
-      "cantidad",
-      "existencia",
-      "valor_normal",
-      "valor_con_descuento",
-      "imagen",
-      "condicion",
-      "estado",
-      "id_categoria_producto",
-    ],
+  const dbdata = await Product.findByPk(idProduct, {
     include: [
-      { model: Comercio, attributes: ["nombre_comercio", "id_comercio"] },
+      {
+        model: Supplier,
+        attributes: ["name", "supplier_id"]
+      },
     ],
   });
 

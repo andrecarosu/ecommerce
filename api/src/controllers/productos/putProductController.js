@@ -1,26 +1,52 @@
-const { Producto } = require("../../db");
+const { Product } = require("../../db");
+const { Op } = require("sequelize")
 
 
-
-const putProductController = async (producto) => {
-
+const putProductController = async (productUpdate) => {
+    const { product_id,
+        name,
+        normal_price,
+        discount_price,
+        description,
+        stock,
+        image,
+        brand,
+        state,
+        categories,
+        suppilerName } = productUpdate
+    //supplier es el name
     try {
-        if (!producto || Object.keys(producto).length === 0) {
-            throw new Error('No se proporcionó nueva cantidad de stock para actualización')
+        if (!productUpdate || Object.keys(productUpdate).length === 0) {
+            throw new Error('No se proporcionaron datos de actualizacion')
         } else {
-
-            console.log('CONTROLLER', producto)
-
-            for (let i = 0; i < producto.length; i++) {
-                Producto.update(
-                    {
-                        existencia: producto[i].nuevoStock
-                    },
-                    {
-                        where: { id_producto: producto[i].id_producto }
-                    }
-                )                
+            const product = await Product.findOne({ where: { product_id } })
+            if (!product) {
+                throw new Error('El producto no existe')
             }
+            await product.update(
+                {
+                    name,
+                    normal_price,
+                    discount_price,
+                    description,
+                    stock,
+                    image,
+                    brand,
+                    state,
+                }
+            )
+            const supplierSearch = await Supplier.findOne({
+                where: {
+                    name: {
+                        [Op.iLike]: `%${suppilerName}%`,
+                    },
+                }
+            })
+            if (supplierSearch) {
+                await product.setSupplier(supplierSearch)
+            }
+
+
             return "Producto/s actualizado"
         }
     } catch (error) {
