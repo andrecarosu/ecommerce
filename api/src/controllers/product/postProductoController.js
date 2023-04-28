@@ -1,4 +1,5 @@
 const { Product, Supplier, Category_product } = require("../../db");
+const handlerHttpError = require('../../middlewares/handlerHttpError')
 const { Op } = require("sequelize")
 
 const createProduct = async ({

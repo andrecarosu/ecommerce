@@ -1,4 +1,5 @@
 const { putProductController } = require('../../controllers/product/putProductController')
+const handlerHttpError = require('../../middlewares/handlerHttpError')
 
 const putProductHandler = async (req, res, next) => {
     try {
@@ -10,7 +11,7 @@ const putProductHandler = async (req, res, next) => {
         res.status(201).send(controller)
 
     } catch (error) {
-        next(error)
+        handlerHttpError(res, 500, error.message)
     }
 }
 

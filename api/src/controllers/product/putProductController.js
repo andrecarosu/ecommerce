@@ -3,6 +3,20 @@ const { Op } = require("sequelize")
 
 
 const putProductController = async (idProduct, productUpdate) => {
+
+    const {
+        name,
+        normal_price,
+        discount_price,
+        description,
+        stock,
+        image,
+        brand,
+        state,
+        categories,
+        suppilerName } = productUpdate
+    //supplier es el name
+
     try {
         // Verifica si hay datos para actualizar
         if (!productUpdate || Object.keys(productUpdate).length === 0) {
