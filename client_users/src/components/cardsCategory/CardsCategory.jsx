@@ -19,9 +19,10 @@ function CardsCategory() {
       {categorys?.map((category, index) => {
         return <CardCategory
           key={index}
-          id_categoria_producto={category.id_categoria_producto}
-          nombre_categoria_producto={category.nombre_categoria_producto}
-          imagen_categoria_producto={category.imagen_categoria_producto}
+          category_id={category.category_id}
+          name={category.name}
+          image={category.image}
+          family={category.family}
         />
 
       })}
