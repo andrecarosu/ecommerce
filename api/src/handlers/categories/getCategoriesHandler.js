@@ -1,4 +1,4 @@
-const { getCategories } = require('../../controllers/category/getCategories')
+const { getCategories, getAllFamilies } = require('../../controllers/category/getCategories')
 
 const getCategoriesHandler = async (req, res) => {
 
@@ -11,6 +11,21 @@ const getCategoriesHandler = async (req, res) => {
     }
 
 }
+
+const getFamiliesHandler = async (req, res) => {
+
+    try {
+        const allFamilies = await getAllFamilies()
+        res.status(200).send(allFamilies)
+
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+}
+
+
 module.exports = {
-    getCategoriesHandler
+    getCategoriesHandler,
+    getFamiliesHandler
 }
