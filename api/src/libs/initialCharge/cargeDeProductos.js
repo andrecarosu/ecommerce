@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const { Product } = require('../../db');
-//const { getAllCategorias } = require("./cargueDeCategorias")
+const { getAllCategorias } = require("../../controllers/product/getProductoController")
 
 const loadProducts = async () => {
 
     const rutaArchivoProductos = path.resolve(path.join(__dirname, '..', 'initialRegisters'), 'productos.json');
     try {
-        //await getAllCategorias()
+        await getAllCategorias()
         const count = await Product.count()
         if (count > 0) return;
         const productosJSON = fs.readFileSync(rutaArchivoProductos, 'utf-8');
