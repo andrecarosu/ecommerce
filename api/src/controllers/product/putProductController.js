@@ -3,7 +3,7 @@ const { Op } = require("sequelize")
 
 
 const putProductController = async (idProduct, productUpdate) => {
-    const { product_id,
+    const {
         name,
         normal_price,
         discount_price,

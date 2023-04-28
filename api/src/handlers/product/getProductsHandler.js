@@ -1,5 +1,5 @@
 const { searchProductByName, getAllProducts, getProductById, getAllCategorias } = require("../../controllers/product/getProductoController")
-
+const handlerHttpError = require('../../middlewares/handlerHttpError')
 
 const getAllProductsHandler = async (req, res, next) => {
     const { name } = req.query;
@@ -8,7 +8,7 @@ const getAllProductsHandler = async (req, res, next) => {
 
         res.status(200).json(results)
     } catch (error) {
-        next(error)
+        handlerHttpError(res, error.message, 500)
     }
 
 }
@@ -19,7 +19,8 @@ const getProductByIdHandler = async (req, res, next) => {
         const ProductId = await getProductById(idProduct)
         res.status(200).json(ProductId)
     } catch (error) {
-        next(error)
+        console.log('wow', error)
+        handlerHttpError(res, error.message, 500)
     }
 }
 

@@ -1,20 +1,39 @@
 const { Router } = require("express");
 const router = Router();
+const fs = require("fs")
 
 // Importar todos los routers, Ejemplo: const authRouter = require('./auth.js');
 // Configurar los routers, Ejemplo: router.use('/auth', authRouter);
 
-const usuarios = require("./usuario");
-const product = require('./product')
-const categories = require('./category')
+// const usuarios = require("./usuario");
+// const product = require('./product')
+// const categories = require('./category')
 
 
-router.use("/usuario", usuarios);
-router.use("/product", product);
-router.use("/category", categories);
+// router.use("/usuario", usuarios);
+// router.use("/product", product);
+// router.use("/category", categories);
 
 
+/**
+ * !TODO: Esta ruta es dinamica no se necesita agregar ninguna ruta adicional que sean rutas claras y especificas
+ */
+const PATH_ROUTES = __dirname;
+const removeExtends = (filename) => {
+  //user.routes.js
+  return filename.split(".").shift();
+};
 
+fs.readdirSync(PATH_ROUTES).filter((file) => {
+  const fileClean = removeExtends(file);
+  if (fileClean !== "index") {
+    router.use(`/${fileClean}`, require(`./${file}`));
+  } else {
+    router.use("/notfound", (req, res) => {
+      res.status(404).json({ message: "Algo inesperado sucedio :') !" });
+    });
+  }
+});
 
 
 
