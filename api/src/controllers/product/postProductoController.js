@@ -7,6 +7,7 @@ const createProduct = async ({
   discount_price,
   description,
   stock,
+  amount,
   image,
   brand,
   state,
@@ -32,6 +33,7 @@ const createProduct = async ({
     discount_price,
     description,
     stock,
+    amount,
     image,
     brand,
     state

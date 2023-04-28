@@ -17,6 +17,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
+    family: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      unique: true,
+    },
     
   }, {
     tableName: 'Category_product',

@@ -1,29 +1,30 @@
 const fs = require('fs');
 const path = require('path');
-const { Producto } = require('../../db');
+const { Product } = require('../../db');
+const {getAllCategorias} = require("./getProductoController")
 
 const loadProducts = async () => {
+   
     const rutaArchivoProductos = path.resolve(__dirname, 'productos.json');
 
     try {
+        await getAllCategorias()
         const productosJSON = fs.readFileSync(rutaArchivoProductos, 'utf-8');
         const productos = JSON.parse(productosJSON);
         let mapProductos = productos.map((prop) => ({
-            nombre: prop.nombre,
-            fecha_inicial: prop.fecha_inicial,
-            fecha_final: prop.fecha_final,
-            descripcion_producto: prop.descripcion_producto,
-            cantidad: prop.cantidad,
-            existencia: prop.existencia,
-            valor_normal: prop.valor_normal,
-            valor_con_descuento: prop.valor_con_descuento,
-            condicion: prop.condicion,
-            imagen: prop.imagen,
-            id_categoria_producto: prop.id_categoria_producto,
-            id_comercio: prop.id_comercio
+            name: prop.name,
+            normal_price: prop.normal_price,
+            discount_price: prop.discount_price,
+            description: prop.description,
+            stock: prop.stock,
+            amount: prop.amount,            
+            image: prop.image,
+            brand: prop.brand,
+            state: prop.state,
+            category_id: prop.category_id,
         }));
-
-        await Producto.bulkCreate(mapProductos);
+        
+        await Product.bulkCreate(mapProductos);
         console.log('se guardaron los productos correctamente');
     } catch (error) {
         console.log('Error al cargar los productos', error);

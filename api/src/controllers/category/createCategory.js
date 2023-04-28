@@ -1,7 +1,7 @@
 const { Category_product } = require("../../db");
 const { Op } = require("sequelize")
 
-const createCategory = async ({ name, image }) => {
+const createCategory = async ({ name, image, family }) => {
     const categoryExistent = await Category_product.findOne({
         where: {
             name: {
@@ -16,7 +16,8 @@ const createCategory = async ({ name, image }) => {
 
     const category = await Category_product.create({
         name,
-        image
+        image,
+        family
     })
 
     return category
