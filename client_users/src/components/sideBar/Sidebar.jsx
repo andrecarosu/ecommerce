@@ -9,6 +9,10 @@ function Sidebar() {
   const [showOrdenar, setShowOrdenar] = useState(false);
   const [showCondicion, setShowCondicion] = useState(false);
   const [showPrecio, setShowPrecio] = useState(false);
+  const [showTinto, setShowTinto] = useState(false);
+  const [showBlanco, setShowBlanco] = useState(false);
+  const [showRosado, setShowRosado] = useState(false);
+
 
 
   const handleClick = () => {
@@ -22,6 +26,15 @@ function Sidebar() {
   };
     const handleClick4 = () => {
     setShowCondicion(!showCondicion);
+  };
+  const handleClickTinto = () => {
+    setShowTinto(!showTinto);
+  };
+  const handleClickBlanco = () => {
+    setShowBlanco(!showBlanco);
+  };
+  const handleClickRosado = () => {
+    setShowRosado(!showRosado);
   };
   return (
     <div className={styles.nav_contenedor}>
@@ -59,107 +72,142 @@ function Sidebar() {
               </span>
             </div>
             {showCategories && (
-              <ul className={styles.list_show}>
+              <>
+              <ul>
                 <li
                   tabindex="0"
                   className={styles.list_1}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Indumentaria"))
-                  }
-                >
-                  Indumentaria
+                  >
+                  <div>
+                    <span className={styles.nav_link} onClick={handleClickTinto}>
+                      Tinto
+                    </span>
+                  </div>
+                  {showTinto && (
+                    <ul className={styles.list_show}>
+                        <li
+                        tabindex="0"
+                        className={styles.list_1}
+                        onClick={() =>
+                          dispatch(action.getProductByCategory("Indumentaria"))
+                        }
+                      >
+                        Cabernet Sauvignon
+                      </li>
+                      <li
+                        tabindex="0"
+                        className={styles.list_2}
+                        onClick={() =>
+                          dispatch(action.getProductByCategory("Electrodomesticos"))
+                        }
+                      >
+                        Malbec
+                      </li>
+                      <li
+                        tabindex="0"
+                        className={styles.list_3}
+                        onClick={() =>
+                          dispatch(action.getProductByCategory("Informatica"))
+                        }
+                      >
+                        Merlot
+                      </li>
+                      <li
+                        tabindex="0"
+                        className={styles.list_4}
+                        onClick={() =>
+                          dispatch(action.getProductByCategory("Cosmética"))
+                        }
+                      >
+                        Syrah
+                      </li>
+                    </ul>
+                  )}
                 </li>
                 <li
                   tabindex="0"
-                  className={styles.list_2}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Electrodomesticos"))
-                  }
-                >
-                  Electrodomesticos
+                  className={styles.list_1}
+                  >
+                  <div>
+                    <span className={styles.nav_link} onClick={handleClickBlanco}>
+                      Blanco
+                    </span>
+                  </div>
+                  {showBlanco && (
+                    <ul className={styles.list_show}>
+                        <li
+                          tabindex="0"
+                          className={styles.list_5}
+                          onClick={() =>
+                            dispatch(action.getProductByCategory("Alimentos"))
+                          }
+                        >
+                          Semillón
+                        </li>
+                        <li
+                          tabindex="0"
+                          className={styles.list_6}
+                          onClick={() =>
+                            dispatch(action.getProductByCategory("Juguetes"))
+                          }
+                        >
+                          Malbec
+                        </li>
+                        <li
+                          tabindex="0"
+                          className={styles.list_7}
+                          onClick={() =>
+                            dispatch(action.getProductByCategory("Muebles"))
+                          }
+                        >
+                          Cosecha Tardía
+                        </li>
+                        <li
+                          tabindex="0"
+                          className={styles.list_8}
+                          onClick={() =>
+                            dispatch(action.getProductByCategory("Jardinería"))
+                          }
+                        >
+                          Chardonnay
+                        </li>
+                    </ul>
+                  )}
                 </li>
                 <li
                   tabindex="0"
-                  className={styles.list_3}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Informatica"))
-                  }
-                >
-                  Informatica
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_4}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Cosmética"))
-                  }
-                >
-                  Cosmética
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_5}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Alimentos"))
-                  }
-                >
-                  Alimentos
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_6}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Juguetes"))
-                  }
-                >
-                  Juguetes
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_7}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Muebles"))
-                  }
-                >
-                  Muebles
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_8}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Jardinería"))
-                  }
-                >
-                  Jardinería
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_9}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Deportes"))
-                  }
-                >
-                  Deportes
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_10}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Joyería"))
-                  }
-                >
-                  Joyería
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_11}
-                  onClick={() =>
-                    dispatch(action.getProductByCategory("Herramientas"))
-                  }
-                >
-                  Herramientas
+                  className={styles.list_1}
+                  >
+                  <div>
+                    <span className={styles.nav_link} onClick={handleClickRosado}>
+                      Rosado
+                    </span>
+                  </div>
+                  {showRosado && (
+                    <ul className={styles.list_show}>
+                      <li
+                        tabindex="0"
+                        className={styles.list_9}
+                        onClick={() =>
+                          dispatch(action.getProductByCategory("Deportes"))
+                        }
+                      >
+                        Malbec Rosé
+                      </li>
+                      <li
+                        tabindex="0"
+                        className={styles.list_10}
+                        onClick={() =>
+                          dispatch(action.getProductByCategory("Joyería"))
+                        }
+                      >
+                        Merlot Rosé
+                      </li>
+                    </ul>
+                  )}
                 </li>
               </ul>
+              </>
             )}
           </li>
           <li className={`${styles.list_item} ${styles.list_item_click}`}>
