@@ -64,21 +64,21 @@ Product.hasMany(Review, { foreignKey: "product_id" });
 Product.belongsTo(Category_product, { foreignKey: "category_id" });
 Category_product.hasMany(Product, { foreignKey: "category_id" });
 
-Product.belongsTo(Supplier, { foreignKey: "supplier_id" });
-Supplier.hasMany(Product, { foreignKey: "supplier_id" });
+// Product.belongsTo(Supplier, { foreignKey: "supplier_id" });
+// Supplier.hasMany(Product, { foreignKey: "supplier_id" });
 
 Order.belongsTo(User, { foreignKey: "user_id" });
 User.hasMany(Order, { foreignKey: "user_id" });
 
-Supplier.belongsTo(Shopping, { foreignKey: "shopping_id" });
-Shopping.hasMany(Supplier, { foreignKey: "shopping_id" });
+// Supplier.belongsTo(Shopping, { foreignKey: "shopping_id" });
+// Shopping.hasMany(Supplier, { foreignKey: "shopping_id" });
 
 /*---------------relaciones de muchos a muchos---------------------*/
 Product.belongsToMany(Order, { through: "Detail_order" });
 Order.belongsToMany(Product, { through: "Detail_order" });
 
-Product.belongsToMany(Shopping, { through: "Detail_shopping" });
-Shopping.belongsToMany(Product, { through: "Detail_shopping" });
+// Product.belongsToMany(Shopping, { through: "Detail_shopping" });
+// Shopping.belongsToMany(Product, { through: "Detail_shopping" });
 
 
 

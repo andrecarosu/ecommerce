@@ -3,6 +3,7 @@ const { validacionPostUsuario } = require("../validaciones/validacionUsuario")
 
 
 const postUserHandler = async (req, res) => {
+
   let { type_id, name, address, phone, city, email, password, image, estado} = req.body
  
   try {
