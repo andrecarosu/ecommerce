@@ -6,7 +6,7 @@ import Sidebar from "../../components/sideBar/Sidebar";
 
 
 function Home() {
-  // const productos = useSelector((state) => state.products)
+  // const os = useSelector((state) => state.s)
   return (
     <>
       <section className={styles.section}>
