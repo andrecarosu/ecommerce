@@ -11,8 +11,8 @@ const allproducts = require("./allProducts");
 
 
 router.use("/usuario", usuarios);
-router.use("/product", product);
-router.use("/category", categories);
+router.use("/products", product);
+router.use("/categorias", categories);
 router.use("/allProducts", allproducts);
 
 
