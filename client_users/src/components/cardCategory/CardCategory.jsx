@@ -4,19 +4,19 @@ import { useDispatch } from 'react-redux'
 import { getProductByCategory } from '../../redux/actions';
 import s from './CardCategory.module.css'
 
-function CardCategory({nombre_categoria_producto, imagen_categoria_producto}) {
+function CardCategory({name, image,family}) {
     const dispatch = useDispatch();
   const handlerCategory = () => {
-    dispatch(getProductByCategory(nombre_categoria_producto))
+    dispatch(getProductByCategory(family))
   }
  
 
   return (
     <Link className={s.link} to="/home" onClick={handlerCategory} >
       <div className={s.container}>
-        <h4 className={s.nombre}>{nombre_categoria_producto}</h4>
+        <h4 className={s.nombre}>{name}</h4>
         <div className={s.box}>
-          <div style={{backgroundImage: `url(${imagen_categoria_producto})`}} className={s.imagen}></div>
+          <div style={{backgroundImage: `url(${image})`}} className={s.imagen}></div>
         </div>
         <span className={s.vermas}>Explorar más...</span>
       </div>
