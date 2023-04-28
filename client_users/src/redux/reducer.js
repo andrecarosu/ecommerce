@@ -87,13 +87,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         productsFitered: [...state.products].filter((product) => {
           return (
-            product.Categoria_producto.nombre_categoria_producto ===
+            product.Category_product.family ===
             action.payload
           );
         }),
         copyProducts: [...state.products].filter((product) => {
           return (
-            product.Categoria_producto.nombre_categoria_producto ===
+            product.Category_product.family ===
             action.payload
           );
         }),
@@ -103,7 +103,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         productsFitered: [...state.productsFitered].sort((a, b) =>
-          b.nombre.localeCompare(a.nombre)
+          b.name.localeCompare(a.name)
         ),
       };
 
@@ -111,7 +111,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         productsFitered: [...state.productsFitered].sort((a, b) =>
-          a.nombre.localeCompare(b.nombre)
+          a.name.localeCompare(b.name)
         ),
       };
 
