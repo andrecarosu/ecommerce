@@ -1,4 +1,5 @@
 const { Product, Supplier, Category_product } = require("../../db");
+const handlerHttpError = require('../../middlewares/handlerHttpError')
 const { Op } = require("sequelize")
 
 const createProduct = async ({
@@ -39,14 +40,7 @@ const createProduct = async ({
     state
   });
 
-  const supplierSearch = await Supplier.findOne({
-    where: {
-      name: {
-        [Op.iLike]: `%${suppilerName}%`,
-      },
-    }
-  })
-
+  
   const categorySearch = await Category_product.findOne({
     where: {
       name: {
@@ -57,9 +51,6 @@ const createProduct = async ({
 
   console.log(categorySearch)
 
-  if (supplierSearch) {
-    await newProduct.setSupplier(supplierSearch)
-  }
 
   if (categorySearch) {
     await newProduct.setCategory_product(categorySearch)

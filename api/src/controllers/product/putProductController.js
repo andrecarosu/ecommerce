@@ -2,7 +2,9 @@ const { Product, Supplier } = require("../../db");
 const { Op } = require("sequelize")
 
 
-const putProductController = async (idProduct, productUpdate) => {
+const putProductController = async (product_id, productUpdate) => {
+
+
     try {
         // Verifica si hay datos para actualizar
         if (!productUpdate || Object.keys(productUpdate).length === 0) {
@@ -10,7 +12,7 @@ const putProductController = async (idProduct, productUpdate) => {
         }  
         // Actualiza los campos específicos del producto en la base de datos
         const [filasActualizadas, [productoActualizado]] = await Product.update(productUpdate, {
-          where: { idProduct },
+          where: { product_id },
           returning: true // Devuelve el registro actualizado
         });
     
