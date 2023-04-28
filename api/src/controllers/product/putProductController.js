@@ -3,6 +3,7 @@ const { Op } = require("sequelize")
 
 
 const putProductController = async (idProduct, productUpdate) => {
+
     const {
         name,
         normal_price,
@@ -15,53 +16,29 @@ const putProductController = async (idProduct, productUpdate) => {
         categories,
         suppilerName } = productUpdate
     //supplier es el name
+
     try {
+        // Verifica si hay datos para actualizar
         if (!productUpdate || Object.keys(productUpdate).length === 0) {
             throw new Error('No se proporcionaron datos de actualizacion')
-        } else {
-
-            const product = await Product.findOne({ where: { product_id: idProduct } })
-            if (!product) {
-                throw new Error('El producto no existe')
-            }
-
-
-            await product.update(
-                {
-                    name,
-                    normal_price,
-                    discount_price,
-                    description,
-                    stock,
-                    image,
-                    brand,
-                    state
-                }
-            )
-
-            if (suppilerName) {
-
-                const supplierSearch = await Supplier.findOne({
-                    where: {
-                        name: {
-                            [Op.iLike]: `%${suppilerName}%`,
-                        },
-                    }
-                })
-                if (supplierSearch) {
-                    await product.setSupplier(supplierSearch)
-                } else {
-                    throw new Error('No existe')
-                }
-            }
-
-
-
-            return "Producto/s actualizado"
+        }  
+        // Actualiza los campos específicos del producto en la base de datos
+        const [filasActualizadas, [productoActualizado]] = await Product.update(productUpdate, {
+          where: { idProduct },
+          returning: true // Devuelve el registro actualizado
+        });
+    
+        // Verifica si el producto se actualizó correctamente
+        if (filasActualizadas === 0) {
+          throw new Error("No se encontró el producto especificado");
         }
-    } catch (error) {
-        return error
-    }
-}
+        
+        // Retorna el producto actualizado
+        return productoActualizado;
+      } catch (error) {
+        // Manejo de errores
+        throw new Error("Ocurrió un error al actualizar el producto: " + error.message);
+      }
+    };
 
 module.exports = { putProductController }
