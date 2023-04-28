@@ -1,0 +1,87 @@
+[
+
+  {
+      "name": "Vino NICOLA CATENA ",
+        "normal_price": 19.000,
+        "discount_price": 16.000,
+        "description": "La Bonarda fue la variedad adoptada por los inmigrantes italianos a fines del siglo XIX, llegando a ser en los años 90 la uva tinta mas cultivada de Argentina. Es una variedad que se adapta a suelos livianos y necesita un ciclo vegetativo extenso. Es en el sureste de Mendoza donde las temperaturas medias permiten alcanzar su nivel optimo de madurez",
+        "stock": 28,
+        "amount": 0,
+        "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-nicola-catena-bonarda-bodega-catena-zapata-700x700.jpg",
+        "category_id": 1,
+        "brand": "Catena Zapata",
+        "state": true
+    },
+    {
+      "name": "Vino DURIGUTTI ETIQUETA ",
+      "normal_price": 19.000,
+      "discount_price": 16.000,
+      "description": "La Bonarda fue la variedad adoptada por los inmigrantes italianos a fines del siglo XIX, llegando a ser en los años 90 la uva tinta mas cultivada de Argentina. Es una variedad que se adapta a suelos livianos y necesita un ciclo vegetativo extenso. Es en el sureste de Mendoza donde las temperaturas medias permiten alcanzar su nivel optimo de madurez",
+      "stock": 28,
+      "amount": 0,
+      "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-nicola-catena-bonarda-bodega-catena-zapata-700x700.jpg",
+      "category_id": 1,
+      "brand": "Catena Zapata",
+      "state": true
+    },
+    {
+      "name": "Vino GRAN EQUILIBRISTA",
+      "normal_price" : 4230,
+      "discount_price": 3900,
+      "description" : "Apto para guarda de 8 años. La temperatura adecuada para su consumo es entre 16º y 18º C. Mantener en lugar fresco y sin luz ni vibraciones. Dejar oxigenar por especio de una hora. Ideal para acompañas, Carnes rojas asadas o grilladas, cordero, huevos rellenos de codorniz, salazones u otra combinación elaborada.",
+      "stock" : 10,
+      "amount": 0,
+      "image" : "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2020/04/vino-gran-equilibrista-blend-ubaldini-wines.jpg",
+      "category_id" : 6,
+      "brand" : "Ubaldini Wines",
+      "state" : true
+    },    
+    {
+      "name": "Vino JUAN UBALDINI",
+      "normal_price" : 3990,
+      "discount_price": 3500,
+      "description": "Calidad enológica y una historia que nos inspira día a día. Vinos elaborados a base de un cuidado respetuoso de las uvas y los lugares, sin movimientos invasivos para obtener la máxima pureza.",
+      "stock" : 14,
+      "amount" : 0,
+      "image" : "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-juan-ubaldini-Terroir-Blend-Malbec-bodega-ubaldini-wines.jpg",
+      "category_id": 7,
+      "brand": "Ubaldini Wines",
+      "state": true
+    },  
+    {
+      "name": "Vino SERIE A",
+      "normal_price": 3340,
+      "discount_price" : 2900,
+      "description" : "Temperatura de servicio para este vino es entre 16º y 18º C, Potencial de guarda 6 años. Decantar por espacio de una hora antes de beberlo. Conservar en lugar fresco, oscuro, y sin vibraciones. Ideal para acompañar unos Bifesitos de cordero marinados con papas rusticas.",
+      "stock": 12,
+      "amount": 0,
+      "image" : "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2021/11/19.jpg",
+      "category_id" : 8,
+      "brand" : "ZUCCARDI",
+      "state" : true
+    },
+    {
+      "name" : "Vino MALBEC ARGENTINO 2019",
+      "normal_price": 40000,
+      "discount_price" : 32000,
+      "description" : "DIEZ SIGLOS DE VIDA, MUERTE Y RENACIMIENTO. La épica historia de la noble uva Malbec es como ninguna otra, y la etiqueta de Catena Zapata Malbec Argentino rinde homenaje a la historia de la variedad en Francia y su ascenso en Argentina. Cuatro figuras femeninas encarnan diferentes hitos en la historia de la uva. Leonor de Aquitania representa el nacimiento del Malbec. Ella es una fuerte presencia del Viejo Mundo, que permanece en el puente de Cahors, donde el Malbec se hizo realidad. A continuación, el Inmigrante simboliza el movimiento hacia el Nuevo Mundo y los desconocidos exploradores y aventureros que conectaron Europa con las Américas. La filoxera personifica la muerte del Malbec en el Viejo Mundo, lo que permitió su renacimiento en el nuevo. Finalmente, está Bodega Catena Zapata, representada por Adrianna Catena, quien retrata el nacimiento, la tierra y la maternidad compartiendo las riquezas del Nuevo Mundo.Este Dia, La cuarta generación de la familia Catena lidera el renacimiento de la altura en Argentina. Estamos devolviendo el Malbec al cielo… donde pertenece.",
+      "stock" : 15,
+      "amount" : 0,
+      "image" : "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-malbec-argentino-bodega-catena-zapata.jpg",
+      "category_id": 9,
+      "brand" : "Catena Zapata",
+      "state" : true
+    },
+    {
+      "name" : "Vino EL INTERMINABLE",
+      "normal_price" : 6900,
+      "discount_price" : 6500,
+      "description" : "Un vino no se termina con la última gota… aromas, recuerdos, experiencias lo hacen SIN FIN.",
+      "stock" : 10,
+      "amount" : 0,
+      "image" : "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2021/03/1-2.jpg",
+      "category_id": 10,
+      "brand" : "Sin Fin",
+      "state" : true
+    }
+  ]

@@ -3,13 +3,16 @@ const path = require('path');
 const { Category_product } = require('../../db');
 
 const loadCategoryProduct = async () => {
-    const rutaArchivoCategorías = path.resolve(__dirname, 'category.json');
+
+    const rutaArchivoCategorías = path.resolve(path.join(__dirname, '..', 'initialRegisters'), 'category.json');
 
     try {
+        const count = await Category_product.count()
+        if (count > 0) return;
         const categoriasJSON = fs.readFileSync(rutaArchivoCategorías, 'utf-8');
         const categoriasProduct = JSON.parse(categoriasJSON);
         let mapCategory = categoriasProduct.map((prop) => ({
-            name: prop.name,           
+            name: prop.name,
             image: prop.image,
             family: prop.family,
         }));

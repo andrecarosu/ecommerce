@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { getCategoriesHandler } = require('../handlers/categories/getCategoriesHandler')
+const { getCategoriesHandler, getFamiliesHandler } = require('../handlers/categories/getCategoriesHandler')
 const { postCategoryHandler } = require('../handlers/categories/postCategoriesHandler')
 
 
@@ -7,6 +7,7 @@ const { postCategoryHandler } = require('../handlers/categories/postCategoriesHa
 const router = Router()
 
 router.get('/', getCategoriesHandler)
+router.get('/families', getFamiliesHandler)
 router.post('/', postCategoryHandler)
 
 module.exports = router
