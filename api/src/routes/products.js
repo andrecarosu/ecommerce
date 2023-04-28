@@ -11,11 +11,11 @@ const { putProductHandler, borradoLogicoHandler } = require("../handlers/product
 const router = Router();
 
 router.get("/", getAllProductsHandler);
-router.get("/:idProduct", getProductByIdHandler);
+router.get("/:product_id", getProductByIdHandler);
 router.post("/", postProductHandler);
 //router.put("/delete/:id_producto", borradoLogicoHandler);
 
-router.put("/:idProduct", putProductHandler)
+router.put("/:product_id", putProductHandler)
 
 //router.put('/', putProductHandler)
 

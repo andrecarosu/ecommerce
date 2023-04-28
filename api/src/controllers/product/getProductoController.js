@@ -12,10 +12,6 @@ const query = {//no es necesario listar los atributos, ya los trae
       required: true,
     },
     {
-      model: Supplier,
-      attributes: ["name", "supplier_id"]
-    },
-    {
       model: Review,
       attributes: ["comments", "scoring"],
       include: [
