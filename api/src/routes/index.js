@@ -5,7 +5,14 @@ const fs = require("fs")
 // Importar todos los routers, Ejemplo: const authRouter = require('./auth.js');
 // Configurar los routers, Ejemplo: router.use('/auth', authRouter);
 
+// const usuarios = require("./usuario");
+// const product = require('./product')
+// const categories = require('./category')
 
+
+// router.use("/usuario", usuarios);
+// router.use("/product", product);
+// router.use("/category", categories);
 
 
 /**
@@ -27,7 +34,6 @@ fs.readdirSync(PATH_ROUTES).filter((file) => {
     });
   }
 });
-
 
 
 
