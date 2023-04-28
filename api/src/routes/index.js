@@ -7,11 +7,13 @@ const router = Router();
 const usuarios = require("./usuario");
 const product = require('./product')
 const categories = require('./category')
+const allproducts = require("./allProducts");
 
 
 router.use("/usuario", usuarios);
 router.use("/product", product);
 router.use("/category", categories);
+router.use("/allProducts", allproducts);
 
 
 
