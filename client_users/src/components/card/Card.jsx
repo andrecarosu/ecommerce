@@ -4,22 +4,22 @@ import s from './Card.module.css'
 
 
 const Card = ({producto}) => {
-const {nombre, valor_normal,valor_con_descuento, imagen, id_producto, Categoria_producto}=producto;
-console.log("CATEGORIA: ", Categoria_producto)
+const {name, normal_price,discount_price, image, product_id, Category_product}=producto;
+console.log("CATEGORIA: ", Category_product)
   return (
-    <Link className={s.link} to={`/detail/${id_producto}`}>
+    <Link className={s.link} to={`/detail/${product_id}`}>
     <div className={s.container}>
       <div className={s.img}>
-        <img src={imagen} alt={nombre} />
+        <img src={image} alt={name} />
       </div>
       <div className={s.precios}>
-      <h4 className={s.vNormal}>${valor_normal}</h4>
+      <h4 className={s.vNormal}>${normal_price}</h4>
       <h4 className={s.flecha}>→</h4>
-      <h4 className={s.vDescuento}>${valor_con_descuento}</h4>
+      <h4 className={s.vDescuento}>${discount_price}</h4>
       </div>
       <div className={s.text}>
-      <span style={{fontWeight: 'bolder'}}>{nombre}</span>
-      <span style={{fontWeight: 'lighter'}}>{Categoria_producto.nombre_categoria_producto}</span>
+      <span style={{fontWeight: 'bolder'}}>{name}</span>
+      <span style={{fontWeight: 'lighter'}}>{Category_product.name}</span>
       </div>
       
     </div>
