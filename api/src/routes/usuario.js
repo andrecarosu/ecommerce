@@ -8,7 +8,7 @@ router.get("/", getAllUsersHandler)
 router.get("/:user_id", getUserByIdHandler)
 router.post("/", postUserHandler)
 router.post('/login', loginHandler)
-router.put("/", actualizarUsuarioHandler)
+router.put("/:user_id", actualizarUsuarioHandler)
 router.put("/delete", putUserHandler)
 
 module.exports = router;
