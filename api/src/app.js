@@ -4,11 +4,16 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const { loadProducts } = require('./libs/initialCharge/cargeDeProductos.js')
-const { getAllCategorias } = require('./controllers/product/getProductoController')
+const { loadCategoryProduct } = require("./libs/initialCharge/cargueDeCategorias")
 
 const db =  require('./db.js');
-//getAllCategorias().then(() => loadProducts())
- loadProducts()
+
+setTimeout(async() => {
+await loadCategoryProduct()}, 1000);
+
+setTimeout(async() => {
+ await loadProducts()}, 5000);
+ //loadProducts()
 
 const server = express();
 
