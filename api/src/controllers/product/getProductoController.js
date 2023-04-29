@@ -2,7 +2,7 @@ const { Product, Supplier, Category_product, Review, User } = require("../../db"
 const axios = require("axios");
 const { error } = require("console");
 const { Op } = require("sequelize");
-//const { loadCategoryProduct } = require("../product/cargueDeCategorias")
+const { loadCategoryProduct } = require("../../libs/initialCharge/cargueDeCategorias")
 
 const query = {//no es necesario listar los atributos, ya los trae
   include: [
@@ -60,7 +60,7 @@ const getAllCategorias = async () => {
   if (todasLasCategorias.length) {
     return todasLasCategorias;
   } else {
-    //await loadCategoryProduct()
+    await loadCategoryProduct()
     //  const todasLasCategorias2 = await Category_product.findAll({ raw: true });
     //  return todasLasCategorias2;
   }

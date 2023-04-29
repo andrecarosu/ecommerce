@@ -50,15 +50,15 @@ module.exports = validacionProducto = (product) => {
         throw new Error("la descripcion debe ser un string");
     }
 
-    if (!/^[a-zA-Z0-9\u00F1\u00f1\s\.-]+$/.test(description)) {
-        throw new Error('El formato de la descripcion no es adecuado')
-    }
+    // if (!/^[a-zA-Z0-9\u00F1\u00f1\s\.-]+$/.test(description)) {
+    //     throw new Error('El formato de la descripcion no es adecuado')
+    // }
 
     if (description.length < 10) {
         throw new Error("La descripcion del producto debe ser mayor a 10")
     }
 
-    if (description.length > 300) {
+    if (description.length > 1000) {
         throw new Error("El nombre debe ser menor a 300")
     }
 

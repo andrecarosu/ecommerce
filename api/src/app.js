@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const { loadProducts } = require('./libs/initialCharge/cargeDeProductos.js')
-const { loadCategoryProduct } = require('./libs/initialCharge/cargueDeCategorias.js')
+const { getAllCategorias } = require('./controllers/product/getProductoController')
 
-const db = require('./db.js');
-loadCategoryProduct().then(() => loadProducts())
-//loadProducts()
+const db =  require('./db.js');
+//getAllCategorias().then(() => loadProducts())
+ loadProducts()
 
 const server = express();
 
