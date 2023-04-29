@@ -89,7 +89,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_1}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Indumentaria"))
+                          dispatch(action.getProductByCategory("Cabernet Sauvignon "))
                         }
                       >
                         Cabernet Sauvignon
@@ -98,7 +98,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_2}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Electrodomesticos"))
+                          dispatch(action.getProductByCategory("Malbec Tinto"))
                         }
                       >
                         Malbec
@@ -107,7 +107,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_3}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Informatica"))
+                          dispatch(action.getProductByCategory("Merlot Tinto"))
                         }
                       >
                         Merlot
@@ -116,7 +116,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_4}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Cosmética"))
+                          dispatch(action.getProductByCategory("Syrah"))
                         }
                       >
                         Syrah
@@ -139,7 +139,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_5}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Alimentos"))
+                            dispatch(action.getProductByCategory("Semillon"))
                           }
                         >
                           Semillón
@@ -148,7 +148,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_6}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Juguetes"))
+                            dispatch(action.getProductByCategory("Malbec Blanco"))
                           }
                         >
                           Malbec
@@ -157,7 +157,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_7}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Muebles"))
+                            dispatch(action.getProductByCategory("Cosecha Tardía"))
                           }
                         >
                           Cosecha Tardía
@@ -166,7 +166,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_8}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Jardinería"))
+                            dispatch(action.getProductByCategory("Chardonnay"))
                           }
                         >
                           Chardonnay
@@ -189,7 +189,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_9}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Deportes"))
+                          dispatch(action.getProductByCategory("Malbec Rose"))
                         }
                       >
                         Malbec Rosé
@@ -198,7 +198,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_10}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Joyería"))
+                          dispatch(action.getProductByCategory("Merlot Rose"))
                         }
                       >
                         Merlot Rosé

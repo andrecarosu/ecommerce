@@ -89,13 +89,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         productsFitered: [...state.products].filter((product) => {
           return (
-            product.Category_product.family ===
+            product.Category_product.name ===
             action.payload
           );
         }),
         copyProducts: [...state.products].filter((product) => {
           return (
-            product.Category_product.family ===
+            product.Category_product.name ===
             action.payload
           );
         }),
