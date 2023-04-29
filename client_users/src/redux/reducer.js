@@ -36,6 +36,7 @@ import {
   COUNT_AGREGAR,
   COUNT_RESTAR,
   COUNT_DELETE,
+  GET_FAMILIES,
 } from "./actions-type.js";
 
 const initialState = {
@@ -47,6 +48,7 @@ const initialState = {
   ventas: [],
   pagos: [],
   categorys: [],
+  families: [],
   product: {},
   filter: [],
   carrito: JSON.parse(window.localStorage.getItem("carrito")) || [],
@@ -99,6 +101,12 @@ function rootReducer(state = initialState, action) {
         }),
       };
 
+    case GET_FAMILIES:
+      return {
+        ...state,
+        families: action.payload
+      }
+      
     case ORDERED_BY_NAME_DESC:
       return {
         ...state,

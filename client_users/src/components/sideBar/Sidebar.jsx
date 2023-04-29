@@ -268,43 +268,6 @@ function Sidebar() {
           </li>
           <li className={styles.list_item}>
             <div className={styles.list_button}>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKZJREFUSEvtldENgzAQQx+bwCZlE5iso9BNyiYgIxVFSaqYVpFA4n7jOye2T2moXE3l+dwERYVDiSbgUezwADPQCRoSLF6vjdpmuwQf3JFLnIvA1iUAJi/QWQs8/zD7BYyATN4qt2gieUdXdj3oAZHs9W2TYzNdAkVzv33uBVUlOhJBx/RzxdT1IPHX3WRHkhiTSKT8D79MyvQoqors/eGUBb3+n7wCgGQcGaIC4qAAAAAASUVORK5CYII=" alt="icono"/>
-              <span
-                tabindex="0"
-                className={styles.nav_link}
-                onClick={handleClick4}
-              >
-                Condición
-              </span>
-            </div>
-            {showCondicion && (
-            <ul className={styles.list_show}>
-              <li
-                tabindex="0"
-                className={styles.list_16}
-                onClick={() => dispatch(action.filterByNewProducts())}
-              >
-                Nuevos
-              </li>
-              <li
-                tabindex="0"
-                className={styles.list_17}
-                onClick={() => dispatch(action.filterByUsedProducts())}
-              >
-                Usados
-              </li>
-              <li
-                tabindex="0"
-                className={styles.list_18}
-                onClick={() => dispatch(action.filterByRefurbishedProducts())}
-              >
-                Reacondicionado
-              </li>
-            </ul>
-            )}
-          </li>
-          <li className={styles.list_item}>
-            <div className={styles.list_button}>
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANhJREFUSEvtldENgzAMRI9N2k3KJmWSqpO0m5RNyiZUR+MoorbjCPFRCT7D5Z4526LDzk+3sz8OQDXhMqIXgEv1RkwwAThTWgLm2N2wavHeAngCuDq4TYAewAjg4UDCAJox03eqlsY84+P17QfAC6dUVdnsIQFolptnmBMu+qUCbdEIkWrXEUs0LIBA630+tzZZmygx9wrgaPIrTYAWEcVa7uveiM6MyNoDK/eyN9q0hqeI804zK3drFcIAGtwB3MI7/BU2ARq9dYC3la2APBTHD6ca3f9H9AET9TAZjvnCQgAAAABJRU5ErkJggg==" />
               <span
                 tabindex="0"
