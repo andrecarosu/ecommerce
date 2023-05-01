@@ -1,0 +1,8 @@
+.usuariosContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    text-align: center;
+    gap: 30px;
+    justify-content: center;
+}
