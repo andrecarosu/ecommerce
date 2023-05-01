@@ -8,11 +8,9 @@ import {
   GET_CATEGORY,
   ORDERED_BY_LOWEST_PRICE,
   ORDERED_BY_HIGHEST_PRICE,
-  FILTER_BY_NEW_PRODUCTS,
-  FILTER_BY_USED_PRODUCTS,
-  FILTER_BY_REFURBISHED_PRODUCTS,
+  FILTER_BY_BRAND,
   AGREGAR_AL_CARRITO,
-  OFERTAS,
+  FILTER_BY_OFERTAS,
   ORDERED_BY_NAME_ASC,
   GET_ALL_CITIES,
   CLEAN_PRODUCT,
@@ -23,7 +21,6 @@ import {
   READY,
   USER_LOGIN,
   MERCADO_PAGO,
-  ORDERED_BY_RECIENTES,
   GET_USER_BY_ID,
   REVIEWS,
   CLEAN_REVIEWS,
@@ -133,10 +130,10 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         productsFitered: [...state.productsFitered].sort((a, b) => {
-          if (a.valor_con_descuento > b.valor_con_descuento) {
+          if (a.discount_price > b.discount_price) {
             return 1;
           }
-          if (b.valor_con_descuento > a.valor_con_descuento) {
+          if (b.discount_price > a.discount_price) {
             return -1;
           }
           return 0;
@@ -147,72 +144,33 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         productsFitered: [...state.productsFitered].sort((a, b) => {
-          if (a.valor_con_descuento > b.valor_con_descuento) {
+          if (a.discount_price > b.discount_price) {
             return -1;
           }
-          if (b.valor_con_descuento > a.valor_con_descuento) {
+          if (b.discount_price > a.discount_price) {
             return 1;
           }
           return 0;
         }),
       };
 
-    case FILTER_BY_NEW_PRODUCTS:
+    case FILTER_BY_BRAND:
       return {
         ...state,
-        productsFitered: state.copyProducts.filter(
-          (item) => item.condicion === "Nuevo"
-        ),
-      };
-
-    case FILTER_BY_USED_PRODUCTS:
-      return {
-        ...state,
-        productsFitered: state.copyProducts.filter(
-          (item) => item.condicion === "Usado"
-        ),
-      };
-
-    case FILTER_BY_REFURBISHED_PRODUCTS:
-      return {
-        ...state,
-        productsFitered: state.copyProducts.filter(
-          (item) => item.condicion === "Reacondicionado"
-        ),
-      };
-
-    case ORDERED_BY_RECIENTES:
-      return {
-        ...state,
-        productsFitered: [...state.productsFitered].sort((a, b) => {
-          if (a.createdAt > b.createdAt) {
-            return 1;
-          }
-          if (b.createdAt > a.createdAt) {
-            return -1;
-          }
-          return 0;
-        }),
-        Copyproducts: [...state.productsFitered].sort((a, b) => {
-          if (a.createdAt > b.createdAt) {
-            return 1;
-          }
-          if (b.createdAt > a.createdAt) {
-            return -1;
-          }
-          return 0;
+        productsFitered: state.copyProducts.filter(product => {
+          return product.brand === action.payload
         }),
       };
 
-    case OFERTAS:
+    case FILTER_BY_OFERTAS:
       return {
         ...state,
-        productsFitered: state.products.filter(
-          (product) => product.valor_con_descuento < 60
+        productsFitered: state.copyProducts.filter(
+          (product) => product.discount === action.payload
         ),
-        copyProducts: state.products.filter(
-          (product) => product.valor_con_descuento < 60
-        ),
+        // copyProducts: state.productsFitered.filter(
+        //   (product) => product.discount === action.payload
+        // ),
       };
 
     case AGREGAR_AL_CARRITO:
