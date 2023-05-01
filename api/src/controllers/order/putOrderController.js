@@ -1,47 +1,47 @@
-const { User, Tipo_usuario, Ciudad } = require("../../db");
+const { Order } = require("../../db");
 const { Op, Sequelize } = require("sequelize");
 
-const actualizarUsuario = async (user_id, updateData) => {
+const actualizarOrden = async (order_id, updateData) => {
     try {
       // Verifica si hay datos para actualizar
       if (!updateData || Object.keys(updateData).length === 0) {
         throw new Error("No se proporcionaron datos de actualización");
       }
       
-      // Actualiza los campos específicos del usuario en la base de datos
-      const [filasActualizadas, [usuarioActualizado]] = await User.update(updateData, {
-        where: { user_id },
+      // Actualiza los campos específicos de la orden en la base de datos
+      const [filasActualizadas, [ordenActualizada]] = await Order.update(updateData, {
+        where: { order_id },
         returning: true // Devuelve el registro actualizado
       });
   
-      // Verifica si el usuario se actualizó correctamente
+      // Verifica si la orden se actualizó correctamente
       if (filasActualizadas === 0) {
-        throw new Error("No se encontró el usuario especificado");
+        throw new Error("No se encontró la orden especificada");
       }
       
-      // Retorna el usuario actualizado
-      return usuarioActualizado;
+      // Retorna la orden actualizada
+      return ordenActualizada;
     } catch (error) {
       // Manejo de errores
-      throw new Error("Ocurrió un error al actualizar el usuario: " + error.message);
+      throw new Error("Ocurrió un error al actualizar la orden: " + error.message);
     }
   };
 
-  const editUser = async (user_id, estado) => {
+  const editOrder = async (order_id, state) => {
     
-    const editOneUser = await User.update(
+    const editOneOrder = await Order.update(
         {
-          estado,
+          state,
         },
         {
-            where: { user_id },
+            where: { order_id },
         }
         );
         
-        return editOneUser;
+        return editOneOrder;
     };
   
-  module.exports = { actualizarUsuario, editUser };
+  module.exports = { actualizarOrden, editOrder };
   
   
   

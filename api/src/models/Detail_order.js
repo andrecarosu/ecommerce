@@ -10,6 +10,11 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
 
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
+
      unit_value: {
       type: DataTypes.FLOAT,
       allowNull: false,
