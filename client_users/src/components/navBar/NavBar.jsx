@@ -66,12 +66,12 @@ const NavBar = () => {
         <DrawerMenu />
       </div>
 
-      <div className={s.options}>
+      {/* <div className={s.options}>
         <Link to={"/"}>
           <img className={s.texto} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994537/SoloTextoBlanco_iraxjq.png" />
           <img className={s.icono} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994537/SoloIconoNormal_bjxj2j.png"/>
         </Link>
-      </div>
+      </div> */}
 
       <div className={s.nav_text}>
         <Link

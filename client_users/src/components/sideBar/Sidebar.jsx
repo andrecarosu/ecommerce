@@ -89,7 +89,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_1}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Indumentaria"))
+                          dispatch(action.getProductByCategory("Cabernet Sauvignon "))
                         }
                       >
                         Cabernet Sauvignon
@@ -98,7 +98,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_2}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Electrodomesticos"))
+                          dispatch(action.getProductByCategory("Malbec Tinto"))
                         }
                       >
                         Malbec
@@ -107,7 +107,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_3}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Informatica"))
+                          dispatch(action.getProductByCategory("Merlot Tinto"))
                         }
                       >
                         Merlot
@@ -116,7 +116,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_4}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Cosmética"))
+                          dispatch(action.getProductByCategory("Syrah"))
                         }
                       >
                         Syrah
@@ -139,7 +139,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_5}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Alimentos"))
+                            dispatch(action.getProductByCategory("Semillon"))
                           }
                         >
                           Semillón
@@ -148,7 +148,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_6}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Juguetes"))
+                            dispatch(action.getProductByCategory("Malbec Blanco"))
                           }
                         >
                           Malbec
@@ -157,7 +157,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_7}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Muebles"))
+                            dispatch(action.getProductByCategory("Cosecha Tardía"))
                           }
                         >
                           Cosecha Tardía
@@ -166,7 +166,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_8}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Jardinería"))
+                            dispatch(action.getProductByCategory("Chardonnay"))
                           }
                         >
                           Chardonnay
@@ -189,7 +189,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_9}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Deportes"))
+                          dispatch(action.getProductByCategory("Malbec Rose"))
                         }
                       >
                         Malbec Rosé
@@ -198,7 +198,7 @@ function Sidebar() {
                         tabindex="0"
                         className={styles.list_10}
                         onClick={() =>
-                          dispatch(action.getProductByCategory("Joyería"))
+                          dispatch(action.getProductByCategory("Merlot Rose"))
                         }
                       >
                         Merlot Rosé
@@ -262,43 +262,6 @@ function Sidebar() {
                 onClick={() => dispatch(action.orderedByLowestPrice())}
               >
                 Menor precio
-              </li>
-            </ul>
-            )}
-          </li>
-          <li className={styles.list_item}>
-            <div className={styles.list_button}>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKZJREFUSEvtldENgzAQQx+bwCZlE5iso9BNyiYgIxVFSaqYVpFA4n7jOye2T2moXE3l+dwERYVDiSbgUezwADPQCRoSLF6vjdpmuwQf3JFLnIvA1iUAJi/QWQs8/zD7BYyATN4qt2gieUdXdj3oAZHs9W2TYzNdAkVzv33uBVUlOhJBx/RzxdT1IPHX3WRHkhiTSKT8D79MyvQoqors/eGUBb3+n7wCgGQcGaIC4qAAAAAASUVORK5CYII=" alt="icono"/>
-              <span
-                tabindex="0"
-                className={styles.nav_link}
-                onClick={handleClick4}
-              >
-                Condición
-              </span>
-            </div>
-            {showCondicion && (
-            <ul className={styles.list_show}>
-              <li
-                tabindex="0"
-                className={styles.list_16}
-                onClick={() => dispatch(action.filterByNewProducts())}
-              >
-                Nuevos
-              </li>
-              <li
-                tabindex="0"
-                className={styles.list_17}
-                onClick={() => dispatch(action.filterByUsedProducts())}
-              >
-                Usados
-              </li>
-              <li
-                tabindex="0"
-                className={styles.list_18}
-                onClick={() => dispatch(action.filterByRefurbishedProducts())}
-              >
-                Reacondicionado
               </li>
             </ul>
             )}

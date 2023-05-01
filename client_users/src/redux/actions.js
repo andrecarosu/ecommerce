@@ -161,6 +161,22 @@ export const getAllProducts = () => {
   };
 };
 
+export const getFamilies = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading());
+      const response = await axios.get(`${URL}/categorias/families`);
+      console.log(response.data);
+      dispatch({ type: action.GET_FAMILIES, payload: response.data });
+      dispatch(ready());
+    } catch (error) {
+      console.log(error);
+      // dispatch({ type: action.GET_ALL_PRODUCTS, payload: error });
+      dispatch(ready());
+    }
+  };
+};
+
 // * 3.action-creator para obtener producto por ID
 
 export const getProductById = (id) => async (dispatch) => {

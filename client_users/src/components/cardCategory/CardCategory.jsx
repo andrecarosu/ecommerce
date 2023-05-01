@@ -4,13 +4,12 @@ import { useDispatch } from 'react-redux'
 import { getProductByCategory } from '../../redux/actions';
 import s from './CardCategory.module.css'
 
-function CardCategory({name, image,family}) {
+function CardCategory({name, image, family}) {
     const dispatch = useDispatch();
   const handlerCategory = () => {
-    dispatch(getProductByCategory(family))
+    dispatch(getProductByCategory(name))
   }
  
-
   return (
     <Link className={s.link} to="/home" onClick={handlerCategory} >
       <div className={s.container}>
