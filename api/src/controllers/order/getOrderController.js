@@ -69,7 +69,10 @@ const getDetalle_Venta = async (order_id) => {
       // Crea un objeto de venta vacío para cada orden y almacénalo en un nuevo array llamado `ventas`
       const ventas = orders.map((order) => ({
         id: order.order_id,
+        id_orden: order.order_id,
         fecha: order.date,
+        total: order.total,
+        estado: order.state,
         productos: [],
       }));
   
@@ -79,6 +82,7 @@ const getDetalle_Venta = async (order_id) => {
         if (venta) {
           venta.productos.push({
             id: detail.ProductProductId,
+            id_producto: detail.ProductProductId,
             valor_unitario: detail.unit_value,
             valor_total: detail.value,
             cantidad: detail.amount,
@@ -119,7 +123,10 @@ const getDetalle_Venta = async (order_id) => {
       // Crea un objeto de venta vacío para cada orden y almacénalo en un nuevo array llamado `ventas`
       const ventas = orders.map((order) => ({
         id: order.order_id,
+        id_orden: order.order_id,
         fecha: order.date,
+        total: order.total,
+        estado: order.state,
         productos: [],
       }));
   
@@ -129,9 +136,10 @@ const getDetalle_Venta = async (order_id) => {
         if (venta) {
           venta.productos.push({
             id: detail.ProductProductId,
+            id_producto: detail.ProductProductId,
             valor_unitario: detail.unit_value,
-            valor_total: detail.value,
             cantidad: detail.amount,
+            valor_total: detail.value,
             name:detail.name
           });
         }
