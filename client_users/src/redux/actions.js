@@ -378,7 +378,7 @@ export function cleanMercadoPago() {
 export function getReviews(id) {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL}/products/${id}/calificaciones`);
+      const response = await axios.get(`${URL}/review/${id}`);
       console.log(response.data);
       dispatch({ type: action.REVIEWS, payload: response.data });
     } catch (error) {

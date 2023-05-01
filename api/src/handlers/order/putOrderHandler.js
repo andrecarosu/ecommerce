@@ -1,14 +1,14 @@
-const {actualizarUsuario, editUser} = require("../../controllers/usuarios/putUsuarioController")
-const {getUserById} = require("../../controllers/usuarios/getUsuarioController")
+const {actualizarOrden, editOrder} = require("../../controllers/order/putOrderController");
+const {getDetalle_Venta} = require("../../controllers/order/getOrderController")
 
 // Handler
 const actualizarUsuarioHandler = async (req, res, next) => {
     try {
-      const { user_id } = req.body; // Obtén el ID del usuario a actualizar
+      const { order_id } = req.body; // Obtén el ID del usuario a actualizar
       const updateData = req.body; // Obtén los datos de actualización del cuerpo de la solicitud
   
       // Llama al controlador para actualizar el usuario con los datos proporcionados
-      await actualizarUsuario(user_id, updateData);
+      await actualizarOrden(order_id, updateData);
   
       // Retorna una respuesta exitosa
       res.status(200).json({ message: "Usuario actualizado exitosamente" });
@@ -20,12 +20,12 @@ const actualizarUsuarioHandler = async (req, res, next) => {
 
 
   const putUserHandler = async (req, res, next) => {
-    const { user_id, estado } = req.body
-
+    const order_id = req.params.order_id;
+    const { state } = req.body
+    
     try {
-        await editUser(user_id, estado)
-        const results = await getUserById(user_id)
-
+      await editOrder(order_id, state)
+        const results = await getDetalle_Venta(order_id)
         res.status(200).json(results)
 
     } catch (error) {

@@ -1,11 +1,10 @@
 const { User, Type_user} = require("../../db");
 const { Op, Sequelize } = require("sequelize");
 
-const getAllUsers = async () => {
+const getAllUsersEmail = async () => {
   try {
     const dataUser = await User.findAll({
       attributes: [
-        "type_id",
         "user_id",
         "name",
         "address",
@@ -14,14 +13,13 @@ const getAllUsers = async () => {
         "estado",
         "email",
         "password",
-        "image",
-        "estado"
+        "image"
       ],
       include: [
         {
           model: Type_user,
-          attributes: ["name"]
-        }       
+          attributes: ["nombre_tipo_usuario"]
+        },
       ]
     });
     const results = [...dataUser];
@@ -31,34 +29,13 @@ const getAllUsers = async () => {
   }
 };
 
-const getUserById = async (user_id) => {
-  try {
-    const user = await User.findByPk(user_id, {
-      attributes: [
-        "type_id",
-        "user_id",
-        "name",
-        "address",
-        "phone",
-        "city",
-        "estado",
-        "email",
-        "password",
-        "image",
-        "estado"
-      ],
-    });
-    return user;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const getUserByName = async name => {
+const getUserByEmail = async (email) => {
   try {
     const users = await User.findAll({
+      where: {
+        email: { [Op.regexp]: `^${email}$` } // Utiliza una expresión regular para buscar el correo exacto
+      },
       attributes: [
-        "type_id",
         "user_id",
         "name",
         "address",
@@ -67,14 +44,14 @@ const getUserByName = async name => {
         "estado",
         "email",
         "password",
-        "image",
-        "estado"
+        "image"
       ],
-      where: {
-        [Op.or]: [
-          { name: name }
-        ],
-      },
+      include: [
+        {
+          model: Type_user,
+          attributes: ["nombre_tipo_usuario"]
+        },
+      ],
     });
     return users;
   } catch (error) {
@@ -84,4 +61,5 @@ const getUserByName = async name => {
 
 
 
-module.exports = { getAllUsers, getUserById, getUserByName};
+
+  module.exports = { getUserByEmail , getAllUsersEmail };

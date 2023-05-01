@@ -77,12 +77,9 @@ User.hasMany(Order, { foreignKey: "user_id" });
 // Shopping.hasMany(Supplier, { foreignKey: "shopping_id" });
 
 /*---------------relaciones de muchos a muchos---------------------*/
-Product.belongsToMany(Order, { through: "Detail_order" });
-Order.belongsToMany(Product, { through: "Detail_order" });
 
-// Product.belongsToMany(Shopping, { through: "Detail_shopping" });
-// Shopping.belongsToMany(Product, { through: "Detail_shopping" });
-
+Product.belongsToMany(Order, { through: { model: Detail_order, unique: false, fields: ["name"] } });
+Order.belongsToMany(Product, { through: { model: Detail_order, unique: false, fields: ["name"] } });
 
 
 module.exports = {
