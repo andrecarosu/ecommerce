@@ -14,9 +14,9 @@ const getAllProductsHandler = async (req, res, next) => {
 }
 
 const getProductByIdHandler = async (req, res, next) => {
-    const { idProduct } = req.params
+    const { product_id } = req.params // idProducto = product_id
     try {
-        const ProductId = await getProductById(idProduct)
+        const ProductId = await getProductById(product_id)
         res.status(200).json(ProductId)
     } catch (error) {
         console.log('wow', error)

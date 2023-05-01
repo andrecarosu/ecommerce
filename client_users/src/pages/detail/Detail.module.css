@@ -43,8 +43,10 @@ div>.image {
 }
 
 .descripcion_producto {
-    font-weight: 400;
-    font-size: 1.5rem;
+    font-weight: 200;
+    font-size: 1.2rem;
+    text-align: justify;
+    margin-top: 10px;
 }
 
 .condicion {
@@ -109,12 +111,28 @@ div>.image {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
+    gap: 20px;
+    /* border: 1px solid red; */
 }
 
-.input {
-    width: 800px;
+.form label {
+    font-size: 1.1rem;
+}
+
+.textarea {
+    width: 700px;
     height: 150px;
-    margin-left: 20px;
+    padding: 8px;
+    font-size: 1rem;
+    resize: none;
+    border-radius: 12px;
+    color: #202020;
+    outline: none;
+}
+
+.textarea:focus {
+    border: 2px solid rgb(37, 199, 37);
 }
 
 .select {

@@ -46,9 +46,9 @@ const searchProductByName = async (nombre) => {
 };
 
 const getProductById = async (idProduct) => {
-
+  console.log(idProduct)
   const dbdata = await Product.findByPk(idProduct, query);
-
+  
   if (!dbdata) throw new Error('Ese id no existe')
 
   return dbdata;
