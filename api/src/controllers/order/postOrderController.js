@@ -1,91 +1,70 @@
-const nodemailer = require("nodemailer");
-const bcrypt = require("bcrypt");
-const { User, Type_user } = require('../../db');
+const { Order, Detail_order, Product} = require("../../db");
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, 
-  auth: {
-    user: `${process.env.EMAIL_EMAIL}`, 
-    pass:`${process.env.EMAIL_PASSWORD}`, 
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
-const guardarTipoUsuario = async () => {
-  try {
-    let tipoUsuario = [
-      { name: 'Cliente' },
-      { name: 'Administrador' },
-    ];
-    let mapTipoUsuario = tipoUsuario.map((prop) => ({
-      name: prop.name,
-    }));
-    await Type_user.bulkCreate(mapTipoUsuario);
-    console.log('Se guardaron los tipos de usuarios correctamente');
-  } catch (error) {
-    console.error('Error al cargar los tipos de Usuarios', error);
-  }
-};
-
-const verifyDb = async () => {
-  const aux = await Type_user.count();
-  if (aux < 1) await guardarTipoUsuario();
-};
-
-const createUsuario = async (
-  type_id,
-   name,
-  address,
-  phone,
-  city,
-  email,
-  password,
-  image,
-  estado
-) => {
-  verifyDb();
-
-  // Generar un salt para el hash
-  const salt = await bcrypt.genSalt(10);
-
-  // Encriptar la contraseña con el salt generado
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  // Crear el usuario en la base de datos con la contraseña encriptada
-  const newUser = await User.create({
-    type_id,
-    name,
-     address,
-     phone,
-     city,
-     email,
-    password: hashedPassword, // guardar la contraseña encriptada
-    image,
-    estado
-  });
-//asd
-  
-  const mailOptions = {
-    from: "thewinecellar.com@gmail.com",
-    to: email,
-    subject: "Registro exitoso",
-    text: `¡Bienvenido a nuestra aplicación! Tu registro fue exitoso. Tu correo es:
-           Correo electrónico: ${email} `,
-  };
-  
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log("Error al enviar el correo electrónico:", error);
-    } else {
-      console.log("Correo electrónico enviado correctamente:", info.response);
+const createVenta = async (date, total, state, user_id, detail_order) => {
+    try {
+        const venta = await Order.create({
+            date: new Date(),
+            total,
+            state,
+            user_id,
+        });
+        const newVenta = await venta.save();
+        return newVenta;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Hubo un error creando la venta");
     }
-  });
-
-  return newUser;
 };
 
-module.exports = { createUsuario }; 
+// const createDetalleVenta = async (detalle_order, venta_id) => {
+//   try {
+//     const newDetalleVenta = await Promise.all(
+//       detalle_order.map(async (detalle) => {
+//         const { product_id, amount, unit_value, value, name } = detalle;
+//         const detalle_venta = await Detail_order.create({
+//           amount: amount,
+//           unit_value: unit_value,
+//           value: value,
+//           ProductProductId: product_id,
+//           OrderOrderId: venta_id,
+//           name: name,
+//         });
+//         return detalle_venta;
+//       })
+//     );
+//     return newDetalleVenta;
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error("Hubo un error creando el detalle de venta");
+//   }
+// };
+
+const createDetalleVenta = async (detalle_order, venta_id) => {
+  try {
+    const newDetalleVenta = await Promise.all(
+      detalle_order.map(async (detalle) => {
+        const { product_id, amount, unit_value, value } = detalle;
+        const product = await Product.findByPk(product_id); // Buscar el producto por su ID
+        console.log(30,product);
+        const detalle_venta = await Detail_order.create({
+          amount: amount,
+          unit_value: unit_value,
+          value: value,
+          ProductProductId: product_id,
+          OrderOrderId: venta_id,
+          name: product.name, // Incluir el nombre del producto en el campo name
+        });
+        return detalle_venta;
+      })
+    );
+    return newDetalleVenta;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Hubo un error creando el detalle de venta");
+  }
+};
+
+
+
+
+module.exports = { createVenta, createDetalleVenta };
