@@ -150,8 +150,18 @@ export const getAllProducts = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/products`);
-      // console.log(response.data);
-      dispatch({ type: action.GET_ALL_PRODUCTS, payload: response.data });
+      const data = response.data.map(prod => {
+        let discount = Math.ceil((prod.normal_price - prod.discount_price)/prod.normal_price * 100)
+        if(19<=discount && discount<=21) discount=20
+        if(34<=discount && discount<=36) discount=35
+        if(44<=discount && discount<=46) discount=45
+        return {
+          ...prod,
+          discount
+        }
+      })
+      console.log(data);
+      dispatch({ type: action.GET_ALL_PRODUCTS, payload: data });
       dispatch(ready());
     } catch (error) {
       console.log(error);
@@ -261,19 +271,17 @@ export const orderedByRecientes = () => {
 };
 // * 10. action-creator para filtrar productos por condicion (Nuevo,Usado,Reacondicionado,Ofertas)
 
-export const filterByNewProducts = () => {
-  return { type: action.FILTER_BY_NEW_PRODUCTS }; //productos nuevos
+export const filterByBrand = (brand) => {
+  return { 
+    type: action.FILTER_BY_BRAND, 
+    payload: brand 
+  }; 
 };
-
-export const filterByUsedProducts = () => {
-  return { type: action.FILTER_BY_USED_PRODUCTS }; //productos usados
-};
-
-export const filterByRefurbishedProducts = () => {
-  return { type: action.FILTER_BY_REFURBISHED_PRODUCTS }; //productos reacondicionados
-};
-export const filterByOffers = () => {
-  return { type: action.OFERTAS }; //productos reacondicionados
+export const filterByOffers = (discount) => {
+  return { 
+    type: action.FILTER_BY_OFERTAS,
+    payload: discount
+  };
 };
 
 // * 11. action-creator para filtrar productos por categoria
