@@ -31,9 +31,9 @@ const getAllUsers = async () => {
   }
 };
 
-const getUserById = async idUser => {
+const getUserById = async (user_id) => {
   try {
-    const user = await User.findByPk(idUser, {
+    const user = await User.findByPk(user_id, {
       attributes: [
         "type_id",
         "user_id",
