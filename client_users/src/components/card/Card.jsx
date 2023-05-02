@@ -29,8 +29,7 @@ console.log(discount)
           <h3 style={{fontWeight: 'bolder', fontSize:"20px"}}>{name}</h3>
           <span style={{fontWeight: 'bolder', fontSize:"15px"}}>{brand}</span>
           <span style={{fontWeight: 'bolder', color: "gray", fontSize:"13px"}}>{Category_product.name}</span>
-        </div>
-        
+        </div>  
       </div>
     </Link> 
   )

@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import DashStyles from './DashMain.module.css'
 import SideBar from '../components/SideBar/SideBar';
 import { Route, Switch } from "react-router-dom"
@@ -6,10 +6,29 @@ import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
 import { useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
+import { getCategorys, getAllProducts, getFamilies } from '../../redux/actions';
 // import contentLayout from ''
-
+const type_permission = 2;
+//esto de pronto podemos mejorarlo de tal forma que se haga con los JWT y no asi
 const DashMain = () => {
     const location = useLocation();
+    const dispatch = useDispatch();
+    const token = Cookies.get('user_token');
+    const session = JSON.parse(Cookies.get('user_session'));
+    // console.log('->>', token)
+    // console.log('-->', session)
+
+    useEffect(() => {
+        dispatch(getCategorys());
+        dispatch(getAllProducts());
+        dispatch(getFamilies())
+    }, [dispatch])
+
+    // if (session.dataValues.type_id !== type_permission) {
+    //     return <div>No tiene permisos</div>
+    // }
     return (
         <>
             <div className={DashStyles.mainContainer}>

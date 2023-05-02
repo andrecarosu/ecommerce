@@ -5,7 +5,7 @@ import validations from "./validations";
 import { useSelector, useDispatch } from "react-redux";
 import { CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert"
-import { getAllCategorias, getAllSupplier } from "../../../redux/actions"
+import { getCategorys } from "../../../redux/actions"
 import Cookies from "js-cookie";
 
 import s from "../formCreateProduct/FormProduct.module.css"
@@ -13,26 +13,26 @@ import s from "../formCreateProduct/FormProduct.module.css"
 
 export default function FormCreateProduct() {
   const { categorias } = useSelector(state => state);
-  const {supplier} = useSelector(state => state);
+  const { supplier } = useSelector(state => state);
   const dispatch = useDispatch();
 
-  let proveedor = values.dataValues
+  // let proveedor = values.dataValues
 
   useEffect(() => {
-    dispatch(getAllCategorias(), getAllSupplier());
+    dispatch(getCategorys());
   }, [dispatch]);
 
-  
+
   const [form, setForm] = useState({
-    supplier_id:0,
-    category_id:0,
-    name:"",
-    normal_price:0,
-    discount_price:0,
-    description:"",
-    stock:0,
-    image:"",
-    brand:"",
+    supplier_id: 0,
+    category_id: 0,
+    name: "",
+    normal_price: 0,
+    discount_price: 0,
+    description: "",
+    stock: 0,
+    image: "",
+    brand: "",
     state: true,
   });
 
@@ -49,7 +49,7 @@ export default function FormCreateProduct() {
     event.preventDefault();
 
     // Obtiene los valores del formulario
-    const { 
+    const {
       supplier_id,
       category_id,
       name,
@@ -182,8 +182,8 @@ export default function FormCreateProduct() {
             <CloudinaryContext cloudName="dfmkjxjsf">
               <form onSubmit={handleSubmit}>
 
-                                {/* ----------------------- PROVEEDOR -----------------------*/}
-                                <div className={s.contenedorDiv}>
+                {/* ----------------------- PROVEEDOR -----------------------*/}
+                <div className={s.contenedorDiv}>
                   <label for="" className={s.label}>
                     Proveedor
                   </label>
@@ -303,7 +303,7 @@ export default function FormCreateProduct() {
                   )}
                 </div>
 
-              {/* ----------------------- CATEGORIA -----------------------*/}
+                {/* ----------------------- CATEGORIA -----------------------*/}
                 <div className={s.contenedorDiv}>
                   <label for="" className={s.label}>
                     Categoria

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts, getCategorys, getFamilies } from '../../redux/actions';
 import CardCategory from '../cardCategory/CardCategory';
@@ -6,14 +6,36 @@ import styles from "./CardsCategory.module.css"
 
 function CardsCategory() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);// variable booleana para verificar si los datos están listos
 
   useEffect(() => {
-    dispatch(getCategorys());
-    dispatch(getAllProducts());
-    dispatch(getFamilies())
+    async function fetchData() {
+      setLoading(true); // establecer la variable loading en true antes de hacer la petición
+      setTimeout(async() => {
+       await dispatch(getCategorys())
+       await dispatch(getAllProducts())
+       await dispatch(getFamilies())
+        setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
+      }, 2000); // esperar 2 segundos antes de obtener los datos
+    }
+    fetchData();    
   }, [dispatch])
 
+
   const { families } = useSelector(state => state);
+
+  const { categorys, families } = useSelector(state => state);
+
+  if (loading) {
+    return (
+      <div >
+        <div >Loading...</div>
+        <img className={styles.imagenLoading} src="/bebidas-premium-home.gif" alt="" />
+              
+      </div> 
+    );
+  }
+ 
   return (
     <div style={{display:"flex", alignItems:"center"}}>
     <div style={{margin: "0px 20px 0px 20px", display:"inline-block"}}>

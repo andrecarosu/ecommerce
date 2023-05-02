@@ -250,7 +250,7 @@ function Sidebar() {
           </li>
           <hr />
           <li className={styles.list_item}>
-            <div className={styles.list_button}>
+            <div className={styles.list_button}
               <span
                 tabindex="0"
                 className={styles.nav_link}
