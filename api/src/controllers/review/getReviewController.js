@@ -5,17 +5,6 @@ const getAllReviews = async (req, res) => {
     try {
       const product_id = req.params.id;
       console.log(1,product_id);
-    //   const calificaciones = await Review.findAll({
-    //     where: {
-    //         product_id: product_id,
-    //     },
-    //   });
-    //   console.log(2,calificaciones);
-  
-      
-
-  
-    //   res.status(200).json(calificaciones);
 
     const calificaciones = await Review.findAll({
         where: {

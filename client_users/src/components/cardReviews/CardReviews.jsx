@@ -21,7 +21,17 @@ function CardReview({comments, scoring}) {
           </div>
 
           <div style={{marginBottom: "20px"}}>
-            <p className={styles.texto}>{comments}</p>
+          
+            <p className={styles.texto}>
+            {comments?.map((comment) => (
+    <div key={comment.id}>
+          {comment.comment}
+    </div>
+))}
+
+</p> 
+
+
           </div>
           <hr />
         </div>
