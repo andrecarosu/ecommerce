@@ -82,14 +82,6 @@ const NavBar = () => {
         </Link>
 
         <Link
-          to="/"
-          className={s.link}
-        // style={{ margin: '0px 10px' }}
-        >
-          <h4>Quiero vender</h4>
-        </Link>
-
-        <Link
           to="/about"
           className={s.link}
         // style={{ margin: '0px 10px' }}

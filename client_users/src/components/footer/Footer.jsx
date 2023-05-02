@@ -8,69 +8,24 @@ const henry = Henry
     return(
         <div style={{minHeight: "100%", position: "relative", height:"100%"}}>
             <div className={styles.container}>
-                <div>
-                    <img className={styles.logo} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994536/LogoCompletoBlanco_cxbcjm.png" />
-                </div>
-                <div className={styles.nombres}>
-                <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/udiz/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Jesus Udiz
-                    </a>
-                    <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/andrea-carolina-su%C3%A1rez-mesa-460861b9/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Andrea Carolina Suárez Mesa
-                    </a>
-                    <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/rodrigo-duran-74514a269/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Rodrigo Duran
-                    </a>
-                    <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/mateo-mugnaini/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Franco Galeano
-                    </a>
-                    <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/corvalautaro/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Lautaro Corva
-                    </a>
-                    <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/mateo-mugnaini/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Chris Ringler
-                    </a>
-                    <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/jonathan-pomilio-b0456a187/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Jonathan Pomilio
-                    </a>
-                    <a
-                    className= {styles.links}
-                    href="https://www.linkedin.com/in/mateo-mugnaini/"
-                    target="_blank"
-                    rel="noreferrer">
-                        Mugnaini Mateo
-                    </a>
-                </div>
+
+            <div className={styles.nombres}>
+  <p className={styles.nombres}>Recibimos meidos de pagos:</p>
+  <label className={styles.nombres}>  <img className={styles.henry} src="https://www.cast.mx/MercadoPago/imagenes/Ahora-aceptamos-MercadoPago-Pago-con-Tarjeta-de-Credito-Debito-y-Saldo-de-MercadoLibre-CASTelecom.png" />
+</label>  
+</div>
+<div className={styles.nombres}>
+  <label className={styles.nombres}>Horarios de Atención:</label>
+  <label className={styles.nombres}>Lunes a Sábado</label>
+  <br />
+  <label>10:00 a.m - 12:00 p.m</label>
+</div>
+
                 <div >
-                    <img className={styles.henry} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994535/HenryLogo_oevjn5.png" />
+                <a href="https://www.facebook.com/profile.php?id=100092554111303" target="_blank">
+  <img className={styles.facebook} src="https://img.freepik.com/psd-gratis/cuadrado-redondeado-3d-logo-facebook-brillante_125540-1538.jpg?size=626&ext=jpg&ga=GA1.2.1515287885.1677413274&semt=robertav1_2_sidr" />
+</a>
+
                 </div>
             </div>
         </div>
