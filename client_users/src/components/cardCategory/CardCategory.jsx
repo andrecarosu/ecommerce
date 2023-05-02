@@ -12,13 +12,11 @@ function CardCategory({name, image, family}) {
  
   return (
     <Link className={s.link} to="/home" onClick={handlerCategory} >
-      <div className={s.container}>
-        <h4 className={s.nombre}>{name}</h4>
-        <div className={s.box}>
-          <div style={{backgroundImage: `url(${image})`}} className={s.imagen}></div>
+      {/* <div style={{with:"25%", border:"solid 1px black"}}> */}
+        <div className={s.container}>
+          <img src={image} alt={name} style={{width: "100%", height:"100%"}}/>
         </div>
-        <span className={s.vermas}>Explorar más...</span>
-      </div>
+      {/* </div> */}
     </Link>
   )
 }

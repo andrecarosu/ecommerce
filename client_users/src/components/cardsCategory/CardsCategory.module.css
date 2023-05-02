@@ -1,12 +1,12 @@
 
 .container{
-    /* position: relative; */
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 20px;
-    margin-bottom: 150px;
+    width: 80%;
+    display: inline-flex;
+    /* justify-content: space-evenly; */
+    /* flex-direction: row;
+    flex-wrap: wrap; */
+    margin: 20px 0 10px 0
+    /* margin-bottom: 150px; */
 }
 
 .imagenLoading{
