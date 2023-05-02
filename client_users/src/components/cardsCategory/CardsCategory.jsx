@@ -22,7 +22,6 @@ function CardsCategory() {
   }, [dispatch])
 
 
-  const { families } = useSelector(state => state);
 
   const { categorys, families } = useSelector(state => state);
 
