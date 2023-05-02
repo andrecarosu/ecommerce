@@ -1,52 +1,52 @@
 [
   {
     "name": "Cabernet Sauvignon ",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-nicola-catena-bonarda-bodega-catena-zapata-700x700.jpg",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991411/varietales/cabernet-sauvignon_u8zdki.png",
     "family": "Tintos"
   },
   {
     "name": "Malbec Tinto",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-las-perdices-chac-chac-cabernet-franc-500x500.jpg",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991411/varietales/malbec-tinto_gcneoo.png",
     "family": "Tintos"
   },
   {
     "name": "Merlot Tinto",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2020/10/vino-finca-gabriel-bodega-jorge-rubio-500x500.jpg",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991989/varietales/merlot-tinto_pshwom.png",
     "family": "Tintos"
   },
   {
     "name": "Syrah",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/03/vino-la-flor-bodega-pulenta-estate-500x500.jpg",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991412/varietales/syrah_lcpka5.png",
     "family": "Tintos"
   },
   {
-    "name": "Malbec Rose",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-las-perdices-ice-wine-de-malbec-exploracion-500x500.jpg",
-    "family": "Rosados"
-  },
-  {
-    "name": "Merlot Rose",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-las-perdices-rose-de-malbec-500x500.jpg",
-    "family": "Rosados"
-  },
-  {
     "name": "Semillon",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-saint-felicien-chardonnay-bodega-catena-zapata-500x500.jpg",    
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991412/varietales/semillon_mnigil.png",    
     "family": "Blancos"
   },
   {
     "name": "Malbec Blanco",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/05/vino-trivento-reserva-white-malbec-500x500.jpg",    
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991989/varietales/malbec-blanco_moac4t.png",    
     "family": "Blancos"
   },
   {
     "name": "Cosecha Tardía",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-finca-gabriel-bodega-jorge-rubio-blanco-dulce-500x500.jpg",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991411/varietales/cosecha-tardia_gpzw51.png",
         "family": "Blancos"
   },
   {
     "name": "Chardonnay",
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-juan-ubaldini-sauvignon-blanc-gualtallary-bodega-ubaldini-wines-500x500.jpg",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991410/varietales/chardonnay_dpio0n.png",
     "family": "Blancos"
+  },
+  {
+    "name": "Malbec Rose",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991411/varietales/malbec-rose_hn4lgd.png",
+    "family": "Rosados"
+  },
+  {
+    "name": "Merlot Rose",
+    "image": "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1682991410/varietales/merlot-rose_ayqrhx.png",
+    "family": "Rosados"
   }
 ]

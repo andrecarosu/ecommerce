@@ -4,21 +4,32 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect } from 'react';
-import { getAllProducts } from '../../redux/actions';
+import { getAllProducts, getSlider } from '../../redux/actions';
 
 export default function Carousel({ numSlides, speed }) {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllProducts())
+    dispatch(getSlider())
   }, [dispatch])
 
-  const products = useSelector(state => state.products)
-  console.log('CAROUSEL', products);
+  const { products, slider } = useSelector(state => state)
+  console.log('CAROUSEL', slider);
 
 
   const renderSlides = () => 
-    products?.map(p => (
-      <CardOfert key={p.id_producto} id={p.id_producto} imagen={p.imagen} nombre={p.nombre} valor_normal={p.valor_normal} valor_con_descuento={p.valor_con_descuento} />
+  slider?.map(p => (
+      <CardOfert 
+      key={p.product_id} 
+      product_id={p.product_id} 
+      image={p.image} 
+      name={p.name} 
+      discount={p.discount} 
+      normal_price={p.normal_price}
+      discount_price={p.discount_price}
+      brand={p.brand}
+      Category_product={p.Category_product}
+      />
     ))
   
 

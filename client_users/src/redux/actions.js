@@ -406,3 +406,7 @@ export function getSales() {
     }
   };
 }
+
+export function getSlider () {
+  return { type: action.GET_SLIDER }
+}

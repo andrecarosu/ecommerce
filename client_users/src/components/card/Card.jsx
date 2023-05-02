@@ -9,9 +9,6 @@ console.log(discount)
   return (
     <Link className={s.link} to={`/detail/${product_id}`}>
       <div className={s.container}>
-        {/* <div style={{position:"relative"}}>
-          
-        </div> */}
         <div className={s.img} style={{position:"relative"}}>
           <div style={{width:"100%", height:"100%", position:"absolute"}}>
             <img src={image} alt={name}/>
@@ -29,9 +26,9 @@ console.log(discount)
           </div>
         </div>
         <div className={s.text}>
-          <h3 style={{fontWeight: 'bolder', fontSize:"25px"}}>{name}</h3>
-          <span style={{fontWeight: 'bolder', fontSize:"20px"}}>{brand}</span>
-          <span style={{fontWeight: 'bolder', color: "gray", fontSize:"18px"}}>{Category_product.name}</span>
+          <h3 style={{fontWeight: 'bolder', fontSize:"20px"}}>{name}</h3>
+          <span style={{fontWeight: 'bolder', fontSize:"15px"}}>{brand}</span>
+          <span style={{fontWeight: 'bolder', color: "gray", fontSize:"13px"}}>{Category_product.name}</span>
         </div>
         
       </div>
