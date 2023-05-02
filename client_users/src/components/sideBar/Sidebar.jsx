@@ -7,13 +7,12 @@ function Sidebar() {
   const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
   const [showOrdenar, setShowOrdenar] = useState(false);
-  const [showCondicion, setShowCondicion] = useState(false);
   const [showPrecio, setShowPrecio] = useState(false);
   const [showTinto, setShowTinto] = useState(false);
   const [showBlanco, setShowBlanco] = useState(false);
   const [showRosado, setShowRosado] = useState(false);
-
-
+  const [showBodega, setShowBodega] = useState(false);
+  const [showOfertas, setShowOfertas] = useState(false)
 
   const handleClick = () => {
     setShowCategories(!showCategories);
@@ -24,9 +23,6 @@ function Sidebar() {
   const handleClick3 = () => {
     setShowPrecio(!showPrecio);
   };
-    const handleClick4 = () => {
-    setShowCondicion(!showCondicion);
-  };
   const handleClickTinto = () => {
     setShowTinto(!showTinto);
   };
@@ -36,6 +32,13 @@ function Sidebar() {
   const handleClickRosado = () => {
     setShowRosado(!showRosado);
   };
+  const handleClickBodega = () => {
+    setShowBodega(!showBodega);
+  };
+  const handleClickOfertas = () => {
+    setShowOfertas(!showOfertas);
+  };
+
   return (
     <div className={styles.nav_contenedor}>
       <nav className={styles.nav}>
@@ -58,11 +61,44 @@ function Sidebar() {
               <span
                 tabindex="0"
                 className={styles.nav_link}
-                onClick={() => dispatch(action.filterByOffers())}
+                onClick={handleClickOfertas}
               >
                 Ofertas
               </span>
             </div>
+            {showOfertas && (
+              <ul className={styles.list_show}>
+                <li
+                  tabindex="0"
+                  className={styles.list_14}
+                  onClick={() => dispatch(action.filterByOffers(20))}
+                >
+                  <span 
+                    className={styles.nav_link}
+                  >
+                    20% OFF
+                  </span>
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_15}
+                  onClick={() => dispatch(action.filterByOffers(35))}
+                >
+                  <span className={styles.nav_link}>
+                    35% OFF
+                  </span>
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_15}
+                  onClick={() => dispatch(action.filterByOffers(45))}
+                >
+                  <span className={styles.nav_link}>
+                    45% OFF
+                  </span>
+                </li>
+              </ul>
+            )}
           </li>
           <li className={`${styles.list_item} ${styles.list_item_click}`}>
             <div className={`${styles.list_button} `}>
@@ -210,30 +246,65 @@ function Sidebar() {
               </>
             )}
           </li>
-          <li className={`${styles.list_item} ${styles.list_item_click}`}>
-            <div className={`${styles.list_button} `}>
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAQhJREFUSEvVlA0OAUEMhd/ehJtwEpwEJ8FJuAk3IZ9MN2MzM621JJqIv51+r33tdPpydF/OryhgJmkraZEE3SRtJPHejAiA5NdKlrkHiQAOktaSLpL2CWTV8H3XKiECuKcEuVpadU7q+b0aEUDpsLUNDyYHoN5adExmT1YBbcknaTmFybk68wPlp2T8x2NqCfJxdcfTDkVNHu4C5rrtARIB2EjyPLsAjBfhVuIBhslRTdjy8ZkrA0+K0QKwvSQiSuPIBjOuRHWja4CoQhdSAuSzTkvoeyuArJIvVEK1/S07BLyb3MB4RdWYj6D+Ks8BeVsc0e7fQJ4D8VOAK2vMA94ejMn5cub/AQ9dbTkZoV0kIAAAAABJRU5ErkJggg==" alt="icono"/>
-              <span className={styles.nav_link} onClick={handleClick2}>
-                Ordenar
+          <li className={styles.list_item}>
+            <div className={styles.list_button}>
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANhJREFUSEvtldENgzAMRI9N2k3KJmWSqpO0m5RNyiZUR+MoorbjCPFRCT7D5Z4526LDzk+3sz8OQDXhMqIXgEv1RkwwAThTWgLm2N2wavHeAngCuDq4TYAewAjg4UDCAJox03eqlsY84+P17QfAC6dUVdnsIQFolptnmBMu+qUCbdEIkWrXEUs0LIBA630+tzZZmygx9wrgaPIrTYAWEcVa7uveiM6MyNoDK/eyN9q0hqeI804zK3drFcIAGtwB3MI7/BU2ARq9dYC3la2APBTHD6ca3f9H9AET9TAZjvnCQgAAAABJRU5ErkJggg==" />
+              <span
+                tabindex="0"
+                className={styles.nav_link}
+                onClick={() => handleClickBodega()}
+              >
+                Bodega
               </span>
             </div>
-            {showOrdenar && (
-              <ul className={styles.list_show}>
+            {showBodega && (
+                <ul className={styles.list_show}>
                 <li
                   tabindex="0"
-                  className={styles.list_12}
-                  onClick={() => dispatch(action.orderedByNameASC())}
+                  className={styles.list_1}
+                  onClick={() =>
+                    dispatch(action.filterByBrand("Trapiche"))
+                  }
                 >
-                  Por nombre a-z
+                  Trapiche
                 </li>
                 <li
                   tabindex="0"
-                  className={styles.list_13}
-                  onClick={() => dispatch(action.orderedByNameDESC())}
+                  className={styles.list_2}
+                  onClick={() =>
+                    dispatch(action.filterByBrand("El Esteco"))
+                  }
                 >
-                  Por nombre z-a
+                  El Esteco
                 </li>
-              </ul>
+                <li
+                  tabindex="0"
+                  className={styles.list_3}
+                  onClick={() =>
+                    dispatch(action.filterByBrand("Elementos"))
+                  }
+                >
+                  Elementos
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_4}
+                  onClick={() =>
+                    dispatch(action.filterByBrand("Navarro Correas"))
+                  }
+                >
+                  Navarro Correas
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_4}
+                  onClick={() =>
+                    dispatch(action.filterByBrand("Finca Las Moras"))
+                  }
+                >
+                  Fincas las Moras
+                </li>
+              </ul>      
             )}
           </li>
           <li className={styles.list_item}>
@@ -266,17 +337,45 @@ function Sidebar() {
             </ul>
             )}
           </li>
-          <li className={styles.list_item}>
-            <div className={styles.list_button}>
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAANhJREFUSEvtldENgzAMRI9N2k3KJmWSqpO0m5RNyiZUR+MoorbjCPFRCT7D5Z4526LDzk+3sz8OQDXhMqIXgEv1RkwwAThTWgLm2N2wavHeAngCuDq4TYAewAjg4UDCAJox03eqlsY84+P17QfAC6dUVdnsIQFolptnmBMu+qUCbdEIkWrXEUs0LIBA630+tzZZmygx9wrgaPIrTYAWEcVa7uveiM6MyNoDK/eyN9q0hqeI804zK3drFcIAGtwB3MI7/BU2ARq9dYC3la2APBTHD6ca3f9H9AET9TAZjvnCQgAAAABJRU5ErkJggg==" />
-              <span
-                tabindex="0"
-                className={styles.nav_link}
-                onClick={() => dispatch(action.orderedByRecientes())}
-              >
-                Recientes
+          <li className={`${styles.list_item} ${styles.list_item_click}`}>
+            <div className={`${styles.list_button} `}>
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAQhJREFUSEvVlA0OAUEMhd/ehJtwEpwEJ8FJuAk3IZ9MN2MzM621JJqIv51+r33tdPpydF/OryhgJmkraZEE3SRtJPHejAiA5NdKlrkHiQAOktaSLpL2CWTV8H3XKiECuKcEuVpadU7q+b0aEUDpsLUNDyYHoN5adExmT1YBbcknaTmFybk68wPlp2T8x2NqCfJxdcfTDkVNHu4C5rrtARIB2EjyPLsAjBfhVuIBhslRTdjy8ZkrA0+K0QKwvSQiSuPIBjOuRHWja4CoQhdSAuSzTkvoeyuArJIvVEK1/S07BLyb3MB4RdWYj6D+Ks8BeVsc0e7fQJ4D8VOAK2vMA94ejMn5cub/AQ9dbTkZoV0kIAAAAABJRU5ErkJggg==" alt="icono"/>
+              <span className={styles.nav_link} onClick={handleClick2}>
+                Ordenar
               </span>
             </div>
+            {showOrdenar && (
+              <ul className={styles.list_show}>
+                <li
+                  tabindex="0"
+                  className={styles.list_14}
+                  onClick={() => dispatch(action.orderedByHighestPrice())}
+                >
+                  Mayor precio
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_15}
+                  onClick={() => dispatch(action.orderedByLowestPrice())}
+                >
+                  Menor precio
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_12}
+                  onClick={() => dispatch(action.orderedByNameASC())}
+                >
+                  A-Z
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_13}
+                  onClick={() => dispatch(action.orderedByNameDESC())}
+                >
+                  Z-A
+                </li>
+              </ul>
+            )}
           </li>
         </ul>
       </nav>
