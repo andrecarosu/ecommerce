@@ -1,4 +1,5 @@
 import React from 'react';
+import FormCreateProduct from '../../components/formCreateProduct/FormCreateProduct';
 
 const Ventas = () => {
     return (

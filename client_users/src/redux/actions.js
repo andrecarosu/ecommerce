@@ -103,7 +103,7 @@ export function getUsuarioByEmail(email) {
 export function putUser(userId, userData) {
   return () => {
     axios
-      .put(`${URL}/usuario/${userId}`, userData) 
+      .put(`${URL}/usuario/${userId}`, userData)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   };
@@ -127,7 +127,7 @@ export const getUserById = (id) => async (dispatch) => {
     dispatch(ready());
   }
 };
-  
+
 
 // ========================* PRODUCTOS *========================
 export function createProduct(product) {
@@ -151,6 +151,7 @@ export const getAllProducts = () => {
       dispatch(loading());
       const response = await axios.get(`${URL}/products`);
       const data = response.data.map(prod => {
+
         let discount = Math.ceil((prod.normal_price - prod.discount_price)/prod.normal_price * 100)
         if(19<=discount && discount<=21) discount=20
         if(34<=discount && discount<=36) discount=35
@@ -217,7 +218,7 @@ export const getProductByName = (name) => async (dispatch) => {
     const res = await axios.get(`${URL}/products?name=${name}`);
     const result = res.data;
     console.log(result);
-     dispatch({
+    dispatch({
       type: action.GET_PRODUCT_BY_NAME,
       payload: result,
     });
@@ -405,4 +406,8 @@ export function getSales() {
       });
     }
   };
+}
+
+export function getSlider () {
+  return { type: action.GET_SLIDER }
 }

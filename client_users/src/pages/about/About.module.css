@@ -27,5 +27,45 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url('../../assets/images/SoloIconoNegro.png');
+    background-image: url('../../assets/images/IconoFondoAbout.png');
+}
+
+.seccion {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    /* border: 1px solid blue; */
+    padding: 30px;
+}
+
+.seccion p {
+    /* border: 1px solid red; */
+    background-color: var(--green-color);
+    color: white;
+    font-size: 1.1rem;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: justify;
+    box-shadow: 5px 5px 18px rgb(95, 94, 94);
+    position: relative;
+    height: 300px;
+}
+
+.seccion p span {
+    position: absolute;
+    top: 60%;
+    left: 45%;
+    font-size: 60px;
+}
+
+.textEnd {
+    /* border: 1px solid red; */
+    margin: 50px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: rgb(37, 37, 37);
+}
+
+.textEnd span {
+    color: var(--green-color);
 }

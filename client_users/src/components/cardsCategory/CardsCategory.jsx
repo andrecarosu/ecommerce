@@ -21,6 +21,8 @@ function CardsCategory() {
     fetchData();    
   }, [dispatch])
 
+
+
   const { categorys, families } = useSelector(state => state);
 
   if (loading) {
@@ -32,14 +34,15 @@ function CardsCategory() {
       </div> 
     );
   }
-  
+ 
   return (
-    <div>
+    <div style={{display:"flex", alignItems:"center"}}>
+    <div style={{margin: "0px 20px 0px 20px", display:"inline-block"}}>
       {families?.map((family, index) => {
         return(
           <div key={index}>
             <h2>{ family.family }</h2>
-            <div style={{display:"flex", justifyContent:"space-evenly"}}>
+            <div className={styles.container}>
               {family.categories?.map((category, index) => (
                 <CardCategory
                   key={index}
@@ -52,6 +55,7 @@ function CardsCategory() {
             </div>
           </div>
         )})}
+    </div>
     </div>  
   )
 }
