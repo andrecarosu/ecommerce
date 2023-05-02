@@ -40,7 +40,7 @@
 
 .seccion p {
     /* border: 1px solid red; */
-    background-color: var(--green-color);
+    background-color: rgb(213,161,41);
     color: white;
     font-size: 1.1rem;
     padding: 30px;
@@ -67,5 +67,5 @@
 }
 
 .textEnd span {
-    color: var(--green-color);
+    color: rgb(213,161,41);
 }

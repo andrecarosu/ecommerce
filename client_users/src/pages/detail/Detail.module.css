@@ -15,6 +15,7 @@ div>.image {
     height: auto;
     max-height: 420px;
     border: none;
+    margin-top: 15px;
 }
 
 .precios {
@@ -50,14 +51,14 @@ div>.image {
 }
 
 .condicion {
-    background-color: var(--green-color);
-    box-shadow: -3px 3px rgb(0, 128, 0);
+    background-color:  #daa52080;
+    box-shadow: -3px 3px #daa520;
     border-bottom-left-radius: 8px;
     font-size: 25px;
     position: absolute;
     left: 0px;
-    top: 0px;
-    color: #f1f1f1;
+    top: -10px;
+    color: hsl(0, 100%, 3%);
 }
 
 
