@@ -14,7 +14,7 @@ const Login = () => {
   const logo = Logo
   return (
     <div className={s.container}>
-      <img className={s.logo} src={logo} alt="texto del logo" />
+      {/* <img className={s.logo} src={logo} alt="texto del logo" /> */}
       <ButtonBack />
 
       <div className={s.formulario}>

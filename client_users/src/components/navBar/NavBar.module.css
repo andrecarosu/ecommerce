@@ -44,7 +44,7 @@
 }
 
 .button:hover {
-    color: var(--green-color);
+    color: rgb(213,161,41);
 }
 
 .texto {
@@ -96,11 +96,11 @@
 }
 
 .link:hover {
-    color: #54b216;
+    color: rgb(213,161,41);;
 }
 
 .link_menu:hover {
-    color: #54b216;
+    color: rgb(213,161,41);;
 }
 
 @media (min-width: 930px) {
