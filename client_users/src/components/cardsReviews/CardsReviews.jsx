@@ -13,10 +13,10 @@ function CardsReviews(){
         reviews?.map(review => {
             return ( 
                 <CardReview 
-                id_motivo_calificacion={review.id_motivo_calificacion}
-                descripcion_motivo={review.descripcion_motivo}
-                valor_calificacion={review.valor_calificacion}
-                id_producto={review.id_producto}
+                review_id={review.review_id}
+                comments={review.comments}
+                scoring={review.scoring}
+                product_id={review.product_id}
                 />
             )
         })): (
