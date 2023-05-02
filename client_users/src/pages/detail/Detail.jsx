@@ -132,7 +132,7 @@ const Detail = () => {
                 <div className={s.container_img}>
                   <img className={s.image} src={product.image} alt={product.name} />
                 </div>
-                <div className={s.condicion}>{product.condicion}</div>
+                <div className={s.condicion}>{product.brand}</div>
               </div>
               <hr style={{ height: '90%', margin: '20px' }} />
 
@@ -148,9 +148,9 @@ const Detail = () => {
 
                 <div>
                   <h4>Selecciona la cantidad</h4>
-                  {product.existencia !== 1
-                    ? (<span style={{ color: "gray" }}>({product.existencia} disponibles)</span>)
-                    : (<span style={{ color: "gray" }}>({product.existencia} disponible)</span>)}
+                  {product.stock !== 1
+                    ? (<span style={{ color: "gray" }}>({product.stock} disponibles)</span>)
+                    : (<span style={{ color: "gray" }}>({product.stock} disponible)</span>)}
                   <QuantityDisplay
                     quantity={quantity}
                     onDecrease={handleDecrease}
