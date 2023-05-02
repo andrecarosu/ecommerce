@@ -252,26 +252,14 @@
     "state": true
   },
   {
-    "name": "Juan Ubaldini",
-    "normal_price": 3990,
-    "discount_price": 3500,
-    "description": "Calidad enológica y una historia que nos inspira día a día. Vinos elaborados a base de un cuidado respetuoso de las uvas y los lugares, sin movimientos invasivos para obtener la máxima pureza.",
-    "stock": 14,
-    "amount": 0,
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-juan-ubaldini-Terroir-Blend-Malbec-bodega-ubaldini-wines.jpg",
-    "category_id": 7,
-    "brand": "Ubaldini Wines",
-    "state": true
-  },
-  {
     "name": "Alegoría",
     "normal_price": 5557,
     "discount_price": 3612,
-    "description": "Dedicados a la vitivinicultura desde 1798. Vivimos el vino desda el terror, y es en Finca Agrelo, al pie de la Cordillera de los Andes donde cada uno de nuestros vinos se concibe con la filosofía y el espíritu único que nos legó Don Juan de Dios Correas; quien en su afán incansable por superarse supo hacer perdurar su legado a través de las generaciones: ´Nuestra Tradición es hacer siempre un vino Mejor´",
+    "description": "Dedicados a la vitivinicultura desde 1798. Vivimos el vino desda el terror, y es en Finca Agrelo, al pie de la Cordillera de los Andes donde cada uno de nuestros vinos se concibe con la filosofía y el espíritu único que nos legó Don Juan de Dios Correas; quien en su afán incansable por superarse supo hacer perdurar su legado a través de las generaciones: Nuestra Tradición es hacer siempre un vino Mejor",
     "stock": 10,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/b/n/bnc_alegoria_chardonnay.png?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 8,
+    "category_id": 6,
     "brand": "Navarro Correas",
     "state": true
   },
@@ -283,7 +271,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/7/4/74549.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 8,
+    "category_id": 6,
     "brand": "Costa & Pampa",
     "state": true
   },
@@ -331,7 +319,7 @@
     "stock": 12,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-finca-gabriel-bodega-jorge-rubio-blanco-dulce.jpg",
-    "category_id": 9,
+    "category_id": 7,
     "brand": "Jorge Rubio",
     "state": true
   },
@@ -343,7 +331,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://masonlineprod.vtexassets.com/arquivos/ids/173471-800-auto?v=637835148442770000&width=800&height=auto&aspect=true",
-    "category_id": 9,
+    "category_id": 7,
     "brand": "Bianchi",
     "state": true
   },
@@ -355,8 +343,8 @@
     "stock": 11,
     "amount": 0,
     "image": "https://thefoodmarketar.vtexassets.com/arquivos/ids/160091-800-auto?v=638097324626000000&width=800&height=auto&aspect=true",
-    "category_id": 9,
-    "brand": "Cosecha tardia",
+    "category_id": 7,
+    "brand": "Red Puro",
     "state": true
   },
   {
@@ -367,7 +355,7 @@
     "stock": 17,
     "amount": 0,
     "image": "https://01almacen.com.ar/cdn/shop/products/VINO-ESPUMANTE-NEW-AGE-750ML-UNIDAD_24e053_14224_500x.jpg?v=1626355708",
-    "category_id": 9,
+    "category_id": 7,
     "brand": "Bianchi",
     "state": true
   },
@@ -379,19 +367,19 @@
     "stock": 13,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/d/a/dada_art_white_malbec_74714_1.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 9,
-    "brand": "Malbec",
+    "category_id": 6,
+    "brand": "Finca Las Moras",
     "state": true
   },
   {
-    "name": "Trivento White Malbec",
+    "name": "Trivento",
     "normal_price": 2050,
     "discount_price": 1950,
     "description": "El Tivento Reserve White Malbec es un vino con impacto social, cuyos fondos se utilizan para Becas Estudiantiles. Incursionaron en la elaboración de un blanco a partir de uvas tintas y así nació el White Malbec. Una agradable y simple aventura es este malbec, hecho como blanco, es decir, sin que el jugo tenga un contacto prolongado con las pieles de las uvas, que es donde yace el color.",
     "stock": 15,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/05/vino-trivento-reserva-white-malbec.jpg",
-    "category_id": 8,
+    "category_id": 6,
     "brand": "Trivento",
     "state": true
   },
@@ -403,7 +391,7 @@
     "stock": 11,
     "amount": 0,
     "image": "https://rutini.vteximg.com.br/arquivos/ids/155881-1400-1600/Rutini-Destilado-de-Orujo-de-Malbec-Grapa_1400x1600.jpg?v=637231643748370000",
-    "category_id": 8,
+    "category_id": 5,
     "brand": "Grapa",
     "state": true
   },
@@ -427,7 +415,7 @@
     "stock": 18,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/e/l/elementos_torront_s.png?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 8,
+    "category_id": 6,
     "brand": "Elementos",
     "state": true
   },
@@ -435,11 +423,11 @@
     "name": "Prisionero",
     "normal_price": 1335,
     "discount_price": 1200,
-    "description": "Confinado a los límites de esta botella, solo pienso en escapar, rspirar, gritar quien soy, revelar mi esencia............",
+    "description": "Confinado a los límites de esta botella, solo pienso en escapar, rspirar, gritar quien soy, revelar mi esencia.",
     "stock": 11,
     "amount": 0,
     "image": "https://http2.mlstatic.com/D_NQ_NP_908591-MLA54928400420_042023-O.webp",
-    "category_id": 8,
+    "category_id": 5,
     "brand": "Colosso",
     "state": true
   },
@@ -451,7 +439,7 @@
     "stock": 13,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2020/09/vino-mendel-semillon.jpg",
-    "category_id": 7,
+    "category_id": 5,
     "brand": "Mendel Wines",
     "state": true
   },
@@ -463,7 +451,7 @@
     "stock": 14,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/03/vino-andeluna-semillon-edicion-limitada.jpg",
-    "category_id": 7,
+    "category_id": 5,
     "brand": "Andeluna",
     "state": true
   },
@@ -475,7 +463,7 @@
     "stock": 11,
     "amount": 0,
     "image": "https://cdn.shopify.com/s/files/1/0005/4634/0925/products/StradivariusL-1000x1000_2048x2048.jpg?v=1638286062",
-    "category_id": 7,
+    "category_id": 5,
     "brand": "Bianchi",
     "state": true
   },
@@ -487,7 +475,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.espaciovino.com.ar/media/default/0001/56/thumb_55637_default_big.jpeg",
-    "category_id": 7,
+    "category_id": 8,
     "brand": "Bianchi",
     "state": true
   },
