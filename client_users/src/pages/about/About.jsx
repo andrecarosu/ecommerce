@@ -6,10 +6,10 @@ const About = () => {
   return (
     <div className={s.container}>
       <div className={s.logo}></div>
-      <h1 className={s.titulo}>Acerca de <span style={{ color: 'var(--green-color)' }}>JustOffers</span></h1>
+      <h1 className={s.titulo}>Acerca de <span style={{ color: 'rgb(213,161,41)' }}>thewinecellar.com</span></h1>
       <div className={s.seccion}>
         <p>
-          En JustOffers, somos apasionados por el mundo del vino. 
+          En thewinecellar.com, somos apasionados por el mundo del vino. 
           Nos encanta explorar nuevas variedades, descubrir nuevos sabores y compartir nuestras experiencias 
           con otros amantes del vino como tú.
           <span><FontAwesomeIcon icon={faStar} /></span>
@@ -21,9 +21,9 @@ const About = () => {
           <span><FontAwesomeIcon icon={faBullseye} /></span>
         </p>
       </div>
-      <div className={s.seccion}>
+            <div className={s.seccion}>
         <p>
-          Pero eso no es todo. En JustOffers, también ofrecemos descuentos exclusivos en muchos
+          Pero eso no es todo. En thewinecellar.com, también ofrecemos descuentos exclusivos en muchos
           de nuestros productos, para que puedas disfrutar de los mejores vinos sin tener que gastar
           una fortuna.
           <span><FontAwesomeIcon icon={faPercentage} /></span>
@@ -35,7 +35,7 @@ const About = () => {
         </p>
       </div>
       <p className={s.textEnd}>
-        Gracias por elegir <span>JustOffers</span> como tu tienda de vinos en línea. 
+        Gracias por elegir <span>thewinecellar.com</span> como tu tienda de vinos en línea. 
         Esperamos que disfrutes de nuestros productos tanto como nosotros disfrutamos 
         compartiéndolos contigo.
       </p>

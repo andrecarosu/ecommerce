@@ -8,7 +8,7 @@ export default function Register() {
 
     return (
         <div className={s.container}>
-            <img className={s.logo} src={logo} alt="texto del logo" />
+            {/* <img className={s.logo} src={logo} alt="texto del logo" /> */}
             <p style={{padding: '15px', marginBottom: '20px', color: 'gray'}}>Por favor completa la información sobre ti para registrar tu cuenta, <br /> y comenzar a aprovechar nuestras ofertas exclusivas!</p>
             <FormRegister />
         </div>
