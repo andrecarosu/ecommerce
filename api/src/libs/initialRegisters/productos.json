@@ -247,24 +247,12 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-las-perdices-ice-wine-de-malbec-exploracion.jpg",
-    "category_id": 5,
+    "category_id": 9,
     "brand": "Viña Las Perdices",
     "state": true
   },
   {
-    "name": "Vino GRAN EQUILIBRISTA",
-    "normal_price": 4230,
-    "discount_price": 3900,
-    "description": "Apto para guarda de 8 años. La temperatura adecuada para su consumo es entre 16º y 18º C. Mantener en lugar fresco y sin luz ni vibraciones. Dejar oxigenar por especio de una hora. Ideal para acompañas, Carnes rojas asadas o grilladas, cordero, huevos rellenos de codorniz, salazones u otra combinación elaborada.",
-    "stock": 10,
-    "amount": 0,
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2020/04/vino-gran-equilibrista-blend-ubaldini-wines.jpg",
-    "category_id": 6,
-    "brand": "Ubaldini Wines",
-    "state": true
-  },
-  {
-    "name": "Vino JUAN UBALDINI",
+    "name": "Juan Ubaldini",
     "normal_price": 3990,
     "discount_price": 3500,
     "description": "Calidad enológica y una historia que nos inspira día a día. Vinos elaborados a base de un cuidado respetuoso de las uvas y los lugares, sin movimientos invasivos para obtener la máxima pureza.",
@@ -276,42 +264,6 @@
     "state": true
   },
   {
-    "name": "Vino SERIE A",
-    "normal_price": 3340,
-    "discount_price": 2900,
-    "description": "Temperatura de servicio para este vino es entre 16º y 18º C, Potencial de guarda 6 años. Decantar por espacio de una hora antes de beberlo. Conservar en lugar fresco, oscuro, y sin vibraciones. Ideal para acompañar unos Bifesitos de cordero marinados con papas rusticas.",
-    "stock": 12,
-    "amount": 0,
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2021/11/19.jpg",
-    "category_id": 8,
-    "brand": "ZUCCARDI",
-    "state": true
-  },
-  {
-    "name": "Vino MALBEC ARGENTINO 2019",
-    "normal_price": 40000,
-    "discount_price": 32000,
-    "description": "DIEZ SIGLOS DE VIDA, MUERTE Y RENACIMIENTO. La épica historia de la noble uva Malbec es como ninguna otra, y la etiqueta de Catena Zapata Malbec Argentino rinde homenaje a la historia de la variedad en Francia y su ascenso en Argentina. Cuatro figuras femeninas encarnan diferentes hitos en la historia de la uva. Leonor de Aquitania representa el nacimiento del Malbec. Ella es una fuerte presencia del Viejo Mundo, que permanece en el puente de Cahors, donde el Malbec se hizo realidad. A continuación, el Inmigrante simboliza el movimiento hacia el Nuevo Mundo y los desconocidos exploradores y aventureros que conectaron Europa con las Américas. La filoxera personifica la muerte del Malbec en el Viejo Mundo, lo que permitió su renacimiento en el nuevo. Finalmente, está Bodega Catena Zapata, representada por Adrianna Catena, quien retrata el nacimiento, la tierra y la maternidad compartiendo las riquezas del Nuevo Mundo.Este Dia, La cuarta generación de la familia Catena lidera el renacimiento de la altura en Argentina. Estamos devolviendo el Malbec al cielo… donde pertenece.",
-    "stock": 15,
-    "amount": 0,
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-malbec-argentino-bodega-catena-zapata.jpg",
-    "category_id": 9,
-    "brand": "Catena Zapata",
-    "state": true
-  },
-  {
-    "name": "Vino EL INTERMINABLE",
-    "normal_price": 6900,
-    "discount_price": 6500,
-    "description": "Un vino no se termina con la última gota… aromas, recuerdos, experiencias lo hacen SIN FIN.",
-    "stock": 10,
-    "amount": 0,
-    "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2021/03/1-2.jpg",
-    "category_id": 10,
-    "brand": "Sin Fin",
-    "state": true
-  },
-  {
     "name": "Alegoría",
     "normal_price": 5557,
     "discount_price": 3612,
@@ -319,7 +271,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/b/n/bnc_alegoria_chardonnay.png?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 10,
+    "category_id": 8,
     "brand": "Navarro Correas",
     "state": true
   },
@@ -331,7 +283,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/7/4/74549.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 10,
+    "category_id": 8,
     "brand": "Costa & Pampa",
     "state": true
   },
@@ -343,7 +295,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/l/o/los_intocables_chardonnay_1000_x_1750.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 10,
+    "category_id": 8,
     "brand": "Finca Las Moras",
     "state": true
   },
@@ -355,7 +307,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/d/o/don_david_chardonnay.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 10,
+    "category_id": 8,
     "brand": "El Esteco",
     "state": true
   },
@@ -367,7 +319,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/f/d/fdc_reserva_chardonnay_sku_74443.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 10,
+    "category_id": 8,
     "brand": "Trapiche",
     "state": true
   },
@@ -559,7 +511,7 @@
     "stock": 19,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/03/vino-rose-sil-vous-plaite.jpg",
-    "category_id": 6,
+    "category_id": 10,
     "brand": "Pulenta Estate",
     "state": true
   },
@@ -571,7 +523,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/espumante-las-perdices-brut-rose-charmat.jpg",
-    "category_id": 6,
+    "category_id": 10,
     "brand": "Las Perdices",
     "state": true
   },
@@ -583,7 +535,7 @@
     "stock": 11,
     "amount": 0,
     "image": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/214/080/products/zorzal-t-u-rose-web1-83b146407183355d5015941696610954-480-0.webp",
-    "category_id": 6,
+    "category_id": 10,
     "brand": "Zorzal Wines",
     "state": true
   },
@@ -595,7 +547,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2023/02/vino-mtroeni-rose-pino-noir.jpg",
-    "category_id": 6,
+    "category_id": 10,
     "brand": "Mastroeni",
     "state": true
   },
@@ -607,7 +559,7 @@
     "stock": 12,
     "amount": 0,
     "image": "https://www.vinosyspirits.com/media/catalog/product/p/u/puro_ros_1000_x_1750.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
-    "category_id": 6,
+    "category_id": 10,
     "brand": "Trapiche",
     "state": true
   },
@@ -619,7 +571,7 @@
     "stock": 13,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-las-perdices-ice-wine-de-malbec-exploracion.jpg",
-    "category_id": 5,
+    "category_id": 9,
     "brand": "Las Perdices",
     "state": true
   },
@@ -631,7 +583,7 @@
     "stock": 12,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/10/vino-las-perdices-rose-de-malbec.jpg",
-    "category_id": 5,
+    "category_id": 9,
     "brand": "Las Perdices",
     "state": true
   },
@@ -643,7 +595,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2022/12/vino-la-linda-rose-malbec-bodega-luigi-bosca.jpg",
-    "category_id": 5,
+    "category_id": 9,
     "brand": "Luigi Bosca",
     "state": true
   },
@@ -655,7 +607,7 @@
     "stock": 10,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2021/03/7-2.jpg",
-    "category_id": 5,
+    "category_id": 9,
     "brand": "Vistandés",
     "state": true
   },
@@ -667,7 +619,7 @@
     "stock": 15,
     "amount": 0,
     "image": "https://www.casadevinosmendoza.com.ar/wp-content/uploads/2021/08/vino-andeluna-malbec-rose-edicion-limitada.jpg",
-    "category_id": 5,
+    "category_id": 9,
     "brand": "Andeluna",
     "state": true
   }
