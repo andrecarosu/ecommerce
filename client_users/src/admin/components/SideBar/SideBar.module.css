@@ -1,3 +1,7 @@
+:root {
+    --heigh-item: 50px;
+}
+
 .sideBarContent {
     background-color: white;
     width: 100%;
@@ -66,12 +70,15 @@ a {
 .items {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     /* padding: 10px; */
     /* padding-left: 50px; */
     gap: 10px;
     text-align: left;
     /* background: red; */
-    display: none;
+    /* display: none; */
+    height: 0;
+    transition: height 0.3s ease-in-out;
 }
 
 .items a {
@@ -84,5 +91,7 @@ a {
 }
 
 .expanded {
-    display: flex;
+    /* display: flex; */
+    height: calc(var(--d)*var(--heigh-item));
+    /* transition: height 0.3s ease-in-out; */
 }

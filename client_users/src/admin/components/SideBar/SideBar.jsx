@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
+
 const SideBar = () => {
     const [active, useActive] = useState(0)
     const location = useLocation()
@@ -16,9 +17,17 @@ const SideBar = () => {
             </div>
             <div className={s.menu}>
                 <ul>
-                    <li>Menu</li>
                     <li className={s.option}>
-                        <NavLink to='/dashboard/usuarios' className={isActive =>
+                        <NavLink to='/dashboard/' exact className={isActive =>
+                            `${s.a} ${(isActive ? s.current : '')}`}>
+                            Menu
+                            {/* <li>Usuarios</li> */}
+
+                        </NavLink>
+                    </li>
+
+                    <li className={s.option}>
+                        <NavLink to='/dashboard/usuarios' exact className={isActive =>
                             `${s.a} ${(isActive ? s.current : '')}`}>
                             Usuarios
                             {/* <li>Usuarios</li> */}
@@ -26,14 +35,14 @@ const SideBar = () => {
                         </NavLink>
                     </li>
                     <li className={s.option}>
-                        <NavLink to='/dashboard/productos' className={isActive =>
+                        <NavLink to='/dashboard/productos' exact className={isActive =>
                             `${s.a} ${(isActive ? s.current : '')}`}>
                             Productos
 
                         </NavLink>
 
                         <div className={`${s.items} 
-                        ${location.pathname.includes('/dashboard/productos') ? s.expanded : ''}`}>
+                        ${location.pathname.includes('/dashboard/productos') ? s.expanded : ''}`} style={{ '--d': '2' }}>
                             <NavLink to='/dashboard/productos/categorias'>
                                 Categorias</NavLink>
                             <NavLink to=''>Adicional</NavLink>
@@ -42,7 +51,7 @@ const SideBar = () => {
                     </li>
 
                     <li className={s.option}>
-                        <NavLink to='/dashboard/ventas' className={isActive =>
+                        <NavLink to='/dashboard/ventas' exact className={isActive =>
                             `${s.a} ${(isActive ? s.current : '')}`}>
                             Ventas
                         </NavLink>

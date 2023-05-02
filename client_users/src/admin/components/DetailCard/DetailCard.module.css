@@ -1,0 +1,109 @@
+.globalDetail {
+    position: fixed;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 250px;
+    height: 100%;
+    width: calc(100% - 250px);
+    z-index: 10;
+    background: rgba(245, 245, 250, 0.5);
+}
+
+.containerDetail {
+    display: grid;
+    position: relative;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "s1 image"
+        "s1 image"
+        "description s2"
+        "description s2";
+    width: 50%;
+    height: 450px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    animation: card .5s ease-in-out;
+}
+
+@keyframes card {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+.closeButton {
+    position: absolute;
+    right: 0;
+
+}
+
+.distribution {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.row {
+    display: flex;
+    text-align: left;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.row span {
+    width: 50%;
+}
+
+.s1 {
+    grid-area: s1;
+    padding: 20px;
+}
+
+.imageContainer {
+    width: 60%;
+    margin: auto;
+    height: 100%;
+}
+
+.image {
+    grid-area: image;
+    padding: 20px;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+}
+
+.boxDescription {
+    text-align: left;
+    font-size: 13px;
+    /* background-color: brown; */
+    height: 80%;
+    overflow: auto;
+}
+
+
+.description {
+    grid-area: description;
+    padding: 20px;
+    /* background-color: blue; */
+}
+
+.s2 {
+    grid-area: s2;
+    padding: 20px;
+}
