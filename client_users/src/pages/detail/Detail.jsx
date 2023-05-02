@@ -42,7 +42,7 @@ const Detail = () => {
       dispatch(agregarAlCarrito(product, quantity))
       dispatch(agregarCount(quantity))
        swal({
-         title: `Agregaste ${product.nombre}`,
+         title: `Agregaste ${product.name}`,
          icon: "success",
          timer: "3000",
          showConfirmButton: false
@@ -74,7 +74,7 @@ const Detail = () => {
   }
 
   const handleIncrease = () => {
-    if (quantity !== product.existencia) {
+    if (quantity !== product.stock) {
       setQuantity(quantity + 1);
     } else {
       swal({
@@ -87,7 +87,7 @@ const Detail = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const handlerComprar = () => {
     const exists = carrito?.find(e => {
-      return e.id_producto === product.id_producto
+      return e.product_id === product.product_id
     })
 
     if(estaLogueado === "database" || estaLogueado === "google"){
@@ -115,7 +115,7 @@ const Detail = () => {
       descripcion_motivo,
       valor_calificacion
     }
-    await axios.post(`${URL}/products/${id}/calificacion`, data)
+    await axios.post(`${URL}/review/${id}`, data)
     setDescripcion_motivo()
     setValor_calificacion()
   }
@@ -130,27 +130,27 @@ const Detail = () => {
             <div className={s.container}>
               <div style={{ position: "relative" }}>
                 <div className={s.container_img}>
-                  <img className={s.image} src={product.imagen} alt={product.nombre} />
+                  <img className={s.image} src={product.image} alt={product.name} />
                 </div>
-                <div className={s.condicion}>{product.condicion}</div>
+                <div className={s.condicion}>{product.brand}</div>
               </div>
               <hr style={{ height: '90%', margin: '20px' }} />
 
               <div style={{ maxWidth: '60%' }}>
-                <h1>{product.nombre}</h1>
+                <h2>{product.name}</h2>
 
-                <h4 className={s.descripcion_producto}>{product.descripcion_producto}</h4>
+                <p className={s.descripcion_producto}>{product.description}</p>
 
                 <div className={s.precios}>
-                  <h2 className={s.valor_normal}>${product.valor_normal}</h2>
-                  <h1 className={s.valor_con_descuento}>${product.valor_con_descuento}</h1>
+                  <h2 className={s.valor_normal}>${product.normal_price}</h2>
+                  <h1 className={s.valor_con_descuento}>${product.discount_price}</h1>
                 </div>
 
                 <div>
                   <h4>Selecciona la cantidad</h4>
-                  {product.existencia !== 1
-                    ? (<span style={{ color: "gray" }}>({product.existencia} disponibles)</span>)
-                    : (<span style={{ color: "gray" }}>({product.existencia} disponible)</span>)}
+                  {product.stock !== 1
+                    ? (<span style={{ color: "gray" }}>({product.stock} disponibles)</span>)
+                    : (<span style={{ color: "gray" }}>({product.stock} disponible)</span>)}
                   <QuantityDisplay
                     quantity={quantity}
                     onDecrease={handleDecrease}
@@ -173,7 +173,7 @@ const Detail = () => {
             </div>
           </div>
 
-          <div style={{marginBottom: '50px'}}>
+          {/* <div style={{marginBottom: '50px'}}>
             <h1>Deja un comentario</h1>
             <label>Calificar</label>
             <select
@@ -191,15 +191,17 @@ const Detail = () => {
             </select>
             <form className={s.form} onSubmit={handleSubmit}>
               <label>¿Qué te pareció este producto?</label>
-              <input
-                className={s.input}
-                type="text"
+              <textarea 
+                className={s.textarea}
                 value={descripcion_motivo}
                 onChange={(e) => setDescripcion_motivo(e.target.value)}
-              />
+                cols="30" 
+                rows="10"
+                placeholder='Dejanos un comentario aquí...'>
+              </textarea>
               <button className={s.btn} type='submit'>Enviar</button>
             </form>
-          </div>
+          </div> */}
         </div>
         )}
     </>
