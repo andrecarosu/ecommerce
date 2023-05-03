@@ -34,6 +34,7 @@ import {
   COUNT_RESTAR,
   COUNT_DELETE,
   GET_FAMILIES,
+  GET_SLIDER,
 } from "./actions-type.js";
 
 const initialState = {
@@ -48,6 +49,7 @@ const initialState = {
   families: [],
   product: {},
   filter: [],
+  slider: [],
   carrito: JSON.parse(window.localStorage.getItem("carrito")) || [],
   countCarrito: JSON.parse(window.localStorage.getItem("count")) || 0,
   ciudades: [],
@@ -268,9 +270,17 @@ function rootReducer(state = initialState, action) {
     case GET_ALL_CITIES:
       return {
         ...state,
-        ciudades: action.payload,
+        slider : state.products.filter(prod => {
+          return prod.discount === 45 || prod.discount === 35
+        })
       };
-
+    case GET_SLIDER:
+      return {
+        ...state,
+        slider : [...state.products].filter(prod => {
+          return prod.discount === 35
+        })
+      };
     case LOADING:
       return {
         ...state,
