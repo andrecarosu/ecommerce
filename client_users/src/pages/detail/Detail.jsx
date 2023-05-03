@@ -13,7 +13,7 @@ import axios from 'axios'
 
 const Detail = () => {
 
-  const { product, carrito } = useSelector(state => state)
+  const { product, carrito, countCarrito } = useSelector(state => state)
   console.log(product);
   const { id } = useParams()
   const dispatch = useDispatch();
@@ -24,16 +24,18 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getProductById(id))
     dispatch(getReviews(id))
+    window.localStorage.setItem("carrito", JSON.stringify(carrito));
+    window.localStorage.setItem("count", JSON.stringify(countCarrito));
     return (() => {
       dispatch(cleanProduct())
       dispatch(cleanReviews())
     })
-  }, [dispatch, id])
+  }, [dispatch, id, carrito])
 
   //Cuando se agrega al carrito
   const handlerCarrito = () => {
     const exists = carrito?.find(e => {
-      return e.id_producto === product.id_producto
+      return e.product_id === product.product_id
     })
 
 
