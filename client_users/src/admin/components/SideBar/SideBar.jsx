@@ -45,7 +45,7 @@ const SideBar = () => {
                         ${location.pathname.includes('/dashboard/productos') ? s.expanded : ''}`} style={{ '--d': '2' }}>
                             <NavLink to='/dashboard/productos/categorias'>
                                 Categorias</NavLink>
-                            <NavLink to=''>Adicional</NavLink>
+                            <NavLink to='/dashboard/productos/ver-calificaciones'>Ver Calificaciones</NavLink>
 
                         </div>
                     </li>
