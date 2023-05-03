@@ -310,7 +310,7 @@ function Sidebar() {
             )}
           </li>
           <hr />
-          <li className={styles.list_item}>
+          {/* <li className={styles.list_item}>
             <div className={styles.list_button}>
               <span
                 tabindex="0"
@@ -339,7 +339,7 @@ function Sidebar() {
             </ul>
             )}
           </li>
-          <hr />
+          <hr /> */}
           <li className={`${styles.list_item} ${styles.list_item_click}`}>
             <div className={`${styles.list_button} `}>
               <span className={styles.nav_link} onClick={handleClick2}>
