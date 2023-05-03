@@ -32,9 +32,9 @@ export default function validations(values) {
     if (blankSpace.test(values.email)) errors.email = 'El email no puede ser un espacio en blanco'
     if (values.email.length > 30) errors.email = 'El email no debería contener más de 30 caracteres'
 
-    if (values.password.length < 8) errors.password = 'La contraseña debe tener más de 8 caracteres'
-    if (values.password.length > 20) errors.password = 'La contraseña no debería tener más de 20 caracteres'
-    if (!/(?=.*\d).+/.test(values.password)) errors.password = 'La contraseña debe contener al menos un número';
+    // if (values.password.length < 8) errors.password = 'La contraseña debe tener más de 8 caracteres'
+    // if (values.password.length > 20) errors.password = 'La contraseña no debería tener más de 20 caracteres'
+    // if (!/(?=.*\d).+/.test(values.password)) errors.password = 'La contraseña debe contener al menos un número';
     if (!values.password) errors.password = 'Campo Requerido';
 
 
