@@ -132,7 +132,7 @@ const Detail = () => {
                 <div className={s.container_img}>
                   <img className={s.image} src={product.image} alt={product.name} />
                 </div>
-                <div className={s.condicion}>{product.brand}</div>
+                {/* <div className={s.condicion}>{product.brand}</div> */}
               </div>
               <hr style={{ height: '90%', margin: '20px' }} />
 
