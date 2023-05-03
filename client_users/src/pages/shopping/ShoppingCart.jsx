@@ -37,7 +37,7 @@ export default function ShoppingCart() {
   //Suma de subtotales
   let total = 0
   carrito.forEach(producto => {
-    total = total + producto.valor_con_descuento * producto.cantidad
+    total = total + producto.discount_price * producto.amount
   });
 
   //Boton de mercadoPago
@@ -57,37 +57,37 @@ export default function ShoppingCart() {
   //post a venta
   const handlerDetalleVenta = async () => {
 
-    const session = Cookies.get("user_session");
-    console.log(session)
-    let values = JSON.parse(session)
+    // const session = Cookies.get("user_session");
+    // console.log(session)
+    // let values = JSON.parse(session)
     
-    let cookieUsuario = values.dataValues
-    // console.log(cookieUsuario, "USUARIO")
+    // let cookieUsuario = values.dataValues
+    // // console.log(cookieUsuario, "USUARIO")
     
-    const fecha = date();
-    const detalle_venta = clean(carrito);
-    const valor_total_venta = detalle_venta.reduce((a, b) => {
-      return a + b.valor_total_cantidad
-    }, 0)
-    const venta = {
-      fecha,
-      valor_total_venta,
-      id_usuario: cookieUsuario.id_usuario,
-      detalle_venta,
-      estado:false
-    }
-    await axios.post("http://localhost:3001/venta", venta)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        swal({
-          title: "Ocurrio un error",
-          text: `${error}`,
-          icon: "error",
-          timer: "3000"
-        })
-      })
+    // const fecha = date();
+    // const detalle_venta = clean(carrito);
+    // const valor_total_venta = detalle_venta.reduce((a, b) => {
+    //   return a + b.valor_total_cantidad
+    // }, 0)
+    // const venta = {
+    //   fecha,
+    //   valor_total_venta,
+    //   id_usuario: cookieUsuario.id_usuario,
+    //   detalle_venta,
+    //   estado:false
+    // }
+    // await axios.post("http://localhost:3001/venta", venta)
+    //   .then(response => {
+    //     console.log(response.data);
+    //   })
+    //   .catch(error => {
+    //     swal({
+    //       title: "Ocurrio un error",
+    //       text: `${error}`,
+    //       icon: "error",
+    //       timer: "3000"
+    //     })
+    //   })
     const stockActualizado = enviarStock(carrito)
     await axios.put("http://localhost:3001/products", stockActualizado)
     .then(response => {
@@ -117,14 +117,14 @@ export default function ShoppingCart() {
           </div>
           {carrito.length ? (
             <div style={{ marginBottom: "120px" }}>
-              {carrito.map(producto => (
+              {carrito?.map(producto => (
                 <CartCard
-                  key={producto.id}
-                  id_producto={producto.id_producto}
-                  imagen={producto.imagen}
-                  nombre={producto.nombre}
-                  valor_con_descuento={producto.valor_con_descuento}
-                  cantidad={producto.cantidad}
+                  key={producto.product_id}
+                  product_id={producto.product_id}
+                  image={producto.image}
+                  name={producto.name}
+                  discount_price={producto.discount_price}
+                  amount={producto.amount}
                   total={total}
                 />
               ))}

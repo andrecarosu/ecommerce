@@ -7,11 +7,11 @@ export function actualizarStock(arrayProductos) {
   axios.put(`${URL}/products`)
 }
 
-export function agregarAlCarrito(id, quantity) {
-  console.log(id);
+export function agregarAlCarrito(product, quantity) {
+  console.log(product);
   return {
     type: action.AGREGAR_AL_CARRITO,
-    payload: { id, quantity },
+    payload: { product, quantity },
   };
 }
 
