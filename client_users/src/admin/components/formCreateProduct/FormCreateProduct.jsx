@@ -2,20 +2,39 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import validations from "./validations";
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 import { useSelector, useDispatch } from "react-redux";
 import { CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert"
 import { getCategorys } from "../../../redux/actions"
 import Cookies from "js-cookie";
 
-import s from "../formCreateProduct/FormProduct.module.css"
+import s from "./FormProduct.module.css"
 
+export const modules = {
+  toolbar: [
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    [{ font: [] }],
+    [{ size: [] }],
+    [{ color: [] }, { background: [] }],
+    [{ align: [] }],
+    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+    ['link'],
+    ['clean'],
+  ]
+};
 
 export default function FormCreateProduct() {
-  const { categorias } = useSelector(state => state);
+  const { categorys } = useSelector(state => state);
   const { supplier } = useSelector(state => state);
   const dispatch = useDispatch();
 
+  const categoriasMatch = categorys ? categorys.flat(obj => obj?.categories)?.map(cat => {
+    return { category_id: cat.category_id, name: cat.name }
+  }) : []
+  console.log(categoriasMatch)
   // let proveedor = values.dataValues
 
   useEffect(() => {
@@ -24,13 +43,12 @@ export default function FormCreateProduct() {
 
 
   const [form, setForm] = useState({
-    supplier_id: 0,
     category_id: 0,
     name: "",
-    normal_price: 0,
-    discount_price: 0,
+    normal_price: "",
+    discount_price: "",
     description: "",
-    stock: 0,
+    stock: "",
     image: "",
     brand: "",
     state: true,
@@ -155,7 +173,7 @@ export default function FormCreateProduct() {
         [property]: value
       }));
 
-      const currentErrors = validations({ [property]: value });
+      const currentErrors = 'validations({ [property]: value });'
       // setErrors(prevErrors => ({
       //   ...prevErrors,
       //   [property]: currentErrors[property]
@@ -177,193 +195,208 @@ export default function FormCreateProduct() {
 
         /* ----------------------- CONTENEDOR GENERAL -----------------------*/
         <div className={s.contenedor}>
+
           {/* ----------------------- CONTENEDOR FORMULARIO -----------------------*/}
           <div className='form-container' style={{ padding: '15px' }}>
-            <CloudinaryContext cloudName="dfmkjxjsf">
-              <form onSubmit={handleSubmit}>
+            <CloudinaryContext className={s.cloud} cloudName="dfmkjxjsf">
+              <form className={s.form} onSubmit={handleSubmit}>
+                <div className={s.s1}>
 
-                {/* ----------------------- PROVEEDOR -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
-                    Proveedor
-                  </label>
+                  {/* ----------------------- NOMBRE -----------------------*/}
 
-                  <div>
+                  <div className={s.group}>
 
-                    {errors.supplier_id && (
-                      <div className={s.errors}>{errors.supplier_id}</div>
-                    )}
-                    <div className={s.contenedorDiv}>
-                      <select
-                        name="supplier_id"
-                        onChange={e => handleInputChange(e)}
-                        className='form-input'
-                        style={{ width: '300px' }}
-                      >
-                        <option>Selecciona un proveedor</option>
-                        {supplier &&
-                          supplier.map(c => (
-                            <option key={c.supplier_id} value={c.supplier_id} primary={c.name}>
-                              {c.name}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                {/* ----------------------- NOMBRE -----------------------*/}
-                <div className={s.nombres}>
-                  <div className={s.contenedorDiv}>
-                    <label for="" className={s.label}>
-                      Nombre Producto
-                    </label>
                     <input
                       type="text"
                       name="name"
+                      placeholder=" "
                       value={form.name}
                       onChange={handleInputChange}
-                      className='form-input'
+                      className={s.inpt}
                     />
+                    <label for="" className={s.lbl}>
+                      Nombre Producto
+                    </label>
 
                     {errors.name && (
                       <div className={s.errors}>{errors.name}</div>
                     )}
                   </div>
-                </div>
-
-                {/* ----------------------- PRECIO -----------------------*/}
-                <div className={s.apellidos}>
-                  <div className={s.contenedorDiv}>
-
-                    <label for="" className={s.label}>
-                      Precio
-                    </label>
-                    <input
-                      type="text"
-                      name="normal_price"
-                      value={form.normal_price}
-                      onChange={handleInputChange}
-                      className='form-input'
-                    />
-                    {errors.normal_price && (
-                      <div className={s.errors}>{errors.normal_price}</div>
-                    )}
-                  </div>
-
-                  {/* ----------------------- PRECIO CON DESCUENTO -----------------------*/}
-                  <div className={s.contenedorDiv}>
-                    <label for="" className={s.label}>
-                      Precio con descuento
-                    </label>
-                    <input
-                      type="text"
-                      name="discount_price"
-                      value={form.discount_price}
-                      onChange={handleInputChange}
-                      className='form-input'
-                    />
-                    {errors.discount_price && (
-                      <div className={s.errors}>{errors.discount_price}</div>
-                    )}
-                  </div>
-                </div>
 
 
-                {/* ----------------------- DESCRIPCION -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
-                    Descripción
-                  </label>
-                  <input
-                    type="text"
-                    name="description"
-                    value={form.description}
-                    onChange={handleInputChange}
-                    className='form-input'
-                  />
-                  {errors.description && (
-                    <div className={s.errors}>{errors.description}</div>
-                  )}
-                </div>
+                  {/* ----------------------- PRECIO -----------------------*/}
+                  <div className={s.precios}>
+                    <div className={s.group}>
 
-                {/* ----------------------- MARCA -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
-                    Marca
-                  </label>
-                  <input
-                    type="text"
-                    name="brand"
-                    value={form.brand}
-                    onChange={handleInputChange}
-                    className='form-input'
-                  />
-                  {errors.brand && (
-                    <div className={s.errors}>{errors.brand}</div>
-                  )}
-                </div>
 
-                {/* ----------------------- CATEGORIA -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
-                    Categoria
-                  </label>
+                      <input
+                        type="text"
+                        name="normal_price"
+                        value={form.normal_price}
+                        placeholder=" "
+                        onChange={handleInputChange}
+                        className={s.inpt}
+                      />
+                      <label for="" className={s.lbl}>
+                        Precio
+                      </label>
+                      {errors.normal_price && (
+                        <div className={s.errors}>{errors.normal_price}</div>
+                      )}
+                    </div>
 
-                  <div>
+                    {/* ----------------------- PRECIO CON DESCUENTO -----------------------*/}
+                    <div className={s.group}>
 
-                    {errors.category_id && (
-                      <div className={s.errors}>{errors.category_id}</div>
-                    )}
-                    <div className={s.contenedorDiv}>
-                      <select
-                        name="category_id"
-                        onChange={e => handleInputChange(e)}
-                        className='form-input'
-                        style={{ width: '300px' }}
-                      >
-                        <option>Selecciona una categoría</option>
-                        {categorias &&
-                          categorias.map(c => (
-                            <option key={c.category_id} value={c.category_id} primary={c.name}>
-                              {c.name}
-                            </option>
-                          ))}
-                      </select>
+                      <input
+                        type="text"
+                        name="discount_price"
+                        placeholder=" "
+                        value={form.discount_price}
+                        onChange={handleInputChange}
+                        className={s.inpt}
+                      />
+                      <label for="" className={s.lbl}>
+                        Descuento
+                      </label>
+                      {errors.discount_price && (
+                        <div className={s.errors}>{errors.discount_price}</div>
+                      )}
                     </div>
                   </div>
-                </div>
 
-                {/* ----------------------- IMAGEN -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label htmlFor="" className={s.label}>
-                    Imagen
-                  </label>
-                  <input
-                    type="file"
-                    id="image"
-                    name="image"
-                    onChange={handleInputChange}
-                    className='form-input'
-                  />
 
-                  {/* ----------------------- VISTA PREVIA IMAGEN -----------------------*/}
-                  {form.image && (
-                    <img
-                      className={s.imageFile}
-                      src={form.image}
-                      id="image"
-                      alt="imagen producto"
+                  {/* ----------------------- MARCA -----------------------*/}
+                  <div className={s.group}>
+
+                    <input
+                      type="text"
+                      name="brand"
+                      value={form.brand}
+                      placeholder=" "
+                      onChange={handleInputChange}
+                      className={s.inpt}
                     />
-                  )}
+                    <label for="" className={s.lbl}>
+                      Marca
+                    </label>
+                    {errors.brand && (
+                      <div className={s.errors}>{errors.brand}</div>
+                    )}
+                  </div>
+                </div>
+                <div className={s.s2}>
+                  {/* ----------------------- IMAGEN -----------------------*/}
+                  <div className={s.contenedorDiv}>
+                    <label htmlFor="" className={s.label}>
+                      Imagen
+                    </label>
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      onChange={handleInputChange}
+                      className='form-input'
+                    />
+
+                    {/* ----------------------- VISTA PREVIA IMAGEN -----------------------*/}
+                    {form.image && (
+                      <img
+                        className={s.imageFile}
+                        src={form.image}
+                        id="image"
+                        alt="imagen producto"
+                      />
+                    )}
+                  </div>
+
+                  {/* ----------------------- CATEGORIA -----------------------*/}
+                  <div className={s.contenedorDiv}>
+
+
+                    <div>
+
+                      {errors.category_id && (
+                        <div className={s.errors}>{errors.category_id}</div>
+                      )}
+                      <div className={s.group}>
+                        <select
+                          name="category_id"
+                          onChange={e => handleInputChange(e)}
+                          className='form-input'
+                          style={{ width: '300px' }}
+                          required
+                        >
+                          <option value="" >{""}</option>
+                          {categoriasMatch &&
+                            categoriasMatch.map(c => (
+                              <option key={c.category_id} value={c.category_id} primary={c.name}>
+                                {c.name}
+                              </option>
+                            ))}
+                        </select>
+                        <label for="category_id" style={{ left: '10px' }} className={s.lbl}>
+                          Categoria
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
-                <button type="submit">Crear Producto</button>
+
+                <div className={s.s3}>
+                  {/* ----------------------- DESCRIPCION -----------------------*/}
+                  <div className={s.descriptionContainer}>
+                    <label for="" className={s.label}>
+                      Descripción
+                    </label>
+                    <ReactQuill
+                      theme="snow"
+                      value={form.description}
+                      onChange={handleInputChange}
+                      className={s.rquill}
+                      modules={modules}
+                    ></ReactQuill>
+                    {/* <input
+                      type="text"
+                      name="description"
+                      value={form.description}
+                      onChange={handleInputChange}
+                      className='form-input'
+                    /> */}
+                    {errors.description && (
+                      <div className={s.errors}>{errors.description}</div>
+                    )}
+                  </div>
+                  <button type="submit">Crear Producto</button>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               </form>
             </CloudinaryContext>
           </div>
-        </div>
-      )}
+        </div >
+      )
+      }
 
     </>
   );
 }
+
+
+
