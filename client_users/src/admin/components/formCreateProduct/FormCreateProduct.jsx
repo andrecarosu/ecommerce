@@ -84,7 +84,7 @@ export default function FormCreateProduct() {
       // Si no hay errores, continúa con el proceso de envío del formulario
       try {
         await axios
-          .post("http://localhost:3001/usuario", form)
+          .post("https://ecommercedep.onrender.com/usuario", form)
           .then(res => {
             swal({
               title: 'Registro exitoso',

@@ -47,7 +47,7 @@ export default function FormUpdatePassword(props) {
         const hashedPassword = bcrypt.hashSync(data.password, salt);
         setForm({ ...form, password: hashedPassword });
         await axios
-          .put("http://localhost:3001/usuario", { ...data, password: hashedPassword }) // Actualiza el valor de 'password' en el objeto de datos enviado
+          .put("https://ecommercedep.onrender.com//usuario", { ...data, password: hashedPassword }) // Actualiza el valor de 'password' en el objeto de datos enviado
           .then(res =>
             swal({
               title: "Cambio exitoso",

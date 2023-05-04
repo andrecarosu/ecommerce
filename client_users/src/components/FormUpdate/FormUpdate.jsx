@@ -94,7 +94,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
       );
 
       await axios
-        .put(`http://localhost:3001/usuario`, filteredData)
+        .put(`https://ecommercedep.onrender.com//usuario`, filteredData)
         .then(res => swal({
           title: 'Actualización Exitosa',
           text: 'Ya puedes ver tus cambios reflejados',

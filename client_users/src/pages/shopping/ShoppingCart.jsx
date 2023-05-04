@@ -4,8 +4,8 @@ import { Redirect } from "react-router-dom";
 import CartCard from "../../components/Cart_card/CartCard"
 import enviarStock from "./enviarStock"
 import { cleanMercadoPago, getUserById, mercadoPago } from "../../redux/actions"
-import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
+//import Cookies from "js-cookie";
+//import jwt_decode from "jwt-decode";
 import { clean } from "./clean"
 import { date } from "./date"
 import { mail } from "./user"
@@ -42,7 +42,7 @@ export default function ShoppingCart() {
 
   //Boton de mercadoPago
   const handlerPago = async () => {
-    const response = await fetch('http://localhost:3001/buy-products', {
+    const response = await fetch('https://ecommercedep.onrender.com/buy-products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ export default function ShoppingCart() {
     //     })
     //   })
     const stockActualizado = enviarStock(carrito)
-    await axios.put("http://localhost:3001/products", stockActualizado)
+    await axios.put("https://ecommercedep.onrender.com//products", stockActualizado)
     .then(response => {
       console.log(response.data);
       setShouldRedirect(true)
