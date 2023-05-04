@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom"
 import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
+import Calificaciones from './Calificaciones/Calificaciones';
 import { useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
@@ -17,8 +18,8 @@ const DashMain = () => {
     const dispatch = useDispatch();
     const token = Cookies.get('user_token');
     const session = JSON.parse(Cookies.get('user_session'));
-    // console.log('->>', token)
-    // console.log('-->', session)
+    console.log('->>', token)
+    console.log('-->', session)
 
     useEffect(() => {
         dispatch(getCategorys());
@@ -26,9 +27,9 @@ const DashMain = () => {
         dispatch(getFamilies())
     }, [dispatch])
 
-    // if (session.dataValues.type_id !== type_permission) {
-    //     return <div>No tiene permisos</div>
-    // }
+    if (session.dataValues.type_id !== type_permission) {
+        return <div>No tiene permisos</div>
+    }
     return (
         <>
             <div className={DashStyles.mainContainer}>
@@ -42,8 +43,9 @@ const DashMain = () => {
                     {/* {location?.pathname.includes("usuarios") ? <Usuarios /> : ''} */}
                     <Route exact path="" />
                     <Route path="/dashboard/usuarios" component={Usuarios} />
-                    <Route path="/dashboard/productos" component={Productos} />
+                    <Route exact path="/dashboard/productos" component={Productos} />
                     <Route path="/dashboard/ventas" component={Ventas} />
+                    <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />
                 </div>
 
             </div>

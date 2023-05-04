@@ -43,21 +43,21 @@ export default function CartCard(product) {
           <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
             <div className={s.container}>
               <div className={s.image}>
-                <img src={product.imagen} alt={product.nombre} />
+                <img src={product.image} alt={product.name} />
               </div>
               <div className={s.text}>
-                <h3 className={s.name}>{product.nombre}</h3>
+                <h3 className={s.name}>{product.name}</h3>
               </div>
-              <div className={s.precio}>${product.valor_con_descuento} x unidad</div>
+              <div className={s.precio}>${product.discount_prince} x unidad</div>
               <div className={s.quantity}>
               <QuantityDisplay
-                quantity={product.cantidad}
+                quantity={product.amount}
                 onDecrease={handleDecrease}
                 onIncrease={handleIncrease}
               />
               </div>
               <div>
-                <h3 style={{fontSize: "25px"}}>Subtotal ${product.valor_con_descuento*product.cantidad}</h3>
+                <h3 style={{fontSize: "25px"}}>Subtotal ${product.discount_price*product.amount}</h3>
               </div>
               <div className={s.eliminar} onClick={handleEliminarProducto}>
                 <IoTrashBinOutline size={20} />

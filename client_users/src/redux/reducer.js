@@ -177,15 +177,15 @@ function rootReducer(state = initialState, action) {
 
     case AGREGAR_AL_CARRITO:
       const itemExistente = state.carrito.find(
-        (item) => item.id_producto === action.payload.id.id_producto
+        (item) => item.product_id === action.payload.product.product_id
       );
 
       if (itemExistente) {
         return {
           ...state,
           carrito: state.carrito.map((item) =>
-            item.id_producto === action.payload.id.id_producto
-              ? { ...item, cantidad: item.cantidad + 1 }
+            item.product_id === action.payload.product.product_id
+              ? { ...item, amount: item.amount + 1 }
               : item
           ),
         };
@@ -195,7 +195,7 @@ function rootReducer(state = initialState, action) {
           ...state,
           carrito: [
             ...state.carrito,
-            { ...action.payload.id, cantidad: action.payload.quantity },
+            { ...action.payload.product, amount: action.payload.quantity },
           ],
         };
       }
@@ -204,28 +204,24 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         carrito: state.carrito.map((product) =>
-          product.id_producto === action.payload.id_producto
-            ? { ...product, cantidad: product.cantidad + 1 }
+          product.product_id === action.payload.product_id
+            ? { ...product, amount: product.amount + 1 }
             : product
         ),
       };
-
     case RESTAR_CANTIDAD_CARRITO:
       return {
         ...state,
         carrito: state.carrito.map((product) =>
-          product.id_producto === action.payload.id_producto
-            ? { ...product, cantidad: product.cantidad - 1 }
+          product.product_id === action.payload.product_id
+            ? { ...product, amount: product.amount - 1 }
             : product
         ),
       };
-
     case BORRAR_DEL_CARRITO:
       const filter = state.carrito.filter(
-        (p) => p.id_producto !== action.payload.id_producto
+        (p) => p.product_id !== action.payload.product_id
       );
-      console.log("filter   ", filter);
-
       return {
         ...state,
         carrito: filter,
