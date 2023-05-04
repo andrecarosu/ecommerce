@@ -24,7 +24,7 @@ const getAllFamilies = async () => {
     const families = []
     const familiesAdded = []
 
-    console.log(getAllCategorias)
+    //console.log(getAllCategorias)
     getAllCategorias.forEach(category => {
         const family = category.family
         if (!familiesAdded.includes(family)) {
@@ -37,7 +37,7 @@ const getAllFamilies = async () => {
                 console.log(category.name)
 
                 families[index].categories = [...families[index].categories, {
-
+                    category_id: category.category_id,
                     name: category.name,
                     image: category.image
 
@@ -46,8 +46,6 @@ const getAllFamilies = async () => {
             }
 
         })
-
-
 
 
     });

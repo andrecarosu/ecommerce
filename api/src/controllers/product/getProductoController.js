@@ -35,9 +35,19 @@ const getAllProducts = async () => {
 const searchProductByName = async (nombre) => {
   const databaseProducts = await Product.findAll({
     where: {
-      name: {
-        [Op.iLike]: `%${nombre}%`,
-      },
+      [Op.or]: [
+        {
+          name: {
+            [Op.iLike]: `%${nombre}%`,
+          },
+        },
+        {
+          brand: {
+            [Op.iLike]: `%${nombre}%`,
+          },
+        }
+      ]
+
     },
     ...query
   });
@@ -48,7 +58,7 @@ const searchProductByName = async (nombre) => {
 const getProductById = async (idProduct) => {
   console.log(idProduct)
   const dbdata = await Product.findByPk(idProduct, query);
-  
+
   if (!dbdata) throw new Error('Ese id no existe')
 
   return dbdata;
