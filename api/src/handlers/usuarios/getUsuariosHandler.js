@@ -13,9 +13,9 @@ const getAllUsersHandler = async (req, res, next) => {
 
 
 const getUserByIdHandler = async (req, res, next) => {
-  const { idUser } = req.params
+  const { user_id } = req.params
   try {
-    const UserId = await getUserById(idUser)
+    const UserId = await getUserById(user_id)
     res.status(200).json(UserId)
   } catch (error) {
     next(error)

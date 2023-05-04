@@ -1,33 +1,27 @@
-const { Usuario, Tipo_usuario, Ciudad } = require("../../db");
+const { User, Type_user} = require("../../db");
 const { Op, Sequelize } = require("sequelize");
 
 const getAllUsers = async () => {
   try {
-    const dataUser = await Usuario.findAll({
+    const dataUser = await User.findAll({
       attributes: [
-        "id_tipo_usuario",
-        "id_usuario",
-        "primer_nombre",
-        "segundo_nombre",
-        "primer_apellido",
-        "segundo_apellido",
-        "direccion",
-        "telefono",
-        "id_ciudad",
+        "type_id",
+        "user_id",
+        "name",
+        "address",
+        "phone",
+        "city",
         "estado",
         "email",
         "password",
-        "imagen"
+        "image",
+        "estado"
       ],
       include: [
         {
-          model: Tipo_usuario,
-          attributes: ["nombre_tipo_usuario"]
-        },
-        {
-          model: Ciudad,
-          attributes: ["nombre_ciudad"]
-        },
+          model: Type_user,
+          attributes: ["name"]
+        }       
       ]
     });
     const results = [...dataUser];
@@ -37,23 +31,21 @@ const getAllUsers = async () => {
   }
 };
 
-const getUserById = async idUser => {
+const getUserById = async (user_id) => {
   try {
-    const user = await Usuario.findByPk(idUser, {
+    const user = await User.findByPk(user_id, {
       attributes: [
-        "id_tipo_usuario",
-        "id_usuario",
-        "primer_nombre",
-        "segundo_nombre",
-        "primer_apellido",
-        "segundo_apellido",
-        "direccion",
-        "telefono",
-        "id_ciudad",
+        "type_id",
+        "user_id",
+        "name",
+        "address",
+        "phone",
+        "city",
         "estado",
         "email",
         "password",
-        "imagen"
+        "image",
+        "estado"
       ],
     });
     return user;
@@ -64,28 +56,23 @@ const getUserById = async idUser => {
 
 const getUserByName = async name => {
   try {
-    const users = await Usuario.findAll({
+    const users = await User.findAll({
       attributes: [
-        "id_tipo_usuario",
-        "id_usuario",
-        "primer_nombre",
-        "segundo_nombre",
-        "primer_apellido",
-        "segundo_apellido",
-        "direccion",
-        "telefono",
-        "id_ciudad",
+        "type_id",
+        "user_id",
+        "name",
+        "address",
+        "phone",
+        "city",
         "estado",
         "email",
         "password",
-        "imagen"
+        "image",
+        "estado"
       ],
       where: {
         [Op.or]: [
-          { primer_nombre: name },
-          { segundo_nombre: name },
-          { primer_apellido: name },
-          { segundo_apellido: name },
+          { name: name }
         ],
       },
     });

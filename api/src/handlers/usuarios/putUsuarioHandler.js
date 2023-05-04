@@ -4,11 +4,11 @@ const {getUserById} = require("../../controllers/usuarios/getUsuarioController")
 // Handler
 const actualizarUsuarioHandler = async (req, res, next) => {
     try {
-      const { id_usuario } = req.body; // Obtén el ID del usuario a actualizar
+      const { user_id } = req.body; // Obtén el ID del usuario a actualizar
       const updateData = req.body; // Obtén los datos de actualización del cuerpo de la solicitud
   
       // Llama al controlador para actualizar el usuario con los datos proporcionados
-      await actualizarUsuario(id_usuario, updateData);
+      await actualizarUsuario(user_id, updateData);
   
       // Retorna una respuesta exitosa
       res.status(200).json({ message: "Usuario actualizado exitosamente" });
@@ -20,11 +20,11 @@ const actualizarUsuarioHandler = async (req, res, next) => {
 
 
   const putUserHandler = async (req, res, next) => {
-    const { id_usuario, estado } = req.body
+    const { user_id, estado } = req.body
 
     try {
-        await editUser(id_usuario, estado)
-        const results = await getUserById(id_usuario)
+        await editUser(user_id, estado)
+        const results = await getUserById(user_id)
 
         res.status(200).json(results)
 

@@ -1,23 +1,18 @@
 const validacionPostUsuario = (data) => {
   const {
-    primer_nombre,
-    segundo_nombre,
-    primer_apellido,
-    segundo_apellido,
-    direccion,
-    telefono,
+    name,
+    address,
+    phone,
     email,
     password,
-    imagen,
-    id_tipo_usuario,
-    id_ciudad,
+    image,
+    city,
   } = data;
 
   if (
-    !primer_nombre ||
-    !primer_apellido ||
-    !direccion ||
-    !telefono ||
+    !name ||
+    !address ||
+    !phone||
     !email 
   ) {
     throw new Error("Todos los campos son obligatorios");
@@ -25,107 +20,41 @@ const validacionPostUsuario = (data) => {
 
   //--------------primer_nombre----------------
 
-  if (typeof primer_nombre !== 'string') {
+  if (typeof name !== 'string') {
     throw new Error("Nombre debe ser un string");
   }
 
-  if (primer_nombre.length < 3) {
+  if (name.length < 3) {
     throw new Error("Nombre debe contener al menos 3 caracteres");
   }
 
-  if (primer_nombre.length > 51) {
+  if (name.length > 51) {
     throw new Error("Nombre puede contener como maximo 50 caracteres");
   }
 
   if (
     !/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/i.test(
-      primer_nombre
+      name
     )
   ) {
     throw new Error("Nombre puede contener solo letras");
-  }
-
-  //--------------------segundo_nombre-------------------
-
-  if (segundo_nombre && typeof segundo_nombre !== 'string') {
-    throw new Error("Nombre debe ser un string aca");
-  }
-
-  if (segundo_nombre && segundo_nombre.length < 3) {
-    throw new Error("Nombre debe contener al menos 3 caracteres");
-  }
-
-  if (segundo_nombre && segundo_nombre.length > 51) {
-    throw new Error("Nombre puede contener como maximo 50 caracteres");
-  }
-
-  if (segundo_nombre &&
-    !/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/i.test(
-      segundo_nombre
-    )
-  ) {
-    throw new Error("Nombre puede contener solo letras");
-  }
-
-  //--------------primer_apellido----------------
-
-  if (typeof primer_apellido !== "string") {
-    throw new Error("Apellido debe ser un string");
-  }
-
-  if (primer_apellido.length < 3) {
-    throw new Error("Apellido debe contener al menos 3 caracteres");
-  }
-
-  if (primer_apellido.length > 51) {
-    throw new Error("Apellido puede contener como maximo 50 caracteres");
-  }
-
-  if (
-    !/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/i.test(
-      primer_apellido
-    )
-  ) {
-    throw new Error("Apellido puede contener solo letras");
-  }
-
-  //--------------------segundo_apellido-------------------
-
-  if (segundo_apellido && typeof segundo_apellido !== "string") {
-    throw new Error("Apellido debe ser un string");
-  }
-
-  if (segundo_apellido && segundo_apellido.length < 3) {
-    throw new Error("Apellido debe contener al menos 3 caracteres");
-  }
-
-  if (segundo_apellido && segundo_apellido.length > 51) {
-    throw new Error("Apellido puede contener como maximo 50 caracteres");
-  }
-
-  if (segundo_apellido &&
-    !/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/i.test(
-      segundo_apellido
-    )
-  ) {
-    throw new Error("Apellido puede contener solo letras");
-  }
+  }  
 
   //-------------------direccion------------------
 
-  if (typeof direccion !== "string") {
+  if (typeof address !== "string") {
     throw new Error("Direccion debe ser un string");
   }
 
-  if (direccion.length < 3) {
+  if (address.length < 3) {
     throw new Error("Direccion debe contener al menos 3 caracteres");
   }
 
-  if (direccion.length > 101) {
+  if (address.length > 101) {
     throw new Error("Direccion puede contener como maximo 100 caracteres");
   }
 
-  if (!/^[a-zA-ZñÑ0-9\s.\-]+$/i.test(direccion)) {
+  if (!/^[a-zA-ZñÑ0-9\s.\-]+$/i.test(address)) {
     throw new Error(
       "Direccion puede contener solo letras a-z, numeros y guiones '-'"
     );
@@ -177,11 +106,11 @@ const validacionPostUsuario = (data) => {
 
   //-------------------imagen------------------
 
-  if (imagen && typeof imagen !== "string") {
+  if (image && typeof image !== "string") {
     throw new Error("Imagen debe ser un string");
   }
 
-  if (imagen && imagen.length > 201) {
+  if (image && image.length > 201) {
     throw new Error("Imagen puede contener como maximo 200 caracteres");
   }
 };

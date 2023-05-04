@@ -1,53 +1,40 @@
 const { Router } = require("express");
-const paymentService = require("../service/paymentService")
-const paymentController = require("../controllers/paymentController/paymentController")
-const paymentInstance = new paymentController(new paymentService())
-
 const router = Router();
+const fs = require("fs")
 
 // Importar todos los routers, Ejemplo: const authRouter = require('./auth.js');
 // Configurar los routers, Ejemplo: router.use('/auth', authRouter);
 
-const carga = require("./carga") //CARGA ciudades, categorias, usuarios, comercios y productos http://localhost:3001/carga
-router.use("/carga", carga)
+// const usuarios = require("./usuario");
+// const product = require('./product')
+// const categories = require('./category')
 
-const productos = require("./producto");
-router.use("/products", productos);
 
-const email = require("./email");
-router.use("/email", email);
+// router.use("/usuario", usuarios);
+// router.use("/product", product);
+// router.use("/category", categories);
 
-const allproducts = require("./allProducts");
-router.use("/allProducts", allproducts);
 
-const usuarios = require("./usuario");
-router.use("/usuario", usuarios);
+/**
+ * !TODO: Esta ruta es dinamica no se necesita agregar ninguna ruta adicional que sean rutas claras y especificas
+ */
+const PATH_ROUTES = __dirname;
+const removeExtends = (filename) => {
+  //user.routes.js
+  return filename.split(".").shift();
+};
 
-const categorias = require("./categorias");
-router.use("/categorias", categorias);
-
-const comercio = require("./comercio")
-router.use("/commerce", comercio)
-
-const categoriaComercio = require("./categoriaComercio")
-router.use("/categoriaComercio", categoriaComercio)
-
-const ciudades = require("./ciudad");
-router.use("/ciudad", ciudades);
-
-const venta = require("./venta");
-router.use("/venta", venta)
-
-const pagos = require("./pagos")
-router.use("/pagos", pagos)
-
-router.post("/buy-products", function (req, res, next) {
-  const productos = req.body.productos;
-  // Aquí deberías validar que los ID de los productos sean válidos antes de usarlos
-  // para buscar los productos en la base de datos
-  paymentInstance.getPymentLink(req, res, productos);
-
+fs.readdirSync(PATH_ROUTES).filter((file) => {
+  const fileClean = removeExtends(file);
+  if (fileClean !== "index") {
+    router.use(`/${fileClean}`, require(`./${file}`));
+  } else {
+    router.use("/notfound", (req, res) => {
+      res.status(404).json({ message: "Algo inesperado sucedio :') !" });
+    });
+  }
 });
+
 
 
 module.exports = router;

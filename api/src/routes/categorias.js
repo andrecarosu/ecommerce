@@ -1,7 +1,13 @@
-const { Router } = require("express");
-const categoriasRouter = Router();
-const { getCategoriasHandler} = require("../handlers/productos/getProductos")
+const { Router } = require('express')
+const { getCategoriesHandler, getFamiliesHandler } = require('../handlers/categories/getCategoriesHandler')
+const { postCategoryHandler } = require('../handlers/categories/postCategoriesHandler')
 
-categoriasRouter.get("/", getCategoriasHandler)
 
-module.exports = categoriasRouter;
+
+const router = Router()
+
+router.get('/', getCategoriesHandler)
+router.get('/families', getFamiliesHandler)
+router.post('/', postCategoryHandler)
+
+module.exports = router

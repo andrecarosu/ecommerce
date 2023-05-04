@@ -5,7 +5,7 @@ const { getAllUsersHandler, getUserByIdHandler} = require("../handlers/usuarios/
 const { loginHandler } = require("../handlers/usuarios/loginHandler");
 const {actualizarUsuarioHandler, putUserHandler} = require("../handlers/usuarios/putUsuarioHandler");
 router.get("/", getAllUsersHandler)
-router.get("/:idUser", getUserByIdHandler)
+router.get("/:user_id", getUserByIdHandler)
 router.post("/", postUserHandler)
 router.post('/login', loginHandler)
 router.put("/", actualizarUsuarioHandler)

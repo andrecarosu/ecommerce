@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
-const { Usuario, Tipo_usuario } = require('../../db');
+const { User, Type_user } = require('../../db');
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -18,13 +18,13 @@ const transporter = nodemailer.createTransport({
 const guardarTipoUsuario = async () => {
   try {
     let tipoUsuario = [
-      { nombre_tipo_usuario: 'Cliente' },
-      { nombre_tipo_usuario: 'Administrador' },
+      { name: 'Cliente' },
+      { name: 'Administrador' },
     ];
     let mapTipoUsuario = tipoUsuario.map((prop) => ({
-      nombre_tipo_usuario: prop.nombre_tipo_usuario,
+      name: prop.name,
     }));
-    await Tipo_usuario.bulkCreate(mapTipoUsuario);
+    await Type_user.bulkCreate(mapTipoUsuario);
     console.log('Se guardaron los tipos de usuarios correctamente');
   } catch (error) {
     console.error('Error al cargar los tipos de Usuarios', error);
@@ -32,24 +32,20 @@ const guardarTipoUsuario = async () => {
 };
 
 const verifyDb = async () => {
-  const aux = await Tipo_usuario.count();
+  const aux = await Type_user.count();
   if (aux < 1) await guardarTipoUsuario();
 };
 
 const createUsuario = async (
-  id_tipo_usuario,
-  id_usuario,
-  primer_nombre,
-  segundo_nombre,
-  primer_apellido,
-  segundo_apellido,
-  direccion,
-  telefono,
-  id_ciudad,
-  estado,
+  type_id,
+   name,
+  address,
+  phone,
+  city,
   email,
   password,
-  imagen
+  image,
+  estado
 ) => {
   verifyDb();
 
@@ -60,30 +56,25 @@ const createUsuario = async (
   const hashedPassword = await bcrypt.hash(password, salt);
 
   // Crear el usuario en la base de datos con la contraseña encriptada
-  const newUser = await Usuario.create({
-    id_tipo_usuario,
-    id_usuario,
-    primer_nombre,
-    segundo_nombre,
-    primer_apellido,
-    segundo_apellido,
-    direccion,
-    telefono,
-    id_ciudad,
-    estado,
-    email,
+  const newUser = await User.create({
+    type_id,
+    name,
+     address,
+     phone,
+     city,
+     email,
     password: hashedPassword, // guardar la contraseña encriptada
-    imagen
+    image,
+    estado
   });
 //asd
   
   const mailOptions = {
-    from: "justoffers12@gmail.com",
+    from: "thewinecellar.com@gmail.com",
     to: email,
     subject: "Registro exitoso",
-    text: `¡Bienvenido a nuestra aplicación! Tu registro fue exitoso. Tus credenciales son:
-           Correo electrónico: ${email}
-           Contraseña: ${password}`,
+    text: `¡Bienvenido a nuestra aplicación! Tu registro fue exitoso. Tu correo es:
+           Correo electrónico: ${email} `,
   };
   
   transporter.sendMail(mailOptions, (error, info) => {
