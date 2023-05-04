@@ -11,11 +11,10 @@ export default function CartCard(product) {
 
   function handleEliminarProducto() {
     dispatch(eliminarDelCarrito(product));
-    dispatch(deleteCount(product.cantidad))
-    console.log(product.cantidad);
+    dispatch(deleteCount(product.amount))
   }
 
-  const [quantity, setQuantity] = useState(product.cantidad);
+  const [quantity, setQuantity] = useState(product.amount);
 
   const handleDecrease = () => {
     if (quantity !== 1) {
@@ -48,7 +47,7 @@ export default function CartCard(product) {
               <div className={s.text}>
                 <h3 className={s.name}>{product.name}</h3>
               </div>
-              <div className={s.precio}>${product.discount_prince} x unidad</div>
+              <div className={s.precio}>${product.discount_price} x unidad</div>
               <div className={s.quantity}>
               <QuantityDisplay
                 quantity={product.amount}
