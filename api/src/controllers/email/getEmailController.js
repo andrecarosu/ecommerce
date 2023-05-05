@@ -18,7 +18,7 @@ const getAllUsersEmail = async () => {
       include: [
         {
           model: Type_user,
-          attributes: ["nombre_tipo_usuario"]
+          attributes: ["name"]
         },
       ]
     });
@@ -49,7 +49,7 @@ const getUserByEmail = async (email) => {
       include: [
         {
           model: Type_user,
-          attributes: ["nombre_tipo_usuario"]
+          attributes: ["name"]
         },
       ],
     });

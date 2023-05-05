@@ -84,7 +84,6 @@ export function getUsuarioByEmail(email) {
     try {
       const response = await axios.get(`${URL}/email?email=${email}`);
       console.log(response);
-      console.log(response.data[0].Ciudad.nombre_ciudad); // Accede a la propiedad nombre_ciudad
 
       dispatch({
         type: action.GET_USER_BY_EMAIL,
