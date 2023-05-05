@@ -25,6 +25,14 @@ img {
   height: 50px;
 }
 
+.searchInput {
+  background: none;
+  margin-left: 35px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
 
 
 

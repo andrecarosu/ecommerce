@@ -14,7 +14,8 @@
     width: 10%;
     display: flex;
     align-items: center;
-    object-fit: contain
+    object-fit: contain;
+    border: solid 1px red;
 }
 
 .image img{

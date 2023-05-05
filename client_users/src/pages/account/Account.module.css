@@ -9,6 +9,18 @@
   margin-bottom: 70px;
 }
 
+@media (max-width: 768px) {
+  .container {
+    margin-left: 20px;
+    display: block;
+    max-width: 450px;    
+  }
+  .imagen{
+    max-width: 60%;
+    max-height: 60%;
+  }
+}
+
 .usuario {
   min-height: 70vh;
   padding: 30px;

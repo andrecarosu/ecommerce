@@ -40,7 +40,7 @@ const createProduct = async ({
     state
   });
 
-  
+  console.log(category)
   const categorySearch = await Category_product.findOne({
     where: {
       name: {
