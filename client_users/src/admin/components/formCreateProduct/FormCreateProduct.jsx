@@ -267,7 +267,7 @@ export default function FormCreateProduct() {
     <>
 
       {shouldRedirect ? (
-        <Redirect to="/" />
+        <Redirect to="/dashboard/productos" />
       ) : (
 
         /* ----------------------- CONTENEDOR GENERAL -----------------------*/
