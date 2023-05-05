@@ -10,8 +10,7 @@ import { CloudinaryContext } from "cloudinary-react"; // para guardar las imáge
 import swal from "sweetalert"
 import { getCategorys, getAllProducts, getProductById } from "../../../redux/actions"
 import Cookies from "js-cookie";
-
-import s from "./FormProduct.module.css"
+import s from "./FormProduct.module.css";
 
 
 export const modules = {
@@ -167,12 +166,12 @@ export default function FormCreateProduct() {
         state: true
       }
       const request = !flagEdit ?
-        axios.post("http://localhost:3001/products", parsed) :
-        axios.put(`http://localhost:3001/products/${id}`, parsed);
+        axios.post("https://deploynodejsecommerce.onrender.com/products", parsed) :
+        axios.put(`https://deploynodejsecommerce.onrender.com/products/${id}`, parsed);
 
       try {
         await axios
-        .post("https://ecommercedep.onrender.com/usuario", form)
+        .post("https://deploynodejsecommerce.onrender.com/usuario", form)
           .then(res => {
             swal({
               title: !flagEdit ? 'Registro exitoso' : 'Actualizacion exitosa',

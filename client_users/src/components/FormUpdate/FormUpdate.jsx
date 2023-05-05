@@ -73,27 +73,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
   
       // Verificar si el correo ya existe en la base de datos
       await axios
-<<<<<<< HEAD
-        .put(`https://ecommercedep.onrender.com//usuario`, filteredData)
-        .then(res => swal({
-          title: 'Actualización Exitosa',
-          text: 'Ya puedes ver tus cambios reflejados',
-          icon: 'success',
-          timer: '2000'
-        }))
-
-      //dispatch(getUserById(usuarioId))
-      window.location.reload() // Actualiza la página     
-        .catch(err => swal({
-          text: 'Error',
-          text: 'intente nuevamente',
-          icon: 'error',
-          timer: '2000',
-          button: 'Accept'
-        }));
-
-=======
-        .get(`http://localhost:3001/usuario?email=${filteredData.email}`)
+        .get(`https://deploynodejsecommerce.onrender.com/usuario?email=${filteredData.email}`)
         .then((res) => {
           if (res.data.length > 0) {
             emailExists = true;
@@ -112,7 +92,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
       // Si el correo no existe, se actualizan los datos
       if (!emailExists) {
         await axios
-          .put(`http://localhost:3001/usuario`, filteredData)
+          .put(`https://deploynodejsecommerce.onrender.com/usuario`, filteredData)
           .then((res) =>
             swal({
               title: "Actualización Exitosa",
@@ -131,8 +111,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
               button: "Accept",
             })
           );
-      }
->>>>>>> 57bd0610f00f10d1c66f8e9137537c2861ca8b2e
+      
     }
   };
   
@@ -181,6 +160,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
       const currentErrors = validations({ [property]: value });
       setErrors({ ...errors, [property]: currentErrors[property] });
     }
+  }
   };
 
   useEffect(() => {

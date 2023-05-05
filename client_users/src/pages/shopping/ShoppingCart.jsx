@@ -42,7 +42,7 @@ export default function ShoppingCart() {
 
   //Boton de mercadoPago
   const handlerPago = async () => {
-    const response = await fetch('https://ecommercedep.onrender.com/buy-products', {
+    const response = await fetch('https://deploynodejsecommerce.onrender.com/buy-products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ export default function ShoppingCart() {
     //     })
     //   })
     const stockActualizado = enviarStock(carrito)
-    await axios.put("https://ecommercedep.onrender.com//products", stockActualizado)
+    await axios.put("https://deploynodejsecommerce.onrender.com/products", stockActualizado)
     .then(response => {
       console.log(response.data);
       setShouldRedirect(true)
