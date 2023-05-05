@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom"
 import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
+import FormCreateProduct from '../components/formCreateProduct/FormCreateProduct';
 import Calificaciones from './Calificaciones/Calificaciones';
 import { useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
@@ -44,8 +45,11 @@ const DashMain = () => {
                     <Route exact path="" />
                     <Route path="/dashboard/usuarios" component={Usuarios} />
                     <Route exact path="/dashboard/productos" component={Productos} />
-                    <Route path="/dashboard/ventas" component={Ventas} />
+                    <Route exact path="/dashboard/productos/crear-producto" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />
+
+                    <Route path="/dashboard/ventas" component={Ventas} />
+
                 </div>
 
             </div>

@@ -231,7 +231,7 @@ export const getProductByName = (name) => async (dispatch) => {
 // * 5. action-creator para obtener producto por categoría
 
 export const getProductByCategory = (category) => {
-  return { type: action.GET_PRODUCT_BY_CATEGORY, payload: category };
+  return { type: action.FILTER_BY_CATEGORY, payload: category };
 };
 
 // * 6. action-creator para ordenar productos por nombre ascendente

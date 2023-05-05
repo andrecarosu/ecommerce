@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import s from './Productos.module.css'
 import TableProductos from '../../components/TableProductos/TableProductos';
@@ -64,6 +65,7 @@ const Productos = () => {
     return (
         <div className={s.productosContainer}>
             <h1>Productos</h1>
+            <Link to='/dashboard/productos/crear-producto'><button>Crear Producto</button></Link>
             <TableProductos
                 products={paginatedData}
                 handleClickDetail={handleClickDetail}
