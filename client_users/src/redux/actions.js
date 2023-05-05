@@ -152,10 +152,10 @@ export const getAllProducts = () => {
       const response = await axios.get(`${URL}/products`);
       const data = response.data.map(prod => {
 
-        let discount = Math.ceil((prod.normal_price - prod.discount_price)/prod.normal_price * 100)
-        if(19<=discount && discount<=21) discount=20
-        if(34<=discount && discount<=36) discount=35
-        if(44<=discount && discount<=46) discount=45
+        let discount = Math.ceil((prod.normal_price - prod.discount_price) / prod.normal_price * 100)
+        if (19 <= discount && discount <= 21) discount = 20
+        if (34 <= discount && discount <= 36) discount = 35
+        if (44 <= discount && discount <= 46) discount = 45
         return {
           ...prod,
           discount
@@ -217,7 +217,7 @@ export const getProductByName = (name) => async (dispatch) => {
     dispatch(loading());
     const res = await axios.get(`${URL}/products?name=${name}`);
     const result = res.data;
-    console.log(result);
+    console.log('this', result);
     dispatch({
       type: action.GET_PRODUCT_BY_NAME,
       payload: result,
@@ -273,13 +273,13 @@ export const orderedByRecientes = () => {
 // * 10. action-creator para filtrar productos por condicion (Nuevo,Usado,Reacondicionado,Ofertas)
 
 export const filterByBrand = (brand) => {
-  return { 
-    type: action.FILTER_BY_BRAND, 
-    payload: brand 
-  }; 
+  return {
+    type: action.FILTER_BY_BRAND,
+    payload: brand
+  };
 };
 export const filterByOffers = (discount) => {
-  return { 
+  return {
     type: action.FILTER_BY_OFERTAS,
     payload: discount
   };
@@ -408,6 +408,6 @@ export function getSales() {
   };
 }
 
-export function getSlider () {
+export function getSlider() {
   return { type: action.GET_SLIDER }
 }

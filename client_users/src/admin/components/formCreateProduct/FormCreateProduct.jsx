@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom/cjs/react-router-dom";
 import validations from "./validations";
-import ReactQuill from 'react-quill'
+import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useSelector, useDispatch } from "react-redux";
 import { CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert"
-import { getCategorys } from "../../../redux/actions"
+import { getCategorys, getAllProducts, getProductById } from "../../../redux/actions"
 import Cookies from "js-cookie";
 
 import s from "./FormProduct.module.css"
+
 
 export const modules = {
   toolbar: [
@@ -27,6 +29,18 @@ export const modules = {
 };
 
 export default function FormCreateProduct() {
+  const url = useLocation()
+
+  //const [flagEdit, setFlagEdit] = useState(false)
+
+
+  let flagEdit = url.pathname.includes("edit-product")
+
+
+  const { id } = useParams()
+  console.log(id)
+
+  console.log('pille', url)
   const { categorys } = useSelector(state => state);
   const { supplier } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -34,16 +48,43 @@ export default function FormCreateProduct() {
   const categoriasMatch = categorys ? categorys.flat(obj => obj?.categories)?.map(cat => {
     return { category_id: cat.category_id, name: cat.name }
   }) : []
-  console.log(categoriasMatch)
   // let proveedor = values.dataValues
+
+  let product = null
+
+  useEffect(async () => {
+
+    setForm({})
+    return () => {
+      console.log('se fue')
+      dispatch(getAllProducts())
+    }
+  }, [])
+
+  product = useSelector(state => state.product)
+
+  useEffect(() => {
+    if (flagEdit) {
+      console.log('aasdasd')
+      dispatch(getProductById(id));
+    }
+  }, [flagEdit, id, dispatch]);
+
+  useEffect(async () => {
+    if (flagEdit) setForm({ ...product, category: product.Category_product.name })
+  }, [product])
 
   useEffect(() => {
     dispatch(getCategorys());
   }, [dispatch]);
 
 
+
+
+
+
   const [form, setForm] = useState({
-    category_id: 0,
+    category: 0,
     name: "",
     normal_price: "",
     discount_price: "",
@@ -54,22 +95,40 @@ export default function FormCreateProduct() {
     state: true,
   });
 
+
+
+
+
+
+  const getTextDescription = (description) => {
+    const html = description;
+    if (html == "") return
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    const textNodes = div.childNodes;
+
+    let result = '';
+    for (let i = 0; i < textNodes.length; i++) {
+      result += textNodes[i].textContent;
+    }
+    return result
+  }
+
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     // Llama a la función validations con el estado del formulario actual
     const currentErrors = validations(form);
     // Actualiza el estado de los errores con los errores actuales
-    setErrors(currentErrors);
+    //setErrors(currentErrors);
   }, [form]);
 
   const handleSubmit = async event => {
     event.preventDefault();
-
     // Obtiene los valores del formulario
     const {
-      supplier_id,
-      category_id,
+
+      category,
       name,
       normal_price,
       discount_price,
@@ -82,30 +141,40 @@ export default function FormCreateProduct() {
 
     // Realiza las validaciones
     const errors = validations({
-      supplier_id,
-      category_id,
+      category,
       name,
       normal_price,
       discount_price,
-      description,
+      description: getTextDescription(description),
       stock,
       image,
       brand,
       state,
     });
-
+    console.log('-------->', form)
 
     // Si hay errores, los muestra y no continúa con la solicitud
     if (Object.keys(errors).length > 0) {
+      console.log(errors)
       setErrors(errors); // Actualiza el estado de los errores
     } else {
       // Si no hay errores, continúa con el proceso de envío del formulario
+      let parsed = {
+        ...form,
+        normal_price: parseInt(form.normal_price),
+        discount_price: parseInt(form.discount_price),
+        stock: parseInt(form.stock),
+        state: true
+      }
+      const request = !flagEdit ?
+        axios.post("http://localhost:3001/products", parsed) :
+        axios.put(`http://localhost:3001/products/${id}`, parsed);
+
       try {
-        await axios
-          .post("http://localhost:3001/usuario", form)
+        await request
           .then(res => {
             swal({
-              title: 'Registro exitoso',
+              title: !flagEdit ? 'Registro exitoso' : 'Actualizacion exitosa',
               text: 'se creo correctamente el producto',
               icon: 'success',
               timer: '2000'
@@ -113,14 +182,16 @@ export default function FormCreateProduct() {
             setShouldRedirect(true);
           })
           .catch(err => {
+            console.error("ocurrió un error:", err.response.data.error);
             swal({
               title: 'Error',
-              text: 'intente nuevamente',
+              text: err.response.data.error || 'intente nuevamente',
               icon: 'error',
               timer: '2000',
               button: 'Accept'
             })
           });
+        console.log('-------->', form)
 
       } catch (error) {
         console.error("ocurrió un error:", error);
@@ -131,14 +202,14 @@ export default function FormCreateProduct() {
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const handleInputChange = async event => {
-    const property = event.target.name;
-    const value = event.target.value;
+    let property = event.target.name
+    let value = event.target.value;
     // Verificar si el input es de tipo file
     if (event.target.type === "file") {
       const file = event.target.files[0]; // Obtener el archivo seleccionado
       let valor = 0;
       if (file) valor = 1
-      console.log(valor);
+      // console.log(valor);
       // Subir la imagen a Cloudinary
       const formData = new FormData();
       formData.append("file", file);
@@ -168,12 +239,13 @@ export default function FormCreateProduct() {
       }
     } else {
       // Actualizar el estado del formulario para otros tipos de inputs
+
       setForm(prevForm => ({
         ...prevForm,
         [property]: value
       }));
 
-      const currentErrors = 'validations({ [property]: value });'
+      const currentErrors = validations({ [property]: property !== 'description' ? value : getTextDescription(value) });
       // setErrors(prevErrors => ({
       //   ...prevErrors,
       //   [property]: currentErrors[property]
@@ -186,19 +258,26 @@ export default function FormCreateProduct() {
 
 
 
+  console.log('aqui', form)
+
+
   return (
     <>
 
       {shouldRedirect ? (
-        <Redirect to="/admin" />
+        <Redirect to="/" />
       ) : (
 
         /* ----------------------- CONTENEDOR GENERAL -----------------------*/
         <div className={s.contenedor}>
+          <h1 className={s.title}>
+            {!flagEdit ? 'Crear nuevo producto' : `Editar ${product.name}`}
+          </h1>
 
           {/* ----------------------- CONTENEDOR FORMULARIO -----------------------*/}
           <div className='form-container' style={{ padding: '15px' }}>
             <CloudinaryContext className={s.cloud} cloudName="dfmkjxjsf">
+
               <form className={s.form} onSubmit={handleSubmit}>
                 <div className={s.s1}>
 
@@ -284,11 +363,30 @@ export default function FormCreateProduct() {
                       <div className={s.errors}>{errors.brand}</div>
                     )}
                   </div>
+
+                  {/* ----------------------- MARCA -----------------------*/}
+                  <div className={s.group}>
+
+                    <input
+                      type="text"
+                      name="stock"
+                      value={form.stock}
+                      placeholder=" "
+                      onChange={handleInputChange}
+                      className={s.inpt}
+                    />
+                    <label for="" className={s.lbl}>
+                      Stock
+                    </label>
+                    {errors.stock && (
+                      <div className={s.errors}>{errors.stock}</div>
+                    )}
+                  </div>
                 </div>
                 <div className={s.s2}>
                   {/* ----------------------- IMAGEN -----------------------*/}
                   <div className={s.contenedorDiv}>
-                    <label htmlFor="" className={s.label}>
+                    <label htmlFor="" className={`${s.label} ${!errors.image && form.image != "" ? s.up : null}`}>
                       Imagen
                     </label>
                     <input
@@ -316,28 +414,29 @@ export default function FormCreateProduct() {
 
                     <div>
 
-                      {errors.category_id && (
-                        <div className={s.errors}>{errors.category_id}</div>
-                      )}
+
                       <div className={s.group}>
                         <select
-                          name="category_id"
+                          name="category"
                           onChange={e => handleInputChange(e)}
                           className='form-input'
                           style={{ width: '300px' }}
                           required
                         >
-                          <option value="" >{""}</option>
+                          <option value={!flagEdit ? "" : form.category} >{!flagEdit ? "" : form.category}</option>
                           {categoriasMatch &&
                             categoriasMatch.map(c => (
-                              <option key={c.category_id} value={c.category_id} primary={c.name}>
+                              <option key={c.category_id} value={c.category} primary={c.name}>
                                 {c.name}
                               </option>
                             ))}
                         </select>
-                        <label for="category_id" style={{ left: '10px' }} className={s.lbl}>
+                        <label for="category" style={{ left: '10px' }} className={s.lbl}>
                           Categoria
                         </label>
+                        {errors.category && (
+                          <div className={s.errors}>{errors.category}</div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -348,13 +447,15 @@ export default function FormCreateProduct() {
                 <div className={s.s3}>
                   {/* ----------------------- DESCRIPCION -----------------------*/}
                   <div className={s.descriptionContainer}>
-                    <label for="" className={s.label}>
+                    <label for="" className={`${s.label} ${!errors.description
+                      && form.description != "" ? s.up : ''}`}>
                       Descripción
                     </label>
                     <ReactQuill
                       theme="snow"
                       value={form.description}
-                      onChange={handleInputChange}
+                      id="description"
+                      onChange={(value) => handleInputChange({ target: { name: 'description', value } })}
                       className={s.rquill}
                       modules={modules}
                     ></ReactQuill>
@@ -369,7 +470,7 @@ export default function FormCreateProduct() {
                       <div className={s.errors}>{errors.description}</div>
                     )}
                   </div>
-                  <button type="submit">Crear Producto</button>
+                  <button type="submit">{!flagEdit ? 'Crear Producto' : 'Guardar producto'}</button>
                 </div>
 
 
