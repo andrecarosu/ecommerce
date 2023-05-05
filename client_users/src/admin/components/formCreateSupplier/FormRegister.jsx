@@ -83,7 +83,7 @@ export default function FormRegister() {
         setForm({ ...form, password: hashedPassword });
 
         await axios
-          .post("https://ecommercedep.onrender.com/usuario", form)
+          .post("https://deploynodejsecommerce.onrender.com/usuario", form)
           .then(res => {
             swal({
               title: 'Registro exitoso',

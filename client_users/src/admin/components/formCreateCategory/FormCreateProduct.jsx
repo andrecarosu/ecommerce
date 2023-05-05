@@ -82,7 +82,7 @@ export default function FormCreateProduct() {
 
         console.log(formData);
 
-        await axios.post("https://ecommercedep.onrender.com/products", formData).then(res => {
+        await axios.post("https://deploynodejsecommerce.onrender.com/products", formData).then(res => {
           swal({
             title: "producto creado correctamente",
             text: "asd",
