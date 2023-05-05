@@ -84,6 +84,7 @@ export default function FormLogin() {
       // Almacenar el token y la sesión en cookies con opciones de seguridad
       Cookies.set('user_token', token, { secure: true, sameSite: 'strict' });
       Cookies.set('user_session', JSON.stringify(session), { secure: true, sameSite: 'strict' });
+      console.log(session)
 
       const isUserAuthenticated = await login(true);
       if (isUserAuthenticated) {
