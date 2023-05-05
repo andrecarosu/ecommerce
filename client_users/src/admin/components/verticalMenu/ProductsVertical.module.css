@@ -23,3 +23,8 @@
     border-top: 1px solid #dee2e6;
     cursor: pointer;
 }
+
+.item:hover {
+    background-color: var(--wine-color);
+    color: white;
+}

@@ -13,10 +13,10 @@ const Productos = () => {
     const [productos, setProductos] = useState([])
     const dispatch = useDispatch()
 
-    const AllProducts = useSelector(state => state.products)
-    useEffect(() => {
-        setProductos(AllProducts)
-    }, [AllProducts])
+    // const AllProducts = useSelector(state => state.products)
+    // useEffect(() => {
+    //     setProductos(AllProducts)
+    // }, [AllProducts])
 
 
     let productsFitered = useSelector(state => state.productsFitered)
@@ -46,10 +46,10 @@ const Productos = () => {
 
     useEffect(() => {
 
-        if (productsFitered?.length > 0) {
-            setProductos(productsFitered)
-            // productos = productsFitered
-        }
+
+        setProductos(productsFitered)
+        // productos = productsFitered
+
     }, [dispatch, productsFitered])
 
 
