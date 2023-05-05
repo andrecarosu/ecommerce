@@ -20,8 +20,7 @@ export default function DrawerMenu() {
             <Drawer open={isOpen} onClose={toggleDrawer} direction='left'>
                 <div className={s.container}>
                     <div>
-                        <h1>justOffers</h1>
-                        <span>2023 - #SoyHenry</span>
+                        <h1>thewinecellar.com</h1>
                     </div>
                     <div>
                         <Link to="/" className='link-no-decoration'>
@@ -29,9 +28,6 @@ export default function DrawerMenu() {
                         </Link>
                         <Link to="/log-in" className='link-no-decoration'>
                             <h4 style={{ color: 'black' }}>Iniciar sesión</h4>
-                        </Link>
-                        <Link to="/account" className='link-no-decoration' >
-                            <h4 style={{ color: 'black' }}>Quiero vender</h4>
                         </Link>
                         <div style={{display: 'flex', alignItems: 'center'}}>
                             <AiOutlineShoppingCart size={35} />
