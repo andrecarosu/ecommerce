@@ -5,7 +5,7 @@ import SearchBar from "../searchBar/SearchBar";
 import DrawerMenu from "../drawerMenu/DrawerMenu";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import s from "./NavBar.module.css";
-
+import Cookies from 'js-cookie';
 import { userLoggedIn } from "../../redux/actions";
 
 // imagenes
@@ -32,7 +32,7 @@ const NavBar = () => {
 
   useEffect(() => {
     setShowProfileMenu(false)
-  },[location.pathname])
+  }, [location.pathname])
 
   /* ------------- LOGIN MENU ------------- */
 
@@ -54,6 +54,8 @@ const NavBar = () => {
     window.localStorage.removeItem("estaLogueado");
     window.localStorage.removeItem('carrito');
     window.localStorage.removeItem('count');
+    Cookies.remove('user_token')
+    Cookies.remove('user_session')
     dispatch(userLoggedIn(logOut));
   };
   /* ------------- LOGOUT ------------- */

@@ -54,7 +54,7 @@ export default function FormCreateProduct() {
 
   useEffect(async () => {
 
-    setForm({})
+    //setForm({})
     return () => {
       console.log('se fue')
       dispatch(getAllProducts())
@@ -287,6 +287,7 @@ export default function FormCreateProduct() {
                   <div className={s.group}>
 
                     <input
+                      id="input1"
                       type="text"
                       name="name"
                       placeholder=" "
@@ -294,7 +295,7 @@ export default function FormCreateProduct() {
                       onChange={handleInputChange}
                       className={s.inpt}
                     />
-                    <label for="" className={s.lbl}>
+                    <label htmlFor="" className={s.lbl}>
                       Nombre Producto
                     </label>
 
@@ -310,6 +311,7 @@ export default function FormCreateProduct() {
 
 
                       <input
+                        id="input2"
                         type="text"
                         name="normal_price"
                         value={form.normal_price}
@@ -317,7 +319,7 @@ export default function FormCreateProduct() {
                         onChange={handleInputChange}
                         className={s.inpt}
                       />
-                      <label for="" className={s.lbl}>
+                      <label htmlFor="" className={s.lbl}>
                         Precio
                       </label>
                       {errors.normal_price && (
@@ -329,6 +331,7 @@ export default function FormCreateProduct() {
                     <div className={s.group}>
 
                       <input
+                        id="input2"
                         type="text"
                         name="discount_price"
                         placeholder=" "
@@ -336,7 +339,7 @@ export default function FormCreateProduct() {
                         onChange={handleInputChange}
                         className={s.inpt}
                       />
-                      <label for="" className={s.lbl}>
+                      <label htmlFor="" className={s.lbl}>
                         Descuento
                       </label>
                       {errors.discount_price && (
@@ -350,6 +353,7 @@ export default function FormCreateProduct() {
                   <div className={s.group}>
 
                     <input
+                      id="input3"
                       type="text"
                       name="brand"
                       value={form.brand}
@@ -357,7 +361,7 @@ export default function FormCreateProduct() {
                       onChange={handleInputChange}
                       className={s.inpt}
                     />
-                    <label for="" className={s.lbl}>
+                    <label htmlFor="" className={s.lbl}>
                       Marca
                     </label>
                     {errors.brand && (
@@ -369,6 +373,7 @@ export default function FormCreateProduct() {
                   <div className={s.group}>
 
                     <input
+                      id="input4"
                       type="text"
                       name="stock"
                       value={form.stock}
@@ -376,7 +381,7 @@ export default function FormCreateProduct() {
                       onChange={handleInputChange}
                       className={s.inpt}
                     />
-                    <label for="" className={s.lbl}>
+                    <label htmlFor="" className={s.lbl}>
                       Stock
                     </label>
                     {errors.stock && (
@@ -391,8 +396,9 @@ export default function FormCreateProduct() {
                       Imagen
                     </label>
                     <input
+                      id="input5"
                       type="file"
-                      id="image"
+                      //id="image"
                       name="image"
                       onChange={handleInputChange}
                       className='form-input'
@@ -432,7 +438,7 @@ export default function FormCreateProduct() {
                               </option>
                             ))}
                         </select>
-                        <label for="category" style={{ left: '10px' }} className={s.lbl}>
+                        <label htmlFor="category" style={{ left: '10px' }} className={s.lbl}>
                           Categoria
                         </label>
                         {errors.category && (
@@ -448,7 +454,7 @@ export default function FormCreateProduct() {
                 <div className={s.s3}>
                   {/* ----------------------- DESCRIPCION -----------------------*/}
                   <div className={s.descriptionContainer}>
-                    <label for="" className={`${s.label} ${!errors.description
+                    <label htmlFor="" className={`${s.label} ${!errors.description
                       && form.description != "" ? s.up : ''}`}>
                       Descripción
                     </label>
