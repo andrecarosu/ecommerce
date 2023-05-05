@@ -41,7 +41,7 @@ export default function FormRegister() {
       phone,
       email,
       password,
-      city
+      city,
     } = form;
 
     // Realiza las validaciones
@@ -166,7 +166,7 @@ export default function FormRegister() {
                 {/* ----------------------- PRIMER NOMBRE -----------------------*/}
                 <div className={s.nombres}>
                   <div className={s.contenedorDiv}>
-                    <label for="" className={s.label}>
+                    <label  className={s.label}>
                       Nombre
                     </label>
                     <input
@@ -185,7 +185,7 @@ export default function FormRegister() {
 
                 {/* ----------------------- DIRECCION -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
+                  <label  className={s.label}>
                     Dirección
                   </label>
                   <input
@@ -202,7 +202,7 @@ export default function FormRegister() {
 
                 {/* ----------------------- TELEFONO -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
+                  <label  className={s.label}>
                     Teléfono
                   </label>
                   <input
@@ -219,7 +219,7 @@ export default function FormRegister() {
 
                 {/* ----------------------- EMAIL -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
+                  <label  className={s.label}>
                     Email
                   </label>
                   <input
@@ -236,7 +236,7 @@ export default function FormRegister() {
 
                 {/* ----------------------- CONTRASEÑA -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
+                  <label  className={s.label}>
                     Contraseña
                   </label>
                   <input
@@ -253,7 +253,7 @@ export default function FormRegister() {
 
                 {/* ----------------------- CIUDAD -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label for="" className={s.label}>
+                  <label  className={s.label}>
                     Ciudad
                   </label>
                   <input
@@ -270,13 +270,13 @@ export default function FormRegister() {
 
                 {/* ----------------------- IMAGEN -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label htmlFor="" className={s.label}>
+                  <label  className={s.label}>
                     Imagen
                   </label>
                   <input
                     type="file"
-                    id="image"
-                    name="image"
+                    id="imagen"
+                    name="imagen"
                     onChange={handleInputChange}
                     className='form-input'
                   />
@@ -286,7 +286,7 @@ export default function FormRegister() {
                     <img
                       className={s.imageFile}
                       src={form.image}
-                      id="image"
+                      id="imagen"
                       alt="foto perfil"
                     />
                   )}

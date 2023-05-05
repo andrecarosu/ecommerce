@@ -17,13 +17,13 @@ export default function FormUpdatePassword(props) {
 
     // Obtiene los valores del formulario
     const {
-      id_usuario: id_usuario,
+      user_id: user_id,
       password: password,
       confirmPassword: confirmPassword
     } = form;
 
     const data = {
-      id_usuario: form.id_usuario,
+      user_id: form.user_id,
       password: form.password,
     }
 
@@ -75,7 +75,7 @@ export default function FormUpdatePassword(props) {
     }
   };
   const [form, setForm] = useState({
-    id_usuario: null,
+    user_id: null,
     password: "",
     confirmPassword: ""
   });
@@ -91,7 +91,7 @@ export default function FormUpdatePassword(props) {
   useEffect(() => {
     setForm(prevForm => ({
       ...prevForm,
-      id_usuario: idUsuario
+      user_id: idUsuario
     }));
   }, [idUsuario]);
 
