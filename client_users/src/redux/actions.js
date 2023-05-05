@@ -7,11 +7,11 @@ export function actualizarStock(arrayProductos) {
   axios.put(`${URL}/products`)
 }
 
-export function agregarAlCarrito(id, quantity) {
-  console.log(id);
+export function agregarAlCarrito(product, quantity) {
+  console.log(product);
   return {
     type: action.AGREGAR_AL_CARRITO,
-    payload: { id, quantity },
+    payload: { product, quantity },
   };
 }
 
@@ -231,7 +231,7 @@ export const getProductByName = (name) => async (dispatch) => {
 // * 5. action-creator para obtener producto por categoría
 
 export const getProductByCategory = (category) => {
-  return { type: action.GET_PRODUCT_BY_CATEGORY, payload: category };
+  return { type: action.FILTER_BY_CATEGORY, payload: category };
 };
 
 // * 6. action-creator para ordenar productos por nombre ascendente

@@ -19,14 +19,14 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}className={styles.container}>
+    <form onSubmit={handleSubmit} className={styles.container}>
       <input
         className={styles.input}
         value={input}
         onChange={(e) => setInput(e.target.value)}
         type="text"
         required=""
-        placeholder="Buscar Ofertas..."
+        placeholder="Buscar"
       />
        <button type="submit" className={styles.button}>
         <FontAwesomeIcon icon={faSearch} />
