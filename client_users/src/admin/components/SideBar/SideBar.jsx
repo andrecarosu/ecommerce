@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faUser, faWineGlass, faFileLines } from "@fortawesome/free-solid-svg-icons";
-
+import UserIcon from '../userIcon/UserIcon';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -16,7 +16,7 @@ const SideBar = () => {
     return (
         <div className={s.sideBarContent}>
             <div className={s.profile}>
-
+                {/* <UserIcon /> */}
             </div>
             <div className={s.menu}>
                 <ul>
