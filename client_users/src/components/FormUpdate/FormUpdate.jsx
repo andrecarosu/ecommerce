@@ -111,7 +111,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
               button: "Accept",
             })
           );
-      
+      }
     }
   };
   
@@ -160,7 +160,6 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
       const currentErrors = validations({ [property]: value });
       setErrors({ ...errors, [property]: currentErrors[property] });
     }
-  }
   };
 
   useEffect(() => {
