@@ -46,6 +46,7 @@ const DashMain = () => {
                     <Route path="/dashboard/usuarios" component={Usuarios} />
                     <Route exact path="/dashboard/productos" component={Productos} />
                     <Route exact path="/dashboard/productos/crear-producto" component={FormCreateProduct} />
+                    <Route exact path="/dashboard/productos/edit-product/:id" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />
 
                     <Route path="/dashboard/ventas" component={Ventas} />
