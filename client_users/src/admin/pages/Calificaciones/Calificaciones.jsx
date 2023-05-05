@@ -3,6 +3,10 @@ import s from './Calificaciones.module.css'
 import ProductsVertical from "../../components/verticalMenu/ProductsVertical";
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from '../../../redux/actions';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment, faCommentSlash } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const Calificaciones = () => {
     const [flag, setFlag] = useState(false)
@@ -29,10 +33,16 @@ const Calificaciones = () => {
                 <ProductsVertical handleClickCalificacion={handleClickCalificacion} />
                 <div className={s.boxCalificaciones}>
                     {!flag ?
-                        <div>AQUI SE MOSTRARAN LAS CALIFICACIONES</div> :
+                        <div className={s.contInitial}>
+                            AQUI SE MOSTRARAN LAS <br />CALIFICACIONES
+                            <FontAwesomeIcon size="7x" icon={faComment} />
+                        </div> :
                         product?.Reviews?.length > 0 ?
                             itemsCalificaciones(product) :
-                            'No hay reviews'}
+                            <div className={s.contInitial}>
+                                NO HAY REVIEWS
+                                <FontAwesomeIcon size="7x" icon={faCommentSlash} />
+                            </div>}
                 </div>
             </div>
         </div>

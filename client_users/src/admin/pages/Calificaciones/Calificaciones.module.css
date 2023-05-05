@@ -46,3 +46,17 @@
 
     /* background: red; */
 }
+
+.contInitial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding-top: 20px;
+}
+
+.contInitial {
+    font-size: 30px;
+    color: gray;
+}
