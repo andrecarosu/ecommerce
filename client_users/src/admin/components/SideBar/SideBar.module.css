@@ -36,7 +36,9 @@
 
 }
 
-.menu {}
+.menu {
+    font-family: var(--font-optima);
+}
 
 .menu .option {
     width: 100%;
@@ -51,10 +53,12 @@
 .menu .option .a:hover,
 .menu .option .current,
 .menu .option .items a:hover {
-    background: gray;
+    background: var(--wine-color);
+    color: white;
 }
 
 .a {
+    color: black;
     text-decoration: none;
     display: flex;
     gap: 10px;
@@ -75,6 +79,7 @@ a {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
     /* padding: 10px; */
     /* padding-left: 50px; */
     gap: 10px;
@@ -87,6 +92,7 @@ a {
 
 .items a {
     display: flex;
+    color: black;
     padding: 10px;
     padding-left: 50px;
     width: 100%;

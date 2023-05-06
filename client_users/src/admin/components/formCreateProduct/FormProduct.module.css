@@ -5,7 +5,11 @@
     /* background-color: aqua; */
 }
 
-
+.title {
+    font-family: var(--font-optima);
+    margin-bottom: 20px;
+    font-size: 60px;
+}
 
 .cloud {
     justify-content: center;
@@ -106,6 +110,10 @@
 
 }
 
+.up {
+    color: #3866f2;
+}
+
 .inpt {
     border: none;
     background: none;
@@ -120,6 +128,7 @@
     transform: translateY(-10px) scale(.8);
     color: #3866f2;
     transform-origin: left top;
+    z-index: 2;
 
 }
 
@@ -141,6 +150,10 @@ select:focus {
     outline: none;
 
 }
+
+/* select:invalid {
+    display: none;
+} */
 
 select:focus+.lbl,
 select:valid~.lbl {
@@ -178,7 +191,7 @@ select:valid~.lbl {
     width: 700px;
     text-align: left;
     border: none;
-    height: 360px;
+    height: 260px;
     background-color: #fff;
 }
 

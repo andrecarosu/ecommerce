@@ -30,8 +30,7 @@ const Account = () => {
     }
   }, [usuario]);
 
-  console.log('CIUDAD USUARIO', userData?.Ciudad?.nombre_ciudad);
-
+  
   /* ------------- MENU HAMBURGUESA ------------- */
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -40,9 +39,9 @@ const Account = () => {
     setShowProfileMenu(!showProfileMenu);
   };
 
-  const idUsuario = usuario.length > 0 ? usuario[0].id_usuario : null;
+  const idUsuario = usuario.length > 0 ? usuario[0].user_id : null;
 
-  const nombreUsuario = userData.primer_nombre + ' ' + userData?.segundo_nombre + ' ' + userData.primer_apellido + ' ' + userData?.segundo_apellido
+  const nombreUsuario = userData.name;
 
   return (
     <div className={s.container}>
@@ -50,7 +49,7 @@ const Account = () => {
       <div className={s.usuario}>
         <h1 style={{ marginBottom: '15px', textAlign: 'left', fontSize: '30px' }}>Mi cuenta</h1>
         <div className={s.datos}>
-          <div style={{ backgroundImage: `url(${userData.imagen})` }} className={s.imagen}></div>
+          <div style={{ backgroundImage: `url(${userData.image})` }} className={s.imagen}></div>
           
           <span className={s.label}>Nombre</span>
           <h3 className={s.dato_nombre}>{nombreUsuario}</h3>
@@ -59,13 +58,13 @@ const Account = () => {
           <h3 className={s.dato}>{userData.email}</h3>
 
           <span className={s.label}>Ciudad</span>
-          <h3 className={s.dato}>{userData?.Ciudad?.nombre_ciudad}</h3>
+          <h3 className={s.dato}>{userData.city}</h3>
 
           <span className={s.label}>Dirección</span>
-          <h3 className={s.dato}>{userData.direccion}</h3>
+          <h3 className={s.dato}>{userData.address}</h3>
 
           <span className={s.label}>Teléfono</span>
-          <h3 className={s.dato}>{userData.telefono}</h3>
+          <h3 className={s.dato}>{userData.phone}</h3>
         </div>
 
       </div>

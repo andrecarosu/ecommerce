@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom"
 import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
+import Menu from './Menu/Menu';
 import FormCreateProduct from '../components/formCreateProduct/FormCreateProduct';
 import Calificaciones from './Calificaciones/Calificaciones';
 import { useLocation } from "react-router-dom";
@@ -18,9 +19,9 @@ const DashMain = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const token = Cookies.get('user_token');
-    const session = JSON.parse(Cookies.get('user_session'));
     console.log('->>', token)
-    console.log('-->', session)
+
+    const session = token ? JSON.parse(Cookies.get('user_session')) : null;
 
     useEffect(() => {
         dispatch(getCategorys());
@@ -28,7 +29,7 @@ const DashMain = () => {
         dispatch(getFamilies())
     }, [dispatch])
 
-    if (session.dataValues.type_id !== type_permission) {
+    if (!session || session.dataValues.type_id !== type_permission) {
         return <div>No tiene permisos</div>
     }
     return (
@@ -42,10 +43,11 @@ const DashMain = () => {
                 </div>
                 <div className={DashStyles.contentContainer}>
                     {/* {location?.pathname.includes("usuarios") ? <Usuarios /> : ''} */}
-                    <Route exact path="" />
+                    <Route exact path="/dashboard" component={Menu} />
                     <Route path="/dashboard/usuarios" component={Usuarios} />
                     <Route exact path="/dashboard/productos" component={Productos} />
                     <Route exact path="/dashboard/productos/crear-producto" component={FormCreateProduct} />
+                    <Route exact path="/dashboard/productos/edit-product/:id" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />
 
                     <Route path="/dashboard/ventas" component={Ventas} />
