@@ -6,6 +6,7 @@ import TableProductos from '../../components/TableProductos/TableProductos';
 import Pagination from '../../components/pagination/Pagination';
 import usePagination from '../../components/pagination/PaginationHook';
 import DetailCard from '../../components/DetailCard/DetailCard';
+import { getAllProducts } from '../../../redux/actions';
 import { orderedByNameASC, orderedByNameDESC, orderedByHighestPrice, orderedByLowestPrice } from '../../../redux/actions';
 
 const Productos = () => {
@@ -18,6 +19,11 @@ const Productos = () => {
     //     setProductos(AllProducts)
     // }, [AllProducts])
 
+    useEffect(() => {
+        return () => {
+            dispatch(getAllProducts())
+        }
+    }, [])
 
     let productsFitered = useSelector(state => state.productsFitered)
 
