@@ -1,0 +1,50 @@
+footer {
+    width: 100%;
+    padding: 40px;
+}
+
+.container-footer {
+    /* border: 1px solid red; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* .container-footer section {
+    border: 1px solid blue;
+} */
+
+.container-footer .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-footer .logo img {
+    background-color: #000;
+    width: 220px;
+}
+
+.container-footer .information,
+.container-footer .horaries,
+.container-footer .payments {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.container-footer .information h3,
+.container-footer .horaries h3,
+.container-footer .payments h3 {
+    font-size: 1.5rem;
+}
+
+.container-footer .information p,
+.container-footer .horaries p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.container-footer .payments img {
+    width: 95%;
+    height: 110px;
+}
