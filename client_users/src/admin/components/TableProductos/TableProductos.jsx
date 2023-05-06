@@ -5,6 +5,7 @@ import { faArrowUpAZ, faArrowDownAZ, faArrowUp19, faArrowDown19, faDatabase, faG
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import { getProductByName, getAllProducts } from '../../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
+import CheckState from '../DetailCard/CheckBox/CheckState';
 
 
 
@@ -33,6 +34,12 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
             setPriceFilter('1-9')
         }
 
+    }
+
+    const onCheckState = (e) => {
+        const { value, name } = e.target
+        // value ? setCheckState(false) : setCheckState(true)
+        console.log('checks', value)
     }
 
     const onSearch = (e) => {
@@ -78,6 +85,8 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
                         <th>Stock</th>
                         <th>Fecha de Creacion</th>
                         <th></th>
+                        <th></th>
+                        <th>State</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +104,9 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
                             })}</a></td>
                             <td><button onClick={() => handleClickDetail(wine.product_id)}>Ver</button></td>
                             <td><Link to={`/dashboard/productos/edit-product/${wine.product_id}`}><button>Editar</button></Link></td>
+                            <td>
+                                <CheckState state={wine.state} product_id={wine.product_id} />
+                            </td>
                         </tr>
                     ))}
                 </tbody>

@@ -55,7 +55,6 @@ export default function FormCreateProduct() {
 
     //setForm({})
     return () => {
-      console.log('se fue')
       dispatch(getAllProducts())
     }
   }, [])
