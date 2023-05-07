@@ -32,7 +32,7 @@ import {
   LOADING,
   READY,
   GET_SLIDER,
-  GET_SALE_BY_ID,
+  GET_SALES,
   GET_ALL_CITIES,
 } from "./actions-type.js";
 
@@ -62,12 +62,12 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    
-// ========================* PRODUCTOS *========================
+
+    // ========================* PRODUCTOS *========================
 
     case CREATE_PRODUCT:
       return { ...state, products: [...state.products, action.payload] };
-    
+
     case GET_ALL_PRODUCTS:
       return {
         ...state,
@@ -80,19 +80,20 @@ function rootReducer(state = initialState, action) {
       return { ...state, product: action.payload };
 
     case CLEAN_PRODUCT:
-      return { ...state, product: [] };      
+      return { ...state, product: [] };
 
     case GET_PRODUCT_BY_NAME:
       return { ...state, productsFitered: action.payload };
 
     case GET_FAMILIES:
       return {
-        ...state, families: action.payload };
+        ...state, families: action.payload
+      };
 
     case GET_CATEGORY:
       return { ...state, categorys: action.payload };
 
-// ========================* ORDENAMIENTO *========================
+    // ========================* ORDENAMIENTO *========================
 
     case ORDERED_BY_NAME_DESC:
       return {
@@ -138,24 +139,24 @@ function rootReducer(state = initialState, action) {
         }),
       };
 
-// ========================* FILTRADO *========================
+    // ========================* FILTRADO *========================
 
     case FILTER_BY_CATEGORY:
-          return {
-            ...state,
-            productsFitered: [...state.products].filter((product) => {
-              return (
-                product.Category_product.name ===
-                action.payload
-              );
-            }),
-            copyProducts: [...state.products].filter((product) => {
-              return (
-                product.Category_product.name ===
-                action.payload
-              );
-            }),
-         };
+      return {
+        ...state,
+        productsFitered: [...state.products].filter((product) => {
+          return (
+            product.Category_product.name ===
+            action.payload
+          );
+        }),
+        copyProducts: [...state.products].filter((product) => {
+          return (
+            product.Category_product.name ===
+            action.payload
+          );
+        }),
+      };
 
     case FILTER_BY_BRAND:
       return {
@@ -176,7 +177,7 @@ function rootReducer(state = initialState, action) {
         // ),
       };
 
-// ========================* CARRITO *========================
+    // ========================* CARRITO *========================
 
     case AGREGAR_AL_CARRITO:
       const itemExistente = state.carrito.find(
@@ -202,7 +203,7 @@ function rootReducer(state = initialState, action) {
           ],
         };
       };
-    
+
     case BORRAR_DEL_CARRITO:
       const filter = state.carrito.filter(
         (p) => p.product_id !== action.payload.product_id
@@ -218,7 +219,7 @@ function rootReducer(state = initialState, action) {
             : product
         ),
       };
-    
+
     case RESTAR_CANTIDAD_CARRITO:
       return {
         ...state,
@@ -228,21 +229,21 @@ function rootReducer(state = initialState, action) {
             : product
         ),
       };
-  
-// ======================* CONTADOR CARRITO *======================
+
+    // ======================* CONTADOR CARRITO *======================
 
     case COUNT_AGREGAR:
       return {
         ...state,
         countCarrito: state.countCarrito + action.payload,
       };
-      
+
     case COUNT_DELETE:
       return {
         ...state,
         countCarrito: state.countCarrito - action.payload,
       };
-        
+
     case COUNT_SUMAR:
       return {
         ...state,
@@ -254,8 +255,8 @@ function rootReducer(state = initialState, action) {
         ...state,
         countCarrito: state.countCarrito - 1,
       };
-    
-// ========================* MERCADOPAGO *========================
+
+    // ========================* MERCADOPAGO *========================
 
     case MERCADO_PAGO:
       return { ...state, linkMercadoPago: action.payload };
@@ -263,57 +264,57 @@ function rootReducer(state = initialState, action) {
     case CLEAN_MERCADO_PAGO:
       return { ...state, linkMercadoPago: "" };
 
-// ========================* USUARIOS *========================
-     
+    // ========================* USUARIOS *========================
+
     case USER_LOGIN:
       return { ...state, logIn: action.payload };
-  
+
     case GET_USER_BY_EMAIL:
-      return { ...state, usuario: action.payload,};
+      return { ...state, usuario: action.payload, };
 
     case GET_USER_BY_ID:
-      return { ...state, usuario: action.payload };  
-      
+      return { ...state, usuario: action.payload };
+
     case PUT_USER:
       return { ...state, usuario: action.payload };
 
-// ========================* REVIEWS *========================
-    
+    // ========================* REVIEWS *========================
+
     case REVIEWS:
       return { ...state, reviews: action.payload };
 
     case CLEAN_REVIEWS:
       return { ...state, reviews: [] };
-    
-// ========================* LOADER *========================
+
+    // ========================* LOADER *========================
 
     case LOADING:
       return { ...state, display: true };
-  
+
     case READY:
       return { ...state, display: false };
 
-// ========================* CARRUCEL *========================
+    // ========================* CARRUCEL *========================
 
     case GET_SLIDER:
       return {
         ...state,
-        slider : [...state.products].filter(prod => {
-            return prod.discount === 35
+        slider: [...state.products].filter(prod => {
+          return prod.discount === 35
         })
       };
 
-// ========================* OTROS *========================
+    // ========================* OTROS *========================
 
     case GET_ALL_CITIES:
       return {
         ...state,
-        slider : state.products.filter(prod => {
+        slider: state.products.filter(prod => {
           return prod.discount === 45 || prod.discount === 35
         })
       };
-    
-    case GET_SALE_BY_ID:
+
+    case GET_SALES:
       return { ...state, compras: action.payload };
 
     default:

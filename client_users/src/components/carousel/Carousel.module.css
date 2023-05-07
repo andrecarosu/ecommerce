@@ -1,0 +1,13 @@
+.container{
+    justify-content: center;
+    text-align: center;
+    justify-items: center;
+    margin-left: 30px;
+}
+
+@media (max-width: 768px) {
+    .container {
+      margin-left: 80px;
+    }
+  }
+

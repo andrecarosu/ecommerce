@@ -11,7 +11,7 @@ const putProductHandler = async (req, res, next) => {
         res.status(201).send(controller)
 
     } catch (error) {
-        handlerHttpError(res, 500, error.message)
+        handlerHttpError(res, error.message, 500)
     }
 }
 

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import s from './Productos.module.css'
 import TableProductos from '../../components/TableProductos/TableProductos';
 import Pagination from '../../components/pagination/Pagination';
 import usePagination from '../../components/pagination/PaginationHook';
 import DetailCard from '../../components/DetailCard/DetailCard';
+import { getAllProducts } from '../../../redux/actions';
 import { orderedByNameASC, orderedByNameDESC, orderedByHighestPrice, orderedByLowestPrice } from '../../../redux/actions';
 
 const Productos = () => {
@@ -12,11 +14,16 @@ const Productos = () => {
     const [productos, setProductos] = useState([])
     const dispatch = useDispatch()
 
-    const AllProducts = useSelector(state => state.products)
-    useEffect(() => {
-        setProductos(AllProducts)
-    }, [AllProducts])
+    // const AllProducts = useSelector(state => state.products)
+    // useEffect(() => {
+    //     setProductos(AllProducts)
+    // }, [AllProducts])
 
+    useEffect(() => {
+        return () => {
+            dispatch(getAllProducts())
+        }
+    }, [])
 
     let productsFitered = useSelector(state => state.productsFitered)
 
@@ -45,10 +52,10 @@ const Productos = () => {
 
     useEffect(() => {
 
-        if (productsFitered?.length > 0) {
-            setProductos(productsFitered)
-            // productos = productsFitered
-        }
+
+        setProductos(productsFitered)
+        // productos = productsFitered
+
     }, [dispatch, productsFitered])
 
 
@@ -64,6 +71,7 @@ const Productos = () => {
     return (
         <div className={s.productosContainer}>
             <h1>Productos</h1>
+            <Link to='/dashboard/productos/crear-producto'><button>Crear Producto</button></Link>
             <TableProductos
                 products={paginatedData}
                 handleClickDetail={handleClickDetail}
