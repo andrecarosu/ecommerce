@@ -7,7 +7,6 @@ import { Redirect } from "react-router-dom";
 import s from './Detail.module.css'
 import swal from 'sweetalert'
 import CardsReviews from "../../components/cardsReviews/CardsReviews"
-import { encryptData } from './bcrypt'
 
 // import axios from 'axios'
 
