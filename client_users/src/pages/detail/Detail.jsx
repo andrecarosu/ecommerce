@@ -7,8 +7,9 @@ import { Redirect } from "react-router-dom";
 import s from './Detail.module.css'
 import swal from 'sweetalert'
 import CardsReviews from "../../components/cardsReviews/CardsReviews"
+import { encryptData } from './bcrypt'
 
-import axios from 'axios'
+// import axios from 'axios'
 
 
 const Detail = () => {
@@ -19,18 +20,24 @@ const Detail = () => {
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
 
-  const URL = 'http://localhost:3001'
+  // const URL = 'http://localhost:3001'
 
   useEffect(() => {
     dispatch(getProductById(id))
     dispatch(getReviews(id))
+    
+    const saveEncryptedData = async () => {
+      const encryptedData = await encryptData(carrito)
+      window.localStorage.setItem('cart', encryptedData)
+    }
+    saveEncryptedData();
     window.localStorage.setItem("carrito", JSON.stringify(carrito));
     window.localStorage.setItem("count", JSON.stringify(countCarrito));
     return (() => {
       dispatch(cleanProduct())
       dispatch(cleanReviews())
     })
-  }, [dispatch, id, carrito])
+  }, [dispatch, id, carrito, countCarrito])
 
   //Cuando se agrega al carrito
   const handlerCarrito = () => {
@@ -108,19 +115,19 @@ const Detail = () => {
     }
   }
 
-  const [descripcion_motivo, setDescripcion_motivo] = useState();
-  const [valor_calificacion, setValor_calificacion] = useState();
+  // const [descripcion_motivo, setDescripcion_motivo] = useState();
+  // const [valor_calificacion, setValor_calificacion] = useState();
 
-  async function handleSubmit() {
-    const data = {
-      id: id,
-      descripcion_motivo,
-      valor_calificacion
-    }
-    await axios.post(`${URL}/review/${id}`, data)
-    setDescripcion_motivo()
-    setValor_calificacion()
-  }
+  // async function handleSubmit() {
+  //   const data = {
+  //     id: id,
+  //     descripcion_motivo,
+  //     valor_calificacion
+  //   }
+  //   await axios.post(`${URL}/review/${id}`, data)
+  //   setDescripcion_motivo()
+  //   setValor_calificacion()
+  // }
 
 
   return (

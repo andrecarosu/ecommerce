@@ -37,9 +37,9 @@ import {
 } from "./actions-type.js";
 
 const initialState = {
-  products: [], //22
-  productsFitered: [], //22
-  copyProducts: [],
+  products: JSON.parse(window.localStorage.getItem("products")) ||[], 
+  productsFitered: JSON.parse(window.localStorage.getItem("filtered")) ||  [], //22
+  copyProducts: JSON.parse(window.localStorage.getItem("copyProducts")) || [],
   productID: [],
   comercios: [],
   ventas: [],
@@ -171,9 +171,9 @@ function rootReducer(state = initialState, action) {
         productsFitered: state.copyProducts.filter(
           (product) => product.discount === action.payload
         ),
-        copyProducts: state.productsFitered.filter(
-          (product) => product.discount === action.payload
-        ),
+        // copyProducts: state.productsFitered.filter(
+        //   (product) => product.discount === action.payload
+        // ),
       };
 
 // ========================* CARRITO *========================
