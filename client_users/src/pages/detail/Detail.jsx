@@ -24,12 +24,6 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getProductById(id))
     dispatch(getReviews(id))
-    
-    const saveEncryptedData = async () => {
-      const encryptedData = await encryptData(carrito)
-      window.localStorage.setItem('cart', encryptedData)
-    }
-    saveEncryptedData();
     window.localStorage.setItem("carrito", JSON.stringify(carrito));
     window.localStorage.setItem("count", JSON.stringify(countCarrito));
     return (() => {
