@@ -8,7 +8,7 @@ import s from './Detail.module.css'
 import swal from 'sweetalert'
 import CardsReviews from "../../components/cardsReviews/CardsReviews"
 
-import axios from 'axios'
+// import axios from 'axios'
 
 
 const Detail = (props) => {
@@ -20,7 +20,7 @@ const Detail = (props) => {
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
 
-  const URL = 'http://localhost:3001'
+  // const URL = 'http://localhost:3001'
 
   useEffect(() => {
     dispatch(getProductById(product_id?  product_id: id ))
@@ -31,7 +31,8 @@ const Detail = (props) => {
       dispatch(cleanProduct())
       dispatch(cleanReviews())
     })
-  }, [dispatch, id, product_id, carrito])
+
+  }, [dispatch, id, carrito, countCarrito])
 
   //Cuando se agrega al carrito
   const handlerCarrito = () => {
@@ -109,19 +110,19 @@ const Detail = (props) => {
     }
   }
 
-  const [descripcion_motivo, setDescripcion_motivo] = useState();
-  const [valor_calificacion, setValor_calificacion] = useState();
+  // const [descripcion_motivo, setDescripcion_motivo] = useState();
+  // const [valor_calificacion, setValor_calificacion] = useState();
 
-  async function handleSubmit() {
-    const data = {
-      id: id,
-      descripcion_motivo,
-      valor_calificacion
-    }
-    await axios.post(`${URL}/review/${id}`, data)
-    setDescripcion_motivo()
-    setValor_calificacion()
-  }
+  // async function handleSubmit() {
+  //   const data = {
+  //     id: id,
+  //     descripcion_motivo,
+  //     valor_calificacion
+  //   }
+  //   await axios.post(`${URL}/review/${id}`, data)
+  //   setDescripcion_motivo()
+  //   setValor_calificacion()
+  // }
 
 
   return (

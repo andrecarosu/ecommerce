@@ -48,22 +48,22 @@ class paymentService{
     const url = "https://api.mercadopago.com/checkout/preferences"
     let items = [];
     for(let i = 0; i < productos.length; i++) {
-      const producto = await Producto.findOne({ where: { id_producto: productos[i].id_producto } });
+      const producto = await Producto.findOne({ where: { product_id: productos[i].product_id } });
       if (!producto) {
         throw new Error(`Producto con id ${productos[i].id} no encontrado`);
       }
       items.push({
-        title: producto.nombre,
-        description: producto.descripcion_producto,
-        picture_url: producto.imagen,
-        category_id: producto.id_categoria_producto,
-        quantity: productos[i].cantidad,
-        unit_price: producto.valor_con_descuento
+        title: producto.name,
+        description: producto.description,
+        picture_url: producto.image,
+        category_id: producto.Category_product.name,
+        quantity: productos[i].amount,
+        unit_price: producto.discount_price
       });
     }
   
     const body = {
-      payer_email:"test_user_1879813968@testuser.com",
+      payer_email:"test_user_1957000233@testuser.com",
       items,
       back_urls:{
         failure: "/failure",
