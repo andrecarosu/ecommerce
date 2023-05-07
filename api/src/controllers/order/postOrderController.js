@@ -52,7 +52,8 @@ const createDetalleVenta = async (detalle_order, venta_id) => {
           value: value,
           ProductProductId: product_id,
           OrderOrderId: venta_id,
-          name: product.name, // Incluir el nombre del producto en el campo name
+          name: product.name,
+          image: product.image, // Incluir el nombre del producto en el campo name
         });
         return detalle_venta;
       })
