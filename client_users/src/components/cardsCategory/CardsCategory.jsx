@@ -16,7 +16,7 @@ function CardsCategory() {
        await dispatch(getAllProducts())
        await dispatch(getFamilies())
         setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
-      }, 2000); // esperar 2 segundos antes de obtener los datos
+      }, 5000); // esperar 2 segundos antes de obtener los datos
     }
     fetchData();    
   }, [dispatch])
