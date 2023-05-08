@@ -36,7 +36,7 @@ const CheckState = ({ product_id, state }) => {
         //setCheck(!check)
     }
     return (
-        <div>
+        <div onClick={(event) => event.stopPropagation()}>
             <label className={s.switch}>
                 <input type="checkbox" name="state" value={check} onChange={onCheckState} checked={check} />
                 <span className={`${s.slider} ${s.round}`}></span>

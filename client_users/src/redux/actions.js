@@ -389,6 +389,25 @@ export function getReviews(id) {
 
 // COMPRAS DEL USUARIO
 
+
+export function getAllSales() {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL}/venta`);
+      // console.log(response);
+      dispatch({
+        type: action.GET_SALES,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: action.GET_SALES,
+        payload: error,
+      });
+    }
+  };
+}
+
 export function getSales(id) {
   return async (dispatch) => {
     try {

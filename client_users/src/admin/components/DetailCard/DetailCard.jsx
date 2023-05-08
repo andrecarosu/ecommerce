@@ -64,7 +64,7 @@ const DetailCard = ({ product_id, handleClickDetail }) => {
                         </div>
                         <div className={s.row}>
                             <span>Stock <br /> {product.stock}</span>
-                            <span>State<br />{product.state ? 'true' : 'false'}</span>
+                            <span>State<br />{product.state ? '' : 'No'} Disponible</span>
                         </div>
 
                     </div>
