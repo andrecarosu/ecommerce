@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom"
 import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
-import Graphic from '../components/graphic/graphic';
+// import Graphic from '../components/graphic/graphic';
 import Categorias from './Categorias/Categorias';
 import Menu from './Menu/Menu';
 import FormCreateProduct from '../components/formCreateProduct/FormCreateProduct';
@@ -16,6 +16,7 @@ import Cookies from 'js-cookie';
 import { getCategorys, getAllProducts, getFamilies } from '../../redux/actions';
 // import contentLayout from ''
 const type_permission = 2;
+const URL = process.env.URL
 //esto de pronto podemos mejorarlo de tal forma que se haga con los JWT y no asi
 const DashMain = () => {
     const location = useLocation();
