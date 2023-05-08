@@ -15,12 +15,11 @@ function CardsCategory() {
     (async () =>{
     
       const response2 = await axios.get(`https://ecommerce-khaki-nine.vercel.app/categorias/families`);
-const familiesData = Object.values(response2.data); // si response2.data es un objeto, extraer su valor como un array
-console.log(1, familiesData);
-if (familiesData.length > 0) {
-  setFamilies(familiesData);        
-}
-
+      const familiesData = response2.data;
+      console.log(1,familiesData);
+      if (familiesData.length >0) {
+        setFamilies(familiesData)        
+      }
     })()
     //async function fetchData() {
      // setLoading(true); // establecer la variable loading en true antes de hacer la petición
