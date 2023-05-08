@@ -11,12 +11,12 @@ function CardsCategory() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true); // establecer la variable loading en true antes de hacer la petición
-      setTimeout(async() => {
-       await dispatch(getCategorys())
-       await dispatch(getAllProducts())
-       await dispatch(getFamilies())
+      setTimeout(() => {
+      //  await dispatch(getCategorys())
+      //  await dispatch(getAllProducts())
+       dispatch(getFamilies())
         setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
-      }, 5000); // esperar 2 segundos antes de obtener los datos
+      }, 2000); // esperar 2 segundos antes de obtener los datos
     }
     fetchData();    
   }, [dispatch])
