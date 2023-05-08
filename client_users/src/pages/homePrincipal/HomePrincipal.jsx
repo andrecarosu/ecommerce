@@ -13,7 +13,7 @@ function HomePrincipal() {
       setLoading(true); // establecer la variable loading en true antes de hacer la petición
       setTimeout(async() => {
       setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
-      }, 1000); // esperar 2 segundos antes de obtener los datos
+      }, 2000); // esperar 2 segundos antes de obtener los datos
     }
     fetchData();    
   }, [])
