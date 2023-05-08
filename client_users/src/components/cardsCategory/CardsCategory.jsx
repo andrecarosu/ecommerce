@@ -2,28 +2,39 @@ import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts, getCategorys, getFamilies } from '../../redux/actions';
 import CardCategory from '../cardCategory/CardCategory';
-import styles from "./CardsCategory.module.css"
+import styles from "./CardsCategory.module.css";
+import axios from 'axios';
 
 function CardsCategory() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);// variable booleana para verificar si los datos están listos
+  //const [loading, setLoading] = useState(true);// variable booleana para verificar si los datos están listos
+  const[families, setFamilies] = useState({})
 
   useEffect(() => {
+
+    (async () =>{
+    
+      const response2 = await axios.get(`https://ecommerce-khaki-nine.vercel.app/categorias/families`);
+      const familiesData = response2.data;
+      if (familiesData.length >0) {
+        setFamilies(familiesData)        
+      }
+    })()
     //async function fetchData() {
      // setLoading(true); // establecer la variable loading en true antes de hacer la petición
       //setTimeout(() => {
       //  await dispatch(getCategorys())
       //  await dispatch(getAllProducts())
-       dispatch(getFamilies())
+       //dispatch(getFamilies())
        // setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
       //}, 2000); // esperar 2 segundos antes de obtener los datos
     //}
     //fetchData();    
-  }, [dispatch])
+  }, [dispatch,setFamilies])
 
 
 
-  const  families = useSelector(state => state.families)??[]
+  //const  families = useSelector(state => state.families)??[]
 
   //if (loading) {
     //return (
