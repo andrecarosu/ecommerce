@@ -1,4 +1,4 @@
-import Logo from "../../assets/images/LogoCompletoBlanco.png"
+import Logo from "../../assets/images/LogoFooter.png"
 import MetodosPago from '../../assets/images/MetodosDePago.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapLocationDot, faLocationDot, faEnvelope, faPhone, faClock, faCalendar, faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons'
@@ -35,7 +35,7 @@ const Footer = () => {
               <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Carrera 6 #67-63
             </p>
             <p>
-              <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon> contact@thewincellar.com
+              <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon> contact@thewinecellar.com
             </p>
             <p>
               <FontAwesomeIcon icon={faPhone}></FontAwesomeIcon> +57 321 303 7885

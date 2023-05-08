@@ -1,5 +1,5 @@
 const axios = require("axios"); 
-const { Producto} = require("../db");
+const { Product } = require("../db");
 
 /*class paymentService{
     async createPayment(idProducto){
@@ -48,7 +48,7 @@ class paymentService{
     const url = "https://api.mercadopago.com/checkout/preferences"
     let items = [];
     for(let i = 0; i < productos.length; i++) {
-      const producto = await Producto.findOne({ where: { product_id: productos[i].product_id } });
+      const producto = await Product.findOne({ where: { product_id: productos[i].product_id } });
       if (!producto) {
         throw new Error(`Producto con id ${productos[i].id} no encontrado`);
       }
@@ -56,7 +56,7 @@ class paymentService{
         title: producto.name,
         description: producto.description,
         picture_url: producto.image,
-        category_id: producto.Category_product.name,
+        // category_id: producto.Category_product.name,
         quantity: productos[i].amount,
         unit_price: producto.discount_price
       });

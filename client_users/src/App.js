@@ -44,7 +44,7 @@ function App() {
       {/* {location?.pathname == "/login" ? null : <Footer />} */}
       <Switch>
         <Route exact path="/" component={HomePrincipal} />
-        <Route exact path="/home" component={Home} />
+        <Route exact path="/product" component={Home} />
         <Route exact path="/detail/:id" component={Detail} />
         <Route exact path="/log-in" component={Login} />
         <Route exact path="/registrar-usuario" component={Register} />
