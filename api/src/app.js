@@ -14,7 +14,7 @@ setTimeout(async () => {
 
 setTimeout(async () => {
   await loadProducts()
-}, 2000);
+}, 4000);
 //loadProducts()
 
 const server = express();
