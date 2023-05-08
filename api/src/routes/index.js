@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const router = Router();
 const fs = require("fs")
+const paymentService = require("../service/paymentService")
+const paymentController = require("../controllers/paymentController/paymentController")
+const paymentInstance = new paymentController(new paymentService())
 
 // Importar todos los routers, Ejemplo: const authRouter = require('./auth.js');
 // Configurar los routers, Ejemplo: router.use('/auth', authRouter);
@@ -18,6 +21,14 @@ const fs = require("fs")
 /**
  * !TODO: Esta ruta es dinamica no se necesita agregar ninguna ruta adicional que sean rutas claras y especificas
  */
+router.post("/buy-products", function (req, res, next) {
+  const productos = req.body.productos;
+  // Aquí deberías validar que los ID de los productos sean válidos antes de usarlos
+  // para buscar los productos en la base de datos
+  paymentInstance.getPymentLink(req, res, productos);
+
+});
+
 const PATH_ROUTES = __dirname;
 const removeExtends = (filename) => {
   //user.routes.js

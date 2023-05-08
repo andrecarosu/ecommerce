@@ -6,27 +6,27 @@ import styles from "./homePrincipal.module.css"
 function HomePrincipal() {
 
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true); // establecer la variable loading en true antes de hacer la petición
-      setTimeout(async() => {
-      setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
-      }, 2000); // esperar 2 segundos antes de obtener los datos
-    }
-    fetchData();    
-  }, [])
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     setLoading(true); // establecer la variable loading en true antes de hacer la petición
+  //     setTimeout(async() => {
+  //     setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
+  //     }, 2000); // esperar 2 segundos antes de obtener los datos
+  //   }
+  //   fetchData();    
+  // }, [])
 
-  if (loading) {
-    return (
-      <div >
-        <div >Loading...</div>
-        <img className={styles.imagenLoading} src="/bebidas-premium-home.gif" alt="" />
+  // if (loading) {
+  //   return (
+  //     <div >
+  //       <div >Loading...</div>
+  //       <img className={styles.imagenLoading} src="/bebidas-premium-home.gif" alt="" />
               
-      </div> 
-    );
-  }
+  //     </div> 
+  //   );
+  // }
 
   return (
     <div style={{ minHeight: '100vh', marginTop:"100px" }}>
