@@ -40,7 +40,7 @@ const getDetalle_Venta = async (order_id) => {
           nombre_producto: producto ? producto.name : null,
           valor_unitario: d.unit_value,
           valor_total: d.value,
-          cantidad: d.amount,
+          cantidad: d.amount
         };
       }),
     };
@@ -73,6 +73,7 @@ const getDetalle_Venta = async (order_id) => {
         fecha: order.date,
         total: order.total,
         estado: order.state,
+        id_usuario: order.user_id,
         productos: [],
       }));
   
@@ -86,7 +87,8 @@ const getDetalle_Venta = async (order_id) => {
             valor_unitario: detail.unit_value,
             valor_total: detail.value,
             cantidad: detail.amount,
-            name: detail.name
+            name: detail.name,
+            image: detail.image
           });
         }
       });
@@ -124,6 +126,7 @@ const getDetalle_Venta = async (order_id) => {
       const ventas = orders.map((order) => ({
         id: order.order_id,
         id_orden: order.order_id,
+        id_usuario: order.user_id,
         fecha: order.date,
         total: order.total,
         estado: order.state,
@@ -140,7 +143,8 @@ const getDetalle_Venta = async (order_id) => {
             valor_unitario: detail.unit_value,
             cantidad: detail.amount,
             valor_total: detail.value,
-            name:detail.name
+            name:detail.name,
+            image: detail.image
           });
         }
       });

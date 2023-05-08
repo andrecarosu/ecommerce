@@ -42,10 +42,10 @@ const loginUser = async (user, res) => { // Añadir el parámetro "res" para la 
                     token: token
                 }
             } else {
-                throw new Error('Invalid email or password')
+                throw new Error('El correo o la contraseña son inválidos')
             }
         } else {
-            throw new Error('User not found')
+            throw new Error('El usuario no existe')
         }
     } catch (error) {
         console.log(error);

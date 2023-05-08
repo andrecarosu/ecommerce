@@ -8,6 +8,7 @@ function HomePrincipal() {
 
   // const [loading, setLoading] = useState(true);
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   async function fetchData() {
   //     setLoading(true); // establecer la variable loading en true antes de hacer la petición
@@ -17,6 +18,17 @@ function HomePrincipal() {
   //   }
   //   fetchData();    
   // }, [])
+=======
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true); // establecer la variable loading en true antes de hacer la petición
+      setTimeout(async() => {
+      setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
+      }, 1000); // esperar 2 segundos antes de obtener los datos
+    }
+    fetchData();    
+  }, [])
+>>>>>>> 41fe6b3d543fe6d81480770dfacc49e8c4b3e8f5
 
   // if (loading) {
   //   return (
