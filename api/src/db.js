@@ -87,8 +87,8 @@ User.hasMany(Order, { foreignKey: "user_id" });
 
 /*---------------relaciones de muchos a muchos---------------------*/
 
-Product.belongsToMany(Order, { through: { model: Detail_order, unique: false, fields: ["name","image"] } });
-Order.belongsToMany(Product, { through: { model: Detail_order, unique: false, fields: ["name","image"] } });
+Product.belongsToMany(Order, { through: { model: Detail_order, unique: false, fields: ["name", "image"] } });
+Order.belongsToMany(Product, { through: { model: Detail_order, unique: false, fields: ["name", "image"] } });
 
 
 module.exports = {

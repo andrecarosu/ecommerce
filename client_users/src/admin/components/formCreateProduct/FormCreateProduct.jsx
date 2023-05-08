@@ -56,6 +56,7 @@ export default function FormCreateProduct() {
 
     //setForm({})
     return () => {
+      console.log('se fue')
       dispatch(getAllProducts())
     }
   }, [])
@@ -70,7 +71,7 @@ export default function FormCreateProduct() {
   }, [flagEdit, id, dispatch]);
 
   useEffect(async () => {
-    if (flagEdit) setForm({ ...product, category: product.Category_product.name })
+    if (flagEdit && Object.keys(product).length > 0) setForm({ ...product, category: product.Category_product.name })
   }, [product])
 
   useEffect(() => {
@@ -163,6 +164,7 @@ export default function FormCreateProduct() {
         normal_price: parseInt(form.normal_price),
         discount_price: parseInt(form.discount_price),
         stock: parseInt(form.stock),
+        description: getTextDescription(description),//temporal mientras vemos si aplcamos estilos
         state: true
       }
       const request = !flagEdit ?
@@ -180,6 +182,7 @@ export default function FormCreateProduct() {
               icon: 'success',
               timer: '2000'
             })
+            dispatch(getAllProducts())
             setShouldRedirect(true);
           })
           .catch(err => {
@@ -369,7 +372,7 @@ export default function FormCreateProduct() {
                     )}
                   </div>
 
-                  {/* ----------------------- MARCA -----------------------*/}
+                  {/* ----------------------- STOCK -----------------------*/}
                   <div className={s.group}>
 
                     <input
