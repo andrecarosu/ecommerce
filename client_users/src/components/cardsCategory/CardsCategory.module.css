@@ -1,0 +1,27 @@
+
+.container{
+    width: 80%;
+    display: inline-flex;
+    /* justify-content: space-evenly; */
+    /* flex-direction: row;
+    flex-wrap: wrap; */
+    margin: 20px 0 10px 0
+    /* margin-bottom: 150px; */
+}
+
+@media (max-width: 768px) {
+    .container {
+      display: block;
+      text-align: center;
+      margin-left: 120px;
+    }
+}
+
+.imagenLoading{
+    margin-top: 50px;
+    height: 300px;
+    width: 600px;
+    font-family: cursive;
+    font-size: 40px;
+    object-fit: cover;
+}
