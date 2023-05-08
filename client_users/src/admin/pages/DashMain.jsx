@@ -36,7 +36,7 @@ const DashMain = () => {
         return <div>No tiene permisos</div>
     }
     
-    if (location.pathname !== '/dashboard') {
+    if (location.pathname !== '/dashboard' && location.pathname !== '/dashboard/') {
     return (
         <>
             <div className={DashStyles.mainContainer}>
@@ -54,7 +54,6 @@ const DashMain = () => {
                     <Route exact path="/dashboard/productos/crear-producto" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/edit-product/:id" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />
-                     {/*<Graphic />*/}
                     </div>
                 </div>
             </>
@@ -62,7 +61,7 @@ const DashMain = () => {
     }
     
     
-    if (location.pathname === '/dashboard') {
+    if (location.pathname === '/dashboard' || location.pathname === '/dashboard/') {
         return (
             <>
                 <div className={DashStyles.mainContainer}>
@@ -80,7 +79,7 @@ const DashMain = () => {
                     <Route exact path="/dashboard/productos/crear-producto" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/edit-product/:id" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />
-                     <Graphic />
+                    <Graphic />
                     </div>
                 </div>
             </>
