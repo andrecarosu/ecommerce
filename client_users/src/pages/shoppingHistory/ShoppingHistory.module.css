@@ -3,8 +3,53 @@
     justify-content: center;
     height: fit-content;
     width: 100%;
-    background-color: #97978d;
 }
+
+@media (max-width: 768px) {
+    .contenedor {
+        margin-left: 20px;
+        display: block;
+        max-width: 450px;    
+      }
+
+      .total{
+        font-size: 15px;
+        margin-right: -600px;
+      }
+
+    .tabla {
+      margin-left: 20px;
+      display: block;
+      max-width: 450px;    
+    }
+    .columna{
+      max-width: 60%;
+      max-height: 60%;
+      display: block;
+    }
+
+    .detalle {
+        /* margin-left: 0px;
+        margin-right: -500px; */
+        display: block;
+        max-width: 370px; 
+        max-height: 980px;
+        margin-top: -10px;
+      }
+
+      .btnReview{
+      font-size: small;
+      } 
+      
+      .aux{
+        display: block;
+    }
+  }
+  .total{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: -700px;
+  }
 
 .tabla{
     display: flex;
@@ -13,7 +58,7 @@
     margin-top: 150px;
     margin-bottom: 20px;
     padding: 20px;
-    border: 5px black solid;
+    border: 2px black solid;
     border-radius: 20px;
     width: 90%;
     background-color: white;
@@ -25,9 +70,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: black;
     width:100%;
-    color: aliceblue;
+    color: goldenrod;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     padding: 20px;
@@ -51,9 +95,19 @@
 }
 
 .img{
-    width: 100px;
+    height: auto;
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    border: solid 1px red;
     margin-right: 40px;
-}
+    /* -webkit-transform: scale(.6);
+    transform: scale(.6);  */
+    object-fit: cover;
+    image-rendering: crisp-edges; 
+  }  
 
 .aux{
     display: flex;
@@ -61,7 +115,36 @@
 }
 
 .link{
-    display: flex;
-    color: #97978d;
+    height: auto;
+    width: auto;
     text-decoration: none;
 }
+
+.divLink{
+    height: auto;
+    max-height: 13%;
+    width: auto;
+    max-width: 7%;
+    cursor: pointer;
+}
+
+.btnClose{
+    position: fixed;
+    top: 35px;
+    left: 12px;
+    margin: 30px;
+  }
+
+  .btnCloseReview{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 30px;
+  }
+
+  .btnReview{
+    /* position: relative; */
+    display: flex;
+    margin-top: 23px;
+    right: 0px;
+  }

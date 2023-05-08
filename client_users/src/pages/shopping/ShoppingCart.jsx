@@ -4,8 +4,13 @@ import { Redirect } from "react-router-dom";
 import CartCard from "../../components/Cart_card/CartCard"
 import enviarStock from "./enviarStock"
 import { cleanMercadoPago, getUserById, mercadoPago } from "../../redux/actions"
+<<<<<<< HEAD
 //import Cookies from "js-cookie";
 //import jwt_decode from "jwt-decode";
+=======
+import Cookies from "js-cookie";
+// import jwt_decode from "jwt-decode";
+>>>>>>> 60ac73bb72da87385bae1ec370fe10e9584c2270
 import { clean } from "./clean"
 import { date } from "./date"
 import { mail } from "./user"
@@ -17,7 +22,7 @@ import styles from './shopping.module.css'
 
 export default function ShoppingCart() {
   const dispatch = useDispatch()
-  const { carrito, linkMercadoPago, countCarrito, usuario } = useSelector((state) => state);
+  const { carrito, linkMercadoPago, countCarrito } = useSelector((state) => state);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
@@ -33,7 +38,7 @@ export default function ShoppingCart() {
       }
       setShouldRedirect(false);
     }
-  }, [carrito]);
+  }, [carrito, countCarrito, dispatch]);
   //Suma de subtotales
   let total = 0
   carrito.forEach(producto => {
@@ -57,37 +62,37 @@ export default function ShoppingCart() {
   //post a venta
   const handlerDetalleVenta = async () => {
 
-    // const session = Cookies.get("user_session");
-    // console.log(session)
-    // let values = JSON.parse(session)
+    const session = Cookies.get("user_session");
+    console.log(session)
+    let values = JSON.parse(session)
     
-    // let cookieUsuario = values.dataValues
-    // // console.log(cookieUsuario, "USUARIO")
+    let cookieUsuario = values.dataValues
+    // console.log(cookieUsuario, "USUARIO")
     
-    // const fecha = date();
-    // const detalle_venta = clean(carrito);
-    // const valor_total_venta = detalle_venta.reduce((a, b) => {
-    //   return a + b.valor_total_cantidad
-    // }, 0)
-    // const venta = {
-    //   fecha,
-    //   valor_total_venta,
-    //   id_usuario: cookieUsuario.id_usuario,
-    //   detalle_venta,
-    //   estado:false
-    // }
-    // await axios.post("http://localhost:3001/venta", venta)
-    //   .then(response => {
-    //     console.log(response.data);
-    //   })
-    //   .catch(error => {
-    //     swal({
-    //       title: "Ocurrio un error",
-    //       text: `${error}`,
-    //       icon: "error",
-    //       timer: "3000"
-    //     })
-    //   })
+    const fecha = date();
+    const detalle_venta = clean(carrito);
+    const valor_total_venta = detalle_venta.reduce((a, b) => {
+      return a + b.valor_total_cantidad
+    }, 0)
+    const venta = {
+      fecha,
+      valor_total_venta,
+      id_usuario: cookieUsuario.id_usuario,
+      detalle_venta,
+      estado:false
+    }
+    await axios.post("http://localhost:3001/venta", venta)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        swal({
+          title: "Ocurrio un error",
+          text: `${error}`,
+          icon: "error",
+          timer: "3000"
+        })
+      })
     const stockActualizado = enviarStock(carrito)
     await axios.put("https://deploynodejsecommerce.onrender.com/products", stockActualizado)
     .then(response => {
@@ -142,6 +147,7 @@ export default function ShoppingCart() {
                 <div className={styles.mercadoPago}>
                   <a
                     target="_blank"
+                    rel="noreferrer"
                     onClick={handlerDetalleVenta}
                     href={linkMercadoPago}>Pagar</a>
                 </div>
