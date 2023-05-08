@@ -4,13 +4,7 @@ import { Redirect } from "react-router-dom";
 import CartCard from "../../components/Cart_card/CartCard"
 import enviarStock from "./enviarStock"
 import { cleanMercadoPago, getUserById, mercadoPago } from "../../redux/actions"
-<<<<<<< HEAD
-//import Cookies from "js-cookie";
-//import jwt_decode from "jwt-decode";
-=======
 import Cookies from "js-cookie";
-// import jwt_decode from "jwt-decode";
->>>>>>> 60ac73bb72da87385bae1ec370fe10e9584c2270
 import { clean } from "./clean"
 import { date } from "./date"
 import { mail } from "./user"
