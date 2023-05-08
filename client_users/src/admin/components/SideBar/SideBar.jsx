@@ -2,8 +2,12 @@ import React from 'react';
 import s from './SideBar.module.css'
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faUser, faWineGlass, faFileLines } from "@fortawesome/free-solid-svg-icons";
+import UserIcon from '../userIcon/UserIcon';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import Profile from '../Profile/Profile';
 
 
 const SideBar = () => {
@@ -13,14 +17,15 @@ const SideBar = () => {
     return (
         <div className={s.sideBarContent}>
             <div className={s.profile}>
-
+                <Profile />
+                {/* <UserIcon /> */}
             </div>
             <div className={s.menu}>
                 <ul>
                     <li className={s.option}>
                         <NavLink to='/dashboard/' exact className={isActive =>
                             `${s.a} ${(isActive ? s.current : '')}`}>
-                            Menu
+                            <FontAwesomeIcon icon={faHouse} /> Menu
                             {/* <li>Usuarios</li> */}
 
                         </NavLink>
@@ -29,7 +34,7 @@ const SideBar = () => {
                     <li className={s.option}>
                         <NavLink to='/dashboard/usuarios' exact className={isActive =>
                             `${s.a} ${(isActive ? s.current : '')}`}>
-                            Usuarios
+                            <FontAwesomeIcon icon={faUser} /> Usuarios
                             {/* <li>Usuarios</li> */}
 
                         </NavLink>
@@ -37,7 +42,7 @@ const SideBar = () => {
                     <li className={s.option}>
                         <NavLink to='/dashboard/productos' exact className={isActive =>
                             `${s.a} ${(isActive ? s.current : '')}`}>
-                            Productos
+                            <FontAwesomeIcon icon={faWineGlass} /> Productos
 
                         </NavLink>
 
@@ -53,7 +58,7 @@ const SideBar = () => {
                     <li className={s.option}>
                         <NavLink to='/dashboard/ventas' exact className={isActive =>
                             `${s.a} ${(isActive ? s.current : '')}`}>
-                            Ventas
+                            <FontAwesomeIcon icon={faFileLines} /> Ventas
                         </NavLink>
                     </li>
 

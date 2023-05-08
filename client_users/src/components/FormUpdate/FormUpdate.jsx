@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getAllCities, userLoggedIn, getUserById } from "../../redux/actions";
+import { getUsuarioByEmail } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Image, CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert";
@@ -11,16 +11,13 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
   const { ciudades } = useSelector(state => state);
   const dispatch = useDispatch();
   const [form, setForm] = useState({
-    id_usuario: null,
-    primer_nombre: "",
-    segundo_nombre: "",
-    primer_apellido: "",
-    segundo_apellido: "",
-    direccion: "",
-    telefono: "",
+    user_id: null,
+    name: "",
+    address: "",
+    phone: "",
     email: "",
-    id_ciudad: null,
-    imagen: "",
+    city: null,
+    image: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -35,56 +32,35 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
   console.log(updatedUserData);
   const usuarioId = idUsuario;
   //const { idUsuario } = props; //recibe por props el id_usuario que se le envía desde el componente Account
-  console.log(usuarioId);
-  useEffect(() => {
-    dispatch(getAllCities()); // ejecutamos la action que trae todas las ciudades para mostrarlas en el input ciudad
-  }, [dispatch]);
-
-
-
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     // captura de datos del estado form
     const data = {
-      id_usuario: form.id_usuario,
-      primer_nombre: form.primer_nombre,
-      segundo_nombre: form.segundo_nombre,
-      primer_apellido: form.primer_apellido,
-      segundo_apellido: form.segundo_apellido,
-      direccion: form.direccion,
-      telefono: form.telefono,
+      user_id: form.user_id,
+      name: form.name,
+      address: form.address,
+      phone: form.phone,
       email: form.email,
-      id_ciudad: form.id_ciudad,
+      city: form.city,
       estado: form.estado,
-      imagen: form.imagen
+      image: form.image
     };
-
+  
     // Obtiene los valores del formulario
-    const { primer_nombre,
-      segundo_nombre,
-      primer_apellido,
-      segundo_apellido,
-      direccion,
-      telefono,
-      email,
-      password,
-      id_ciudad
-    } = form;
-
+    const { name, address, phone, email, password, city } = form;
+  
     // Realiza las validaciones
     const errors = validations({
-      primer_nombre,
-      segundo_nombre,
-      primer_apellido,
-      segundo_apellido,
-      direccion,
-      telefono,
+      name,
+      address,
+      phone,
       email,
       password,
-      id_ciudad
+      city
     });
-
+  
     if (Object.keys(errors).length > 0) {
       setErrors(errors); // Actualiza el estado de los errores
     } else {
@@ -92,34 +68,59 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
       const filteredData = Object.fromEntries(
         Object.entries(data).filter(([_, value]) => !!value)
       );
-
+  
+      let emailExists = false; // Variable para verificar si el email ya existe en la base de datos
+  
+      // Verificar si el correo ya existe en la base de datos
       await axios
-        .put(`http://localhost:3001/usuario`, filteredData)
-        .then(res => swal({
-          title: 'Actualización Exitosa',
-          text: 'Ya puedes ver tus cambios reflejados',
-          icon: 'success',
-          timer: '2000'
-        }))
-
-      //dispatch(getUserById(usuarioId))
-      window.location.reload() // Actualiza la página     
-        .catch(err => swal({
-          text: 'Error',
-          text: 'intente nuevamente',
-          icon: 'error',
-          timer: '2000',
-          button: 'Accept'
-        }));
-
+        .get(`http://localhost:3001/usuario?email=${filteredData.email}`)
+        .then((res) => {
+          if (res.data.length > 0) {
+            emailExists = true;
+            swal({
+              text: "Error",
+              text: "Ya existe ese email en la base de datos",
+              icon: "error",
+              timer: "2000",
+              button: "Accept",
+            });
+            emailExists = false;
+          }
+        })
+        .catch((err) => console.log(err));
+  
+      // Si el correo no existe, se actualizan los datos
+      if (!emailExists) {
+        await axios
+          .put(`http://localhost:3001/usuario`, filteredData)
+          .then((res) =>
+            swal({
+              title: "Actualización Exitosa",
+              text: "Ya puedes ver tus cambios reflejados",
+              icon: "success",
+              timer: "2000",
+            })
+          )
+          .then(() => window.location.reload()) // Actualiza la página
+          .catch((err) =>
+            swal({
+              text: "Error",
+              text: "Intente nuevamente, el correo ya existe",
+              icon: "error",
+              timer: "2000",
+              button: "Accept",
+            })
+          );
+      }
     }
   };
-
+  
+  
   const handleInputChange = async event => {
     const property = event.target.name;
     const value = event.target.value;
     // Verificar si el input es de tipo file
-    if (event.target.type === "file") {
+        if (event.target.type === "file") {
       const file = event.target.files[0]; // Obtener el archivo seleccionado
       let valor = 0;
       if (file) valor = 1;
@@ -143,7 +144,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
         // Actualizar el estado del formulario con la URL de la imagen subida
         setForm(prevForm => ({
           ...prevForm, // Copia el estado actual del formulario
-          imagen: imageUrl // Actualiza la propiedad 'imagen' del estado con la URL de la imagen subida
+          image: imageUrl // Actualiza la propiedad 'imagen' del estado con la URL de la imagen subida
         }));
       } catch (error) {
         console.error("Error al subir la imagen a Cloudinary:", error);
@@ -157,10 +158,6 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
       }));
 
       const currentErrors = validations({ [property]: value });
-      // setErrors(prevErrors => ({
-      //   ...prevErrors,
-      //   [property]: currentErrors[property]
-      // }))  
       setErrors({ ...errors, [property]: currentErrors[property] });
     }
   };
@@ -168,7 +165,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
   useEffect(() => {
     setForm(prevForm => ({
       ...prevForm,
-      id_usuario: idUsuario
+      user_id: idUsuario
     }));
   }, [idUsuario]);
 
@@ -185,7 +182,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
               <label for="" style={{ fontWeight: '600' }}>
                 Actualizar datos de Perfil
               </label>
-              {/* ----------------------- PRIMER NOMBRE -----------------------*/}
+              {/* ----------------------- NOMBRE -----------------------*/}
 
               <div className={style.nombres}>
                 <div className={style.contenedorDiv}>
@@ -194,78 +191,20 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
                   </label>
                   <input
                     type="text"
-                    name="primer_nombre"
-                    value={form.primer_nombre}
+                    name="name"
+                    value={form.name}
                     onChange={handleInputChange}
                     className='form-input'
                     style={{ fontSize: '15px', margin: '5px' }}
 
                   />
 
-                  {errors.primer_nombre && (
-                    <div className={style.errors}>{errors.primer_nombre}</div>
+                  {errors.name && (
+                    <div className={style.errors}>{errors.name}</div>
                   )}
 
                 </div>
-
-                {/* ----------------------- SEGUNDO NOMBRE -----------------------*/}
-                <div className={style.contenedorDiv}>
-                  <label for="" className='form-update-label'>
-                    Segundo nombre
-                  </label>
-                  <input
-                    type="text"
-                    name="segundo_nombre"
-                    value={form.segundo_nombre}
-                    onChange={handleInputChange}
-                    className='form-input'
-                    style={{ fontSize: '15px', margin: '5px' }}
-                  />
-                  {errors.segundo_nombre && (
-                    <div className={style.errors}>{errors.segundo_nombre}</div>
-                  )}
                 </div>
-              </div>
-
-              {/* ----------------------- PRIMER APELLIDO -----------------------*/}
-              <div className={style.apellidos}>
-                <div className={style.contenedorDiv}>
-
-                  <label for="" className='form-update-label'>
-                    Apellido
-                  </label>
-                  <input
-                    type="text"
-                    name="primer_apellido"
-                    value={form.primer_apellido}
-                    onChange={handleInputChange}
-                    className='form-input'
-                    style={{ fontSize: '15px', margin: '5px' }}
-                  />
-                  {errors.primer_apellido && (
-                    <div className={style.errors}>{errors.primer_apellido}</div>
-                  )}
-                </div>
-
-                {/* ----------------------- SEGUNDO APELLIDO -----------------------*/}
-                <div className={style.contenedorDiv}>
-                  <label for="" className='form-update-label'>
-                    Segundo apellido
-                  </label>
-                  <input
-                    type="text"
-                    name="segundo_apellido"
-                    value={form.segundo_apellido}
-                    onChange={handleInputChange}
-                    className='form-input'
-                    style={{ fontSize: '15px', margin: '5px' }}
-                  />
-                  {errors.segundo_apellido && (
-                    <div className={style.errors}>{errors.segundo_apellido}</div>
-                  )}
-                </div>
-              </div>
-
 
               {/* ----------------------- DIRECCION -----------------------*/}
               <div className={style.contenedorDiv}>
@@ -274,14 +213,14 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
                 </label>
                 <input
                   type="text"
-                  name="direccion"
-                  value={form.direccion}
+                  name="address"
+                  value={form.address}
                   onChange={handleInputChange}
                   className='form-input'
                   style={{ fontSize: '15px', margin: '5px' }}
                 />
-                {errors.direccion && (
-                  <div className={style.errors}>{errors.direccion}</div>
+                {errors.address && (
+                  <div className={style.errors}>{errors.address}</div>
                 )}
               </div>
 
@@ -292,14 +231,14 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
                 </label>
                 <input
                   type="text"
-                  name="telefono"
-                  value={form.telefono}
+                  name="phone"
+                  value={form.phone}
                   onChange={handleInputChange}
                   className='form-input'
                   style={{ fontSize: '15px', margin: '5px' }}
                 />
-                {errors.telefono && (
-                  <div className={style.errors}>{errors.telefono}</div>
+                {errors.phone && (
+                  <div className={style.errors}>{errors.phone}</div>
                 )}
               </div>
 
@@ -327,28 +266,17 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
                 <label for="" className='form-update-label'>
                   Ciudad
                 </label>
-
-                <div>
-                  {errors.id_ciudad && (
-                    <div className={style.errors}>{errors.id_ciudad}</div>
-                  )}
-                  <div className={style.contenedorDiv}>
-                    <select
-                      name="id_ciudad"
-                      onChange={e => handleInputChange(e)}
-                      className='form-input'
-                      style={{ fontSize: '15px', margin: '5px' }}
-                    >
-                      <option>Selecciona una ciudad</option>
-                      {ciudades &&
-                        ciudades.map(c => (
-                          <option key={c.id_ciudad} value={c.id_ciudad} primary={c.nombre_ciudad}>
-                            {c.nombre_ciudad}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                </div>
+                <input
+                  type="text"
+                  name="city"
+                  value={form.city}
+                  onChange={handleInputChange}
+                  className='form-input'
+                  style={{ fontSize: '15px', margin: '5px' }}
+                />
+                {errors.city && (
+                  <div className={style.errors}>{errors.city}</div>
+                )}
               </div>
 
               {/* ----------------------- IMAGEN -----------------------*/}
@@ -358,8 +286,8 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
                 </label>
                 <input
                   type="file"
-                  id="imagen"
-                  name="imagen"
+                  id="image"
+                  name="image"
                   onChange={handleInputChange}
                   className='form-input'
                   style={{ fontSize: '13px', margin: '5px' }}
@@ -367,12 +295,12 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
                 <div>
                 </div>
 
-                {/* ----------------------- VISTA PREVIA IMAGEN -----------------------*/}
-                {form.imagen && (
+                {/* ----------------------- VISTA PREVIA image -----------------------*/}
+                {form.image && (
                   <img
                     className={style.imageFile}
-                    src={form.imagen}
-                    id="imagen"
+                    src={form.image}
+                    id="image"
                   />
                 )}
               </div>

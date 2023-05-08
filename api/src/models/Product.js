@@ -32,10 +32,11 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      
+
       amount: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0
       },
 
       image: {
@@ -52,11 +53,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         default: true
       },
-      
+
     },
     {
       tableName: "Product",
-     
+
     }
   );
 };

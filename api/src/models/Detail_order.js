@@ -15,6 +15,11 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
 
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
      unit_value: {
       type: DataTypes.FLOAT,
       allowNull: false,

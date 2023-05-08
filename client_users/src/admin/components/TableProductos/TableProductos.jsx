@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import s from './TableProductos.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpAZ, faArrowDownAZ, faArrowUp19, faArrowDown19, faDatabase, faGlobe, faBowlFood } from "@fortawesome/free-solid-svg-icons";
-
+import { Link } from 'react-router-dom/cjs/react-router-dom';
+import { getProductByName, getAllProducts } from '../../../redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import CheckState from '../DetailCard/CheckBox/CheckState';
 
 
 
 const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
     const [nameFilter, setNameFilter] = useState('A-Z')
     const [priceFilter, setPriceFilter] = useState('1-9')
+    const [input, setInput] = useState("")
     const { products } = props
+    const dispatch = useDispatch()
 
     const handleClickNameFilter = (type) => {
         handleFilter(type, nameFilter)
@@ -31,17 +36,44 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
 
     }
 
+    const onCheckState = (e) => {
+        const { value, name } = e.target
+        // value ? setCheckState(false) : setCheckState(true)
+        console.log('checks', value)
+    }
+
+    const onSearch = (e) => {
+        const { name } = e.target
+        const { value } = e.target
+        setInput(value)
+        if (value !== "") {
+            dispatch(getProductByName(value));
+        } else {
+            dispatch(getAllProducts())
+        }
+
+    }
+    console.log('adasdaasdasd', products)
 
     return (
         <>
             <table>
                 <thead>
                     <tr>
-                        <th>Nombre{' '}
+                        <th style={{ width: "350px" }}>Nombre{' '}
                             <span>
                                 <FontAwesomeIcon onClick={() => handleClickNameFilter('name')}
                                     icon={nameFilter === 'A-Z' ? faArrowUpAZ : faArrowDownAZ} />
-                            </span></th>
+                            </span>
+                            <input
+                                className={s.searchInput}
+                                name="search"
+                                placeholder='Buscar'
+                                value={input}
+                                onChange={onSearch}
+
+                            />
+                        </th>
                         <th>Imagen</th>
                         <th>Precio
                             <span>
@@ -53,6 +85,8 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
                         <th>Stock</th>
                         <th>Fecha de Creacion</th>
                         <th></th>
+                        <th></th>
+                        <th>State</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +103,10 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
                                 year: 'numeric',
                             })}</a></td>
                             <td><button onClick={() => handleClickDetail(wine.product_id)}>Ver</button></td>
+                            <td><Link to={`/dashboard/productos/edit-product/${wine.product_id}`}><button>Editar</button></Link></td>
+                            <td>
+                                <CheckState state={wine.state} product_id={wine.product_id} />
+                            </td>
                         </tr>
                     ))}
                 </tbody>

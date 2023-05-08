@@ -1,4 +1,4 @@
-const { Product, Supplier } = require("../../db");
+const { Product, Category_product } = require("../../db");
 const { Op } = require("sequelize")
 
 
@@ -10,10 +10,22 @@ const putProductController = async (product_id, productUpdate) => {
             throw new Error('No se proporcionaron datos de actualizacion')
         }
         // Actualiza los campos específicos del producto en la base de datos
+        if (productUpdate.category) {
+            const categorySearch = await Category_product.findOne({
+                where: {
+                    name: {
+                        [Op.iLike]: `%${productUpdate.category}%`,
+                    },
+                }
+            })
+
+            productUpdate = { ...productUpdate, category_id: categorySearch.category_id }
+        }
+
         const [filasActualizadas, [productoActualizado]] = await Product.update(productUpdate, {
 
-          where: { product_id },
-          returning: true // Devuelve el registro actualizado
+            where: { product_id },
+            returning: true // Devuelve el registro actualizado
 
         });
 
