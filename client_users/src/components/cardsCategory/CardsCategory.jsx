@@ -16,6 +16,7 @@ function CardsCategory() {
     
       const response2 = await axios.get(`https://ecommerce-khaki-nine.vercel.app/categorias/families`);
       const familiesData = response2.data;
+      console.log(1,familiesData);
       if (familiesData.length >0) {
         setFamilies(familiesData)        
       }
