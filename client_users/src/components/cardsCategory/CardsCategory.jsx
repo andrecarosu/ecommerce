@@ -9,31 +9,31 @@ function CardsCategory() {
   const [loading, setLoading] = useState(true);// variable booleana para verificar si los datos están listos
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true); // establecer la variable loading en true antes de hacer la petición
-      setTimeout(() => {
+    //async function fetchData() {
+     // setLoading(true); // establecer la variable loading en true antes de hacer la petición
+      //setTimeout(() => {
       //  await dispatch(getCategorys())
       //  await dispatch(getAllProducts())
        dispatch(getFamilies())
-        setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
-      }, 2000); // esperar 2 segundos antes de obtener los datos
-    }
-    fetchData();    
+       // setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
+      //}, 2000); // esperar 2 segundos antes de obtener los datos
+    //}
+    //fetchData();    
   }, [dispatch])
 
 
 
-  const { categorys, families } = useSelector(state => state);
+  const  families = useSelector(state => state.families)??[]
 
-  if (loading) {
-    return (
-      <div >
-        <div >Loading...</div>
-        <img className={styles.imagenLoading} src="/bebidas-premium-home.gif" alt="" />
+  //if (loading) {
+    //return (
+  //     <div >
+  //       <div >Loading...</div>
+  //       <img className={styles.imagenLoading} src="/bebidas-premium-home.gif" alt="" />
               
-      </div> 
-    );
-  }
+  //     </div> 
+  //   );
+  // }
  
   return (
     <div style={{display:"flex", alignItems:"center"}}>
@@ -54,9 +54,12 @@ function CardsCategory() {
               ))}
             </div>
           </div>
-        )})}
-    </div>
-    </div>  
+        )}
+        )}
+        </div>
+        </div>
+        //}
+   // </div>  
   )
 }
 
