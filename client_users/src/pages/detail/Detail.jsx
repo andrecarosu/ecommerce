@@ -31,7 +31,6 @@ const Detail = (props) => {
       dispatch(cleanProduct())
       dispatch(cleanReviews())
     })
-
   }, [dispatch, id, carrito, countCarrito])
 
   //Cuando se agrega al carrito

@@ -34,7 +34,13 @@ const Cards = () => {
   for (let i = 1; i <= numPaginas; i++) {
     paginas.push(i);
   }
-
+//Scroll
+const handlerScroll = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
   return (
     <div className={styles.container}>
       
@@ -55,33 +61,35 @@ const Cards = () => {
               <div>
                 {/* ------------------------------BOTON ATRAS------------------------------ */}
                 <button
-                  className="btnPag"
-                  onClick={() => setNumeroPagina(numeroPagina - 1)}
+                  className={styles.btnPag}
+                  onClick={() => {setNumeroPagina(numeroPagina - 1); handlerScroll()}}
                   disabled={numeroPagina === 1}
                 >
-                  ◄
+                  {/* ◄ */}
+                  {"<"}
                 </button>
                 {/* ------------------------------BOTONES PAGINAS------------------------------ */}
                 {paginas.map((pagina) => (
                   <button
                     key={pagina}
-                    className={`btnPag ${
-                      pagina === numeroPagina ? "active" : ""
+                    className={`${styles.btnPag} ${
+                      pagina === numeroPagina ? styles.active : ""
                     }`}
-                    onClick={() => setNumeroPagina(pagina)}
+                    onClick={() => {setNumeroPagina(pagina); handlerScroll()}}
                   >
                     {pagina}
                   </button>
                 ))}
                 {/* ------------------------------BOTON PROXIMO------------------------------ */}
                 <button
-                  className="btnPag"
-                  onClick={() => setNumeroPagina(numeroPagina + 1)}
+                  className={styles.btnPag}
+                  onClick={() => {setNumeroPagina(numeroPagina + 1); handlerScroll()}}
                   disabled={
                     numeroPagina === Math.ceil(productsFitered?.length / grupo)
                   }
                 >
-                  ►
+                  {/* ► */}
+                  {">"}
                 </button>
               </div>
             </div>
