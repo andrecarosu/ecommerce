@@ -19,9 +19,9 @@ const DashMain = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const token = Cookies.get('user_token');
-    console.log('->>', token)
 
     const session = token ? JSON.parse(Cookies.get('user_session')) : null;
+    console.log('->>', session)
 
     useEffect(() => {
         dispatch(getCategorys());
