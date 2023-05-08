@@ -29,18 +29,19 @@ const Ventas = () => {
     return (
         <div className={s.ventasContainer}>
             <h1>Ventas</h1>
-            <TableVentas
+
+            {ventas.length > 0 ? <TableVentas
                 ventas={paginatedData}
                 handleClickDetail={handleClickDetail}
             // handleFilter={handleFilter}
-            />
+            /> : 'Ups'}
             {detailActive ? <DetailCard product_id={detailActive} handleClickDetail={handleClickDetail} /> : null}
-            <Pagination
+            {ventas.length > 0 && <Pagination
                 NextPage={NextPage}
                 PreviousPage={PreviousPage}
                 totalPages={totalPages}
                 currentPage={currentPage}
-            />
+            />}
         </div>
     );
 }

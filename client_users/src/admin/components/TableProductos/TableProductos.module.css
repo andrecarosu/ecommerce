@@ -25,10 +25,31 @@ img {
   height: 50px;
 }
 
+.icon {
+  cursor: pointer;
+}
+
+.icon:active {
+  color: var(--wine-color);
+}
+
 .searchInput {
   background: none;
   margin-left: 35px;
   border: none;
   border-bottom: 1px solid black;
   outline: none;
+}
+
+.rowProduct:hover {
+  background: #d1d1d1e8;
+  cursor: pointer;
+}
+
+.selectorCategory {
+  width: 100px;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+
 }

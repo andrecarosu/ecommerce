@@ -5,14 +5,16 @@ import { Route, Switch } from "react-router-dom"
 import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
+import Graphic from '../components/graphic/graphic';
 import Categorias from './Categorias/Categorias';
 import Menu from './Menu/Menu';
 import FormCreateProduct from '../components/formCreateProduct/FormCreateProduct';
 import Calificaciones from './Calificaciones/Calificaciones';
 import { useLocation } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { getCategorys, getAllProducts, getFamilies } from '../../redux/actions';
+
 // import contentLayout from ''
 const type_permission = 2;
 //esto de pronto podemos mejorarlo de tal forma que se haga con los JWT y no asi
@@ -21,8 +23,11 @@ const DashMain = () => {
     const dispatch = useDispatch();
     const token = Cookies.get('user_token');
 
+    const { usuario } = useSelector(state => state)
+
     const session = token ? JSON.parse(Cookies.get('user_session')) : null;
     console.log('->>', session)
+
 
     useEffect(() => {
         dispatch(getCategorys());
@@ -30,9 +35,12 @@ const DashMain = () => {
         dispatch(getFamilies())
     }, [dispatch])
 
+
     if (!session || session.dataValues.type_id !== type_permission) {
         return <div>!Error 404!<br />Ruta no disponible</div>
     }
+
+
     return (
         <>
             <div className={DashStyles.mainContainer}>
@@ -47,18 +55,19 @@ const DashMain = () => {
                     <Route exact path="/dashboard" component={Menu} />
                     <Route path="/dashboard/usuarios" component={Usuarios} />
                     <Route exact path="/dashboard/productos" component={Productos} />
+                    <Route exact path="/dashboard/ventas" component={Ventas} />
                     <Route exact path="/dashboard/productos/categorias" component={Categorias} />
                     <Route exact path="/dashboard/productos/crear-producto" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/edit-product/:id" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />
 
-                    <Route path="/dashboard/ventas" component={Ventas} />
-
                 </div>
-
             </div>
         </>
     );
+
+
+
 }
 
 export default DashMain;

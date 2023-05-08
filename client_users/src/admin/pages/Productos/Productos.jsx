@@ -7,7 +7,7 @@ import Pagination from '../../components/pagination/Pagination';
 import usePagination from '../../components/pagination/PaginationHook';
 import DetailCard from '../../components/DetailCard/DetailCard';
 import { getAllProducts } from '../../../redux/actions';
-import { orderedByNameASC, orderedByNameDESC, orderedByHighestPrice, orderedByLowestPrice } from '../../../redux/actions';
+import { orderedByNameASC, orderedByNameDESC, orderedByHighestPrice, orderedByLowestPrice, getProductByCategory } from '../../../redux/actions';
 
 const Productos = () => {
     const [detailActive, setDetailActive] = useState(false)
@@ -35,24 +35,30 @@ const Productos = () => {
         setDetailActive(product_id)
     }
 
-    const handleFilter = (type, nameFilter) => {
+    const handleFilter = (type, value) => {
         if (type === 'name') {
-            nameFilter === 'A-Z' ?
+            value === 'A-Z' ?
                 dispatch(orderedByNameASC()) :
                 dispatch(orderedByNameDESC())
         }
 
         if (type === 'price') {
-            nameFilter === '1-9' ?
+            value === '1-9' ?
                 dispatch(orderedByHighestPrice()) :
                 dispatch(orderedByLowestPrice())
+        }
+
+        if (type === 'category') {
+            value.toLowerCase().includes('category') ?
+                dispatch(getAllProducts())
+                : dispatch(getProductByCategory(value))
         }
 
     }
 
     useEffect(() => {
 
-
+        console.log(productsFitered)
         setProductos(productsFitered)
         // productos = productsFitered
 
