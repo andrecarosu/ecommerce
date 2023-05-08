@@ -73,7 +73,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
   
       // Verificar si el correo ya existe en la base de datos
       await axios
-        .get(`https://deploynodejsecommerce.onrender.com/usuario?email=${filteredData.email}`)
+        .get(`https://ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app/usuario?email=${filteredData.email}`)
         .then((res) => {
           if (res.data.length > 0) {
             emailExists = true;
@@ -92,7 +92,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
       // Si el correo no existe, se actualizan los datos
       if (!emailExists) {
         await axios
-          .put(`https://deploynodejsecommerce.onrender.com/usuario`, filteredData)
+          .put(`https://ecommerce-khaki-nine.vercel.app/usuario`, filteredData)
           .then((res) =>
             swal({
               title: "Actualización Exitosa",
