@@ -165,12 +165,12 @@ export default function FormCreateProduct() {
         state: true
       }
       const request = !flagEdit ?
-        axios.post("ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app/products", parsed) :
-        axios.put(`ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app/products/${id}`, parsed);
+        axios.post("https://ecommerce-khaki-nine.vercel.app/products", parsed) :
+        axios.put(`https://ecommerce-khaki-nine.vercel.app/products/${id}`, parsed);
 
       try {
         await axios
-        .post("ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app/usuario", form)
+        .post("https://ecommerce-khaki-nine.vercel.app/usuario", form)
           .then(res => {
             swal({
               title: !flagEdit ? 'Registro exitoso' : 'Actualizacion exitosa',

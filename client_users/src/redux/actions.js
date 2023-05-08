@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as action from "./actions-type"; // para no escribir todos los action types los obtuve todos con el uso del * y lo renombre como action...para usar colocar la palabra action.[nombre del action-type]
 
-const URL = "ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app";
+const URL = "https://ecommerce-khaki-nine.vercel.app";
 // ========================* CARRITO *========================
 export function actualizarStock(arrayProductos) {
   axios.put(`${URL}/products`)

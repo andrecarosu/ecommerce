@@ -83,7 +83,7 @@ export default function FormRegister() {
         setForm({ ...form, password: hashedPassword });
 
         await axios
-          .post("ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app/usuario", form)
+          .post("https://ecommerce-khaki-nine.vercel.app/usuario", form)
           .then(res => {
             swal({
               title: 'Registro exitoso',
