@@ -5,7 +5,6 @@
   "dependencies": {
     "nodemailer": "^6.9.1",
     "react-icons": "^4.8.0",
-    "react-modern-drawer": "^1.2.0",
-    "react-responsive": "^9.0.2"
+    "react-modern-drawer": "^1.2.0"
   }
 }
