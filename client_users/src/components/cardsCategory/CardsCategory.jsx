@@ -38,7 +38,7 @@ function CardsCategory() {
   return (
     <div style={{display:"flex", alignItems:"center"}}>
     <div style={{margin: "0px 20px 0px 20px", display:"inline-block"}}>
-      {families?.map((family, index) => {
+    {families && families.map((family, index) => {
         return(
           <div key={index}>
             <h2>{ family.family }</h2>
