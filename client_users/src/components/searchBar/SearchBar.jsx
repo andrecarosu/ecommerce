@@ -14,8 +14,8 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getProductByName(input));
-      history.push("/home");
-     
+      history.push("/product");
+     setInput("")
   };
 
   return (

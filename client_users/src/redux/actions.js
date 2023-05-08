@@ -218,9 +218,21 @@ export const getProductByName = (name) => async (dispatch) => {
     dispatch(loading());
     const res = await axios.get(`${URL}/products?name=${name}`);
     const result = res.data;
+    const data = result.map(prod => {
+
+      let discount = Math.ceil((prod.normal_price - prod.discount_price) / prod.normal_price * 100)
+      if (19 <= discount && discount <= 21) discount = 20
+      if (34 <= discount && discount <= 36) discount = 35
+      if (44 <= discount && discount <= 46) discount = 45
+      return {
+        ...prod,
+        discount
+      }
+    })
+    window.localStorage.setItem("filtered", JSON.stringify(data));
     dispatch({
       type: action.GET_PRODUCT_BY_NAME,
-      payload: result,
+      payload: data,
     });
     dispatch(ready());
   } catch (error) {
