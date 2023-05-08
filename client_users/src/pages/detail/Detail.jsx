@@ -12,20 +12,19 @@ import Loader from '../../components/loader/loader'
 // import axios from 'axios'
 
 
-const Detail = (props) => {
+const Detail = () => {
 
-  const { product, carrito, countCarrito } = useSelector(state => state)
-  // const prueba = props.match.params.detail
-  const  product_id  = props.id
-  const { id } =  useParams()
+  const { product, carrito, countCarrito, display } = useSelector(state => state)
+  console.log(product);
+  const { id } = useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
 
   // const URL = 'http://localhost:3001'
 
   useEffect(() => {
-    dispatch(getProductById(product_id?  product_id: id ))
-    dispatch(getReviews(product_id?  product_id: id))
+    dispatch(getProductById(id))
+    dispatch(getReviews(id))
     window.localStorage.setItem("carrito", JSON.stringify(carrito));
     window.localStorage.setItem("count", JSON.stringify(countCarrito));
     return (() => {
