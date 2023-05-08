@@ -19,7 +19,7 @@ const Detail = (props) => {
   const { id } =  useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
-  const URL = 'https://deploynodejsecommerce.onrender.com'
+  //const URL = 'https://deploynodejsecommerce.onrender.com'
 
 
   useEffect(() => {
