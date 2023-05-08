@@ -39,6 +39,7 @@ function App() {
   // }, [logIn])
   return (
     <div className="App">
+
       {location?.pathname == "/log-in" || location?.pathname.includes("dashboard") ? '' : <NavBar />}
       {/* {location?.pathname == "/login" ? null : <Footer />} */}
       <Switch>
