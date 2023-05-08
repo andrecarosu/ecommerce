@@ -23,7 +23,12 @@ function CardsCategory() {
 
 
 
-  const { categorys, families } = useSelector(state => state);
+  const  families  = useSelector(state => state.families) ?? [];
+  const  categorys = useSelector(state => state.categorys) ?? [];
+
+
+  const verFamilies= families;
+  console.log(12,verFamilies);
 
   if (loading) {
     return (
