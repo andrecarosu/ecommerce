@@ -11,7 +11,7 @@ function CardCategory({name, image, family}) {
   }
  
   return (
-    <Link className={s.link} to="/home" onClick={handlerCategory} >
+    <Link className={s.link} to="/product" onClick={handlerCategory} >
       {/* <div style={{with:"25%", border:"solid 1px black"}}> */}
         <div className={s.container}>
           <img src={image} alt={name} className={s.image}/>

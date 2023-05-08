@@ -197,7 +197,9 @@ export const getProductById = (id) => async (dispatch) => {
       type: action.GET_PRODUCT_BY_ID,
       payload: res.data,
     });
-    dispatch(ready());
+    setTimeout(() => {
+      dispatch(ready());
+    }, 1000);
   } catch (error) {
     console.log(error);
     dispatch({
@@ -216,7 +218,6 @@ export const getProductByName = (name) => async (dispatch) => {
     dispatch(loading());
     const res = await axios.get(`${URL}/products?name=${name}`);
     const result = res.data;
-    console.log('this', result);
     dispatch({
       type: action.GET_PRODUCT_BY_NAME,
       payload: result,
