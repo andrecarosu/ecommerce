@@ -8,29 +8,34 @@ import s from './Detail.module.css'
 import swal from 'sweetalert'
 import CardsReviews from "../../components/cardsReviews/CardsReviews"
 
-import axios from 'axios'
+// import axios from 'axios'
 
 
-const Detail = () => {
+const Detail = (props) => {
 
   const { product, carrito, countCarrito } = useSelector(state => state)
-  console.log(product);
-  const { id } = useParams()
+  // const prueba = props.match.params.detail
+  const  product_id  = props.id
+  const { id } =  useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
 
+<<<<<<< HEAD
   const URL = 'https://ecommercedep.onrender.com'
+=======
+  // const URL = 'http://localhost:3001'
+>>>>>>> b804a38d9f45ae29d89db3fed5e4d92a7e7dec34
 
   useEffect(() => {
-    dispatch(getProductById(id))
-    dispatch(getReviews(id))
+    dispatch(getProductById(product_id?  product_id: id ))
+    dispatch(getReviews(product_id?  product_id: id))
     window.localStorage.setItem("carrito", JSON.stringify(carrito));
     window.localStorage.setItem("count", JSON.stringify(countCarrito));
     return (() => {
       dispatch(cleanProduct())
       dispatch(cleanReviews())
     })
-  }, [dispatch, id, carrito])
+  }, [dispatch, id, carrito, countCarrito])
 
   //Cuando se agrega al carrito
   const handlerCarrito = () => {
@@ -108,19 +113,19 @@ const Detail = () => {
     }
   }
 
-  const [descripcion_motivo, setDescripcion_motivo] = useState();
-  const [valor_calificacion, setValor_calificacion] = useState();
+  // const [descripcion_motivo, setDescripcion_motivo] = useState();
+  // const [valor_calificacion, setValor_calificacion] = useState();
 
-  async function handleSubmit() {
-    const data = {
-      id: id,
-      descripcion_motivo,
-      valor_calificacion
-    }
-    await axios.post(`${URL}/review/${id}`, data)
-    setDescripcion_motivo()
-    setValor_calificacion()
-  }
+  // async function handleSubmit() {
+  //   const data = {
+  //     id: id,
+  //     descripcion_motivo,
+  //     valor_calificacion
+  //   }
+  //   await axios.post(`${URL}/review/${id}`, data)
+  //   setDescripcion_motivo()
+  //   setValor_calificacion()
+  // }
 
 
   return (

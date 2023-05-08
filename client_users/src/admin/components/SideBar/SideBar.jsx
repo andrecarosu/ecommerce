@@ -7,6 +7,7 @@ import { faHouse, faUser, faWineGlass, faFileLines } from "@fortawesome/free-sol
 import UserIcon from '../userIcon/UserIcon';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import Profile from '../Profile/Profile';
 
 
 const SideBar = () => {
@@ -16,6 +17,7 @@ const SideBar = () => {
     return (
         <div className={s.sideBarContent}>
             <div className={s.profile}>
+                <Profile />
                 {/* <UserIcon /> */}
             </div>
             <div className={s.menu}>

@@ -19,9 +19,14 @@
 }
 
 .image img{
+<<<<<<< HEAD
     max-width: 100%;
     max-height: 100%;
     object-fit: contain
+=======
+    max-width: auto;
+    max-height: auto;
+>>>>>>> b804a38d9f45ae29d89db3fed5e4d92a7e7dec34
 }
 
 .eliminar:hover{

@@ -45,6 +45,7 @@ const usePagination = (data, itemsPerPage) => {
         goToPage,
         pageNumbers,
     }
+
 }
 
 export default usePagination
