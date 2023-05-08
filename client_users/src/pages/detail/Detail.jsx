@@ -19,7 +19,7 @@ const Detail = (props) => {
   const { id } =  useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
-  const URL = 'ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app'
+  const URL = 'https://ecommerce-khaki-nine.vercel.app'
 
 
   useEffect(() => {

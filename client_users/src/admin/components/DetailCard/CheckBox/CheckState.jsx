@@ -12,7 +12,7 @@ const CheckState = ({ product_id, state }) => {
 
     useEffect(async () => {
         try {
-            await axios.put(`ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app:3001/products/${product_id}`, { state: check });
+            await axios.put(`https://ecommerce-khaki-nine.vercel.app/products/${product_id}`, { state: check });
         } catch (error) {
             console.error(error)
         }

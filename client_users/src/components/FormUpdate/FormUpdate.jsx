@@ -73,7 +73,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
   
       // Verificar si el correo ya existe en la base de datos
       await axios
-        .get(`https://ecommerce-c2nccxhew-andrecarosu-hotmailcom.vercel.app/usuario?email=${filteredData.email}`)
+        .get(`https://ecommerce-khaki-nine.vercel.app/usuario?email=${filteredData.email}`)
         .then((res) => {
           if (res.data.length > 0) {
             emailExists = true;

@@ -16,7 +16,7 @@ const Review = (props) => {
   const email = props.email
   console.log(11,email);
   
-  const URL = 'https://deploynodejsecommerce.onrender.com'
+  const URL = 'https://ecommerce-khaki-nine.vercel.app'
 
   const [descripcion_motivo, setDescripcion_motivo] = useState();
   const [valor_calificacion, setValor_calificacion] = useState();
