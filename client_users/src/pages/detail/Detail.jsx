@@ -8,7 +8,7 @@ import s from './Detail.module.css'
 import swal from 'sweetalert'
 import CardsReviews from "../../components/cardsReviews/CardsReviews"
 
-// import axios from 'axios'
+import axios from 'axios'
 
 
 const Detail = (props) => {
@@ -19,7 +19,7 @@ const Detail = (props) => {
   const { id } =  useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
-  //const URL = 'https://deploynodejsecommerce.onrender.com'
+  const URL = 'https://deploynodejsecommerce.onrender.com'
 
 
   useEffect(() => {
