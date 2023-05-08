@@ -166,8 +166,8 @@ export default function FormCreateProduct() {
         state: true
       }
       const request = !flagEdit ?
-        axios.post("http://localhost:3001/products", parsed) :
-        axios.put(`http://localhost:3001/products/${id}`, parsed);
+        axios.post("https://ecommerce-khaki-nine.vercel.app/products", parsed) :
+        axios.put(`https://ecommerce-khaki-nine.vercel.app/products/${id}`, parsed);
 
       try {
         await request

@@ -82,7 +82,7 @@ export default function FormCreateProduct() {
 
         console.log(formData);
 
-        await axios.post("http://localhost:3001/products", formData).then(res => {
+        await axios.post("https://ecommerce-khaki-nine.vercel.app/products", formData).then(res => {
           swal({
             title: "producto creado correctamente",
             text: "asd",
@@ -143,7 +143,7 @@ export default function FormCreateProduct() {
 
       try {
         const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dfmkjxjsf/image/upload",
+          "https://ecommerce-khaki-nine.vercel.app/image/upload",
           formData
         );
 

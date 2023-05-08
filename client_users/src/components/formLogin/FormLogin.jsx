@@ -42,7 +42,7 @@ export default function FormLogin() {
 
   const iconGoogle = Google;
 
-  const BACK_HOST = 'http://localhost:3001'
+  const BACK_HOST = 'https://ecommerce-khaki-nine.vercel.app'
   const history = useHistory()
   const navigateTo = (url) => {
     history.push(url)

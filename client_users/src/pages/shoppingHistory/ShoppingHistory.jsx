@@ -29,11 +29,11 @@ const HistorialDeCompra = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get(`http://localhost:3001/email?email=${email}`);
+      const response = await axios.get(`https://ecommerce-khaki-nine.vercel.app/email?email=${email}`);
       const idUsuario = response.data[0].user_id;
       console.log(3, idUsuario);
       setTimeout(async () => {
-        const response2 = await axios.get(`http://localhost:3001/venta/${idUsuario}`);
+        const response2 = await axios.get(`https://ecommerce-khaki-nine.vercel.app/venta/${idUsuario}`);
         const ventas = response2.data;
         console.log(3, ventas);
         if (ventas.length > 0) {

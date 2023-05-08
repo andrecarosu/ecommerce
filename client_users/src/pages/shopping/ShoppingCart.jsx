@@ -42,7 +42,7 @@ export default function ShoppingCart() {
 
   //Boton de mercadoPago
   const handlerPago = async () => {
-    const response = await fetch('http://localhost:3001/buy-products', {
+    const response = await fetch('https://ecommerce-khaki-nine.vercel.app/buy-products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ export default function ShoppingCart() {
       detalle_venta,
       estado:false
     }
-    await axios.post("http://localhost:3001/venta", venta)
+    await axios.post("https://ecommerce-khaki-nine.vercel.app/venta", venta)
       .then(response => {
         console.log(response.data);
       })
@@ -89,7 +89,7 @@ export default function ShoppingCart() {
         })
       })
     const stockActualizado = enviarStock(carrito)
-    await axios.put("http://localhost:3001/products", stockActualizado)
+    await axios.put("https://ecommerce-khaki-nine.vercel.app/products", stockActualizado)
     .then(response => {
       console.log(response.data);
       setShouldRedirect(true)
