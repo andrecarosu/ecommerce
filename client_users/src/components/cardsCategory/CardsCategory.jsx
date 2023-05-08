@@ -8,18 +8,19 @@ import axios from 'axios';
 function CardsCategory() {
   const dispatch = useDispatch();
   //const [loading, setLoading] = useState(true);// variable booleana para verificar si los datos están listos
-  const[families, setFamilies] = useState({})
+  const[families, setFamilies] = useState([])
 
   useEffect(() => {
 
     (async () =>{
     
       const response2 = await axios.get(`https://ecommerce-khaki-nine.vercel.app/categorias/families`);
-      const familiesData = response2.data;
-      console.log(1,familiesData);
-      if (familiesData.length >0) {
-        setFamilies(familiesData)        
-      }
+const familiesData = Object.values(response2.data); // si response2.data es un objeto, extraer su valor como un array
+console.log(1, familiesData);
+if (familiesData.length > 0) {
+  setFamilies(familiesData);        
+}
+
     })()
     //async function fetchData() {
      // setLoading(true); // establecer la variable loading en true antes de hacer la petición
