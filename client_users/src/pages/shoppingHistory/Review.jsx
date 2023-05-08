@@ -41,43 +41,49 @@ const Review = (props) => {
 
 
   return (
-    <>    
-    
-    {/* <div className={mostrar ? style.container : style.ocultar}>
-    <button className={style.cerrar} onClick={handleMostrar}>Cancelar</button> */}
-          <div style={{marginBottom: '50px'}}>
-            <h1>Deja un comentario</h1>
-            <label>Calificar</label>
-            <select
-              className='form-input'
-              style={{ width: '40%' }}
-              value={valor_calificacion}
-              onChange={(e) => setValor_calificacion(e.target.value)}
-            >
-              <option value="0">Puntaje</option>
-              <option value="1">⭐</option>
-              <option value="2">⭐⭐</option>
-              <option value="3">⭐⭐⭐</option>
-              <option value="4">⭐⭐⭐⭐</option>
-              <option value="5">⭐⭐⭐⭐⭐</option>
-            </select>
-            <form className={s.form} onSubmit={handleSubmit}>
-              <label>¿Qué te pareció este producto?</label>
-              <textarea 
-                className={s.textarea}
-                value={descripcion_motivo}
-                onChange={(e) => setDescripcion_motivo(e.target.value)}
-                cols="30" 
-                rows="10"
-                placeholder='Dejanos un comentario aquí...'>
-              </textarea>
-              <button className={s.btn} type='submit'>Enviar</button>
-            </form>
-          </div>
-          {/* </div> */}
-        
+    <>
+      <div style={{marginBottom: '50px'}}>
+        <h1>Deja un comentario</h1>
+        <label>Calificar</label>
+        <select
+          className='form-input'
+          style={{ width: '40%' }}
+          value={valor_calificacion}
+          onChange={(e) => setValor_calificacion(e.target.value)}
+        >
+          <option value="0">Puntaje</option>
+          <option value="1">⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+        <form className={s.form} onSubmit={handleSubmit}>
+          <label>¿Qué te pareció este producto?</label>
+          <textarea 
+            className={s.textarea}
+            value={descripcion_motivo}
+            onChange={(e) => setDescripcion_motivo(e.target.value)}
+            cols="30" 
+            rows="10"
+            placeholder='Dejanos un comentario aquí...'>
+          </textarea>
+          <button className={s.btn} type='submit'>Enviar</button>
+        </form>
+      </div>
+  
+      <div>
+        <h2>Comentarios:</h2>
+        {descripcion_motivo && Array.isArray(descripcion_motivo) && descripcion_motivo.map((comentario, index) => (
+  <div key={index}>
+    <p>{comentario}</p>
+    <p>Calificación: {valor_calificacion[index]}</p>
+  </div>
+))}
+      </div>
     </>
-  )
+  );
+  
 }
 
 export default Review
