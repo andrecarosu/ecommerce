@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FormCreateProduct from '../../components/formCreateProduct/FormCreateProduct';
 import TableVentas from '../../components/TableVentas/TableVentas';
 import s from './Ventas.module.css'
-import { getSales } from '../../../redux/actions';
+import { getAllSales } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DetailCard from '../../components/DetailCard/DetailCard';
@@ -14,7 +14,7 @@ const Ventas = () => {
 
     const dispatch = useDispatch()
     useEffect(async () => {
-        await dispatch(getSales())
+        await dispatch(getAllSales())
     }, [])
 
     const handleClickDetail = (product_id) => {

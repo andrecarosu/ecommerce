@@ -1,18 +1,34 @@
 import React from 'react';
 import s from './SideBar.module.css'
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom/cjs/react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faUser, faWineGlass, faFileLines } from "@fortawesome/free-solid-svg-icons";
 import UserIcon from '../userIcon/UserIcon';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Profile from '../Profile/Profile';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { userLoggedIn } from '../../../redux/actions';
 
 
 const SideBar = () => {
     const [active, useActive] = useState(0)
     const location = useLocation()
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    const onClicklLogout = async () => {
+        window.localStorage.removeItem("estaLogueado");
+        window.localStorage.removeItem('carrito');
+        window.localStorage.removeItem('count');
+        Cookies.remove('user_token')
+        Cookies.remove('user_session')
+        await dispatch(userLoggedIn(false));
+        history.push('/')
+
+    }
 
     return (
         <div className={s.sideBarContent}>
@@ -64,6 +80,7 @@ const SideBar = () => {
 
                 </ul>
             </div>
+            <button onClick={onClicklLogout} className={s.logout}>Cerrar sesion</button>
 
 
         </div >

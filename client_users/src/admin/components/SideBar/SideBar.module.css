@@ -107,3 +107,9 @@ a {
     height: calc(var(--d)*var(--heigh-item));
     /* transition: height 0.3s ease-in-out; */
 }
+
+.logout {
+    position: absolute;
+    bottom: 20px;
+    left: auto;
+}

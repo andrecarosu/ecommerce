@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom"
 import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
+import Categorias from './Categorias/Categorias';
 import Menu from './Menu/Menu';
 import FormCreateProduct from '../components/formCreateProduct/FormCreateProduct';
 import Calificaciones from './Calificaciones/Calificaciones';
@@ -30,7 +31,7 @@ const DashMain = () => {
     }, [dispatch])
 
     if (!session || session.dataValues.type_id !== type_permission) {
-        return <div>No tiene permisos</div>
+        return <div>!Error 404!<br />Ruta no disponible</div>
     }
     return (
         <>
@@ -46,6 +47,7 @@ const DashMain = () => {
                     <Route exact path="/dashboard" component={Menu} />
                     <Route path="/dashboard/usuarios" component={Usuarios} />
                     <Route exact path="/dashboard/productos" component={Productos} />
+                    <Route exact path="/dashboard/productos/categorias" component={Categorias} />
                     <Route exact path="/dashboard/productos/crear-producto" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/edit-product/:id" component={FormCreateProduct} />
                     <Route exact path="/dashboard/productos/ver-calificaciones" component={Calificaciones} />

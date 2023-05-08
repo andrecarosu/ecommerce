@@ -70,7 +70,7 @@ export default function FormCreateProduct() {
   }, [flagEdit, id, dispatch]);
 
   useEffect(async () => {
-    if (flagEdit) setForm({ ...product, category: product.Category_product.name })
+    if (flagEdit && Object.keys(product).length > 0) setForm({ ...product, category: product.Category_product.name })
   }, [product])
 
   useEffect(() => {
