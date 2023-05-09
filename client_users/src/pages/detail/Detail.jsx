@@ -135,25 +135,26 @@ const Detail = () => {
             : (<div>
               <div className={s.box1}>
                 <div className={s.container}>
-                  <div style={{ position: "relative" }}>
-                    <div className={s.container_img}>
-                      <img className={s.image} src={product.image} alt={product.name} />
-                    </div>
-                    {/* <div className={s.condicion}>{product.brand}</div> */}
+                  <div className={s.container_img}>
+                    <img className={s.image} src={product.image} alt={product.name} />
                   </div>
+                  {/* <div className={s.condicion}>{product.brand}</div> */}
                   <hr style={{ height: '90%', margin: '20px' }} />
 
-                  <div style={{ maxWidth: '60%' }}>
+                  <div className={s.textos} /* style={{ maxWidth: '60%' }} */>
                     <h2>{product.name}</h2>
-
                     <p className={s.descripcion_producto}>{product.description}</p>
+                  </div>
 
+                  <hr style={{ height: '90%', margin: '20px' }} />
+                  
+                  <div className={s.compra}>
                     <div className={s.precios}>
                       <h2 className={s.valor_normal}>${product.normal_price}</h2>
                       <h1 className={s.valor_con_descuento}>${product.discount_price}</h1>
                     </div>
 
-                    <div>
+                    <div className={s.cantidad}>
                       <h4>Selecciona la cantidad</h4>
                       {product.stock !== 1
                         ? (<span style={{ color: "gray" }}>({product.stock} disponibles)</span>)
@@ -165,11 +166,10 @@ const Detail = () => {
                       />
                     </div>
 
-                    <div style={{ margin: '15px' }}>
+                    <div className={s.botones} style={{ margin: '15px' }}>
                       <button style={{ width: '250px' }} onClick={handlerComprar}>Comprar</button>
                       <button style={{ width: '250px' }} onClick={handlerCarrito}>Agregar al carrito</button>
                     </div>
-
                   </div>
                 </div>
               </div>
