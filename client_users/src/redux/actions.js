@@ -307,6 +307,13 @@ export function getCategorys() {
   };
 }
 
+export const numberPage = (page) => {
+  return {
+    type: action.NUMBER_PAGE,
+    payload: page
+  };
+};
+
 //*12. action-cargar ciudades para los formularios de registro comercio y cliente
 
 export function getAllCities() {

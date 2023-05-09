@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 import QuantityDisplay from '../../components/quantityDisplay/QuantityDisplay'
 import { agregarAlCarrito, getProductById, cleanProduct, getReviews, cleanReviews, agregarCount } from '../../redux/actions'
 import { Redirect } from "react-router-dom";
@@ -121,7 +121,10 @@ const Detail = () => {
   //   setDescripcion_motivo()
   //   setValor_calificacion()
   // }
-
+  const history = useHistory()
+  const handlerBack = () =>{
+    history.goBack();
+  }
 
   return (
     <>
@@ -131,83 +134,84 @@ const Detail = () => {
         <div className={s.a}>
           {carrito && shouldRedirect
             ? <Redirect to="/shopping-cart" />
-            : (<div>
-              <div className={s.box1}>
-                <div className={s.container}>
-                  <div style={{ position: "relative" }}>
-                    <div className={s.container_img}>
-                      <img className={s.image} src={product.image} alt={product.name} />
+            : (
+            <div>
+                <div className={s.box1}>
+                  <div className={s.container}>
+                    <div style={{ position: "relative" }}>
+                      <div className={s.container_img}>
+                        <img className={s.image} src={product.image} alt={product.name} />
+                      </div>
+                      <button className={s.condicion} onClick={handlerBack}>Atras</button>
                     </div>
-                    {/* <div className={s.condicion}>{product.brand}</div> */}
-                  </div>
-                  <hr style={{ height: '90%', margin: '20px' }} />
+                    <hr style={{ height: '90%', margin: '20px' }} />
 
-                  <div style={{ maxWidth: '60%' }}>
-                    <h2>{product.name}</h2>
+                    <div style={{ maxWidth: '60%' }}>
+                      <h2>{product.name}</h2>
 
-                    <p className={s.descripcion_producto}>{product.description}</p>
+                      <p className={s.descripcion_producto}>{product.description}</p>
 
-                    <div className={s.precios}>
-                      <h2 className={s.valor_normal}>${product.normal_price}</h2>
-                      <h1 className={s.valor_con_descuento}>${product.discount_price}</h1>
+                      <div className={s.precios}>
+                        <h2 className={s.valor_normal}>${product.normal_price}</h2>
+                        <h1 className={s.valor_con_descuento}>${product.discount_price}</h1>
+                      </div>
+
+                      <div>
+                        <h4>Selecciona la cantidad</h4>
+                        {product.stock !== 1
+                          ? (<span style={{ color: "gray" }}>({product.stock} disponibles)</span>)
+                          : (<span style={{ color: "gray" }}>({product.stock} disponible)</span>)}
+                        <QuantityDisplay
+                          quantity={quantity}
+                          onDecrease={handleDecrease}
+                          onIncrease={handleIncrease}
+                        />
+                      </div>
+
+                      <div style={{ margin: '15px' }}>
+                        <button style={{ width: '250px' }} onClick={handlerComprar}>Comprar</button>
+                        <button style={{ width: '250px' }} onClick={handlerCarrito}>Agregar al carrito</button>
+                      </div>
+
                     </div>
-
-                    <div>
-                      <h4>Selecciona la cantidad</h4>
-                      {product.stock !== 1
-                        ? (<span style={{ color: "gray" }}>({product.stock} disponibles)</span>)
-                        : (<span style={{ color: "gray" }}>({product.stock} disponible)</span>)}
-                      <QuantityDisplay
-                        quantity={quantity}
-                        onDecrease={handleDecrease}
-                        onIncrease={handleIncrease}
-                      />
-                    </div>
-
-                    <div style={{ margin: '15px' }}>
-                      <button style={{ width: '250px' }} onClick={handlerComprar}>Comprar</button>
-                      <button style={{ width: '250px' }} onClick={handlerCarrito}>Agregar al carrito</button>
-                    </div>
-
                   </div>
                 </div>
-              </div>
 
-              <div className={s.box2}>
-                <div className={s.box2Hijo}>
-                  <CardsReviews />
+                <div className={s.box2}>
+                  <div className={s.box2Hijo}>
+                    <CardsReviews />
+                  </div>
                 </div>
-              </div>
 
-              {/* <div style={{marginBottom: '50px'}}>
-                <h1>Deja un comentario</h1>
-                <label>Calificar</label>
-                <select
-                  className='form-input'
-                  style={{ width: '40%' }}
-                  value={valor_calificacion}
-                  onChange={(e) => setValor_calificacion(e.target.value)}
-                >
-                  <option value="0">Puntaje</option>
-                  <option value="1">⭐</option>
-                  <option value="2">⭐⭐</option>
-                  <option value="3">⭐⭐⭐</option>
-                  <option value="4">⭐⭐⭐⭐</option>
-                  <option value="5">⭐⭐⭐⭐⭐</option>
-                </select>
-                <form className={s.form} onSubmit={handleSubmit}>
-                  <label>¿Qué te pareció este producto?</label>
-                  <textarea 
-                    className={s.textarea}
-                    value={descripcion_motivo}
-                    onChange={(e) => setDescripcion_motivo(e.target.value)}
-                    cols="30" 
-                    rows="10"
-                    placeholder='Dejanos un comentario aquí...'>
-                  </textarea>
-                  <button className={s.btn} type='submit'>Enviar</button>
-                </form>
-              </div> */}
+                  {/* <div style={{marginBottom: '50px'}}>
+                    <h1>Deja un comentario</h1>
+                    <label>Calificar</label>
+                    <select
+                      className='form-input'
+                      style={{ width: '40%' }}
+                      value={valor_calificacion}
+                      onChange={(e) => setValor_calificacion(e.target.value)}
+                    >
+                      <option value="0">Puntaje</option>
+                      <option value="1">⭐</option>
+                      <option value="2">⭐⭐</option>
+                      <option value="3">⭐⭐⭐</option>
+                      <option value="4">⭐⭐⭐⭐</option>
+                      <option value="5">⭐⭐⭐⭐⭐</option>
+                    </select>
+                    <form className={s.form} onSubmit={handleSubmit}>
+                      <label>¿Qué te pareció este producto?</label>
+                      <textarea 
+                        className={s.textarea}
+                        value={descripcion_motivo}
+                        onChange={(e) => setDescripcion_motivo(e.target.value)}
+                        cols="30" 
+                        rows="10"
+                        placeholder='Dejanos un comentario aquí...'>
+                      </textarea>
+                      <button className={s.btn} type='submit'>Enviar</button>
+                    </form>
+                  </div> */}
             </div>
             )}
         </div>

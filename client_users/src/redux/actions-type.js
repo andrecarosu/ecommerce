@@ -58,7 +58,7 @@ const GET_ALL_CITIES = "GET_ALL_CITIES"; // para el registro de usurio por 1ra v
 const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 const PUT_USER = "PUT_USER"; // actualiza los datos del usuario menos la contraseña
 const PUT_PASSWORD_USER = "PUT_PASSWORD_USER"; // actualiza la contraseña del usuario
-
+const NUMBER_PAGE = "NUMBER_PAGE";
 //* LOADER
 
 const LOADING = "LOADING";
@@ -120,5 +120,6 @@ module.exports = {
   COUNT_RESTAR,
   COUNT_AGREGAR,
   COUNT_DELETE,
-  GET_SLIDER
+  GET_SLIDER,
+  NUMBER_PAGE
 };

@@ -1,12 +1,14 @@
 import React,{useEffect, useState} from "react";
 import Card from "../card/Card";
 import styles from "./Cards.module.css";
-import { useSelector} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 // import {getAllProducts} from '../../redux/actions'
 import Loader from "../loader/loader";
+import { numberPage } from "../../redux/actions";
 
 const Cards = () => {
-  const { productsFitered, copyProducts, products ,display } = useSelector((state) => state);
+  const { productsFitered, copyProducts, products ,display, page } = useSelector((state) => state);
+  const dispatch = useDispatch();
   useEffect(() => {
     window.localStorage.setItem("products", JSON.stringify(products));
     window.localStorage.setItem("filtered", JSON.stringify(productsFitered));
@@ -14,7 +16,7 @@ const Cards = () => {
   },[products, productsFitered, copyProducts])
   // PAGINADO
 
-  const [numeroPagina, setNumeroPagina] = useState(1);
+  const [numeroPagina, setNumeroPagina] = useState(page);
 
   const grupo = 12;
   const conteoFinal = numeroPagina * grupo;
@@ -41,6 +43,11 @@ const handlerScroll = () => {
     behavior: 'smooth'
   });
 }
+
+const handlerPage = (page) => {
+  setNumeroPagina(page);
+  dispatch(numberPage(page));
+}
   return (
     <div className={styles.container}>
       
@@ -62,7 +69,7 @@ const handlerScroll = () => {
                 {/* ------------------------------BOTON ATRAS------------------------------ */}
                 <button
                   className={styles.btnPag}
-                  onClick={() => {setNumeroPagina(numeroPagina - 1); handlerScroll()}}
+                  onClick={() => {handlerPage(numeroPagina - 1); handlerScroll()}}
                   disabled={numeroPagina === 1}
                 >
                   {/* ◄ */}
@@ -75,7 +82,7 @@ const handlerScroll = () => {
                     className={`${styles.btnPag} ${
                       pagina === numeroPagina ? styles.active : ""
                     }`}
-                    onClick={() => {setNumeroPagina(pagina); handlerScroll()}}
+                    onClick={() => {handlerPage(pagina); handlerScroll()}}
                   >
                     {pagina}
                   </button>
@@ -83,7 +90,7 @@ const handlerScroll = () => {
                 {/* ------------------------------BOTON PROXIMO------------------------------ */}
                 <button
                   className={styles.btnPag}
-                  onClick={() => {setNumeroPagina(numeroPagina + 1); handlerScroll()}}
+                  onClick={() => {handlerPage(numeroPagina + 1); handlerScroll()}}
                   disabled={
                     numeroPagina === Math.ceil(productsFitered?.length / grupo)
                   }
