@@ -89,7 +89,7 @@ const HistorialDeCompra = () => {
                           {/* <Link className={s.link} to={`/detail/${detalle.id_producto}`}>
             <img className={s.img} src={detalle.image} alt={detalle.name}  onClick={() => toggleModal(detalle.id_producto)}  />
             </Link> */}
-                          <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id_producto)} />
+                          <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id)} />
 
                         </div>
                         <label className={s.aux}>Valor Unitario: {detalle.valor_unitario}</label>
