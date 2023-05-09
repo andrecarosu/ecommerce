@@ -123,7 +123,7 @@ const HistorialDeCompra = () => {
               className={s.modal}
               overlayClassName={s.modalOverlay}
             >
-              {selectedDetail && <Detail id={selectedDetail.id} />}
+              {selectedDetail && <Detail id={selectedDetail} />}
               <button className={s.btnClose} onClick={toggleModal}>
                 CERRAR
               </button>
