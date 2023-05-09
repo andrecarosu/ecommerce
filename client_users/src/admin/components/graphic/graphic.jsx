@@ -37,7 +37,7 @@ const Graphic = () => {
 
   const options = {
     scales: {
-  
+
       x: {
         type: 'category',
       },
@@ -51,7 +51,7 @@ const Graphic = () => {
     },
   };
 
-  
+
 
   return (
     <div>

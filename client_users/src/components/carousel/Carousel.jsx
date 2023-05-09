@@ -61,13 +61,14 @@ import styles from "./Carousel.module.css";
 import { useMediaQuery } from 'react-responsive';
 
 export default function Carousel({ numSlides, speed }) {
+  const { products, slider } = useSelector(state => state)
   const dispatch = useDispatch()
+
   useEffect(() => {
-    dispatch(getAllProducts())
-    dispatch(getSlider())
+    if(products.length == 0) dispatch(getAllProducts())
+    if(slider.length == 0) dispatch(getSlider())
   }, [dispatch])
 
-  const { products, slider } = useSelector(state => state)
   console.log('CAROUSEL', slider);
 
   const isMobile = useMediaQuery({ maxWidth: 767 }); // cambiar el ancho máximo según sea necesario
