@@ -176,7 +176,6 @@ export const getFamilies = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/categorias/families`);
-      console.log(response.data);
       dispatch({ type: action.GET_FAMILIES, payload: response.data });
       dispatch(ready());
     } catch (error) {
@@ -307,6 +306,13 @@ export function getCategorys() {
     });
   };
 }
+
+export const numberPage = (page) => {
+  return {
+    type: action.NUMBER_PAGE,
+    payload: page
+  };
+};
 
 //*12. action-cargar ciudades para los formularios de registro comercio y cliente
 

@@ -34,6 +34,7 @@ import {
   GET_SLIDER,
   GET_SALES,
   GET_ALL_CITIES,
+  NUMBER_PAGE,
 } from "./actions-type.js";
 
 const initialState = {
@@ -58,6 +59,7 @@ const initialState = {
   usuario: [],
   reviews: [],
   compras: [],
+  page: 1
 };
 
 function rootReducer(state = initialState, action) {
@@ -316,6 +318,9 @@ function rootReducer(state = initialState, action) {
 
     case GET_SALES:
       return { ...state, compras: action.payload };
+
+    case NUMBER_PAGE:
+      return { ...state, page: action.payload }
 
     default:
       return state;
