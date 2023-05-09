@@ -2,7 +2,6 @@ import CardReview from "../cardReviews/CardReviews"
 import { useSelector } from "react-redux"
 function CardsReviews(){
  const {reviews} = useSelector((state)=> state)
- console.log(reviews);
     return(
     <div>
         <div style={{display:"flex", justifyContent:"flex-start", margin:"20px"}}>

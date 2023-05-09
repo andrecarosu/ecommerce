@@ -5,7 +5,6 @@ import s from './Card.module.css'
 
 const Card = ({producto}) => {
 const {name, brand, normal_price, discount_price, discount ,image, product_id, Category_product}=producto;
-console.log(discount)
   return (
     <Link className={s.link} to={`/detail/${product_id}`}>
       <div className={s.container}>

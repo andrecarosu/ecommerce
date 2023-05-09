@@ -176,7 +176,6 @@ export const getFamilies = () => {
     try {
       dispatch(loading());
       const response = await axios.get(`${URL}/categorias/families`);
-      console.log(response.data);
       dispatch({ type: action.GET_FAMILIES, payload: response.data });
       dispatch(ready());
     } catch (error) {

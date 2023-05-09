@@ -12,8 +12,6 @@ const Cards = () => {
     window.localStorage.setItem("filtered", JSON.stringify(productsFitered));
     window.localStorage.setItem("copyProducts", JSON.stringify(copyProducts));
   },[products, productsFitered, copyProducts])
-
-console.log(productsFitered);
   // PAGINADO
 
   const [numeroPagina, setNumeroPagina] = useState(1);

@@ -69,8 +69,6 @@ export default function Carousel({ numSlides, speed }) {
     if(slider.length == 0) dispatch(getSlider())
   }, [dispatch])
 
-  console.log('CAROUSEL', slider);
-
   const isMobile = useMediaQuery({ maxWidth: 767 }); // cambiar el ancho máximo según sea necesario
   const slidesToShow = isMobile ? 1 : numSlides || 5; // renderizar 1 tarjeta en pantallas móviles, de lo contrario, use numSlides
   const centerMode = isMobile ? true : false; // centrar el contenido del carrusel en vista mobile

@@ -15,7 +15,6 @@ import Loader from '../../components/loader/loader'
 const Detail = () => {
 
   const { product, carrito, countCarrito, display } = useSelector(state => state)
-  console.log(product);
   const { id } = useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");

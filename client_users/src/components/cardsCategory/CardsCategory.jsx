@@ -27,7 +27,7 @@ function CardsCategory() {
   //   return (
   //     <div >
   //       <div >Loading...</div>
-  //       <img className={styles.imagenLoading} src="/bebidas-premium-home.gif" alt="" />
+  //       <img className={styles.imagenLoading} src="/-premium-home.gif" alt="" />
               
   //     </div> 
   //   );
