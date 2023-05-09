@@ -40,7 +40,7 @@ const HistorialDeCompra = () => {
           setUserData(ventas);
           setEmailData(email);
         }
-      }, 2000);
+      }, 4000);
     })();
   }, [dispatch, email, setUserData]);
 
