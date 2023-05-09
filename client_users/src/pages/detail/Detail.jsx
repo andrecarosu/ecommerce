@@ -142,7 +142,6 @@ const Detail = () => {
                       <div className={s.container_img}>
                         <img className={s.image} src={product.image} alt={product.name} />
                       </div>
-                      <button className={s.condicion} onClick={handlerBack}>Atras</button>
                     </div>
                     <hr style={{ height: '90%', margin: '20px' }} />
 
@@ -174,6 +173,9 @@ const Detail = () => {
                       </div>
 
                     </div>
+                  </div>
+                  <div >
+                    <button className={s.condicion}  onClick={handlerBack}>Atrás</button>
                   </div>
                 </div>
 
