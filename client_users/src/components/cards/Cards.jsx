@@ -4,17 +4,17 @@ import styles from "./Cards.module.css";
 import { useDispatch, useSelector} from "react-redux";
 // import {getAllProducts} from '../../redux/actions'
 import Loader from "../loader/loader";
-import { numberPage } from "../../redux/actions";
+import { getAllProducts, numberPage } from "../../redux/actions";
 import { IoAlertCircleOutline } from 'react-icons/io5';
 
 const Cards = () => {
   const { productsFitered, copyProducts, products ,display, page } = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
-    window.localStorage.setItem("products", JSON.stringify(products));
+    if(products.length === 0) dispatch(getAllProducts())
     window.localStorage.setItem("filtered", JSON.stringify(productsFitered));
     window.localStorage.setItem("copyProducts", JSON.stringify(copyProducts));
-  },[products, productsFitered, copyProducts])
+  },[productsFitered, copyProducts, dispatch])
   // PAGINADO
 
   const [numeroPagina, setNumeroPagina] = useState(page);

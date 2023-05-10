@@ -171,6 +171,10 @@ export const getAllProducts = () => {
   };
 };
 
+export const allProducts = () => {
+  return { type: action.ALLPRODUCTS, payload: true };
+};
+
 export const getFamilies = () => {
   return async (dispatch) => {
     try {

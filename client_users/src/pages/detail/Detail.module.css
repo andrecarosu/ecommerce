@@ -50,15 +50,16 @@ div>.image {
 }
 
 .condicion {
-    background-color:  #daa520;
+    /* background-color:  #daa520;
     box-shadow: -3px 3px #daa52080;
-    border-bottom-left-radius: 8px;
+    border-bottom-left-radius: 8px; */
     font-size: 20px;
     position: absolute;
-    left: 150px;
+    left: 10px;
     top: 100px;
-    color: hsl(0, 100%, 3%);
+    /* color: hsl(0, 100%, 3%); */
     padding: 1px 10px 1px 10px;
+    cursor: pointer;
 }
 .condicion:hover {
     transform: scale(1.1);
