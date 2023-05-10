@@ -127,6 +127,25 @@ export const getUserById = (id) => async (dispatch) => {
   }
 };
 
+export const getAllUsers = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${URL}/usuario`);
+
+      dispatch({
+        type: action.GET_ALL_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: action.GET_ALL_USERS,
+        payload: error,
+      });
+    }
+  };
+}
+
 
 // ========================* PRODUCTOS *========================
 export function createProduct(product) {

@@ -23,7 +23,13 @@ import Cookies from "js-cookie";
 function App() {
   const location = useLocation();
   const { logIn } = useSelector(state => state)
+  useEffect(() => {
 
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [location.pathname])
   // useEffect(() => {
   //   console.log('asdasd', logIn)
   //   if (!logIn) {

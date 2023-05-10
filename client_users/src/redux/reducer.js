@@ -35,11 +35,12 @@ import {
   GET_SALES,
   GET_ALL_CITIES,
   NUMBER_PAGE,
+  GET_ALL_USERS
 } from "./actions-type.js";
 
 const initialState = {
-  products: JSON.parse(window.localStorage.getItem("products")) ||[], 
-  productsFitered: JSON.parse(window.localStorage.getItem("filtered")) ||  [], //22
+  products: JSON.parse(window.localStorage.getItem("products")) || [],
+  productsFitered: JSON.parse(window.localStorage.getItem("filtered")) || [], //22
   copyProducts: JSON.parse(window.localStorage.getItem("copyProducts")) || [],
   productID: [],
   comercios: [],
@@ -57,6 +58,7 @@ const initialState = {
   logIn: false,
   linkMercadoPago: "",
   usuario: [],
+  allUsers: [],
   reviews: [],
   compras: [],
   page: 1
@@ -279,6 +281,9 @@ function rootReducer(state = initialState, action) {
 
     case PUT_USER:
       return { ...state, usuario: action.payload };
+
+    case GET_ALL_USERS:
+      return { ...state, allUsers: action.payload }
 
     // ========================* REVIEWS *========================
 

@@ -59,6 +59,7 @@ const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 const PUT_USER = "PUT_USER"; // actualiza los datos del usuario menos la contraseña
 const PUT_PASSWORD_USER = "PUT_PASSWORD_USER"; // actualiza la contraseña del usuario
 const NUMBER_PAGE = "NUMBER_PAGE";
+const GET_ALL_USERS = "GET_ALL_USERS"
 //* LOADER
 
 const LOADING = "LOADING";
@@ -121,5 +122,6 @@ module.exports = {
   COUNT_AGREGAR,
   COUNT_DELETE,
   GET_SLIDER,
-  NUMBER_PAGE
+  NUMBER_PAGE,
+  GET_ALL_USERS
 };

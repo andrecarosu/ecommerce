@@ -1,4 +1,4 @@
-const { User, Type_user} = require("../../db");
+const { User, Type_user } = require("../../db");
 const { Op, Sequelize } = require("sequelize");
 
 const getAllUsers = async () => {
@@ -21,7 +21,7 @@ const getAllUsers = async () => {
         {
           model: Type_user,
           attributes: ["name"]
-        }       
+        }
       ]
     });
     const results = [...dataUser];
@@ -84,4 +84,4 @@ const getUserByName = async name => {
 
 
 
-module.exports = { getAllUsers, getUserById, getUserByName};
+module.exports = { getAllUsers, getUserById, getUserByName };
