@@ -15,9 +15,12 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 // import axios from 'axios'
 
 
-const Detail = () => {
+const Detail = (props) => {
 
   const { product, carrito, countCarrito, display } = useSelector(state => state)
+
+ const  product_id  = props.id
+
   const { id } = useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");
@@ -25,8 +28,8 @@ const Detail = () => {
   // const URL = 'http://localhost:3001'
 
   useEffect(() => {
-    dispatch(getProductById(id))
-    dispatch(getReviews(id))
+    dispatch(getProductById(product_id?  product_id: id ))
+    dispatch(getReviews(product_id?  product_id: id))
     window.localStorage.setItem("carrito", JSON.stringify(carrito));
     window.localStorage.setItem("count", JSON.stringify(countCarrito));
     return (() => {
