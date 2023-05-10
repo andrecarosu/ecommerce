@@ -55,7 +55,7 @@ class paymentService{
       items.push({
         title: producto.name,
         description: producto.description,
-        picture_url: producto.image,
+        image_url: producto.image,
         // category_id: producto.Category_product.name,
         quantity: productos[i].amount,
         unit_price: producto.discount_price
@@ -66,10 +66,11 @@ class paymentService{
       payer_email:"test_user_1957000233@testuser.com",
       items,
       back_urls:{
-        failure: "/failure",
+        failure: "http://localhost:3000",
         pending: "/pending",
-        success: "/success"
-      }
+        success: "http://localhost:3000"
+      },
+      auto_return: "approved"
     };
           
     const payment = await axios.post(url,body, {
@@ -78,6 +79,7 @@ class paymentService{
         Authorization: `Bearer ${process.env.ACCES_TOKEN}`
       }
     });
+    console.log(payment.data);
     return payment.data;
   }
   

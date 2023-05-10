@@ -35,6 +35,7 @@ import {
   GET_SALES,
   GET_ALL_CITIES,
   NUMBER_PAGE,
+  ALLPRODUCTS,
   GET_ALL_USERS
 } from "./actions-type.js";
 
@@ -42,6 +43,7 @@ const initialState = {
   products: JSON.parse(window.localStorage.getItem("products")) || [],
   productsFitered: JSON.parse(window.localStorage.getItem("filtered")) || [], //22
   copyProducts: JSON.parse(window.localStorage.getItem("copyProducts")) || [],
+  allProducts: false,
   productID: [],
   comercios: [],
   ventas: [],
@@ -76,9 +78,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
-        productsFitered: action.payload,
-        copyProducts: action.payload,
+        productsFitered: state.allProducts ? action.payload : JSON.parse(window.localStorage.getItem("filtered")),
+        copyProducts: state.allProducts ? action.payload : JSON.parse(window.localStorage.getItem("copyProducts")),
       };
+
+    case ALLPRODUCTS:
+      return { ...state, allProducts: action.payload };
 
     case GET_PRODUCT_BY_ID:
       return { ...state, product: action.payload };
@@ -325,7 +330,7 @@ function rootReducer(state = initialState, action) {
       return { ...state, compras: action.payload };
 
     case NUMBER_PAGE:
-      return { ...state, page: action.payload }
+      return { ...state, page: action.payload };
 
     default:
       return state;

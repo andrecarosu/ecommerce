@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CardsCategory from "../../components/cardsCategory/CardsCategory";
 import Carousel from "../../components/carousel/Carousel";
 
