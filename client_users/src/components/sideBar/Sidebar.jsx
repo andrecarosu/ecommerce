@@ -48,57 +48,12 @@ function Sidebar() {
               <span
                 tabindex="0"
                 className={styles.nav_link}
-                onClick={() => dispatch(action.getAllProducts())}
+                onClick={() => {dispatch(action.getAllProducts()); dispatch(action.allProducts())}}
               >
                 VER TODO
               </span>
             </div>
-          </li>
-          <hr />
-          <li className={styles.list_item}>
-            <div className={styles.list_button}>
-              <span
-                tabindex="0"
-                className={styles.nav_link}
-                onClick={handleClickOfertas}
-              >
-                OFERTAS
-              </span>
-            </div>
-            {showOfertas && (
-              <ul className={styles.list_show}>
-                <li
-                  tabindex="0"
-                  className={styles.list_14}
-                  onClick={() => dispatch(action.filterByOffers(20))}
-                >
-                  <span 
-                    className={styles.nav_link}
-                  >
-                    20% OFF
-                  </span>
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_15}
-                  onClick={() => dispatch(action.filterByOffers(35))}
-                >
-                  <span className={styles.nav_link}>
-                    35% OFF
-                  </span>
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_15}
-                  onClick={() => dispatch(action.filterByOffers(45))}
-                >
-                  <span className={styles.nav_link}>
-                    45% OFF
-                  </span>
-                </li>
-              </ul>
-            )}
-          </li>
+          </li>    
           <hr />
           <li className={`${styles.list_item} ${styles.list_item_click}`}>
             <div className={`${styles.list_button} `}>
@@ -256,7 +211,7 @@ function Sidebar() {
                 className={styles.nav_link}
                 onClick={() => handleClickBodega()}
               >
-                BODEGA
+                BODEGAS
               </span>
             </div>
             {showBodega && (
@@ -310,40 +265,55 @@ function Sidebar() {
             )}
           </li>
           <hr />
-          {/* <li className={styles.list_item}>
+          <li className={styles.list_item}>
             <div className={styles.list_button}>
               <span
                 tabindex="0"
                 className={styles.nav_link}
-                onClick={handleClick3}
+                onClick={handleClickOfertas}
               >
-                PRECIO
+                OFERTAS
               </span>
             </div>
-            {showPrecio && (
-            <ul className={styles.list_show}>
-              <li
-                tabindex="0"
-                className={styles.list_14}
-                onClick={() => dispatch(action.orderedByHighestPrice())}
-              >
-                Mayor precio
-              </li>
-              <li
-                tabindex="0"
-                className={styles.list_15}
-                onClick={() => dispatch(action.orderedByLowestPrice())}
-              >
-                Menor precio
-              </li>
-            </ul>
+            {showOfertas && (
+              <ul className={styles.list_show}>
+                <li
+                  tabindex="0"
+                  className={styles.list_14}
+                  onClick={() => dispatch(action.filterByOffers(20))}
+                >
+                  <span 
+                    className={styles.nav_link}
+                  >
+                    20% OFF
+                  </span>
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_15}
+                  onClick={() => dispatch(action.filterByOffers(35))}
+                >
+                  <span className={styles.nav_link}>
+                    35% OFF
+                  </span>
+                </li>
+                <li
+                  tabindex="0"
+                  className={styles.list_15}
+                  onClick={() => dispatch(action.filterByOffers(45))}
+                >
+                  <span className={styles.nav_link}>
+                    45% OFF
+                  </span>
+                </li>
+              </ul>
             )}
           </li>
-          <hr /> */}
+          <hr />
           <li className={`${styles.list_item} ${styles.list_item_click}`}>
             <div className={`${styles.list_button} `}>
               <span className={styles.nav_link} onClick={handleClick2}>
-                ORDENAR :
+                ORDENAR 
               </span>
             </div>
             {showOrdenar && (
