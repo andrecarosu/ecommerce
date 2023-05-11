@@ -1,19 +1,19 @@
-const { Order, Detail_order, Product} = require("../../db");
+const { Order, Detail_order, Product } = require("../../db");
 
 const createVenta = async (date, total, state, user_id, detail_order) => {
-    try {
-        const venta = await Order.create({
-            date: new Date(),
-            total,
-            state,
-            user_id,
-        });
-        const newVenta = await venta.save();
-        return newVenta;
-    } catch (error) {
-        console.log(error);
-        throw new Error("Hubo un error creando la venta");
-    }
+  try {
+    const venta = await Order.create({
+      date: new Date(),
+      total,
+      state,
+      user_id,
+    });
+    const newVenta = await venta.save();
+    return newVenta;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Hubo un error creando la venta");
+  }
 };
 
 // const createDetalleVenta = async (detalle_order, venta_id) => {
@@ -39,22 +39,30 @@ const createVenta = async (date, total, state, user_id, detail_order) => {
 //   }
 // };
 
-const createDetalleVenta = async (detalle_order, venta_id) => {
+const createDetalleVenta = async (detalle_order, venta_id, state) => {
   try {
     const newDetalleVenta = await Promise.all(
       detalle_order.map(async (detalle) => {
         const { product_id, amount, unit_value, value } = detalle;
         const product = await Product.findByPk(product_id); // Buscar el producto por su ID
-        console.log(30,product);
+        console.log(30, product);
         const detalle_venta = await Detail_order.create({
           amount: amount,
           unit_value: unit_value,
           value: value,
           ProductProductId: product_id,
           OrderOrderId: venta_id,
+          user_id: user_id,
           name: product.name,
           image: product.image, // Incluir el nombre del producto en el campo name
         });
+        //si el estado es verdadero
+        if (state) {
+          product.stock = product.stock - amount;
+          await product.save()
+        }
+
+
         return detalle_venta;
       })
     );
