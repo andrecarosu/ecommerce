@@ -1,15 +1,13 @@
 // 
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
-import { Link } from "react-router-dom";
 import Modal from 'react-modal';
 import axios from 'axios';
 import Detail from "../detail/Detail";
 import Review from "./Review";
-// ACTIONS
-import { getSales, getUsuarioByEmail } from "../../redux/actions";
+
 // ESTILOS
 import s from "./ShoppingHistory.module.css";
 
@@ -19,8 +17,6 @@ const HistorialDeCompra = () => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({})
   const [emailData, setEmailData] = useState({})
-  const usuario = useSelector((state) => state.usuario) ?? [];
-  const compras = useSelector((state) => state.compras) ?? [];
   const token = Cookies.get("user_token");
   const decodedToken = jwt_decode(token);
 
