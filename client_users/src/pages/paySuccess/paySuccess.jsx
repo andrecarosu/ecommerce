@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userId, date, detailOrder, total } from "./assistand";
 import swal from 'sweetalert';
 import axios from "axios"
-import { removeShoppingCart } from '../../redux/actions';
+import { cleanShoppingCart } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 
 
 function PaySuccess () {
   const dispatch = useDispatch();
-  const { carrito, countCarrito } = useSelector((state) => state);
+  const { carrito } = useSelector((state) => state);
   useEffect(()=>{
     const postVenta = async () => {
       const venta = {
@@ -34,15 +34,11 @@ function PaySuccess () {
         })
       };
       postVenta();
-      // window.localStorage.setItem("carrito", JSON.stringify([]));
-      // window.localStorage.setItem("count", JSON.stringify(0));
-      // dispatch(cleanShoppingCart());
-      window.localStorage.setItem("remove", JSON.stringify(true));
-      //put de venta y put de product
-  },[dispatch])
-  // const handlerInicio = () => {
-  //   window.localStorage.setItem("remove", JSON.stringify(true));
-  // }
+      window.localStorage.setItem("carrito", JSON.stringify([]));
+      window.localStorage.setItem("count", JSON.stringify(0));
+      dispatch(cleanShoppingCart())
+    },[dispatch])
+  
   return (
     <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh"}}>
       <div style={{border:"solid 1px red"}}>

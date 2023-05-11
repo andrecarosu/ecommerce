@@ -262,7 +262,8 @@ function rootReducer(state = initialState, action) {
       };
     
     case CLEAN_SHOPPING_CART:
-      return { 
+      return {
+        ...state, 
         countCarrito: 0,
         carrito:[]
       };
