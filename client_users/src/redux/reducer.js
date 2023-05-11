@@ -36,11 +36,13 @@ import {
   GET_ALL_CITIES,
   NUMBER_PAGE,
   ALLPRODUCTS,
+  GET_ALL_USERS,
+  SET_FILTERS_ACTIVE
 } from "./actions-type.js";
 
 const initialState = {
-  products: [], 
-  productsFitered: JSON.parse(window.localStorage.getItem("filtered")) ||  [], 
+  products: JSON.parse(window.localStorage.getItem("products")) || [],
+  productsFitered: JSON.parse(window.localStorage.getItem("filtered")) || [], //22
   copyProducts: JSON.parse(window.localStorage.getItem("copyProducts")) || [],
   allProducts: false,
   productID: [],
@@ -51,6 +53,7 @@ const initialState = {
   families: [],
   product: {},
   filter: [],
+  activeFilter: JSON.parse(window.localStorage.getItem("filtersActive")) || {},
   slider: [],
   carrito: JSON.parse(window.localStorage.getItem("carrito")) || [],
   countCarrito: JSON.parse(window.localStorage.getItem("count")) || 0,
@@ -59,6 +62,7 @@ const initialState = {
   logIn: false,
   linkMercadoPago: "",
   usuario: [],
+  allUsers: [],
   reviews: [],
   compras: [],
   page: 1
@@ -79,9 +83,9 @@ function rootReducer(state = initialState, action) {
         productsFitered: state.allProducts ? action.payload : JSON.parse(window.localStorage.getItem("filtered")),
         copyProducts: state.allProducts ? action.payload : JSON.parse(window.localStorage.getItem("copyProducts")),
       };
-    
+
     case ALLPRODUCTS:
-      return { ...state, allProducts : action.payload };  
+      return { ...state, allProducts: action.payload };
 
     case GET_PRODUCT_BY_ID:
       return { ...state, product: action.payload };
@@ -99,6 +103,23 @@ function rootReducer(state = initialState, action) {
 
     case GET_CATEGORY:
       return { ...state, categorys: action.payload };
+
+    case SET_FILTERS_ACTIVE:
+      let filters
+      // console.log('pupurrupup', action.payload)
+      if (Object.keys(action.payload).length !== 0) {
+        filters = action.payload.Categoria ? { ...action.payload } : { ...state.activeFilter, ...action.payload }
+
+      } else {
+        filters = {}
+      }
+
+
+
+      return {
+        ...state,
+        activeFilter: filters
+      }
 
     // ========================* ORDENAMIENTO *========================
 
@@ -284,6 +305,9 @@ function rootReducer(state = initialState, action) {
 
     case PUT_USER:
       return { ...state, usuario: action.payload };
+
+    case GET_ALL_USERS:
+      return { ...state, allUsers: action.payload }
 
     // ========================* REVIEWS *========================
 
