@@ -6,6 +6,8 @@ import * as action from "../../redux/actions";
 function Sidebar() {
   const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
+
+  const [filters, setFilters] = useState(null)
   const [showOrdenar, setShowOrdenar] = useState(false);
   const [showPrecio, setShowPrecio] = useState(false);
   const [showTinto, setShowTinto] = useState(false);
@@ -38,27 +40,54 @@ function Sidebar() {
   const handleClickOfertas = () => {
     setShowOfertas(!showOfertas);
   };
+  const handleClickFilterCategory = (value) => {
+    console.log(value)
+    dispatch(action.getProductByCategory(value))
+    setFilters({ Category: value })
+  }
 
   return (
     <div className={styles.nav_contenedor}>
+      {filters && <div className={styles.filtersContainer}>
+        <span className={`${styles.filterMessage} ${styles.filterCont}`}><strong>Filtrando por</strong></span>
+        {filters && Object.keys(filters).map((key, index) => {
+          return (
+            <React.Fragment key={index}>
+              <span className={styles.filterMessage}>
+                {<>
+                  <strong>{key}: </strong>
+                  {filters[key]}
+                </>
+                }
+              </span>
+            </React.Fragment>
+          )
+        })}
+      </div>}
       <nav className={styles.nav}>
+
         <ul className={styles.list}>
           <li className={styles.list_item}>
             <div className={styles.list_button}>
               <span
                 tabindex="0"
                 className={styles.nav_link}
-                onClick={() => {dispatch(action.getAllProducts()); dispatch(action.allProducts())}}
+                onClick={() => {
+                  dispatch(action.getAllProducts());
+                  dispatch(action.allProducts());
+                  setFilters(null)
+                  dispatch(action.setFiltersActive())
+                }}
               >
                 VER TODO
               </span>
             </div>
-          </li>    
+          </li>
           <hr />
           <li className={`${styles.list_item} ${styles.list_item_click}`}>
             <div className={`${styles.list_button} `}>
-              <span 
-                className={styles.nav_link} 
+              <span
+                className={styles.nav_link}
                 onClick={handleClick}
               >
                 VARIETALES
@@ -66,73 +95,73 @@ function Sidebar() {
             </div>
             {showCategories && (
               <>
-              <ul>
-                <li
-                  tabindex="0"
-                  className={styles.list_1}
+                <ul>
+                  <li
+                    tabindex="0"
+                    className={styles.list_1}
                   >
-                  <div>
-                    <span className={styles.nav_link} onClick={handleClickTinto}>
-                      Tinto
-                    </span>
-                  </div>
-                  {showTinto && (
-                    <ul className={styles.list_show}>
+                    <div>
+                      <span className={styles.nav_link} onClick={handleClickTinto}>
+                        Tinto
+                      </span>
+                    </div>
+                    {showTinto && (
+                      <ul className={styles.list_show}>
                         <li
-                        tabindex="0"
-                        className={styles.list_1}
-                        onClick={() =>
-                          dispatch(action.getProductByCategory("Cabernet Sauvignon "))
-                        }
-                      >
-                        Cabernet Sauvignon
-                      </li>
-                      <li
-                        tabindex="0"
-                        className={styles.list_2}
-                        onClick={() =>
-                          dispatch(action.getProductByCategory("Malbec Tinto"))
-                        }
-                      >
-                        Malbec
-                      </li>
-                      <li
-                        tabindex="0"
-                        className={styles.list_3}
-                        onClick={() =>
-                          dispatch(action.getProductByCategory("Merlot Tinto"))
-                        }
-                      >
-                        Merlot
-                      </li>
-                      <li
-                        tabindex="0"
-                        className={styles.list_4}
-                        onClick={() =>
-                          dispatch(action.getProductByCategory("Syrah"))
-                        }
-                      >
-                        Syrah
-                      </li>
-                    </ul>
-                  )}
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_1}
+                          tabindex="0"
+                          className={styles.list_1}
+                          onClick={() =>
+                            handleClickFilterCategory("Cabernet Sauvignon ")
+                          }
+                        >
+                          Cabernet Sauvignon
+                        </li>
+                        <li
+                          tabindex="0"
+                          className={styles.list_2}
+                          onClick={() =>
+                            handleClickFilterCategory("Malbec Tinto")
+                          }
+                        >
+                          Malbec
+                        </li>
+                        <li
+                          tabindex="0"
+                          className={styles.list_3}
+                          onClick={() =>
+                            handleClickFilterCategory("Merlot Tinto")
+                          }
+                        >
+                          Merlot
+                        </li>
+                        <li
+                          tabindex="0"
+                          className={styles.list_4}
+                          onClick={() =>
+                            handleClickFilterCategory("Syrah")
+                          }
+                        >
+                          Syrah
+                        </li>
+                      </ul>
+                    )}
+                  </li>
+                  <li
+                    tabindex="0"
+                    className={styles.list_1}
                   >
-                  <div>
-                    <span className={styles.nav_link} onClick={handleClickBlanco}>
-                      Blanco
-                    </span>
-                  </div>
-                  {showBlanco && (
-                    <ul className={styles.list_show}>
+                    <div>
+                      <span className={styles.nav_link} onClick={handleClickBlanco}>
+                        Blanco
+                      </span>
+                    </div>
+                    {showBlanco && (
+                      <ul className={styles.list_show}>
                         <li
                           tabindex="0"
                           className={styles.list_5}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Semillon"))
+                            handleClickFilterCategory("Semillon")
                           }
                         >
                           Semillón
@@ -141,7 +170,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_6}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Malbec Blanco"))
+                            handleClickFilterCategory("Malbec Blanco")
                           }
                         >
                           Malbec
@@ -150,7 +179,7 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_7}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Cosecha Tardía"))
+                            handleClickFilterCategory("Cosecha Tardía")
                           }
                         >
                           Cosecha Tardía
@@ -159,47 +188,47 @@ function Sidebar() {
                           tabindex="0"
                           className={styles.list_8}
                           onClick={() =>
-                            dispatch(action.getProductByCategory("Chardonnay"))
+                            handleClickFilterCategory("Chardonnay")
                           }
                         >
                           Chardonnay
                         </li>
-                    </ul>
-                  )}
-                </li>
-                <li
-                  tabindex="0"
-                  className={styles.list_1}
+                      </ul>
+                    )}
+                  </li>
+                  <li
+                    tabindex="0"
+                    className={styles.list_1}
                   >
-                  <div>
-                    <span className={styles.nav_link} onClick={handleClickRosado}>
-                      Rosado
-                    </span>
-                  </div>
-                  {showRosado && (
-                    <ul className={styles.list_show}>
-                      <li
-                        tabindex="0"
-                        className={styles.list_9}
-                        onClick={() =>
-                          dispatch(action.getProductByCategory("Malbec Rose"))
-                        }
-                      >
-                        Malbec Rosé
-                      </li>
-                      <li
-                        tabindex="0"
-                        className={styles.list_10}
-                        onClick={() =>
-                          dispatch(action.getProductByCategory("Merlot Rose"))
-                        }
-                      >
-                        Merlot Rosé
-                      </li>
-                    </ul>
-                  )}
-                </li>
-              </ul>
+                    <div>
+                      <span className={styles.nav_link} onClick={handleClickRosado}>
+                        Rosado
+                      </span>
+                    </div>
+                    {showRosado && (
+                      <ul className={styles.list_show}>
+                        <li
+                          tabindex="0"
+                          className={styles.list_9}
+                          onClick={() =>
+                            handleClickFilterCategory("Malbec Rose")
+                          }
+                        >
+                          Malbec Rosé
+                        </li>
+                        <li
+                          tabindex="0"
+                          className={styles.list_10}
+                          onClick={() =>
+                            handleClickFilterCategory("Merlot Rose")
+                          }
+                        >
+                          Merlot Rosé
+                        </li>
+                      </ul>
+                    )}
+                  </li>
+                </ul>
               </>
             )}
           </li>
@@ -215,12 +244,14 @@ function Sidebar() {
               </span>
             </div>
             {showBodega && (
-                <ul className={styles.list_show}>
+              <ul className={styles.list_show}>
                 <li
                   tabindex="0"
                   className={styles.list_1}
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(action.filterByBrand("Trapiche"))
+                    setFilters({ ...filters, Marca: "Trapiche" })
+                  }
                   }
                 >
                   Trapiche
@@ -228,8 +259,10 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_2}
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(action.filterByBrand("El Esteco"))
+                    setFilters({ ...filters, Marca: "El Esteco" })
+                  }
                   }
                 >
                   El Esteco
@@ -237,8 +270,10 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_3}
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(action.filterByBrand("Elementos"))
+                    setFilters({ ...filters, Marca: "Elementos" })
+                  }
                   }
                 >
                   Elementos
@@ -246,8 +281,10 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_4}
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(action.filterByBrand("Navarro Correas"))
+                    setFilters({ ...filters, Marca: "Navarro Correas" })
+                  }
                   }
                 >
                   Navarro Correas
@@ -255,13 +292,15 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_5}
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(action.filterByBrand("Finca Las Moras"))
+                    setFilters({ ...filters, Marca: "Finca Las Moras" })
+                  }
                   }
                 >
                   Fincas las Moras
                 </li>
-              </ul>      
+              </ul>
             )}
           </li>
           <hr />
@@ -280,9 +319,12 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_14}
-                  onClick={() => dispatch(action.filterByOffers(20))}
+                  onClick={() => {
+                    dispatch(action.filterByOffers(20))
+                    setFilters({ ...filters, Oferta: "20%" })
+                  }}
                 >
-                  <span 
+                  <span
                     className={styles.nav_link}
                   >
                     20% OFF
@@ -291,7 +333,10 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_15}
-                  onClick={() => dispatch(action.filterByOffers(35))}
+                  onClick={() => {
+                    dispatch(action.filterByOffers(35))
+                    setFilters({ ...filters, Oferta: "35%" })
+                  }}
                 >
                   <span className={styles.nav_link}>
                     35% OFF
@@ -300,7 +345,10 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_15}
-                  onClick={() => dispatch(action.filterByOffers(45))}
+                  onClick={() => {
+                    dispatch(action.filterByOffers(45))
+                    setFilters({ ...filters, Oferta: "45%" })
+                  }}
                 >
                   <span className={styles.nav_link}>
                     45% OFF
@@ -313,7 +361,7 @@ function Sidebar() {
           <li className={`${styles.list_item} ${styles.list_item_click}`}>
             <div className={`${styles.list_button} `}>
               <span className={styles.nav_link} onClick={handleClick2}>
-                ORDENAR 
+                ORDENAR
               </span>
             </div>
             {showOrdenar && (
@@ -321,28 +369,40 @@ function Sidebar() {
                 <li
                   tabindex="0"
                   className={styles.list_14}
-                  onClick={() => dispatch(action.orderedByHighestPrice())}
+                  onClick={() => {
+                    dispatch(action.orderedByHighestPrice())
+                    setFilters({ ...filters, Orden: "Mayor Precio" })
+                  }}
                 >
                   Mayor precio
                 </li>
                 <li
                   tabindex="0"
                   className={styles.list_15}
-                  onClick={() => dispatch(action.orderedByLowestPrice())}
+                  onClick={() => {
+                    dispatch(action.orderedByLowestPrice())
+                    setFilters({ ...filters, Orden: "Menor Precio" })
+                  }}
                 >
                   Menor precio
                 </li>
                 <li
                   tabindex="0"
                   className={styles.list_12}
-                  onClick={() => dispatch(action.orderedByNameASC())}
+                  onClick={() => {
+                    dispatch(action.orderedByNameASC())
+                    setFilters({ ...filters, Orden: "A-Z" })
+                  }}
                 >
                   A-Z
                 </li>
                 <li
                   tabindex="0"
                   className={styles.list_13}
-                  onClick={() => dispatch(action.orderedByNameDESC())}
+                  onClick={() => {
+                    dispatch(action.orderedByNameDESC())
+                    setFilters({ ...filters, Orden: "Z-A" })
+                  }}
                 >
                   Z-A
                 </li>

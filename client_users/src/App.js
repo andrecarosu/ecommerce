@@ -22,6 +22,14 @@ import PayFailure from "./pages/payFailure/PayFailure";
 function App() {
   const location = useLocation();
   const { logIn } = useSelector(state => state)
+
+  useEffect(() => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [location.pathname])
   return (
     <div className="App">
 
