@@ -22,14 +22,14 @@ const Cards = () => {
   const grupo = 12;
   const conteoFinal = numeroPagina * grupo;
   const conteoInicial = conteoFinal - grupo;
-
+console.log(productsFitered);
   const aux =
     productsFitered && productsFitered.slice
       ? productsFitered.slice(conteoInicial, conteoFinal)
       : [];
 
       
-
+console.log(aux);
   const paginas = [];
 
   const numPaginas = Math.ceil(productsFitered.length / grupo);
@@ -57,7 +57,7 @@ const handlerPage = (page) => {
       ) : (
         <>
           <div className={styles.card}>
-            {aux.length ? aux.map((products, index) => (
+            {aux.length !== 0 ? aux.map((products, index) => (
              products.state === false || products.stock === 0 ? null : <Card key={index} producto={products} />
             )) : <div className={styles.alert} > 
             <IoAlertCircleOutline size={60}/>

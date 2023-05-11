@@ -1,23 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { userId, date, detailOrder, total } from "./assistand";
 import swal from 'sweetalert';
 import axios from "axios"
 
-
-function PaySuccess () {
-
-  const { carrito, countCarrito } = useSelector((state) => state);
+function PayFailure() {
+  const { carrito } = useSelector((state) => state);
 
   useEffect(()=>{
-    window.localStorage.setItem("count", JSON.stringify(0));
     const postVenta = async () => {
       const venta = {
         date: date(),
         total: total(carrito),
         user_id : userId(),
         detail_order : detailOrder(carrito),
-        state: true
+        state: false
       }
       console.log(venta);
       await axios.post("http://localhost:3001/venta", venta)
@@ -34,18 +31,14 @@ function PaySuccess () {
         })
       };
       postVenta();
-      window.localStorage.setItem("carrito", JSON.stringify([]));
-      if (carrito.length !== 0) {
-        window.location.reload();
-      }
   },[])
   return (
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh"}}>
-      <div style={{border:"solid 1px red"}}>
-        <p>Pago Exitoso</p>
+    <div style={{width:"100%", height:"100vh", display:"flex", justifyContent:"center", alignItems:"center"}}>
+      <div>
+        Su pago ha sido rechazado
       </div>
     </div>
   )
 };
 
-export default PaySuccess;
+export default PayFailure;
