@@ -66,9 +66,9 @@ class paymentService{
       payer_email:"test_user_1957000233@testuser.com",
       items,
       back_urls:{
-        failure: "http://localhost:3000",
+        success: "http://localhost:3000/shopping-cart/success",
+        failure: "http://localhost:3000/shopping-cart/failure",
         pending: "/pending",
-        success: "http://localhost:3000"
       },
       auto_return: "approved"
     };
