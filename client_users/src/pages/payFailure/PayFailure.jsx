@@ -17,7 +17,7 @@ function PayFailure() {
         state: false
       }
       console.log(venta);
-      await axios.post("http://localhost:3001/venta", venta)
+      await axios.post("https://deploynodejsecommerce.onrender.com/usuario/venta", venta)
         .then(response => {
           console.log(response.data);
         })
