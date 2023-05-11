@@ -18,6 +18,8 @@ const Account = () => {
   const decodedToken = jwt_decode(token);
 
   const email = decodedToken.email;
+  console.log(14,email);
+  const emailDatas= email
 
   useEffect(() => {
     dispatch(getUsuarioByEmail(email));
@@ -41,7 +43,7 @@ const Account = () => {
 
   const idUsuario = usuario.length > 0 ? usuario[0].user_id : null;
 
-  const nombreUsuario = userData.name;
+  const nombreUsuario = userData?.name;
 
   return (
     <div className={s.container}>
@@ -72,7 +74,7 @@ const Account = () => {
       <div className={s.update}>
         <FormUpdate idUsuario={idUsuario} />
         <button onClick={handleLogInClick}>Quiero cambiar mi contraseña</button>
-        {showProfileMenu && <FormUpdatePassword idUsuario={idUsuario} mostrarProp={true} />}
+        {showProfileMenu && <FormUpdatePassword idUsuario={idUsuario} emailResult={userData.email} mostrarProp={true} />}
       </div>
     </div>
   );

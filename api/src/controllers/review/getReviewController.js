@@ -10,6 +10,10 @@ const getAllReviews = async (req, res) => {
         where: {
           product_id: product_id,
         },
+
+        include: [
+          { model: User, attributes: ["name"] },
+        ],
       });
       
     
