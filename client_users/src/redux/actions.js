@@ -452,3 +452,11 @@ export function getSales(id) {
 export function getSlider() {
   return { type: action.GET_SLIDER }
 }
+
+export const cleanShoppingCart = () => {
+  return { type: action.CLEAN_SHOPPING_CART };
+};
+
+export const removeShoppingCart = () => {
+  return { type: action.REMOVE_SHOPPING_CART };
+};

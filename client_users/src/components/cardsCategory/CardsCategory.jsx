@@ -1,38 +1,27 @@
 import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllProducts, getCategorys, getFamilies } from '../../redux/actions';
+import { cleanShoppingCart, getAllProducts, getCategorys, getFamilies } from '../../redux/actions';
 import CardCategory from '../cardCategory/CardCategory';
 import styles from "./CardsCategory.module.css"
 import Loader from '../loader/loader';
 
 function CardsCategory() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);// variable booleana para verificar si los datos están listos
   const { categorys, families, products, display } = useSelector(state => state);
 
   useEffect(() => {
-    // async function fetchData() {
-    //   setLoading(true); // establecer la variable loading en true antes de hacer la petición
-    //   setTimeout(async() => {
-       if(categorys.length === 0) dispatch(getCategorys())
-       if(products.length === 0) dispatch(getAllProducts())
-       if(families.length === 0) dispatch(getFamilies())
-    //     setLoading(false); // establecer la variable loading en false cuando los datos hayan sido cargados
-    //   }, 2000); // esperar 2 segundos antes de obtener los datos
-    // }
-    // fetchData();    
+    const remove = JSON.parse(window.localStorage.getItem("remove"))
+    if(remove){
+      window.localStorage.setItem("carrito", JSON.stringify([]));
+      window.localStorage.setItem("count", JSON.stringify(0));
+      dispatch(cleanShoppingCart());
+      window.localStorage.setItem("remove", JSON.stringify(false));
+    }
+    if(categorys?.length === 0) dispatch(getCategorys())
+    if(products?.length === 0) dispatch(getAllProducts())
+    if(families?.length === 0) dispatch(getFamilies())    
   }, [dispatch])
 
-  // if (loading) {
-  //   return (
-  //     <div >
-  //       <div >Loading...</div>
-  //       <img className={styles.imagenLoading} src="/-premium-home.gif" alt="" />
-              
-  //     </div> 
-  //   );
-  // }
- 
   return (
     <div style={{display:"flex", alignItems:"center"}}>
       {display ? (

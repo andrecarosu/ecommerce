@@ -65,7 +65,7 @@ export default function Carousel({ numSlides, speed }) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(products.length == 0) dispatch(getAllProducts())
+    if(products?.length == 0) dispatch(getAllProducts())
     if(slider.length == 0) dispatch(getSlider())
   }, [dispatch])
 
