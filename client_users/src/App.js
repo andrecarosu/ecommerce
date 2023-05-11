@@ -16,7 +16,7 @@ import DashMain from "./admin/pages/DashMain"
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import PaySuccess from "./pages/paySuccess/PaySuccess";
+import PaySuccess from "./pages/paySuccess/paySuccess";
 import PayFailure from "./pages/payFailure/PayFailure";
 
 function App() {
