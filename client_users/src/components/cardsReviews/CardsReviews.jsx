@@ -2,7 +2,6 @@ import CardReview from "../cardReviews/CardReviews"
 import { useSelector } from "react-redux"
 function CardsReviews(){
  const {reviews} = useSelector((state)=> state)
- console.log(reviews);
     return(
     <div>
         <div style={{display:"flex", justifyContent:"flex-start", margin:"20px"}}>
@@ -14,6 +13,7 @@ function CardsReviews(){
             return ( 
                 <CardReview 
                 review_id={review.review_id}
+                name={review.User.name}
                 comments={review.comments}
                 scoring={review.scoring}
                 product_id={review.product_id}

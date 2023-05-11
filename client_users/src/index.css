@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 
 @font-face {
   font-family: 'Optima';
@@ -20,6 +21,7 @@
   --wine-color: #691533;
   --green-strong-color: #63db12;
   --font-optima: 'Optima', sans-serif;
+  --font-lato: 'Lato', sans-serif;
 
 }
 

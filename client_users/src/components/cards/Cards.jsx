@@ -1,31 +1,50 @@
-import React,{useState} from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../card/Card";
 import styles from "./Cards.module.css";
-import { useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import {getAllProducts} from '../../redux/actions'
 import Loader from "../loader/loader";
+import { getAllProducts, numberPage } from "../../redux/actions";
+import { IoAlertCircleOutline } from 'react-icons/io5';
+import BoxFilters from "../showFilters/BoxFilters";
 
 const Cards = () => {
-  const { productsFitered, copyProducts, products ,display } = useSelector((state) => state);
-  window.localStorage.setItem("products", JSON.stringify(products));
-  window.localStorage.setItem("filtered", JSON.stringify(productsFitered));
-  window.localStorage.setItem("copyProducts", JSON.stringify(copyProducts));
-
-
+  const { productsFitered, copyProducts, products, display, page, activeFilter } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (products.length === 0) dispatch(getAllProducts())
+    window.localStorage.setItem("filtered", JSON.stringify(productsFitered));
+    window.localStorage.setItem("copyProducts", JSON.stringify(copyProducts));
+    window.localStorage.setItem("filtersActive", JSON.stringify(activeFilter))
+  }, [productsFitered, copyProducts, dispatch])
   // PAGINADO
 
-  const [numeroPagina, setNumeroPagina] = useState(1);
+  const [numeroPagina, setNumeroPagina] = useState(page);
+  console.log('filtros ', Object.keys(activeFilter).length)
+
 
   const grupo = 12;
   const conteoFinal = numeroPagina * grupo;
   const conteoInicial = conteoFinal - grupo;
-
+console.log(productsFitered);
   const aux =
-    productsFitered && productsFitered.slice
+    productsFitered.length > 0
       ? productsFitered.slice(conteoInicial, conteoFinal)
       : [];
 
       
+console.log(aux);
+  useEffect(() => {
+    setNumeroPagina(1)
+
+  }, [productsFitered])
+
+  useEffect(() => {
+    handlerScroll()
+  }, [aux, numeroPagina])
+
+
+
 
   const paginas = [];
 
@@ -34,66 +53,74 @@ const Cards = () => {
   for (let i = 1; i <= numPaginas; i++) {
     paginas.push(i);
   }
-//Scroll
-const handlerScroll = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
+  //Scroll
+  const handlerScroll = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  const handlerPage = (page) => {
+    setNumeroPagina(page);
+    dispatch(numberPage(page));
+  }
   return (
     <div className={styles.container}>
-      
+
       {display ? (
         <Loader />
       ) : (
         <>
+          {Object.keys(activeFilter).length > 0 ? <BoxFilters activeFilter={activeFilter} /> : ''}
           <div className={styles.card}>
-            {aux.length ? aux.map((products, index) => (
+
+            {aux.length !== 0 ? aux.map((products, index) => (
              products.state === false || products.stock === 0 ? null : <Card key={index} producto={products} />
-            )) : <div className={styles.alert} > <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAVVJREFUSEvFlYFNBDEMBPc7gUqASoBKgErgKwEqASoBjZSNnFzi3CNeRDr5/s/xeteOc9CZ1+HM8bUH4FoSz1Wxn5LeJH0Vy/t0ZQAXkp5L0CwGgDeSsJs1A3iU9FC82XgM2QIMI+xtsfZhX7NGADH4k6TNphABkLuQzMa/B2DDRwkA7VTfAASj1yLTfdzXA+CE8yzz7xI0Y45clwaPjlClqI1DJ2kGAHsSxFb2EcDaZ7pnAOSyiREByB4WaPgy6csVgGtB7WDRHDSKCz30G/a0pBWAm6TKHBn8BQBJN0lEAHdQ1p4rBm4UJEbqRqI9RV7NxrTI8bDUPj6hTXG1CrVRokRxuFWKJwC4C2sH9RLxO46KrF17qcye/5sajo68C4XzatjFwzX0HwH0E9IXzHsYYh7ZHtfTZP7twrHGZOrHVybfYGVGv74yVz2/6/ueS39XoJnTD8PBXRlXJ52JAAAAAElFTkSuQmCC" alt=""/>
+            )) : <div className={styles.alert} > 
+            <IoAlertCircleOutline size={60}/>
             <p>No hay coincidencias</p> </div>}
+
           </div>
           {productsFitered.length >= 12 && (
-          <div className={styles.paginado}>
-            <div className={styles.paginadoAbj}>
-              {/* ------------------------------CONTENEDOR PAGINADO------------------------------ */}
-              <div>
-                {/* ------------------------------BOTON ATRAS------------------------------ */}
-                <button
-                  className={styles.btnPag}
-                  onClick={() => {setNumeroPagina(numeroPagina - 1); handlerScroll()}}
-                  disabled={numeroPagina === 1}
-                >
-                  {/* ◄ */}
-                  {"<"}
-                </button>
-                {/* ------------------------------BOTONES PAGINAS------------------------------ */}
-                {paginas.map((pagina) => (
+            <div className={styles.paginado}>
+              <div className={styles.paginadoAbj}>
+                {/* ------------------------------CONTENEDOR PAGINADO------------------------------ */}
+                <div>
+                  {/* ------------------------------BOTON ATRAS------------------------------ */}
                   <button
-                    key={pagina}
-                    className={`${styles.btnPag} ${
-                      pagina === numeroPagina ? styles.active : ""
-                    }`}
-                    onClick={() => {setNumeroPagina(pagina); handlerScroll()}}
+                    className={styles.btnPag}
+                    onClick={() => { handlerPage(numeroPagina - 1); handlerScroll() }}
+                    disabled={numeroPagina === 1}
                   >
-                    {pagina}
+                    {/* ◄ */}
+                    {"<"}
                   </button>
-                ))}
-                {/* ------------------------------BOTON PROXIMO------------------------------ */}
-                <button
-                  className={styles.btnPag}
-                  onClick={() => {setNumeroPagina(numeroPagina + 1); handlerScroll()}}
-                  disabled={
-                    numeroPagina === Math.ceil(productsFitered?.length / grupo)
-                  }
-                >
-                  {/* ► */}
-                  {">"}
-                </button>
+                  {/* ------------------------------BOTONES PAGINAS------------------------------ */}
+                  {paginas.map((pagina) => (
+                    <button
+                      key={pagina}
+                      className={`${styles.btnPag} ${pagina === numeroPagina ? styles.active : ""
+                        }`}
+                      onClick={() => { handlerPage(pagina); handlerScroll() }}
+                    >
+                      {pagina}
+                    </button>
+                  ))}
+                  {/* ------------------------------BOTON PROXIMO------------------------------ */}
+                  <button
+                    className={styles.btnPag}
+                    onClick={() => { handlerPage(numeroPagina + 1); handlerScroll() }}
+                    disabled={
+                      numeroPagina === Math.ceil(productsFitered?.length / grupo)
+                    }
+                  >
+                    {/* ► */}
+                    {">"}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
           )}
         </>
       )}

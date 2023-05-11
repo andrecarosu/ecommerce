@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import DetailVenta from './DetailVenta';
+import { getUserById } from '../../../redux/actions';
 import s from './TableVentas.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 const TableVentas = ({ ventas, handleClickDetail }) => {
 
     const [filaActive, setFilaActive] = useState(null)
-
+    const dispatch = useDispatch()
     const onClickRow = (e, key) => {
         console.log(e)
         setFilaActive(filaActive == key ? null : key)
+    }
+    const { allUsers } = useSelector(state => state)
+    const getUser = (id) => {
+
+        const u = allUsers.find((user) => user.user_id == id)
+        return u?.name
     }
 
     return (
@@ -32,7 +41,7 @@ const TableVentas = ({ ventas, handleClickDetail }) => {
                                 <td style={{ padding: "10px" }}><a>{venta.id}</a></td>
                                 <td><a>{venta.total}</a></td>
                                 <td><a>{venta.fecha}</a></td>
-                                <td><a>{'ads'}</a></td>
+                                <td><a>{getUser(venta.id_usuario)}</a></td>
                                 <td><a>{venta.estado}</a></td>
                             </tr>
                             {<tr key={index} className={`${s.detail} ${filaActive == index ? s.activeRow : ''}`}>

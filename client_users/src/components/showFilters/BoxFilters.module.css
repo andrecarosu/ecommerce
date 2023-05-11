@@ -1,0 +1,22 @@
+.box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: -4rem;
+    width: 80%;
+    height: 50px;
+    padding-top: 20px;
+}
+
+.box span {
+    font-size: 14px;
+}
+
+.key {
+    color: #b1b1b1;
+}
+
+.name {
+    color: #d4a22c;
+}

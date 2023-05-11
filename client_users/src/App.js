@@ -16,29 +16,23 @@ import DashMain from "./admin/pages/DashMain"
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import Cookies from "js-cookie";
-
-// import Footer from "./components/footer/Footer";
+import PaySuccess from "./pages/paySuccess/PaySuccess";
+import PayFailure from "./pages/payFailure/PayFailure";
 
 function App() {
   const location = useLocation();
   const { logIn } = useSelector(state => state)
 
-  // useEffect(() => {
-  //   console.log('asdasd', logIn)
-  //   if (!logIn) {
-  //     const cookies = Cookies.get();
-  //     window.localStorage.removeItem("estaLogueado");
-  //     window.localStorage.removeItem('carrito');
-  //     window.localStorage.removeItem('count');
+  useEffect(() => {
 
-  //     for (const cookie in cookies) {
-  //       Cookies.remove(cookie);
-  //     }
-  //   }
-  // }, [logIn])
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [location.pathname])
   return (
     <div className="App">
+
       {location?.pathname == "/log-in" || location?.pathname.includes("dashboard") ? '' : <NavBar />}
       {/* {location?.pathname == "/login" ? null : <Footer />} */}
       <Switch>
@@ -52,6 +46,8 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/shopping-cart" component={ShoppingCart} />
         <Route exact path="/historial-de-compra" component={HistorialDeCompra} />
+        <Route exact path="/shopping-cart/success" component={PaySuccess} />
+        <Route exact path="/shopping-cart/failure" component={PayFailure} />
         <Route path="/dashboard" render={() => <DashMain />} >
           {/* <Route exact path="/usuarios" /> */}
         </Route>

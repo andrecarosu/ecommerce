@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom"
 import Productos from './Productos/Productos';
 import Usuarios from './Usuarios/Usuarios';
 import Ventas from './Ventas/Ventas';
-import Graphic from '../components/graphic/graphic';
+// import Graphic from '../components/graphic/graphic';
 import Categorias from './Categorias/Categorias';
 import Menu from './Menu/Menu';
 import FormCreateProduct from '../components/formCreateProduct/FormCreateProduct';
@@ -13,10 +13,12 @@ import Calificaciones from './Calificaciones/Calificaciones';
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
-import { getCategorys, getAllProducts, getFamilies } from '../../redux/actions';
+import * as actions from '../../redux/actions-type'
+import { getCategorys, getAllProducts, getFamilies, getAllUsers } from '../../redux/actions';
 
 // import contentLayout from ''
 const type_permission = 2;
+const URL = process.env.URL
 //esto de pronto podemos mejorarlo de tal forma que se haga con los JWT y no asi
 const DashMain = () => {
     const location = useLocation();
@@ -33,7 +35,16 @@ const DashMain = () => {
         dispatch(getCategorys());
         dispatch(getAllProducts());
         dispatch(getFamilies())
+        dispatch(getAllUsers())
     }, [dispatch])
+
+    useEffect(() => {
+        return () => {
+            dispatch({ type: actions.GET_ALL_USERS, payload: [] })
+        }
+    }, [])
+
+    const { allUsers } = useSelector(state => state)
 
 
     if (!session || session.dataValues.type_id !== type_permission) {
