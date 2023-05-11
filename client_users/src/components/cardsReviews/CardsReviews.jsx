@@ -13,6 +13,7 @@ function CardsReviews(){
             return ( 
                 <CardReview 
                 review_id={review.review_id}
+                name={review.User.name}
                 comments={review.comments}
                 scoring={review.scoring}
                 product_id={review.product_id}

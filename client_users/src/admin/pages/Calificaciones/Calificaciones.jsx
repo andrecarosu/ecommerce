@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import s from './Calificaciones.module.css'
 import ProductsVertical from "../../components/verticalMenu/ProductsVertical";
+import Loader from '../../../components/loader/loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from '../../../redux/actions';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,8 +11,14 @@ import { faComment, faCommentSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Calificaciones = () => {
     const [flag, setFlag] = useState(false)
+    const [load, setLoad] = useState(false)
+
     const dispatch = useDispatch()
     const handleClickCalificacion = (product) => {
+        setTimeout(() => {
+            setLoad(false)
+        }, 500)
+        setLoad(true)
         dispatch(getProductById(product))
         setFlag(true)
     }
@@ -21,6 +28,21 @@ const Calificaciones = () => {
             setFlag(false)
         }
     }, [])
+
+
+    const componentBox = () => {
+        if (!load) {
+
+            return product?.Reviews?.length > 0 && !load ?
+                itemsCalificaciones(product) :
+                <div className={s.contInitial}>
+                    NO HAY REVIEWS
+                    <FontAwesomeIcon size="7x" icon={faCommentSlash} />
+                </div>
+
+        }
+
+    }
 
     const product = useSelector(state => state.product)
 
@@ -32,17 +54,16 @@ const Calificaciones = () => {
             <div className={s.disContainer}>
                 <ProductsVertical handleClickCalificacion={handleClickCalificacion} />
                 <div className={s.boxCalificaciones}>
+                    {load ? <div className={s.loadad}><Loader /></div> : ''}
+
+
                     {!flag ?
                         <div className={s.contInitial}>
                             AQUI SE MOSTRARAN LAS <br />CALIFICACIONES
                             <FontAwesomeIcon size="7x" icon={faComment} />
                         </div> :
-                        product?.Reviews?.length > 0 ?
-                            itemsCalificaciones(product) :
-                            <div className={s.contInitial}>
-                                NO HAY REVIEWS
-                                <FontAwesomeIcon size="7x" icon={faCommentSlash} />
-                            </div>}
+                        componentBox()
+                    }
                 </div>
             </div>
         </div>

@@ -4,10 +4,10 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    margin: 0.5rem ;
+    margin: 0.5rem;
     flex-direction: column;
     width: 100%;
-    gap:2rem;
+    gap: 2rem;
 }
 
 .card {
@@ -46,26 +46,28 @@
     place-items: center;
     padding: 25px;
     margin-top: 50px;
-    background-color:transparent;
+    background-color: transparent;
     font-size: 2rem;
     border-radius: 10px;
     text-align: center;
 }
-.btnPag{
+
+.btnPag {
     all: unset;
     border-radius: 50%;
     height: 30px;
     width: 30px;
     margin: 0 10px 0 10px;
-    cursor:pointer;
+    cursor: pointer;
     font-size: 15px;
     border: solid 1px gray;
 }
-.active{
+
+.active {
     border: solid 1px black;
 }
 
-.btnPag:hover{
+.btnPag:hover {
     color: gray;
     background-color: white;
 }

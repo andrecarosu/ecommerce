@@ -27,7 +27,7 @@ export default function FormUpdatePassword(props) {
       password: form.password,
     }
 
-    console.log(data);
+    //console.log(data);
 
     // Realiza las validaciones
     const errors = validations({
