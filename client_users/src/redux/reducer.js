@@ -36,7 +36,8 @@ import {
   GET_ALL_CITIES,
   NUMBER_PAGE,
   ALLPRODUCTS,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  SET_FILTERS_ACTIVE
 } from "./actions-type.js";
 
 const initialState = {
@@ -52,6 +53,7 @@ const initialState = {
   families: [],
   product: {},
   filter: [],
+  activeFilter: JSON.parse(window.localStorage.getItem("filtersActive")) || {},
   slider: [],
   carrito: JSON.parse(window.localStorage.getItem("carrito")) || [],
   countCarrito: JSON.parse(window.localStorage.getItem("count")) || 0,
@@ -101,6 +103,23 @@ function rootReducer(state = initialState, action) {
 
     case GET_CATEGORY:
       return { ...state, categorys: action.payload };
+
+    case SET_FILTERS_ACTIVE:
+      let filters
+      // console.log('pupurrupup', action.payload)
+      if (Object.keys(action.payload).length !== 0) {
+        filters = action.payload.Categoria ? { ...action.payload } : { ...state.activeFilter, ...action.payload }
+
+      } else {
+        filters = {}
+      }
+
+
+
+      return {
+        ...state,
+        activeFilter: filters
+      }
 
     // ========================* ORDENAMIENTO *========================
 

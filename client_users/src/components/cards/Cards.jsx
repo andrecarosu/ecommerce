@@ -6,18 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../loader/loader";
 import { getAllProducts, numberPage } from "../../redux/actions";
 import { IoAlertCircleOutline } from 'react-icons/io5';
+import BoxFilters from "../showFilters/BoxFilters";
 
 const Cards = () => {
-  const { productsFitered, copyProducts, products, display, page } = useSelector((state) => state);
+  const { productsFitered, copyProducts, products, display, page, activeFilter } = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
     if (products.length === 0) dispatch(getAllProducts())
     window.localStorage.setItem("filtered", JSON.stringify(productsFitered));
     window.localStorage.setItem("copyProducts", JSON.stringify(copyProducts));
+    window.localStorage.setItem("filtersActive", JSON.stringify(activeFilter))
   }, [productsFitered, copyProducts, dispatch])
   // PAGINADO
 
   const [numeroPagina, setNumeroPagina] = useState(page);
+  console.log('filtros ', Object.keys(activeFilter).length)
+
 
   const grupo = 12;
   const conteoFinal = numeroPagina * grupo;
@@ -68,7 +72,10 @@ const Cards = () => {
         <Loader />
       ) : (
         <>
+          {Object.keys(activeFilter).length > 0 ? <BoxFilters activeFilter={activeFilter} /> : ''}
           <div className={styles.card}>
+
+
             {aux.length ? aux.map((products, index) => (
               products.state === false || products.stock === 0 ? null : <Card key={index} producto={products} />
             )) : <div className={styles.alert} >

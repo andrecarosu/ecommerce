@@ -265,25 +265,50 @@ export const getProductByName = (name) => async (dispatch) => {
 // * 5. action-creator para obtener producto por categoría
 
 export const getProductByCategory = (category) => {
-  return { type: action.FILTER_BY_CATEGORY, payload: category };
+  return (dispatch) => {
+    dispatch(setFiltersActive('Categoria', category))
+    dispatch({ type: action.FILTER_BY_CATEGORY, payload: category })
+  }
+
+  // return { type: action.FILTER_BY_CATEGORY, payload: category };
 };
 
 // * 6. action-creator para ordenar productos por nombre ascendente
 
 export const orderedByNameASC = () => {
-  return { type: action.ORDERED_BY_NAME_ASC };
+  return (dispatch) => {
+    dispatch(setFiltersActive('Orden', 'A-Z'))
+    dispatch({ type: action.ORDERED_BY_NAME_ASC })
+  }
+  //return { type: action.ORDERED_BY_NAME_ASC };
 };
 
 // * 7. action-creator para ordenar productos por nombre descendente
 export const orderedByNameDESC = () => {
-  return { type: action.ORDERED_BY_NAME_DESC };
+  return (dispatch) => {
+    dispatch(setFiltersActive('Orden', 'Z-A'))
+    dispatch({ type: action.ORDERED_BY_NAME_DESC })
+  }
+  //return { type: action.ORDERED_BY_NAME_DESC };
 };
 
 // * 8. action-creator para ordenar productos por menor precio
 
 export const orderedByLowestPrice = () => {
-  return { type: action.ORDERED_BY_LOWEST_PRICE };
+  return (dispatch) => {
+    dispatch(setFiltersActive('Orden', 'Menor precio'))
+    dispatch({ type: action.ORDERED_BY_LOWEST_PRICE })
+  }
+  //return { type: action.ORDERED_BY_LOWEST_PRICE };
 };
+
+export const setFiltersActive = (type_filter, value) => {
+
+  return {
+    type: action.SET_FILTERS_ACTIVE,
+    payload: type_filter ? { [type_filter]: value } : {}
+  }
+}
 
 export function cleanReviews() {
   return {
@@ -299,7 +324,11 @@ export function loading() {
 // * 9. action-creator para ordenar productos por mayor precio
 
 export const orderedByHighestPrice = () => {
-  return { type: action.ORDERED_BY_HIGHEST_PRICE };
+  return (dispatch) => {
+    dispatch(setFiltersActive('Orden', 'Mayor precio'))
+    dispatch({ type: action.ORDERED_BY_HIGHEST_PRICE })
+  }
+  //return { type: action.ORDERED_BY_HIGHEST_PRICE };
 };
 export const orderedByRecientes = () => {
   return { type: action.ORDERED_BY_RECIENTES };
@@ -307,16 +336,31 @@ export const orderedByRecientes = () => {
 // * 10. action-creator para filtrar productos por condicion (Nuevo,Usado,Reacondicionado,Ofertas)
 
 export const filterByBrand = (brand) => {
-  return {
-    type: action.FILTER_BY_BRAND,
-    payload: brand
-  };
+  return (dispatch) => {
+    dispatch(setFiltersActive('Marca', brand))
+    dispatch({
+      type: action.FILTER_BY_BRAND,
+      payload: brand
+    })
+  }
+
+  // return {
+  //   type: action.FILTER_BY_BRAND,
+  //   payload: brand
+  // };
 };
 export const filterByOffers = (discount) => {
-  return {
-    type: action.FILTER_BY_OFERTAS,
-    payload: discount
-  };
+  return (dispatch) => {
+    dispatch(setFiltersActive('Oferta', discount))
+    dispatch({
+      type: action.FILTER_BY_OFERTAS,
+      payload: discount
+    })
+  }
+  // return {
+  //   type: action.FILTER_BY_OFERTAS,
+  //   payload: discount
+  // };
 };
 
 // * 11. action-creator para filtrar productos por categoria
