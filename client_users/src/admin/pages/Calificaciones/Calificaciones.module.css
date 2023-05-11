@@ -5,6 +5,10 @@
     padding: 20px;
 }
 
+.containerCalificaciones h1 {
+    z-index: 100;
+}
+
 
 
 .disContainer {
@@ -59,4 +63,15 @@
 .contInitial {
     font-size: 30px;
     color: gray;
+}
+
+.loadad {
+    /* position: absolute; */
+    position: relative;
+    height: 100px;
+    z-index: -100;
+    margin-top: -250px;
+    margin-left: auto;
+
+
 }

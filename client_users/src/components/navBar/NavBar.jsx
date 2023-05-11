@@ -3,23 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import DrawerMenu from "../drawerMenu/DrawerMenu";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import s from "./NavBar.module.css";
 import Cookies from 'js-cookie';
 import { userLoggedIn } from "../../redux/actions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+
 
 // imagenes
-import Logo from "../../assets/images/SoloTextoBlanco.png";
-import Icono from "../../assets/images/SoloIconoNormal.png";
 import logIn from "../../assets/images/logIn.webp";
-import Profile from '../../assets/images/profile.png'
 import { useEffect } from "react";
 
 const NavBar = () => {
-  const logoTexto = Logo;
-  const logoIcono = Icono;
-  const profile = Profile;
-
+  
   /* ------------- MENU HAMBURGUESA ------------- */
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -27,6 +24,9 @@ const NavBar = () => {
   const handleLogInClick = () => {
     setShowProfileMenu(!showProfileMenu);
   };
+  // const handleMouseLeave = () => {
+  //   setShowProfileMenu()
+  // }
 
   const location = useLocation()
 
@@ -39,6 +39,10 @@ const NavBar = () => {
   // const estaLogueado = useSelector(state => state.logIn)
 
   // Obtén el valor almacenado en el localStorage
+  // const session = Cookies.get("user_session");
+  //   let values = JSON.parse(session)
+  //   let userCookie = values.dataValues
+  //   console.log(userCookie);
   const estaLogueado = localStorage.getItem("estaLogueado");
 
   /* ------------- LOGOUT ------------- */
@@ -105,13 +109,16 @@ const NavBar = () => {
         )}
 
         {estaLogueado === "database" && (
-          <div style={{ display: 'flex' }}>
-            <img onClick={handleLogInClick} className={s.logIn} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994536/profile_j9qoip.png" />
-
+          <div 
+            style={{ height:"61px", display:"flex", alignItems:"center" }}
+            onMouseLeave={() => setShowProfileMenu(false)} 
+            onMouseEnter={() => setShowProfileMenu(true)}>
+            <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}}  />
+            {/* <h5 style={{ color:"white"}}>Hola {userCookie.name}</h5> */}
             {showProfileMenu && (
               <div className={s.menuDesplegable}>
 
-                <Link to="/account" className={s.link_menu} onClick={handleLogInClick}>
+                <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
                   <h4>Ver perfil</h4>
                 </Link>
                 <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
@@ -128,8 +135,8 @@ const NavBar = () => {
 
         {estaLogueado === "google" && (
           <div style={{ display: 'flex' }}>
-            <img onClick={handleLogInClick} className={s.logIn} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994536/profile_j9qoip.png" />
-
+            {/* <img onClick={handleLogInClick} className={s.logIn} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994536/profile_j9qoip.png" /> */}
+            <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}} onClick={handleLogInClick}/>
             {showProfileMenu && (
               <div className={s.menuDesplegable}>
                 <Link to="/" className={s.link_menu} onClick={handleLogOut}>
@@ -144,20 +151,26 @@ const NavBar = () => {
 
         <div style={{ position: "relative" }}>
           <Link to="/shopping-cart" style={{ textDecoration: "none" }}>
+            {count !== 0 ? (
             <div
               style={{
                 display: "inline-block",
                 position: "absolute",
                 top: "-10px",
-                right: "6px",
+                right: "-25px",
+                width:"25px", 
+                height:"25px", 
+                backgroundColor:"rgb(248,93,91)", 
+                borderRadius:"50%"
               }}
             >
-              <h4 style={{ fontSize: "25px", color: "var(--green-color)", textShadow: '0px 0px 5px black' }}>
-                {count === 0 ? "" : count}
+              <h4 style={{ fontSize: "15px", color: "white" }}>
+                {count}
               </h4>
-            </div>
+            </div>) : ""}
             <div className={s.button}>
-              <AiOutlineShoppingCart size={40} />
+              {/* <AiOutlineShoppingCart size={40} /> */}
+              <FontAwesomeIcon icon={faShoppingCart} style={{ fontSize: "25px" }}/>
             </div>
           </Link>
         </div>

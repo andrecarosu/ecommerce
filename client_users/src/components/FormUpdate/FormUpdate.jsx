@@ -1,23 +1,74 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getUsuarioByEmail } from "../../redux/actions";
+import { getUsuarioByEmail, getUserById } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Image, CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert";
 import validations from "./validations";
 import style from "./FormUpdate.module.css";
 
-export default function FormUpdate({ idUsuario, updateUserData }) {
-  const { ciudades } = useSelector(state => state);
+export default function FormUpdate({idUsuario,emailResult, updateUserData}) {
+  const usuario = useSelector(state => state.usuario) ?? [];
+  //const [dataUsuario, setDataUsuario] = useState(usuario[0] || {});
+  const [dataUsuario, setDataUsuario] = useState(usuario.length > 0 ? usuario[0] : {});
+  const updatedUserData = updateUserData;  
   const dispatch = useDispatch();
+
+  // const cargarEstado = () => {
+  //   if (emailResult) {
+  //     dispatch(getUsuarioByEmail(emailResult));
+  //   }
+
+  //   if (usuario.length > 0) {
+  //     setDataUsuario(usuario[0]);
+  //   }
+  // };
+
+  const cargarEstado = () => {
+    setDataUsuario({}); // Reinicializar el estado dataUsuario
+  
+    if (emailResult) {
+      dispatch(getUsuarioByEmail(emailResult));
+    }
+  
+    if (usuario.length > 0) {
+      setDataUsuario(usuario[0]);
+    }
+  };
+  
+
+  useEffect(() => {
+    const cargarEstado = async () => {
+      if (emailResult) {
+        await dispatch(getUsuarioByEmail(emailResult));
+      }
+  
+      if (usuario.length > 0) {
+        setDataUsuario(usuario[0]);
+      }
+    };
+  
+    cargarEstado(); // Ejecutar la función cargarEstado inicialmente
+  
+    if (window.location.reload) {
+      cargarEstado(); // Ejecutar la función cargarEstado después de recargar la página
+    }
+  }, [dispatch, emailResult, usuario]);
+ 
+ 
+
+const usuarioId = idUsuario;
+  const emailData = emailResult;
+  console.log(15,emailData);
+
   const [form, setForm] = useState({
-    user_id: null,
-    name: "",
-    address: "",
-    phone: "",
-    email: "",
-    city: null,
-    image: "",
+    user_id: idUsuario,
+    name: dataUsuario.name? dataUsuario.name : "",
+    address: dataUsuario.address? dataUsuario.address : "",
+    phone: dataUsuario.phone? dataUsuario.phone :"",
+    email: dataUsuario.email? dataUsuario.email :"",
+    city: dataUsuario.city? dataUsuario.city :"",
+    image:dataUsuario.image? dataUsuario.image : "",
   });
   const [errors, setErrors] = useState({});
 
@@ -28,9 +79,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
     setErrors(currentErrors);
   }, [form]);
 
-  const updatedUserData = updateUserData;
-  console.log(updatedUserData);
-  const usuarioId = idUsuario;
+
   //const { idUsuario } = props; //recibe por props el id_usuario que se le envía desde el componente Account
  
   const handleSubmit = async (event) => {
@@ -101,7 +150,13 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
               timer: "2000",
             })
           )
-          .then(() => window.location.reload()) // Actualiza la página
+          .then(() => {
+  ; // Actualizar el estado antes de recargar la página
+  window.onload = () => {
+    window.location.reload();
+  };
+  cargarEstado()
+})
           .catch((err) =>
             swal({
               text: "Error",
@@ -165,9 +220,9 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
   useEffect(() => {
     setForm(prevForm => ({
       ...prevForm,
-      user_id: idUsuario
+      user_id: usuarioId
     }));
-  }, [idUsuario]);
+  }, [usuarioId]);
 
 
 
@@ -179,14 +234,14 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
         <div className='form-container' style={{ padding: '15px', marginTop: '70px', marginBottom: '15px' }}>
           <CloudinaryContext cloudName="dfmkjxjsf">
             <form onSubmit={handleSubmit}>
-              <label for="" style={{ fontWeight: '600' }}>
+              <label style={{ fontWeight: '600' }}>
                 Actualizar datos de Perfil
               </label>
               {/* ----------------------- NOMBRE -----------------------*/}
 
               <div className={style.nombres}>
                 <div className={style.contenedorDiv}>
-                  <label for="" className='form-update-label'>
+                  <label className='form-update-label'>
                     Nombre
                   </label>
                   <input
@@ -208,7 +263,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
 
               {/* ----------------------- DIRECCION -----------------------*/}
               <div className={style.contenedorDiv}>
-                <label for="" className='form-update-label'>
+                <label className='form-update-label'>
                   Dirección
                 </label>
                 <input
@@ -226,7 +281,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
 
               {/* ----------------------- TELEFONO -----------------------*/}
               <div className={style.contenedorDiv}>
-                <label for="" className='form-update-label'>
+                <label  className='form-update-label'>
                   Teléfono
                 </label>
                 <input
@@ -244,7 +299,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
 
               {/* ----------------------- EMAIL -----------------------*/}
               <div className={style.contenedorDiv}>
-                <label for="" className='form-update-label'>
+                <label className='form-update-label'>
                   Email
                 </label>
                 <input
@@ -263,7 +318,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
 
               {/* ----------------------- CIUDAD -----------------------*/}
               <div className={style.contenedorDiv}>
-                <label for="" className='form-update-label'>
+                <label className='form-update-label'>
                   Ciudad
                 </label>
                 <input
@@ -281,7 +336,7 @@ export default function FormUpdate({ idUsuario, updateUserData }) {
 
               {/* ----------------------- IMAGEN -----------------------*/}
               <div className={style.contenedorDiv} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <label htmlFor="" className='form-update-label'>
+                <label bel className='form-update-label'>
                   Imagen
                 </label>
                 <input
