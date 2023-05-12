@@ -13,13 +13,25 @@ const Account = () => {
   const [userData, setUserData] = useState({});
   const dispatch = useDispatch();
   const usuario = useSelector(state => state.usuario) ?? [];
+  const estaLogueado = localStorage.getItem("estaLogueado");
+  let email = ""
+  
+  if (estaLogueado === "database") {
 
-  const token = Cookies.get("user_token");
+    const token = Cookies.get("user_token");
   const decodedToken = jwt_decode(token);
 
-  const email = decodedToken.email;
+  email = decodedToken.email;
   console.log(14, email);
   const emailDatas = email
+
+ 
+    
+  } else {
+
+    email = Cookies.get("user_session");
+    console.log(35,email);    
+  }
 
   useEffect(() => {
     dispatch(getUsuarioByEmail(email));
@@ -45,6 +57,8 @@ const Account = () => {
 
 
   const nombreUsuario = userData?.name;
+
+
 
   return (
     <div className={s.container}>
