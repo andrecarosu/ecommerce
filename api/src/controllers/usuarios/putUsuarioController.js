@@ -77,6 +77,23 @@ const resetPassword = async (email) => {
     }
 
 
+    const mailOptions = {
+      from: "thewinecellar.com@gmail.com",
+      to: email,
+      subject: "Recuperacion de contraseña",
+      text: `Estimado ${usuarioActualizado.name} ,hemos generado una contraseña de respaldo:
+             Su contraseña es: ${randomPassword} 
+             Al ingresar a la aplicación dirigete a mi perfil y reestablece una nueva contraseña personal`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("Error al enviar el correo electrónico:", error);
+      } else {
+        console.log("Correo electrónico enviado correctamente:", info.response);
+      }
+    });
+
     console.log('----->', randomPassword)
     return usuarioActualizado
 
