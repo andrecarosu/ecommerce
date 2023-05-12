@@ -1,11 +1,20 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { userId, date, detailOrder, total } from "./assistand";
 import swal from 'sweetalert';
 import axios from "axios"
+import { Redirect } from 'react-router-dom';
 
-function PayFailure() {
+
+function PayFailure () {
+  const dispatch = useDispatch();
   const { carrito } = useSelector((state) => state);
+
+  //REDIRECCIONAMIENTO
+
+    const [shouldRedirect, setShouldRedirect] = useState(false)
+
+  //POST VENTA
 
   useEffect(()=>{
     const postVenta = async () => {
@@ -30,14 +39,52 @@ function PayFailure() {
           })
         })
       };
-      postVenta();
-  },[])
+      if(carrito.length !== 0) postVenta();
+    },[dispatch])
+    
+    //ANIMACIÓN
+
+  const [size, setSize] = useState(0);
+  const [percentage, setPercentage] = useState(50)
+  
+  useEffect(()=>{
+    if(size < window.innerWidth){
+      setTimeout(() => {
+        setSize(prev => prev += 100)
+      }, 90);
+    }
+    if(size >= window.innerWidth){
+      setPercentage(0)
+      swal({
+        title: '¡No se pudo realizar la compra!',
+        text: '¡Vuelva a intentar!',
+        icon: 'error',
+        timer: "4000"
+        }) 
+      setTimeout(() => {
+        setShouldRedirect(true)
+      }, 4000)
+    }
+  }, [size])
+
   return (
-    <div style={{width:"100%", height:"100vh", display:"flex", justifyContent:"center", alignItems:"center"}}>
-      <div>
-        Su pago ha sido rechazado
-      </div>
-    </div>
+    <>
+      {shouldRedirect ? (
+        <Redirect to= "/shopping-cart"/>
+        ) : (
+        <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh", overflow: "hidden"}}>
+          <div style={{
+            backgroundColor:"rgb(242,61,78)", 
+            borderRadius:`${percentage}%`, 
+            width:`${size}px`, 
+            height:`${size}px`, 
+            display:"flex", 
+            justifyContent:"center", 
+            alignItems:"center"}}>    
+          </div>
+        </div>
+      )}
+    </>  
   )
 };
 

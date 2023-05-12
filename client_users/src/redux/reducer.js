@@ -36,6 +36,8 @@ import {
   GET_ALL_CITIES,
   NUMBER_PAGE,
   ALLPRODUCTS,
+  CLEAN_SHOPPING_CART,
+  REMOVE_SHOPPING_CART,
   GET_ALL_USERS,
   SET_FILTERS_ACTIVE
 } from "./actions-type.js";
@@ -57,6 +59,7 @@ const initialState = {
   slider: [],
   carrito: JSON.parse(window.localStorage.getItem("carrito")) || [],
   countCarrito: JSON.parse(window.localStorage.getItem("count")) || 0,
+  remove: false,
   ciudades: [],
   display: false,
   logIn: false,
@@ -257,7 +260,17 @@ function rootReducer(state = initialState, action) {
             : product
         ),
       };
-
+    
+    case CLEAN_SHOPPING_CART:
+      return {
+        ...state, 
+        countCarrito: 0,
+        carrito:[]
+      };
+    
+    case REMOVE_SHOPPING_CART: 
+      return {remove: !state.remove}  
+    
     // ======================* CONTADOR CARRITO *======================
 
     case COUNT_AGREGAR:
