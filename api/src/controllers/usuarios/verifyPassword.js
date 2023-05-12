@@ -6,9 +6,10 @@ const cookie = require('cookie');
 const verifyPassword = async (user_id, matchPassword) => {
     try {
         const user = await User.findByPk(user_id)
-
+        console.log('-------->', user_id)
+        console.log('-------->', matchPassword)
         if (user) {
-            console.log(user)
+
             const passwordMatch = await bcrypt.compare(matchPassword, user.password);
             if (passwordMatch) {
                 return { succesfull: 'La contraseña es correcta' }

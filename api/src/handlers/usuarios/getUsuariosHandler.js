@@ -25,7 +25,7 @@ const getUserByIdHandler = async (req, res, next) => {
 
 const validatePasswordUserHandler = async (req, res, next) => {
 
-  const { user_id, matchPassword } = req.body
+  const { user_id, matchPassword } = req.query
   try {
     const response = await verifyPassword(user_id, matchPassword)
     res.status(200).json(response)
