@@ -167,10 +167,10 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
           )
           .then(() => {
             ; // Actualizar el estado antes de recargar la página
-            window.onload = () => {
+            //window.onload = () => {
               window.location.reload();
-            };
-            cargarEstado()
+              cargarEstado()
+            //};
           })
           .catch((err) =>
             swal({

@@ -114,9 +114,12 @@ export default function FormLogin() {
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
-      const user = result.user;
+      const user = result.user;      
       if (user) {
-        swal({
+        const session = user.email;
+        console.log(30, session);
+        Cookies.set('user_session', JSON.stringify(session), { secure: true, sameSite: 'strict' });
+         swal({
           title: 'Bienvenido',
           text: 'Ya puedes navegar con tu cuenta!',
           icon: 'success',
