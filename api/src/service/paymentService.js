@@ -66,8 +66,8 @@ class paymentService{
       payer_email:"test_user_1957000233@testuser.com",
       items,
       back_urls:{
-        success: "https://deploynodejsecommerce.onrender.com/shopping-cart/success",
-        failure: "https://deploynodejsecommerce.onrender.com/shopping-cart/failure",
+        success: "https://ecommerce-khaki-nine.vercel.app/shopping-cart/success",
+        failure: "https://ecommerce-khaki-nine.vercel.app/shopping-cart/failure",
         pending: "/pending",
       },
       auto_return: "approved"
