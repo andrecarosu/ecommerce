@@ -18,8 +18,8 @@ const Account = () => {
   const decodedToken = jwt_decode(token);
 
   const email = decodedToken.email;
-  console.log(14,email);
-  const emailDatas= email
+  console.log(14, email);
+  const emailDatas = email
 
   useEffect(() => {
     dispatch(getUsuarioByEmail(email));
@@ -32,16 +32,21 @@ const Account = () => {
     }
   }, [usuario]);
 
-  
+
   /* ------------- MENU HAMBURGUESA ------------- */
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const handleLogInClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     setShowProfileMenu(!showProfileMenu);
   };
 
   const idUsuario = usuario.length > 0 ? usuario[0].user_id : null;
+
 
   const nombreUsuario = userData?.name;
 
@@ -52,7 +57,7 @@ const Account = () => {
         <h1 style={{ marginBottom: '15px', textAlign: 'left', fontSize: '30px' }}>Mi cuenta</h1>
         <div className={s.datos}>
           <div style={{ backgroundImage: `url(${userData.image})` }} className={s.imagen}></div>
-          
+
           <span className={s.label}>Nombre</span>
           <h3 className={s.dato_nombre}>{nombreUsuario}</h3>
 
