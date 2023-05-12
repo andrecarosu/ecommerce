@@ -66,8 +66,8 @@ class paymentService{
       payer_email:"test_user_1957000233@testuser.com",
       items,
       back_urls:{
-        success: "http://localhost:3000/shopping-cart/success",
-        failure: "http://localhost:3000/shopping-cart/failure",
+        success: "https://deploynodejsecommerce.onrender.com/shopping-cart/success",
+        failure: "https://deploynodejsecommerce.onrender.com/shopping-cart/failure",
         pending: "/pending",
       },
       auto_return: "approved"
