@@ -31,3 +31,10 @@
     transform: scale(1.1);
     background-color: rgb(230, 230, 230);
 }
+
+.linkForget {
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 400;
+
+}

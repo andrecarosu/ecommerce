@@ -6,70 +6,85 @@ import { Image, CloudinaryContext } from "cloudinary-react"; // para guardar las
 import swal from "sweetalert";
 import validations from "./validations";
 import style from "./FormUpdate.module.css";
+import data from "../carouselAbout/data";
 
-export default function FormUpdate({idUsuario,emailResult, updateUserData}) {
+export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
   const usuario = useSelector(state => state.usuario) ?? [];
   //const [dataUsuario, setDataUsuario] = useState(usuario[0] || {});
-  const [dataUsuario, setDataUsuario] = useState(usuario.length > 0 ? usuario[0] : {});
-  const updatedUserData = updateUserData;  
+  const [dataUsuario, setDataUsuario] = useState({});
+  const updatedUserData = updateUserData;
   const dispatch = useDispatch();
 
-  // const cargarEstado = () => {
-  //   if (emailResult) {
-  //     dispatch(getUsuarioByEmail(emailResult));
-  //   }
+  useEffect(() => {
+    if (usuario.length > 0) {
+      setDataUsuario(usuario[0])
+    }
+  }, [idUsuario, usuario])
 
-  //   if (usuario.length > 0) {
-  //     setDataUsuario(usuario[0]);
-  //   }
-  // };
 
   const cargarEstado = () => {
     setDataUsuario({}); // Reinicializar el estado dataUsuario
-  
+
     if (emailResult) {
       dispatch(getUsuarioByEmail(emailResult));
     }
-  
+
     if (usuario.length > 0) {
       setDataUsuario(usuario[0]);
     }
   };
-  
+
+
+  // useEffect(() => {
+  //   console.log('entro')
+  //   const cargarEstado = async () => {
+  //     if (emailResult) {
+  //       await dispatch(getUsuarioByEmail(emailResult));
+  //     }
+
+  //     if (usuario.length > 0) {
+  //       setDataUsuario(usuario[0]);
+  //     }
+  //   };
+
+  //   cargarEstado(); // Ejecutar la función cargarEstado inicialmente
+
+  //   if (window.location.reload) {
+  //     cargarEstado(); // Ejecutar la función cargarEstado después de recargar la página
+  //   }
+  // }, [dispatch, emailResult, usuario]);
+
+  const [form, setForm] = useState({})
 
   useEffect(() => {
-    const cargarEstado = async () => {
-      if (emailResult) {
-        await dispatch(getUsuarioByEmail(emailResult));
-      }
-  
-      if (usuario.length > 0) {
-        setDataUsuario(usuario[0]);
-      }
-    };
-  
-    cargarEstado(); // Ejecutar la función cargarEstado inicialmente
-  
-    if (window.location.reload) {
-      cargarEstado(); // Ejecutar la función cargarEstado después de recargar la página
+    if (Object.keys(dataUsuario).length > 0) {
+      setForm({
+        user_id: idUsuario,
+        name: dataUsuario.name,
+        phone: dataUsuario.phone,
+        address: dataUsuario.address,
+        email: dataUsuario.email,
+        city: dataUsuario.city,
+        image: dataUsuario.image,
+      })
     }
-  }, [dispatch, emailResult, usuario]);
- 
- 
 
-const usuarioId = idUsuario;
+  }, [dispatch, dataUsuario, usuario, idUsuario])
+
+  const usuarioId = idUsuario;
   const emailData = emailResult;
-  console.log(15,emailData);
+  console.log(15, emailData);
 
-  const [form, setForm] = useState({
-    user_id: idUsuario,
-    name: dataUsuario.name? dataUsuario.name : "",
-    address: dataUsuario.address? dataUsuario.address : "",
-    phone: dataUsuario.phone? dataUsuario.phone :"",
-    email: dataUsuario.email? dataUsuario.email :"",
-    city: dataUsuario.city? dataUsuario.city :"",
-    image:dataUsuario.image? dataUsuario.image : "",
-  });
+
+  // const [form, setForm] = useState({
+  //   user_id: idUsuario,
+  //   name: dataUsuario.name ? dataUsuario.name : "",
+  //   address: dataUsuario.address ? dataUsuario.address : "",
+  //   phone: dataUsuario.phone ? dataUsuario.phone : "",
+  //   email: dataUsuario.email ? dataUsuario.email : "",
+  //   city: dataUsuario.city ? dataUsuario.city : "",
+  //   image: dataUsuario.image ? dataUsuario.image : "",
+  // });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -81,10 +96,10 @@ const usuarioId = idUsuario;
 
 
   //const { idUsuario } = props; //recibe por props el id_usuario que se le envía desde el componente Account
- 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     // captura de datos del estado form
     const data = {
       user_id: form.user_id,
@@ -96,10 +111,10 @@ const usuarioId = idUsuario;
       estado: form.estado,
       image: form.image
     };
-  
+
     // Obtiene los valores del formulario
     const { name, address, phone, email, password, city } = form;
-  
+
     // Realiza las validaciones
     const errors = validations({
       name,
@@ -109,7 +124,7 @@ const usuarioId = idUsuario;
       password,
       city
     });
-  
+
     if (Object.keys(errors).length > 0) {
       setErrors(errors); // Actualiza el estado de los errores
     } else {
@@ -117,9 +132,9 @@ const usuarioId = idUsuario;
       const filteredData = Object.fromEntries(
         Object.entries(data).filter(([_, value]) => !!value)
       );
-  
+
       let emailExists = false; // Variable para verificar si el email ya existe en la base de datos
-  
+
       // Verificar si el correo ya existe en la base de datos
       await axios
         .get(`https://deploynodejsecommerce.onrender.com/usuario?email=${filteredData.email}`)
@@ -137,7 +152,7 @@ const usuarioId = idUsuario;
           }
         })
         .catch((err) => console.log(err));
-  
+
       // Si el correo no existe, se actualizan los datos
       if (!emailExists) {
         await axios
@@ -151,12 +166,12 @@ const usuarioId = idUsuario;
             })
           )
           .then(() => {
-  ; // Actualizar el estado antes de recargar la página
-  window.onload = () => {
-    window.location.reload();
-  };
-  cargarEstado()
-})
+            ; // Actualizar el estado antes de recargar la página
+            //window.onload = () => {
+              window.location.reload();
+              cargarEstado()
+            //};
+          })
           .catch((err) =>
             swal({
               text: "Error",
@@ -169,13 +184,13 @@ const usuarioId = idUsuario;
       }
     }
   };
-  
-  
+
+
   const handleInputChange = async event => {
     const property = event.target.name;
     const value = event.target.value;
     // Verificar si el input es de tipo file
-        if (event.target.type === "file") {
+    if (event.target.type === "file") {
       const file = event.target.files[0]; // Obtener el archivo seleccionado
       let valor = 0;
       if (file) valor = 1;
@@ -259,7 +274,7 @@ const usuarioId = idUsuario;
                   )}
 
                 </div>
-                </div>
+              </div>
 
               {/* ----------------------- DIRECCION -----------------------*/}
               <div className={style.contenedorDiv}>
@@ -281,7 +296,7 @@ const usuarioId = idUsuario;
 
               {/* ----------------------- TELEFONO -----------------------*/}
               <div className={style.contenedorDiv}>
-                <label  className='form-update-label'>
+                <label className='form-update-label'>
                   Teléfono
                 </label>
                 <input

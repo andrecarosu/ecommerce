@@ -62,7 +62,7 @@ const Productos = () => {
         setProductos(productsFitered)
         // productos = productsFitered
 
-    }, [dispatch, productsFitered])
+    }, [dispatch, productsFitered]) 
 
 
 

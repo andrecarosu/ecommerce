@@ -1,16 +1,23 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { userId, date, detailOrder, total } from "./assistand";
 import swal from 'sweetalert';
 import axios from "axios"
-
+import { cleanShoppingCart } from '../../redux/actions';
+import { Redirect, useLocation } from 'react-router-dom';
 
 function PaySuccess () {
+  const dispatch = useDispatch();
+  const { carrito } = useSelector((state) => state);
+  const location = useLocation()
 
-  const { carrito, countCarrito } = useSelector((state) => state);
+  //REDIRECCIONAMIENTO
+
+    const [shouldRedirect, setShouldRedirect] = useState(false)
+
+  //POST VENTA
 
   useEffect(()=>{
-    window.localStorage.setItem("count", JSON.stringify(0));
     const postVenta = async () => {
       const venta = {
         date: date(),
@@ -33,18 +40,57 @@ function PaySuccess () {
           })
         })
       };
-      postVenta();
+      if(carrito.length !== 0) postVenta();
       window.localStorage.setItem("carrito", JSON.stringify([]));
-      if (carrito.length !== 0) {
-        window.location.reload();
-      }
-  },[])
+      window.localStorage.setItem("count", JSON.stringify(0));
+      dispatch(cleanShoppingCart());
+    },[dispatch])
+    
+    //ANIMACIÓN
+
+  const [size, setSize] = useState(0);
+  const [percentage, setPercentage] = useState(50)
+  
+  useEffect(()=>{
+    if(size < window.innerWidth){
+      setTimeout(() => {
+        setSize(prev => prev += 100)
+      }, 90);
+    }
+    if(size >= window.innerWidth){
+      setPercentage(0)
+
+      swal({
+        title: '¡Compra exitosa!',
+        text: '¡Gracias por elegirnos!',
+        icon: 'success',
+        timer: "4000"
+        })  
+    
+      setTimeout(() => {
+        setShouldRedirect(true)
+      }, 4000)
+    }
+  }, [size])
+
   return (
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh"}}>
-      <div style={{border:"solid 1px red"}}>
-        <p>Pago Exitoso</p>
-      </div>
-    </div>
+    <>
+      {shouldRedirect ? (
+        <Redirect to= "/"/>
+        ) : (
+        <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh", overflow: "hidden"}}>
+          <div style={{
+            backgroundColor:"rgb(58,181,74)", 
+            borderRadius:`${percentage}%`, 
+            width:`${size}px`, 
+            height:`${size}px`, 
+            display:"flex", 
+            justifyContent:"center", 
+            alignItems:"center"}}>
+          </div>
+        </div>
+      )}
+    </>  
   )
 };
 
