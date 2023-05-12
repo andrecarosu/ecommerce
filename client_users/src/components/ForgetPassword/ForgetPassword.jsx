@@ -16,7 +16,7 @@ const ForgetPassword = ({ setActiveForget }) => {
     }
 
     const onClickReset = async () => {
-        await axios.put("http://localhost:3001/usuario/reset-password", { email: input })
+        await axios.put("https://deploynodejsecommerce.onrender.com/usuario/reset-password", { email: input })
             .then((data) => {
                 console.log('here', data.data)
                 setActiveForget(false)
