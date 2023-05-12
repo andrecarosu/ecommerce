@@ -13,7 +13,15 @@ export default function FormUpdatePassword(props) {
   const [errors, setErrors] = useState({});
 
   const validate = async () => {
+    try {
 
+      const response = await axios.get(`http://localhost:3001/usuario/validate-password?user_id=${idUsuario}&matchPassword=${form.prevPassword}`)
+      console.log('response mathc', response)
+      return response
+    } catch (error) {
+      console.log('---------', error.response.data)
+      return { error: error.response.data }
+    }
   }
 
   const handleSubmit = async event => {
@@ -23,6 +31,7 @@ export default function FormUpdatePassword(props) {
     const {
       user_id: user_id,
       password: password,
+      prevPassword: prevPassword,
       confirmPassword: confirmPassword
     } = form;
 
@@ -34,16 +43,28 @@ export default function FormUpdatePassword(props) {
     //console.log(data);
 
     // Realiza las validaciones
-    const errors = validations({
+    let errors = validations({
       password,
       confirmPassword
     });
+
+    const validateResponse = await validate()
+    if (validateResponse.error) {
+      errors = { ...errors, prevPassword: validateResponse.error }
+    }
+
+
     // Si hay errores, los muestra y no continúa con la solicitud
     if (Object.keys(errors).length > 0) {
       setErrors(errors); // Actualiza el estado de los errores
     } else {
       // Si no hay errores, continúa con el proceso de envío del formulario
       // ...
+      setErrors({})
+      // const validateResponse = await validate()
+      // if (validateResponse.error) {
+      //   return
+      // }
 
       // Si no hay errores, continúa con el proceso de envío del formulario
       try {
@@ -106,6 +127,7 @@ export default function FormUpdatePassword(props) {
 
 
   const handleInputChange = async event => {
+
     const property = event.target.name;
     const value = event.target.value;
     setForm(prevForm => ({
@@ -139,6 +161,9 @@ export default function FormUpdatePassword(props) {
               onChange={handleInputChange}
               className='form-input'
             />
+            {errors.prevPassword && (
+              <div className={style.errors}>{errors.prevPassword}</div>
+            )}
             <label>Nueva Contraseña:</label>
 
             <input

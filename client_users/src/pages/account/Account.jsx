@@ -50,6 +50,10 @@ const Account = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const handleLogInClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     setShowProfileMenu(!showProfileMenu);
   };
 
