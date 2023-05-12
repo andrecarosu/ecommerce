@@ -7,9 +7,13 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import Detail from "../detail/Detail";
 import Review from "./Review";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 // ESTILOS
 import s from "./ShoppingHistory.module.css";
+import Loader from "../../components/loader/loader";
 
 Modal.setAppElement('#root'); // le decimos a react-modal que nuestro componente principal es #root
 
@@ -33,6 +37,7 @@ const HistorialDeCompra = () => {
         const ventas = response2.data;
         console.log(3, ventas);
         if (ventas.length > 0) {
+          setLoader(true)
           setUserData(ventas);
           setEmailData(email);
         }
@@ -61,89 +66,106 @@ const HistorialDeCompra = () => {
     setShowModalReview(!showModalReview);
     setSelectCalificar({ email, id });
   };
+  //fecha corta
+  const newData = (data) => {
+    console.log(data);
+    const fecha = new Date(data);
+    const opcionesDeFormato = { day: 'numeric', month: 'short' };
+    const fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesDeFormato)
+    .replace(/ /g, '-')
+    .toUpperCase()
+    return `${fechaFormateada.slice(0,4)}${fechaFormateada.slice(4).toLowerCase()}`
+  }
 
-
+const [loader, setLoader] = useState(false)
   return (
-    <div className={s.contenedor}>
-      <div className={s.tabla}>
-        <div className={s.titulo}>
-          <h1>Historial de compras:</h1>
-        </div>
-        {userData.length > 0 ? (
-          <div>
-            {userData.map((venta) => (
-              <div key={venta.id_orden}>
-                <h3>Compra realizada el {venta.fecha}</h3>
-                <label className={s.total}>Total Venta: ${venta.total}</label>
-                {venta.estado ? <label className={s.aux}>Venta Exitosa</label> : <label className={s.aux}>Venta Fallida</label>}
-                {venta.estado ?
-                  venta.productos.map((detalle) => (
-                    <div>
-                      <div className={s.detalle} key={detalle.id_producto}>
-                        <label className={s.aux}>Producto: {detalle.name}</label>
-                        <div className={s.divLink} >
-                          {/* <Link className={s.link} to={`/detail/${detalle.id_producto}`}>
-            <img className={s.img} src={detalle.image} alt={detalle.name}  onClick={() => toggleModal(detalle.id_producto)}  />
-            </Link> */}
-                          <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id)} />
-
+    <>
+      {!loader ? 
+        <Loader/>  : (
+          <div className={s.contenedor}>
+            <div className={s.tabla}>
+              <div className={s.titulo}>
+                <h1>Mis compras</h1>
+              </div>
+              {userData.length > 0 ? (
+                <div>
+                  {userData.map((venta) => (
+                    <div key={venta.id_orden} style={{border: "solid rgb(200, 197, 197) 1px",  margin: "25px 0px 25px 0px", borderRadius:"3px"}}>
+                      <div style={{margin: "20px", display:"flex", justifyContent:"space-between"}}>
+                        <div style={{margin: "0 0 0 40px"}}>
+                          <h3>{newData(venta.fecha)}</h3>
                         </div>
-                        <label className={s.aux}>Valor Unitario: {detalle.valor_unitario}</label>
-                        <label className={s.aux}>Cant: {detalle.cantidad}</label>
-                        <label className={s.aux}>Valor Total  $: {detalle.valor_total}</label>
-                        {/* {showProfileMenu && <Review id={detalle.id} email={email} mostrarProp={true} />} */}
+                        <div>
+                          {venta.estado 
+                          ? <h3 className={s.success}>Compraste {<FontAwesomeIcon icon={faCheckCircle} />}</h3> 
+                          : <h3 className={s.failure}>Compra cancelada <FontAwesomeIcon icon={faTimesCircle} /></h3>}
+                        </div>
                       </div>
-                      <button className={s.btnReview} onClick={() => toggleModalReview(email, detalle.id)}>Calificar</button>
-                    </div>
-                  ))
-                  : venta.productos.map((detalle) => (
-                    <div className={s.detalle} key={detalle.id_producto}>
-                      <label className={s.aux}>Producto: {detalle.name}</label>
-                      <div className={s.divLink} >
-                        {/* <Link className={s.link} to={`/detail/${detalle.id}`}> */}
-                        <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id)} />
-                        {/* </Link> */}
-                      </div>
-                      <label className={s.aux}>Valor Unitario: {detalle.valor_unitario}</label>
-                      <label className={s.aux}>Cant: {detalle.cantidad}</label>
-                      <label className={s.aux}>Valor Total  $: {detalle.valor_total}</label>
+                      <>
+                        {venta.productos.map((detalle) => (
+                          <div>
+                            <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+                              <div className={s.detalle} key={detalle.id_producto}>
+                                <div className={s.divLink} >
+                                  <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id)} />
+                                </div>
+                                <h3 className={s.aux}>{detalle.name}</h3>
+                                {venta.estado ? <button className={s.btnReview} onClick={() => toggleModalReview(email, detalle.id)}>Calificar</button>: null}
+                                <p className={s.aux}>${detalle.valor_unitario} x unidad</p>
+                                {detalle.cantidad === 1
+                                ? <p className={s.aux}>{detalle.cantidad} unidad</p>
+                                : <p className={s.aux}>{detalle.cantidad} unidades</p>}
+                                <h3 className={s.aux}>SubTotal ${detalle.valor_total}</h3>
+                                {/* {showProfileMenu && <Review id={detalle.id} email={email} mostrarProp={true} />} */}
+                              </div>
+                            </div>
+                            {/* <div style={{display:"flex", justifyContent:"center"}}>
+                            </div> */}
+                          </div>
+                          ))}
+                          <div style={{display: "flex", justifyContent: "center"}}>
+                            <div style={{width: "90%", border: "solid rgb(200, 197, 197) 1px",  margin: "25px 0px 25px 0px", borderRadius:"3px", display:"flex", justifyContent: "flex-end"}}>
+                              <h3 style={{ fontSize: "30px", margin:"0 20px 0 0" }}>Total ${venta.total}</h3>
+                            </div>
+                          </div>
+                      </>
                     </div>
                   ))}
-              </div>
-            ))}
 
-            {/* Ventana emergente del detalle de la compra */}
-            <Modal
-              isOpen={showModal}
-              onRequestClose={toggleModal}
-              className={s.modal}
-              overlayClassName={s.modalOverlay}
-            >
-              {selectedDetail && <Detail id={selectedDetail} />}
-              <button className={s.btnClose} onClick={toggleModal}>
-                CERRAR
-              </button>
-            </Modal>
+                  {/* Ventana emergente del detalle de la compra */}
+                  <Modal
+                    isOpen={showModal}
+                    onRequestClose={toggleModal}
+                    className={s.modal}
+                    overlayClassName={s.modalOverlay}
+                  >
+                    {selectedDetail && <Detail id={selectedDetail} />}
+                    <button className={s.btnClose} onClick={toggleModal}>
+                      CERRAR
+                    </button>
+                  </Modal>
 
-            <Modal
-              isOpen={showModalReview}
-              onRequestClose={toggleModalReview}
-              className={s.modal}
-              overlayClassName={s.modalOverlay}
-            >
-              {selectCalificar && <Review id={selectCalificar.id} email={selectCalificar.email} />}
-              <button className={s.btnCloseReview} onClick={toggleModalReview}>
-                CERRAR
-              </button>
-            </Modal>
+                  <Modal
+                    isOpen={showModalReview}
+                    onRequestClose={toggleModalReview}
+                    className={s.modal}
+                    overlayClassName={s.modalOverlay}
+                  >
+                    {selectCalificar && <Review id={selectCalificar.id} email={selectCalificar.email} />}
+                    <button className={s.btnCloseReview} onClick={toggleModalReview}>
+                      CERRAR
+                    </button>
+                  </Modal>
 
+                </div>
+              ) : (
+                <p>No se encontraron compras realizadas por el usuario</p>
+              )}
+
+            </div>
           </div>
-        ) : (
-          <p>No se encontraron compras realizadas por el usuario</p>
-        )}
-
-      </div>
-    </div>
+      )}
+    </>
   );
 
 };
