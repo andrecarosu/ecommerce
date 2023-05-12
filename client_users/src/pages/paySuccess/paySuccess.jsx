@@ -4,48 +4,53 @@ import { userId, date, detailOrder, total } from "./assistand";
 import swal from 'sweetalert';
 import axios from "axios"
 import { cleanShoppingCart } from '../../redux/actions';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-import { TiTick } from 'react-icons/ti';
-
+import { Redirect, useLocation } from 'react-router-dom';
 
 function PaySuccess () {
   const dispatch = useDispatch();
   const { carrito } = useSelector((state) => state);
-  console.log(userId());
+  const location = useLocation()
+
+  //REDIRECCIONAMIENTO
+
+    const [shouldRedirect, setShouldRedirect] = useState(false)
+
+  //POST VENTA
+
   useEffect(()=>{
-    // const postVenta = async () => {
-    //   const venta = {
-    //     date: date(),
-    //     total: total(carrito),
-    //     user_id : userId(),
-    //     detail_order : detailOrder(carrito),
-    //     state: true
-    //   }
-    //   console.log(venta);
-    //   await axios.post("http://localhost:3001/venta", venta)
-    //     .then(response => {
-    //       console.log(response.data);
-    //     })
-    //     .catch(error => {
-    //       swal({
-    //         title: "Ocurrio un error",
-    //         text: `${error}`,
-    //         icon: "error",
-    //         timer: "3000"
-    //       })
-    //     })
-    //   };
-    //   postVenta();
+    const postVenta = async () => {
+      const venta = {
+        date: date(),
+        total: total(carrito),
+        user_id : userId(),
+        detail_order : detailOrder(carrito),
+        state: true
+      }
+      console.log(venta);
+      await axios.post("http://localhost:3001/venta", venta)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          swal({
+            title: "Ocurrio un error",
+            text: `${error}`,
+            icon: "error",
+            timer: "3000"
+          })
+        })
+      };
+      if(carrito.length !== 0) postVenta();
       window.localStorage.setItem("carrito", JSON.stringify([]));
       window.localStorage.setItem("count", JSON.stringify(0));
-      dispatch(cleanShoppingCart())
+      dispatch(cleanShoppingCart());
     },[dispatch])
+    
+    //ANIMACIÓN
+
   const [size, setSize] = useState(0);
   const [percentage, setPercentage] = useState(50)
-  const [showMessage, setShowMessage] = useState(false)
-  // console.log(ancho, alto);
+  
   useEffect(()=>{
     if(size < window.innerWidth){
       setTimeout(() => {
@@ -54,23 +59,38 @@ function PaySuccess () {
     }
     if(size >= window.innerWidth){
       setPercentage(0)
-      setShowMessage(!showMessage)
-      console.log(percentage);
+
+      swal({
+        title: '¡Compra exitosa!',
+        text: '¡Gracias por elegirnos!',
+        icon: 'success',
+        timer: "4000"
+        })  
+    
+      setTimeout(() => {
+        setShouldRedirect(true)
+      }, 4000)
     }
   }, [size])
+
   return (
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh", overflow: "hidden"}}>
-      <div style={{backgroundColor:"rgb(58,181,74)", borderRadius:`${percentage}%`, width:`${size}px`, height:`${size}px`, display:"flex", justifyContent:"center", alignItems:"center"}}>    
-        {size < window.innerWidth ? (
-          null
+    <>
+      {shouldRedirect ? (
+        <Redirect to= "/"/>
         ) : (
-          <div>
-            <FontAwesomeIcon icon={faCheckCircle} style={{fontSize:"80px", margin:"20px"}}/>
-            <h1>¡Compra éxitosa!</h1>
+        <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100vh", overflow: "hidden"}}>
+          <div style={{
+            backgroundColor:"rgb(58,181,74)", 
+            borderRadius:`${percentage}%`, 
+            width:`${size}px`, 
+            height:`${size}px`, 
+            display:"flex", 
+            justifyContent:"center", 
+            alignItems:"center"}}>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>  
   )
 };
 

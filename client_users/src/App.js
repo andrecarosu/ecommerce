@@ -33,7 +33,11 @@ function App() {
   return (
     <div className="App">
 
-      {location?.pathname == "/log-in" || location?.pathname.includes("dashboard") || location?.pathname == "/shopping-cart/success" ? '' : <NavBar />}
+      {location?.pathname == "/log-in" 
+      || location?.pathname.includes("dashboard") 
+      || location?.pathname == "/shopping-cart/success" 
+      || location?.pathname === "/shopping-cart/failure"
+      ? '' : <NavBar />}
       {/* {location?.pathname == "/login" ? null : <Footer />} */}
       <Switch>
         <Route exact path="/" component={HomePrincipal} />
@@ -54,7 +58,10 @@ function App() {
       </Switch>
 
 
-      {location?.pathname.includes("dashboard") || location?.pathname === "/shopping-cart/success" ? '' : <Footer />}
+      {location?.pathname.includes("dashboard") 
+      || location?.pathname === "/shopping-cart/success" 
+      || location?.pathname === "/shopping-cart/failure"
+      ? '' : <Footer />}
 
     </div>
   );
