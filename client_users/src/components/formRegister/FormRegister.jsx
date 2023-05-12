@@ -18,19 +18,12 @@ export default function FormRegister() {
     phone: "",
     email: "",
     password: "",
-    city: null,
+    city: "",
     estado: true,
     image: "",
   });
 
-  const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    // Llama a la función validations con el estado del formulario actual
-    const currentErrors = validations(form);
-    // Actualiza el estado de los errores con los errores actuales
-    setErrors(currentErrors);
-  }, [form]);
+  const [errors, setErrors] = useState({}); 
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -136,6 +129,7 @@ export default function FormRegister() {
         ...prevForm,
         [property]: value
       }));
+    }
 
       const currentErrors = validations({ [property]: value });
       // setErrors(prevErrors => ({
@@ -145,10 +139,19 @@ export default function FormRegister() {
       setErrors({ ...errors, [property]: currentErrors[property] });
 
 
-    }
   }
 
-
+  useEffect(() => {
+    // // Llama a la función validations con el estado del formulario actual
+    // const currentErrors = validations(form);
+    // // Actualiza el estado de los errores con los errores actuales
+    // setErrors(currentErrors);
+    setForm(prevForm => ({
+       ...prevForm 
+      // id:id,
+      // email:email     
+    }));
+    }, []);
 
   return (
     <>
