@@ -15,7 +15,7 @@ export default function FormUpdatePassword(props) {
   const validate = async () => {
     try {
 
-      const response = await axios.get(`http://localhost:3001/usuario/validate-password?user_id=${idUsuario}&matchPassword=${form.prevPassword}`)
+      const response = await axios.get(`https://deploynodejsecommerce.onrender.com/usuario/validate-password?user_id=${idUsuario}&matchPassword=${form.prevPassword}`)
       console.log('response mathc', response)
       return response
     } catch (error) {
