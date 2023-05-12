@@ -16,7 +16,7 @@ import DashMain from "./admin/pages/DashMain"
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import PaySuccess from "./pages/paySuccess/paySuccess";
+import PaySuccess from "./pages/paySuccess/PaySuccess";
 import PayFailure from "./pages/payFailure/PayFailure";
 
 function App() {
@@ -33,7 +33,11 @@ function App() {
   return (
     <div className="App">
 
-      {location?.pathname == "/log-in" || location?.pathname.includes("dashboard") ? '' : <NavBar />}
+      {location?.pathname == "/log-in" 
+      || location?.pathname.includes("dashboard") 
+      || location?.pathname == "/shopping-cart/success" 
+      || location?.pathname === "/shopping-cart/failure"
+      ? '' : <NavBar />}
       {/* {location?.pathname == "/login" ? null : <Footer />} */}
       <Switch>
         <Route exact path="/" component={HomePrincipal} />
@@ -54,7 +58,10 @@ function App() {
       </Switch>
 
 
-      {location?.pathname.includes("dashboard") ? '' : <Footer />}
+      {location?.pathname.includes("dashboard") 
+      || location?.pathname === "/shopping-cart/success" 
+      || location?.pathname === "/shopping-cart/failure"
+      ? '' : <Footer />}
 
     </div>
   );

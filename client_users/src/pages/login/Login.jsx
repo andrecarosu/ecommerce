@@ -21,7 +21,7 @@ const Login = () => {
         <FormLogin />
       </div>
 
-      <p style={{ marginTop: '25px', color: 'gray' }}>Al continuar, aceptas las Condiciones de uso y el Aviso de privacidad de JustOffers.</p>
+      {/* <p style={{ marginTop: '25px', color: 'gray' }}>Al continuar, aceptas las Condiciones de uso y el Aviso de privacidad de JustOffers.</p> */}
     </div>
   );
 };
