@@ -12,6 +12,10 @@ export default function FormUpdatePassword(props) {
 
   const [errors, setErrors] = useState({});
 
+  const validate = async () => {
+
+  }
+
   const handleSubmit = async event => {
     event.preventDefault();
 
@@ -76,6 +80,7 @@ export default function FormUpdatePassword(props) {
   };
   const [form, setForm] = useState({
     user_id: null,
+    prevPassword: "",
     password: "",
     confirmPassword: ""
   });
@@ -126,6 +131,14 @@ export default function FormUpdatePassword(props) {
         <div className={mostrar ? style.container : style.ocultar}>
           <button className={style.cerrar} onClick={handleMostrar}>Cancelar</button>
           <form onSubmit={handleSubmit}>
+            <label>Escriba su contraseña anterior</label>
+            <input
+              type="password"
+              name="prevPassword"
+              value={form.prevPassword}
+              onChange={handleInputChange}
+              className='form-input'
+            />
             <label>Nueva Contraseña:</label>
 
             <input

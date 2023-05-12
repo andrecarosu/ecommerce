@@ -6,6 +6,7 @@ import validation from './validation'
 import swal from 'sweetalert'
 import axios from 'axios'
 import { initializeApp } from "firebase/app";
+import ForgetPassword from '../ForgetPassword/ForgetPassword';
 import Google from "../../assets/images/IconGoogle.png"
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -15,6 +16,7 @@ import { userLoggedIn } from "../../redux/actions";
 import Cookies from 'js-cookie';
 
 import styles from "../formLogin/FormLogin.module.css"
+import { useState } from 'react';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDIr4a7cej0mw217G8qMwAGMx8R9MEYj2g",
@@ -33,7 +35,7 @@ const auth = getAuth(app);
 //LAUTARO
 export default function FormLogin() {
 
-
+  const [activeForget, setActiveForget] = useState(false)
   const estado = true
 
   const logOut = false
@@ -104,7 +106,9 @@ export default function FormLogin() {
     }
   };
 
-
+  const onClickForget = () => {
+    setActiveForget(!activeForget)
+  }
 
   // carolina
   const handleGoogleLogin = async () => {
@@ -139,47 +143,51 @@ export default function FormLogin() {
   }
   //carolina final
   return (
-    <div className={styles.container}
-    // style={{ width: '100%', maxWidth: '820px' }}
-    >
-      <Formik
-        initialValues={{
-          email: '',
-          password: ''
-        }}
-        onSubmit={handleLogin}
-        validate={validation}
-        validateOnBlur={false}
-        validateOnChange={false}
+    <>
+      {activeForget ? <ForgetPassword setActiveForget={setActiveForget} /> : null}
+      <div className={styles.container}
+      // style={{ width: '100%', maxWidth: '820px' }}
       >
-        <Form className='form-container'>
+        <Formik
+          initialValues={{
+            email: '',
+            password: ''
+          }}
+          onSubmit={handleLogin}
+          validate={validation}
+          validateOnBlur={false}
+          validateOnChange={false}
+        >
+          <Form className='form-container'>
 
-          <Field name='email' type='email' placeholder='Email' className='form-input' />
-          <ErrorMessage name='email' />
+            <Field name='email' type='email' placeholder='Email' className='form-input' />
+            <ErrorMessage name='email' />
 
-          <Field name='password' type='password' placeholder='Password' className='form-input' />
-          <ErrorMessage name='password' />
+            <Field name='password' type='password' placeholder='Password' className='form-input' />
+            <ErrorMessage name='password' />
 
-          <div className={styles.botones}
-          // style={{ marginTop: '20px' }}
-          >
-            <button className={styles.boton} type='submit' >Iniciar sesión</button>
+            <div className={styles.botones}
+            // style={{ marginTop: '20px' }}
+            >
+              <button className={styles.boton} type='submit' >Iniciar sesión</button>
+              <h4 className={styles.linkForget} onClick={onClickForget}><u>Olvide mi contraseña</u></h4>
 
-            <div className='or'>
-              <div style={{ border: '1px solid grey', width: '90px' }}></div> <span style={{ margin: '0px 10px' }}>¿No tienes cuenta?</span> <div style={{ border: '1px solid grey', width: '90px' }}></div>
+              <div className='or'>
+                <div style={{ border: '1px solid grey', width: '90px' }}></div> <span style={{ margin: '0px 10px' }}>¿No tienes cuenta?</span> <div style={{ border: '1px solid grey', width: '90px' }}></div>
+              </div>
+
+              <Link to={'/registrar-usuario'}>
+                <button type="button" className={styles.boton}>Registrarse</button>
+              </Link>
             </div>
 
-            <Link to={'/registrar-usuario'}>
-              <button type="button" className={styles.boton}>Registrarse</button>
-            </Link>
-          </div>
+            <div>
+              <button type="button" className={styles.botonRedes} onClick={handleGoogleLogin}><img className={styles.btnRedes} src={iconGoogle} /></button>
+            </div>
 
-          <div>
-            <button type="button" className={styles.botonRedes} onClick={handleGoogleLogin}><img className={styles.btnRedes} src={iconGoogle} /></button>
-          </div>
-
-        </Form>
-      </Formik>
-    </div>
+          </Form>
+        </Formik>
+      </div>
+    </>
   )
 }
