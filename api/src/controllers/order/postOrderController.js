@@ -52,7 +52,6 @@ const createDetalleVenta = async (detalle_order, venta_id, state) => {
           value: value,
           ProductProductId: product_id,
           OrderOrderId: venta_id,
-          user_id: user_id,
           name: product.name,
           image: product.image, // Incluir el nombre del producto en el campo name
         });
@@ -69,7 +68,7 @@ const createDetalleVenta = async (detalle_order, venta_id, state) => {
     return newDetalleVenta;
   } catch (error) {
     console.log(error);
-    throw new Error("Hubo un error creando el detalle de venta");
+    throw new Error("Hubo un error creando el detalle de venta", error);
   }
 };
 
