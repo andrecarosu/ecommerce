@@ -3,9 +3,12 @@ import Pagination from '../../components/pagination/Pagination';
 import TableUsuarios from '../../components/TableUsuarios/TableUsuarios';
 import usePagination from '../../components/pagination/PaginationHook';
 import s from './Usuarios.module.css'
+import { useSelector } from 'react-redux';
 const Usuarios = () => {
-    console.log('entro')
-    const { currentPage, totalPages, paginatedData, NextPage, PreviousPage } = usePagination(persons, 8)
+
+    const { allUsers } = useSelector(state => state)
+
+    const { currentPage, totalPages, paginatedData, NextPage, PreviousPage } = usePagination(allUsers, 8)
 
     return (
         <div className={s.usuariosContainer}>

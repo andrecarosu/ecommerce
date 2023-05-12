@@ -25,7 +25,7 @@ const TableUsuarios = (props) => {
                         <tr key={index}>
                             <td><a>{person.name}</a></td>
                             <td><a>{person.email}</a></td>
-                            <td><a>{person.direccion}</a></td>
+                            <td><a>{person.address}</a></td>
                             <td><a>{new Date(person.fecha).toLocaleString('es-ES', {
                                 day: 'numeric',
                                 month: 'numeric',

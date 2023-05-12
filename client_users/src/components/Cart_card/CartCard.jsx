@@ -1,13 +1,14 @@
-import { IoTrashBinOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { deleteCount, eliminarDelCarrito, restarCantidad, restarCount, sumarCantidad, sumarCount } from "../../redux/actions"
 import QuantityDisplay from "../quantityDisplay/QuantityDisplay";
 import swal from "sweetalert";
 import s from "./cartcard.module.css";
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
 export default function CartCard(product) {
   const dispatch = useDispatch();
+  const { carrito } = useSelector(state => state)
 
   function handleEliminarProducto() {
     dispatch(eliminarDelCarrito(product));
@@ -59,13 +60,15 @@ export default function CartCard(product) {
                 <h3 style={{fontSize: "25px"}}>Subtotal ${product.discount_price*product.amount}</h3>
               </div>
               <div className={s.eliminar} onClick={handleEliminarProducto}>
-                <IoTrashBinOutline size={20} />
+                <RiDeleteBin5Line size={23} />
               </div>
             </div>
           </div>
+          {product.index + 1 !== carrito.length ? (
           <div style={{display:"flex", justifyContent: "center"}}>
             <hr style={{width:"90%"}}/>
           </div>
+          ) : ""}
     </div>      
   );
 }

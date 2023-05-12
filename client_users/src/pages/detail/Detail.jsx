@@ -8,6 +8,9 @@ import s from './Detail.module.css'
 import swal from 'sweetalert'
 import CardsReviews from "../../components/cardsReviews/CardsReviews"
 import Loader from '../../components/loader/loader'
+import { IoIosArrowBack } from 'react-icons/io';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 // import axios from 'axios'
 
@@ -177,8 +180,8 @@ const Detail = (props) => {
 
                     </div>
                   </div>
-                  <div >
-                    <button className={s.condicion}  onClick={handlerBack}>Atrás</button>
+                  <div className={s.condicion} onClick={handlerBack}>
+                    <FontAwesomeIcon icon={faArrowLeft}  style={{color:"grey"}}/> Atrás
                   </div>
                 </div>
 
