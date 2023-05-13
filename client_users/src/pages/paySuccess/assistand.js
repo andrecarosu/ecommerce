@@ -2,12 +2,12 @@ import Cookies from "js-cookie";
 
     
     /*ID DE USUARIO*/
-export const userId = () => {
+export const userEmail = () => {
     const session = Cookies.get("user_session");
     let values = JSON.parse(session)
     let userCookie = values.dataValues
-    let  userId = userCookie.user_id 
-    return userId;
+    let  email = userCookie.email 
+    return email;
 };
 
     /*FECHA DE LA VENTA*/
@@ -30,6 +30,8 @@ export const detailOrder = (carrito) => {
             value: product.amount*product.discount_price,
             product_id: product.product_id,
             unit_value: product.discount_price,
+            email: userEmail(),
+            state: false
         }
     }) 
     return detail;
