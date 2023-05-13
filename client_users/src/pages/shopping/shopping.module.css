@@ -15,12 +15,13 @@
 
 .total{
     background-color: white;
-    width: 70%;
-    margin: 30px;
+    width: 90%;
+    margin: 0 0 10px 0;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     border: solid 1px rgb(200, 197, 197);
+    border-radius: 3px;
 }
 
 .mercadoPago{
@@ -48,11 +49,10 @@
 }
 
 .titulo {
-    width: 90%;
+    width: 100%;
     padding: 10px;
-    border: solid 1px rgb(154, 154, 154);
+    color: rgb(213,161,41);
     background-color: white;
-    font-size: 25px;
 }
 
 .text {

@@ -124,8 +124,9 @@ const [loader, setLoader] = useState(false)
                           </div>
                           ))}
                           <div style={{display: "flex", justifyContent: "center"}}>
-                            <div style={{width: "90%", border: "solid rgb(200, 197, 197) 1px",  margin: "25px 0px 25px 0px", borderRadius:"3px", display:"flex", justifyContent: "flex-end"}}>
-                              <h3 style={{ fontSize: "30px", margin:"0 20px 0 0" }}>Total ${venta.total}</h3>
+                            <div style={{width: "90%", border: "solid rgb(200, 197, 197) 1px",  margin: "10px 0px 25px 0px", borderRadius:"3px", display:"flex", justifyContent: "space-between"}}>
+                              <h3 style={{ fontSize: "30px", margin:"0 0 0 20px" }}>Total</h3>
+                              <h3 style={{ fontSize: "30px", margin:"0 20px 0 0" }}>${venta.total}</h3>
                             </div>
                           </div>
                       </>
