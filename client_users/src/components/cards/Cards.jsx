@@ -34,10 +34,9 @@ console.log(productsFitered);
 
       
 console.log(aux);
-  useEffect(() => {
-    setNumeroPagina(1)
-
-  }, [productsFitered])
+  // useEffect(() => {
+  //   setNumeroPagina(1)
+  // }, [productsFitered])
 
   useEffect(() => {
     handlerScroll()
@@ -76,7 +75,10 @@ console.log(aux);
           <div className={styles.card}>
 
             {aux.length !== 0 ? aux.map((products, index) => (
-             products.state === false || products.stock === 0 ? null : <Card key={index} producto={products} />
+             products.state === false 
+             || products.stock === 0 
+             ? null 
+             : <Card key={index} producto={products} />
             )) : <div className={styles.alert} > 
             <IoAlertCircleOutline size={60}/>
             <p>No hay coincidencias</p> </div>}
