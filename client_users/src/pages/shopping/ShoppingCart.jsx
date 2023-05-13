@@ -38,7 +38,7 @@ export default function ShoppingCart() {
 }
  
   return (
-        <div style={{ marginTop: "100px", display:"flex", justifyContent:"center"}}>
+        <div style={{ margin: "100px 0 30px 0", display:"flex", justifyContent:"center"}}>
           <div style={{ border: "solid 1px rgb(200, 197, 197)", width:"90%", borderRadius:"3px", backgroundColor:"white" ,boxShadow: "0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1)" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <div className={styles.titulo}>
