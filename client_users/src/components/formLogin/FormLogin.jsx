@@ -118,7 +118,7 @@ export default function FormLogin() {
       if (user) {
         const session = user.email;
         console.log(30, session);
-        Cookies.set('user_session', JSON.stringify(session), { secure: true, sameSite: 'strict' });
+        Cookies.set('user_session', session, { secure: true, sameSite: 'strict' });
          swal({
           title: 'Bienvenido',
           text: 'Ya puedes navegar con tu cuenta!',

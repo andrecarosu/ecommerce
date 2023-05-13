@@ -11,9 +11,9 @@ const getAllReviews = async (req, res) => {
           product_id: product_id,
         },
 
-        include: [
-          { model: User, attributes: ["name"] },
-        ],
+        // include: [
+        //   { model: User, attributes: ["name"] },
+        // ],
       });
       
     

@@ -1,6 +1,6 @@
 
 const { Order, Detail_order, Product, User } = require("../../db");
-
+const { Op, Sequelize } = require("sequelize");
 const getDetalle_Venta = async (order_id) => {
   try {
    //consulta la Orden
@@ -30,17 +30,19 @@ const getDetalle_Venta = async (order_id) => {
         fecha: order.date,
         total: order.total,
         estado: order.state,
-        id_usuario: order.user_id
       })),
       
       productos: detallesVenta.map((d) => {
         const producto = productos.find((p) => p.product_id === d.ProductProductId);
         return {
+          detail_order_id: d.detail_order_id,
           id_producto: d.ProductProductId,
           nombre_producto: producto ? producto.name : null,
           valor_unitario: d.unit_value,
           valor_total: d.value,
-          cantidad: d.amount
+          cantidad: d.amount,
+          email: d.email,
+          state: d.state
         };
       }),
     };
@@ -69,11 +71,9 @@ const getDetalle_Venta = async (order_id) => {
       // Crea un objeto de venta vacío para cada orden y almacénalo en un nuevo array llamado `ventas`
       const ventas = orders.map((order) => ({
         id: order.order_id,
-        id_orden: order.order_id,
         fecha: order.date,
         total: order.total,
         estado: order.state,
-        id_usuario: order.user_id,
         productos: [],
       }));
   
@@ -83,12 +83,15 @@ const getDetalle_Venta = async (order_id) => {
         if (venta) {
           venta.productos.push({
             id: detail.ProductProductId,
+            detail_order_id: detail.detail_order_id,
             id_producto: detail.ProductProductId,
             valor_unitario: detail.unit_value,
             valor_total: detail.value,
             cantidad: detail.amount,
             name: detail.name,
-            image: detail.image
+            image: detail.image,
+            email: detail.email,
+            state: detail.state
           });
         }
       });
@@ -102,18 +105,41 @@ const getDetalle_Venta = async (order_id) => {
   
   
 
-  const getVentasUsuario = async (user_id) => {
-    console.log(user_id);
+  const getVentasUsuario = async (email) => {
     try {
-      // Consulta las órdenes del usuario
-      const orders = await Order.findAll({
+      console.log(33, email);
+      const users = await Detail_order.findAll({
         where: {
-          user_id,
+          email: { [Op.regexp]: `^${email}$` } // Utiliza una expresión regular para buscar el correo exacto
         },
-        raw: true,
+        attributes: [
+          "OrderOrderId"          
+        ],
+        
       });
+      console.log(40,users);   
+
+    const ordersIds = users.map((user) => user.OrderOrderId);
+
+    const orders = await Order.findAll({
+  where: {
+    order_id: ordersIds
+  },
+  raw: true,
+});
+
+
+// return users;
+// } catch (error) {
+//   console.error(error);
+// }
+
+//   };
   
-      // Consulta los detalles de orden para las órdenes del usuario
+  
+      
+  
+     // Consulta los detalles de orden para las órdenes del usuario
       const orderIds = orders.map((order) => order.order_id);
       const details = await Detail_order.findAll({
         where: {
@@ -122,29 +148,32 @@ const getDetalle_Venta = async (order_id) => {
         raw: true,
       });
   
-      // Crea un objeto de venta vacío para cada orden y almacénalo en un nuevo array llamado `ventas`
+     // Crea un objeto de venta vacío para cada orden y almacénalo en un nuevo array llamado `ventas`
       const ventas = orders.map((order) => ({
         id: order.order_id,
         id_orden: order.order_id,
-        id_usuario: order.user_id,
         fecha: order.date,
         total: order.total,
         estado: order.state,
         productos: [],
       }));
   
-      // Agrega los productos a cada objeto de venta en el array `ventas`
+      //Agrega los productos a cada objeto de venta en el array `ventas`
       details.forEach((detail) => {
         const venta = ventas.find((venta) => venta.id === detail.OrderOrderId);
         if (venta) {
           venta.productos.push({
             id: detail.ProductProductId,
+            detail_order_id: detail.detail_order_id,
             id_producto: detail.ProductProductId,
             valor_unitario: detail.unit_value,
             cantidad: detail.amount,
             valor_total: detail.value,
             name:detail.name,
-            image: detail.image
+            image: detail.image,
+            email: detail.email,
+            state: detail.state
+
           });
         }
       });

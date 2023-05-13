@@ -19,35 +19,39 @@ Modal.setAppElement('#root'); // le decimos a react-modal que nuestro componente
 
 const HistorialDeCompra = () => {
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState({})
-  const [emailData, setEmailData] = useState({})
-  const token = Cookies.get("user_token");
-  const decodedToken = jwt_decode(token);
-
-  const email = decodedToken.email;
-  console.log(1, email);
+  const [userData, setUserData] = useState({});
+  const estaLogueado = localStorage.getItem("estaLogueado");
+  const [loader, setLoader] = useState(false); // Agregamos el estado loader
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get(`http://localhost:3001/email?email=${email}`);
-      const idUsuario = response.data[0].user_id;
-      console.log(3, idUsuario);
-      setTimeout(async () => {
-        const response2 = await axios.get(`http://localhost:3001/venta/${idUsuario}`);
-        const ventas = response2.data;
-        console.log(3, ventas);
-        if (ventas.length > 0) {
-          setLoader(true)
-          setUserData(ventas);
-          setEmailData(email);
+      try {
+        let email = "";
+        if (estaLogueado === "database") {
+          const token = Cookies.get("user_token");
+          const decodedToken = jwt_decode(token);
+          email = decodedToken.email;
+        } else if (estaLogueado === "google") {
+          email = Cookies.get("user_session");
         }
-      }, 1000);
+  
+        const response2 = await axios.get(`http://localhost:3001/venta?email=${email}`);
+        const ventas = response2.data;
+        //console.log(3, ventas);
+        if (ventas.length > 0) {
+          setUserData(ventas);
+        }
+        setLoader(true); // Actualizamos el estado loader a true
+      } catch (error) {
+        console.error(error);
+      }
     })();
-  }, [dispatch, email, setUserData]);
+  }, [estaLogueado]);
+  
 
 
-  const dataUsuario = userData[0];
-  console.log(4, dataUsuario);
+  const dataUsuario = Array.isArray(userData) && userData.length > 0 ? userData[0] : null;
+   //console.log(4, dataUsuario);
   // console.log(5,dataUsuario.estado);
 
   const [showModal, setShowModal] = useState(false);
@@ -62,9 +66,9 @@ const HistorialDeCompra = () => {
   const [showModalReview, setShowModalReview] = useState(false);
   const [selectCalificar, setSelectCalificar] = useState(null);
 
-  const toggleModalReview = (email, id) => {
+  const toggleModalReview = (detail_order_id, id) => {
     setShowModalReview(!showModalReview);
-    setSelectCalificar({ email, id });
+    setSelectCalificar({ detail_order_id, id });
   };
   //fecha corta
   const newData = (data) => {
@@ -77,7 +81,7 @@ const HistorialDeCompra = () => {
     return `${fechaFormateada.slice(0,4)}${fechaFormateada.slice(4).toLowerCase()}`
   }
 
-const [loader, setLoader] = useState(false)
+
   return (
     <>
       {!loader ? 
@@ -110,7 +114,7 @@ const [loader, setLoader] = useState(false)
                                   <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id)} />
                                 </div>
                                 <h3 className={s.aux}>{detalle.name}</h3>
-                                {venta.estado ? <button className={s.btnReview} onClick={() => toggleModalReview(email, detalle.id)}>Calificar</button>: null}
+                                {venta.estado ? <button className={s.btnReview} onClick={() => toggleModalReview(detalle.detail_order_id, detalle.id)}>Calificar</button>: null}
                                 <p className={s.aux}>${detalle.valor_unitario} x unidad</p>
                                 {detalle.cantidad === 1
                                 ? <p className={s.aux}>{detalle.cantidad} unidad</p>
@@ -151,7 +155,7 @@ const [loader, setLoader] = useState(false)
                     className={s.modal}
                     overlayClassName={s.modalOverlay}
                   >
-                    {selectCalificar && <Review id={selectCalificar.id} email={selectCalificar.email} />}
+                    {selectCalificar && <Review id={selectCalificar.id} idDetail={selectCalificar.detail_order_id} />}
                     <button className={s.btnCloseReview} onClick={toggleModalReview}>
                       CERRAR
                     </button>
