@@ -1,4 +1,5 @@
-const { getAllUsers, getUserByName, getUserById} = require("../../controllers/usuarios/getUsuarioController");
+const { getAllUsers, getUserByName, getUserById, } = require("../../controllers/usuarios/getUsuarioController");
+const { verifyPassword } = require("../../controllers/usuarios/verifyPassword")
 
 const getAllUsersHandler = async (req, res, next) => {
   const { name } = req.query;
@@ -22,11 +23,23 @@ const getUserByIdHandler = async (req, res, next) => {
   }
 };
 
+const validatePasswordUserHandler = async (req, res, next) => {
+
+  const { user_id, matchPassword } = req.query
+  try {
+    const response = await verifyPassword(user_id, matchPassword)
+    res.status(200).json(response)
+  } catch (error) {
+    next(error)
+  }
+}
+
 
 
 module.exports = {
   getAllUsersHandler,
-  getUserByIdHandler
+  getUserByIdHandler,
+  validatePasswordUserHandler
 }
 
 

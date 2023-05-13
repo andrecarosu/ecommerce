@@ -94,6 +94,15 @@ const NavBar = () => {
         >
           <h4>¿Quienes somos?</h4>
         </Link>
+
+        <Link
+          to="/product"
+          className={s.link}
+        // style={{ margin: '0px 10px' }}
+        >
+          <h4>Productos</h4>
+        </Link>
+
       </div>
 
       <div className={s.box1}>
@@ -138,7 +147,15 @@ const NavBar = () => {
             {/* <img onClick={handleLogInClick} className={s.logIn} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994536/profile_j9qoip.png" /> */}
             <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}} onClick={handleLogInClick}/>
             {showProfileMenu && (
+
+              
               <div className={s.menuDesplegable}>
+                   <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
+                  <h4>Ver perfil</h4>
+                </Link>
+                <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
+                  <h4>Historial de compras</h4>
+                </Link>
                 <Link to="/" className={s.link_menu} onClick={handleLogOut}>
                   <h4>Cerrar sesión</h4>
                 </Link>
