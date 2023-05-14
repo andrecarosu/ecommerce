@@ -38,6 +38,7 @@ function PaySuccess () {
             timer: "3000"
           })
         })
+      console.log(venta);
       };
       if(carrito.length !== 0) postVenta();
       window.localStorage.setItem("carrito", JSON.stringify([]));

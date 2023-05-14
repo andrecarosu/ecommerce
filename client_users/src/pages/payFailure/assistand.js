@@ -2,14 +2,19 @@ import Cookies from "js-cookie";
 
     
     /*ID DE USUARIO*/
-export const userEmail = () => {
-    const session = Cookies.get("user_session");
-    console.log(session)
-    let values = JSON.parse(session)
-    let userCookie = values.dataValues
-    let  email = userCookie.email 
-    return email;
-};
+    export const userEmail = () => {
+        const estaLogueado = localStorage.getItem("estaLogueado")
+        let email;
+        if(estaLogueado === "database"){
+           const session = Cookies.get("user_session");
+            let values = JSON.parse(session)
+            let userCookie = values.dataValues
+            email = userCookie.email 
+        } else if(estaLogueado === "google"){
+           email = Cookies.get("user_session"); 
+        };
+        return email;
+    }
 
     /*FECHA DE LA VENTA*/
     export const date = () => {

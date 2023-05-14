@@ -3,10 +3,16 @@ import Cookies from "js-cookie";
     
     /*ID DE USUARIO*/
 export const userEmail = () => {
-    const session = Cookies.get("user_session");
-    let values = JSON.parse(session)
-    let userCookie = values.dataValues
-    let  email = userCookie.email 
+    const estaLogueado = localStorage.getItem("estaLogueado")
+    let email;
+    if(estaLogueado === "database"){
+       const session = Cookies.get("user_session");
+        let values = JSON.parse(session)
+        let userCookie = values.dataValues
+        email = userCookie.email 
+    } else if(estaLogueado === "google"){
+       email = Cookies.get("user_session"); 
+    };
     return email;
 };
 
