@@ -5,12 +5,11 @@
     margin-top: 0;
     align-items: center;
     text-align: center;
-    height: auto;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 300;
-    height: 60px;
+    padding: 5px 0;
 }
 
 .sesion {
@@ -30,6 +29,12 @@
     display: none;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.nav_text img {
+    margin-right: 15px;
+    width: 70px;
+    height: 60px;
 }
 
 .box1 {

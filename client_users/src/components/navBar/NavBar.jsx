@@ -9,6 +9,7 @@ import { userLoggedIn } from "../../redux/actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import Logo from '../../assets/images/LogoHeader.png';
 
 
 // imagenes
@@ -78,8 +79,11 @@ const NavBar = () => {
           <img className={s.icono} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994537/SoloIconoNormal_bjxj2j.png"/>
         </Link>
       </div> */}
-
       <div className={s.nav_text}>
+        <Link to="/">
+          <img src={Logo} alt="" />
+        </Link>
+
         <Link
           to="/"
           className={s.link}
