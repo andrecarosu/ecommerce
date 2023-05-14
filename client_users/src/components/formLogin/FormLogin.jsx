@@ -98,7 +98,7 @@ export default function FormLogin() {
     } catch (error) {
       const err = error.response.data;
       swal({
-        text: 'Invalid email or password',
+        text: 'Email o contraseña invalido',
         icon: 'error',
         timer: '2000'
       });
@@ -120,8 +120,8 @@ export default function FormLogin() {
         console.log(30, session);
         Cookies.set('user_session', session, { secure: true, sameSite: 'strict' });
          swal({
-          title: 'Bienvenido',
-          text: 'Ya puedes navegar con tu cuenta!',
+          title: '¡Bienvenido!',
+          text: '¡Ya puedes navegar con tu cuenta!',
           icon: 'success',
           timer: '2000'
         });
