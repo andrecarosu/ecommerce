@@ -18,6 +18,9 @@ import PayFailure from "./pages/payFailure/PayFailure";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect } from "react";
 import { Redirect } from "react-router-dom/cjs/react-router-dom";
+import { useState } from "react";
+import { Redirect } from "react-router-dom/cjs/react-router-dom";
+
 
 function App() {
   const location = useLocation();
