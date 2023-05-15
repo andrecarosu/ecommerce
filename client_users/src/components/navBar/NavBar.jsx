@@ -5,7 +5,7 @@ import SearchBar from "../searchBar/SearchBar";
 import DrawerMenu from "../drawerMenu/DrawerMenu";
 import s from "./NavBar.module.css";
 import Cookies from 'js-cookie';
-import { userLoggedIn } from "../../redux/actions";
+import { cleanShoppingCart, userLoggedIn } from "../../redux/actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -59,6 +59,7 @@ const NavBar = () => {
     window.localStorage.removeItem("estaLogueado");
     window.localStorage.removeItem('carrito');
     window.localStorage.removeItem('count');
+    dispatch(cleanShoppingCart())
     Cookies.remove('user_token')
     Cookies.remove('user_session')
     dispatch(userLoggedIn(logOut));
@@ -123,19 +124,18 @@ const NavBar = () => {
 
         {estaLogueado === "database" && (
           <div 
-            style={{ height:"61px", display:"flex", alignItems:"center" }}
+            style={{ height:"65px", display:"flex", alignItems:"center" }}
             onMouseLeave={() => setShowProfileMenu(false)} 
             onMouseEnter={() => setShowProfileMenu(true)}>
             <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}}  />
-            {/* <h5 style={{ color:"white"}}>Hola {userCookie.name}</h5> */}
             {showProfileMenu && (
               <div className={s.menuDesplegable}>
 
                 <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
-                  <h4>Ver perfil</h4>
+                  <h4>Mi perfil</h4>
                 </Link>
                 <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
-                  <h4>Historial de compras</h4>
+                  <h4>Mis compras</h4>
                 </Link>
                 <Link to="/" className={s.link_menu} onClick={handleLogOut}>
                   <h4>Cerrar sesión</h4>
@@ -147,12 +147,12 @@ const NavBar = () => {
 
 
         {estaLogueado === "google" && (
-          <div style={{ display: 'flex' }}>
-            {/* <img onClick={handleLogInClick} className={s.logIn} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994536/profile_j9qoip.png" /> */}
+          <div 
+          style={{ height:"65px", display:"flex", alignItems:"center" }}
+          onMouseLeave={() => setShowProfileMenu(false)} 
+          onMouseEnter={() => setShowProfileMenu(true)}>
             <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}} onClick={handleLogInClick}/>
             {showProfileMenu && (
-
-              
               <div className={s.menuDesplegable}>
                    <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
                   <h4>Ver perfil</h4>
@@ -190,7 +190,6 @@ const NavBar = () => {
               </h4>
             </div>) : ""}
             <div className={s.button}>
-              {/* <AiOutlineShoppingCart size={40} /> */}
               <FontAwesomeIcon icon={faShoppingCart} style={{ fontSize: "25px" }}/>
             </div>
           </Link>
