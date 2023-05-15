@@ -34,7 +34,7 @@
     padding: 4px 40px;
     font-size: 18px;
     transition: 0.1s;
-    margin: 20px;
+    margin: 50px 0 0 0;
     font-weight: 600;
 }
 
@@ -66,4 +66,13 @@
     border: solid 1px rgb(154,154,154);
     background-color: white;
     font-size: 20px;
+}
+
+.back {
+    font-size: 25px;
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    padding: 1px 10px 1px 10px;
+    cursor: pointer;
 }

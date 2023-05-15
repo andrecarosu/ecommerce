@@ -16,12 +16,8 @@ import DashMain from "./admin/pages/DashMain"
 import PaySuccess from "./pages/paySuccess/paySuccess";
 import PayFailure from "./pages/payFailure/PayFailure";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useState } from "react";
 import { Redirect } from "react-router-dom/cjs/react-router-dom";
-import PaySuccess from "./pages/paySuccess/paySuccess";
-import PayFailure from "./pages/payFailure/PayFailure";
 
 function App() {
   const location = useLocation();

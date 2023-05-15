@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux"
 import CartCard from "../../components/Cart_card/CartCard"
 import { cleanMercadoPago, mercadoPago } from "../../redux/actions"
 import styles from './shopping.module.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from "react-router-dom"
 
 export default function ShoppingCart() {
   const dispatch = useDispatch()
@@ -42,9 +44,17 @@ export default function ShoppingCart() {
   return total;
   };
 
+  //Boton atrás
+  const history = useHistory();
+  const handlerBack = () =>{
+    history.goBack();
+  };
  
   return (
         <div style={{ margin: "100px 0 30px 0", display:"flex", justifyContent:"center"}}>
+          <div className={styles.back} onClick={handlerBack}>
+              <FontAwesomeIcon icon={faArrowLeft}  style={{color:"grey"}}/>
+          </div>
           <div style={{ border: "solid 1px rgb(200, 197, 197)", width:"90%", borderRadius:"3px", backgroundColor:"white" ,boxShadow: "0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1)" }}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <div className={styles.titulo}>
@@ -86,7 +96,9 @@ export default function ShoppingCart() {
                       </a>
                   </div>
                 ) : (
-                  <button onClick={handlerPago}>Confirmar compra</button>
+                  <div style={{marginTop: "50px"}}>
+                    <button onClick={handlerPago}>Confirmar compra</button>
+                  </div>
                 )}
               </div>
             ) : (

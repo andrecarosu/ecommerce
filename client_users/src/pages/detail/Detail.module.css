@@ -49,22 +49,14 @@ div>.image {
     margin-top: 10px;
 }
 
-.condicion {
-    /* background-color:  #daa520;
-    box-shadow: -3px 3px #daa52080;
-    border-bottom-left-radius: 8px; */
-    font-size: 20px;
+.back {
+    font-size: 25px;
     position: absolute;
-    left: 10px;
+    left: 40px;
     top: 100px;
-    /* color: hsl(0, 100%, 3%); */
     padding: 1px 10px 1px 10px;
     cursor: pointer;
 }
-.condicion:hover {
-    transform: scale(1.1);
-}
-
 
 @media (min-width: 820px) {
     .container {
