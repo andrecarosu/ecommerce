@@ -39,6 +39,7 @@ const DashMain = () => {
     }, [dispatch])
 
     useEffect(() => {
+
         return () => {
             dispatch({ type: actions.GET_ALL_USERS, payload: [] })
         }

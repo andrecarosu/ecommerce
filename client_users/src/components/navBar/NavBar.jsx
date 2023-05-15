@@ -17,7 +17,7 @@ import logIn from "../../assets/images/logIn.webp";
 import { useEffect } from "react";
 
 const NavBar = () => {
-  
+
   /* ------------- MENU HAMBURGUESA ------------- */
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -45,6 +45,9 @@ const NavBar = () => {
   //   let userCookie = values.dataValues
   //   console.log(userCookie);
   const estaLogueado = localStorage.getItem("estaLogueado");
+  const token = Cookies.get('user_token');
+  const { usuario } = useSelector(state => state)
+  const session = token ? JSON.parse(Cookies.get('user_session')) : null;
 
   /* ------------- LOGOUT ------------- */
   const dispatch = useDispatch();
@@ -121,40 +124,41 @@ const NavBar = () => {
 
         )}
 
-        {estaLogueado === "database" && (
-          <div 
-            style={{ height:"61px", display:"flex", alignItems:"center" }}
-            onMouseLeave={() => setShowProfileMenu(false)} 
-            onMouseEnter={() => setShowProfileMenu(true)}>
-            <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}}  />
-            {/* <h5 style={{ color:"white"}}>Hola {userCookie.name}</h5> */}
-            {showProfileMenu && (
-              <div className={s.menuDesplegable}>
+        {estaLogueado === "database"
+          && session?.dataValues.type_id !== 2 && (
+            <div
+              style={{ height: "61px", display: "flex", alignItems: "center" }}
+              onMouseLeave={() => setShowProfileMenu(false)}
+              onMouseEnter={() => setShowProfileMenu(true)}>
+              <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor: "pointer", fontSize: "30px" }} />
+              {/* <h5 style={{ color:"white"}}>Hola {userCookie.name}</h5> */}
+              {showProfileMenu && (
+                <div className={s.menuDesplegable}>
 
-                <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
-                  <h4>Ver perfil</h4>
-                </Link>
-                <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
-                  <h4>Historial de compras</h4>
-                </Link>
-                <Link to="/" className={s.link_menu} onClick={handleLogOut}>
-                  <h4>Cerrar sesión</h4>
-                </Link>
-              </div>
-            )}
-          </div>
-        )}
+                  <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
+                    <h4>Ver perfil</h4>
+                  </Link>
+                  <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
+                    <h4>Historial de compras</h4>
+                  </Link>
+                  <Link to="/" className={s.link_menu} onClick={handleLogOut}>
+                    <h4>Cerrar sesión</h4>
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
 
 
         {estaLogueado === "google" && (
           <div style={{ display: 'flex' }}>
             {/* <img onClick={handleLogInClick} className={s.logIn} src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1681994536/profile_j9qoip.png" /> */}
-            <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}} onClick={handleLogInClick}/>
+            <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor: "pointer", fontSize: "30px" }} onClick={handleLogInClick} />
             {showProfileMenu && (
 
-              
+
               <div className={s.menuDesplegable}>
-                   <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
+                <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
                   <h4>Ver perfil</h4>
                 </Link>
                 <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
@@ -173,28 +177,33 @@ const NavBar = () => {
         <div style={{ position: "relative" }}>
           <Link to="/shopping-cart" style={{ textDecoration: "none" }}>
             {count !== 0 ? (
-            <div
-              style={{
-                display: "inline-block",
-                position: "absolute",
-                top: "-10px",
-                right: "-25px",
-                width:"25px", 
-                height:"25px", 
-                backgroundColor:"rgb(248,93,91)", 
-                borderRadius:"50%"
-              }}
-            >
-              <h4 style={{ fontSize: "15px", color: "white" }}>
-                {count}
-              </h4>
-            </div>) : ""}
+              <div
+                style={{
+                  display: "inline-block",
+                  position: "absolute",
+                  top: "-10px",
+                  right: "-25px",
+                  width: "25px",
+                  height: "25px",
+                  backgroundColor: "rgb(248,93,91)",
+                  borderRadius: "50%"
+                }}
+              >
+                <h4 style={{ fontSize: "15px", color: "white" }}>
+                  {count}
+                </h4>
+              </div>) : ""}
             <div className={s.button}>
               {/* <AiOutlineShoppingCart size={40} /> */}
-              <FontAwesomeIcon icon={faShoppingCart} style={{ fontSize: "25px" }}/>
+              <FontAwesomeIcon icon={faShoppingCart} style={{ fontSize: "25px" }} />
             </div>
           </Link>
         </div>
+
+        {session?.dataValues.type_id === 2 && <div className={s.admin}>
+          <Link to="/dashboard"><button>Panel Admin</button></Link>
+        </div>}
+
       </div>
 
     </div>
