@@ -29,13 +29,19 @@ export default function ShoppingCart() {
     const data = await response.json();
     dispatch(mercadoPago(data.init_point))
   };
+
+  const handlerPermission = () => {
+    localStorage.setItem("permission", true)
+  }
+
   const total = (carrito) => {
     let total = 0
     carrito.forEach(producto => {
     total = total + producto.discount_price * producto.amount
   });
   return total;
-}
+  };
+
  
   return (
         <div style={{ margin: "100px 0 30px 0", display:"flex", justifyContent:"center"}}>
@@ -73,7 +79,11 @@ export default function ShoppingCart() {
                   <div className={styles.mercadoPago}>
                     <a
                       rel="noreferrer"
-                      href={linkMercadoPago}>Pagar</a>
+                      href={linkMercadoPago}
+                      onClick = {handlerPermission}
+                      >
+                        Pagar
+                      </a>
                   </div>
                 ) : (
                   <button onClick={handlerPago}>Confirmar compra</button>
