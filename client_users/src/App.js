@@ -20,6 +20,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Redirect } from "react-router-dom/cjs/react-router-dom";
+import PaySuccess from "./pages/paySuccess/paySuccess";
+import PayFailure from "./pages/payFailure/PayFailure";
 
 function App() {
   const location = useLocation();
@@ -44,11 +46,11 @@ function App() {
   return (
     <div className="App">
 
-      {location?.pathname == "/log-in" 
-      || location?.pathname.includes("dashboard") 
-      || location?.pathname == "/shopping-cart/success" 
-      || location?.pathname === "/shopping-cart/failure"
-      ? '' : <NavBar />}
+      {location?.pathname == "/log-in"
+        || location?.pathname.includes("dashboard")
+        || location?.pathname == "/shopping-cart/success"
+        || location?.pathname === "/shopping-cart/failure"
+        ? '' : <NavBar />}
       {/* {location?.pathname == "/login" ? null : <Footer />} */}
       <Switch>
         <Route exact path="/" component={HomePrincipal} />
@@ -77,10 +79,10 @@ function App() {
       </Switch>
 
 
-      {location?.pathname.includes("dashboard") 
-      || location?.pathname === "/shopping-cart/success" 
-      || location?.pathname === "/shopping-cart/failure"
-      ? '' : <Footer />}
+      {location?.pathname.includes("dashboard")
+        || location?.pathname === "/shopping-cart/success"
+        || location?.pathname === "/shopping-cart/failure"
+        ? '' : <Footer />}
 
     </div>
   );
