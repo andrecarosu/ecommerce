@@ -61,13 +61,16 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/shopping-cart" component={ShoppingCart} />
         <Route exact path="/historial-de-compra" component={HistorialDeCompra} />
-        {permission === false ? (
+        {permission === "false" ? (
             <Redirect to="/" />
           ) : (
             <Route exact path="/shopping-cart/success" component={PaySuccess} />
           )}
-        
-        <Route exact path="/shopping-cart/failure" component={PayFailure} />
+        {permission === "false" ? (
+            <Redirect to="/" />
+          ) : (
+            <Route exact path="/shopping-cart/failure" component={PayFailure} />
+          )}
         <Route path="/dashboard" render={() => <DashMain />} >
           {/* <Route exact path="/usuarios" /> */}
         </Route>
