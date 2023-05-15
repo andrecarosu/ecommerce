@@ -66,7 +66,7 @@ export default function CartCard(product) {
           </div>
           {product.index + 1 !== carrito.length ? (
           <div style={{display:"flex", justifyContent: "center"}}>
-            <hr style={{width:"90%"}}/>
+            <hr style={{width:"90%", backgroundColor:"rgb(200, 197, 197)"}}/>
           </div>
           ) : ""}
     </div>      
