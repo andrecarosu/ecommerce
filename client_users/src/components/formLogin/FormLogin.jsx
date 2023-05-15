@@ -89,10 +89,14 @@ export default function FormLogin() {
       console.log(session)
 
       const isUserAuthenticated = await login(true);
-      if (isUserAuthenticated) {
+      if (isUserAuthenticated && session.dataValues?.type_id !== 2) {
         localStorage.setItem("estaLogueado", "database")
         navigateTo('/');
-      } else {
+      } else if (isUserAuthenticated && session.dataValues?.type_id === 2) {
+        localStorage.setItem("estaLogueado", "database")
+        navigateTo('/dashboard');
+      }
+      else {
         console.log('Login failed');
       }
     } catch (error) {
@@ -114,12 +118,12 @@ export default function FormLogin() {
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
-      const user = result.user;      
+      const user = result.user;
       if (user) {
         const session = user.email;
         console.log(30, session);
         Cookies.set('user_session', session, { secure: true, sameSite: 'strict' });
-         swal({
+        swal({
           title: 'Bienvenido',
           text: 'Ya puedes navegar con tu cuenta!',
           icon: 'success',
