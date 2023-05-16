@@ -153,3 +153,12 @@
     margin-top: 23px;
     right: 0px;
   }
+
+  .back {
+    font-size: 25px;
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    padding: 1px 10px 1px 10px;
+    cursor: pointer;
+}

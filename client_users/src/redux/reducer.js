@@ -68,7 +68,8 @@ const initialState = {
   allUsers: [],
   reviews: [],
   compras: [],
-  page: 1
+  page: 1,
+  permission: localStorage.getItem("permission")
 };
 
 function rootReducer(state = initialState, action) {

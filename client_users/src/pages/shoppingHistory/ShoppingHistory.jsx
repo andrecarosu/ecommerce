@@ -10,10 +10,12 @@ import Review from "./Review";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 // ESTILOS
 import s from "./ShoppingHistory.module.css";
 import Loader from "../../components/loader/loader";
+import { useHistory } from "react-router-dom";
 
 Modal.setAppElement('#root'); // le decimos a react-modal que nuestro componente principal es #root
 
@@ -79,7 +81,13 @@ const HistorialDeCompra = () => {
     .replace(/ /g, '-')
     .toUpperCase()
     return `${fechaFormateada.slice(0,4)}${fechaFormateada.slice(4).toLowerCase()}`
-  }
+  };
+
+  //Boton atrás
+  const history = useHistory();
+  const handlerBack = () =>{
+    history.goBack();
+  };
 
 
   return (
@@ -87,6 +95,9 @@ const HistorialDeCompra = () => {
       {!loader ? 
         <Loader/>  : (
           <div className={s.contenedor}>
+            <div className={s.back} onClick={handlerBack}>
+              <FontAwesomeIcon icon={faArrowLeft}  style={{color:"grey"}}/>
+            </div>
             <div className={s.tabla}>
               <div className={s.titulo}>
                 <h1>Mis compras</h1>
