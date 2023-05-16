@@ -37,7 +37,7 @@ const HistorialDeCompra = () => {
           email = Cookies.get("user_session");
         }
   
-        const response2 = await axios.get(`http://localhost:3001/venta?email=${email}`);
+        const response2 = await axios.get(`https://deploynodejsecommerce.onrender.com/venta?email=${email}`);
         const ventas = response2.data;
         //console.log(3, ventas);
         if (ventas.length > 0) {

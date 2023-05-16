@@ -26,7 +26,7 @@ const Calificaciones = () => {
 
         setFlag(true)
 
-        const response = await axios.get(`http://localhost:3001/review/${product}`)
+        const response = await axios.get(`https://deploynodejsecommerce.onrender.com/review/${product}`)
 
         setReviews(response.data)
     }

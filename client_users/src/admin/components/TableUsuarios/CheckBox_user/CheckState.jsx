@@ -12,7 +12,7 @@ const CheckState = ({ user_id, state }) => {
 
     useEffect(async () => {
         try {
-            await axios.put(`http://localhost:3001/usuario`, { user_id: user_id, estado: check });
+            await axios.put(`https://deploynodejsecommerce.onrender.com/usuario`, { user_id: user_id, estado: check });
         } catch (error) {
             console.error(error)
         }

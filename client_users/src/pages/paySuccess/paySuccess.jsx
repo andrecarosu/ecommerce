@@ -25,7 +25,7 @@ function PaySuccess () {
         state: true
       };
       
-      await axios.post("http://localhost:3001/venta", venta)
+      await axios.post("https://deploynodejsecommerce.onrender.com/venta", venta)
         .then(response => {
           console.log(response.data);
         })

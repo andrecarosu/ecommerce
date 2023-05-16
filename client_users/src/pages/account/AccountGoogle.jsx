@@ -15,7 +15,7 @@ const AccountGoogle = () => {
       <div className={s.usuario}>
         <h1 style={{ marginBottom: '15px', textAlign: 'left', fontSize: '30px' }}>Mi cuenta</h1>
         <div className={s.datos}>
-          <img icon={faUser}src="https://www.adslzone.net/app/uploads-adslzone.net/2019/09/google-chrome-usuario.jpg" style={{ color: "white", cursor:"pointer", fontSize:"30px"}} className={s.imagen}/>
+          <img icon={faUser}src="" style={{ color: "white", cursor:"pointer", fontSize:"30px"}} className={s.imagen}/>
 
           <span className={s.label}>Nombre</span>
           <h3 className={s.dato_nombre}>Usuario Google</h3>
