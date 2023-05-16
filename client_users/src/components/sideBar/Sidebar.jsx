@@ -47,7 +47,7 @@ function Sidebar() {
   }
 
   return (
-    <div className={styles.nav_contenedor}>
+    <div className={styles.nav_contenedor} onClick={() => dispatch(action.numberPage(1))}>
       {filters && <div className={styles.filtersContainer}>
         <span className={`${styles.filterMessage} ${styles.filterCont}`}><strong>Filtrando por</strong></span>
         {filters && Object.keys(filters).map((key, index) => {
@@ -74,7 +74,7 @@ function Sidebar() {
                 className={styles.nav_link}
                 onClick={() => {
                   dispatch(action.getAllProducts());
-                  dispatch(action.allProducts());
+                  dispatch(action.allProducts(true));
                   setFilters(null)
                   dispatch(action.setFiltersActive())
                 }}

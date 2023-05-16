@@ -159,7 +159,7 @@ export function createProduct(product) {
       dispatch({ type: action.CREATE_PRODUCT, payload: error });
     }
   };
-}
+};
 
 // * 2. action-creator para obtener todos los productos del back-end
 
@@ -190,8 +190,12 @@ export const getAllProducts = () => {
   };
 };
 
-export const allProducts = () => {
-  return { type: action.ALLPRODUCTS, payload: true };
+export const allProducts = (bolean) => {
+  return { type: action.ALLPRODUCTS, payload: bolean };
+};
+
+export const path = (path) => {
+  return { type: action.PATH, payload: path };
 };
 
 export const getFamilies = () => {
@@ -303,24 +307,23 @@ export const orderedByLowestPrice = () => {
 };
 
 export const setFiltersActive = (type_filter, value) => {
-
   return {
     type: action.SET_FILTERS_ACTIVE,
     payload: type_filter ? { [type_filter]: value } : {}
   }
-}
+};
 
 export function cleanReviews() {
   return {
     type: action.CLEAN_REVIEWS,
   };
-}
+};
 
 export function loading() {
   return {
     type: action.LOADING,
   };
-}
+};
 // * 9. action-creator para ordenar productos por mayor precio
 
 export const orderedByHighestPrice = () => {
@@ -330,6 +333,7 @@ export const orderedByHighestPrice = () => {
   }
   //return { type: action.ORDERED_BY_HIGHEST_PRICE };
 };
+
 export const orderedByRecientes = () => {
   return { type: action.ORDERED_BY_RECIENTES };
 };
@@ -342,13 +346,14 @@ export const filterByBrand = (brand) => {
       type: action.FILTER_BY_BRAND,
       payload: brand
     })
-  }
+  };
 
   // return {
   //   type: action.FILTER_BY_BRAND,
   //   payload: brand
   // };
 };
+
 export const filterByOffers = (discount) => {
   return (dispatch) => {
     dispatch(setFiltersActive('Oferta', discount))
@@ -372,7 +377,7 @@ export function getCategorys() {
       payload: resp.data,
     });
   };
-}
+};
 
 export const numberPage = (page) => {
   return {
@@ -394,7 +399,7 @@ export function getAllCities() {
       dispatch({ type: action.GET_ALL_CITIES, payload: error });
     }
   };
-}
+};
 
 // CODIGO REALIZADO POR FRANCO
 export function getProducts() {
@@ -413,7 +418,7 @@ export function getProducts() {
       .catch((err) => console.log(err));
     dispatch(ready());
   };
-}
+};
 
 export function getDetail(id) {
   return (dispatch) => {
@@ -431,19 +436,19 @@ export function getDetail(id) {
       .catch((err) => console.log(err));
     dispatch(ready());
   };
-}
+};
 
 export function cleanProduct() {
   return {
     type: action.CLEAN_PRODUCT,
   };
-}
+};
 
 export function ready() {
   return {
     type: action.READY,
   };
-}
+};
 
 // MERCADO PAGO
 export function mercadoPago(link) {
@@ -452,13 +457,13 @@ export function mercadoPago(link) {
     type: action.MERCADO_PAGO,
     payload: link,
   };
-}
+};
 
 export function cleanMercadoPago() {
   return {
     type: action.CLEAN_MERCADO_PAGO
   }
-}
+};
 // REVIEWS // COMENTARIOS
 
 export function getReviews(id) {
@@ -471,7 +476,7 @@ export function getReviews(id) {
       dispatch({ type: action.REVIEWS, payload: error });
     }
   };
-}
+};
 
 // COMPRAS DEL USUARIO
 
@@ -492,7 +497,7 @@ export function getAllSales() {
       });
     }
   };
-}
+};
 
 export function getSales(id) {
   return async (dispatch) => {
@@ -510,11 +515,11 @@ export function getSales(id) {
       });
     }
   };
-}
+};
 
 export function getSlider() {
   return { type: action.GET_SLIDER }
-}
+};
 
 export const cleanShoppingCart = () => {
   return { type: action.CLEAN_SHOPPING_CART };

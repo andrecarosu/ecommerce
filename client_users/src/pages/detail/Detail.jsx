@@ -8,7 +8,6 @@ import s from './Detail.module.css'
 import swal from 'sweetalert'
 import CardsReviews from "../../components/cardsReviews/CardsReviews"
 import Loader from '../../components/loader/loader'
-import { IoIosArrowBack } from 'react-icons/io';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,9 +16,9 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Detail = (props) => {
 
-  const { product, carrito, countCarrito, display } = useSelector(state => state)
+  const { product, carrito, countCarrito } = useSelector(state => state)
 
- const  product_id  = props.id
+  const  product_id  = props.id
 
   const { id } = useParams()
   const dispatch = useDispatch();
@@ -74,16 +73,18 @@ const Detail = (props) => {
       timer: "3000"
     })
    }
-  }  
+  };  
   
   // Cantidad de articulos
   const [quantity, setQuantity] = useState(1);
+
+  //Botones para sumar/restar cantidad
 
   const handleDecrease = () => {
     if (quantity !== 1) {
       setQuantity(quantity - 1);
     }
-  }
+  };
 
   const handleIncrease = () => {
     if (quantity !== product.stock) {
@@ -94,7 +95,8 @@ const Detail = (props) => {
         icon: 'info'
       })
     }
-  }
+  };
+
   //Boton comprar ahora
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const handlerComprar = () => {
@@ -116,25 +118,13 @@ const Detail = (props) => {
       })
 
     }
-  }
+  };
 
-  // const [descripcion_motivo, setDescripcion_motivo] = useState();
-  // const [valor_calificacion, setValor_calificacion] = useState();
-
-  // async function handleSubmit() {
-  //   const data = {
-  //     id: id,
-  //     descripcion_motivo,
-  //     valor_calificacion
-  //   }
-  //   await axios.post(`${URL}/review/${id}`, data)
-  //   setDescripcion_motivo()
-  //   setValor_calificacion()
-  // }
-  const history = useHistory()
+//Boton atrás
+  const history = useHistory();
   const handlerBack = () =>{
     history.goBack();
-  }
+  };
 
   return (
     <>
@@ -184,8 +174,8 @@ const Detail = (props) => {
 
                     </div>
                   </div>
-                  <div className={s.condicion} onClick={handlerBack}>
-                    <FontAwesomeIcon icon={faArrowLeft}  style={{color:"grey"}}/> Atrás
+                  <div className={s.back} onClick={handlerBack}>
+                    <FontAwesomeIcon icon={faArrowLeft}  style={{color:"grey"}}/>
                   </div>
                 </div>
 

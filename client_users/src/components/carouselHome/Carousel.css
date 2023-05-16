@@ -21,11 +21,16 @@
     object-fit: cover;
     transition: transform 5s ease-in-out;
     transform: scale(1);
-    filter: brightness(65%);
+    filter: brightness(70%) contrast(130%) saturate(120%);
 }
 
 .section .img-actual {
-    transform: scale(1.15);
+    animation: scale-up 5s ease-in-out;
+}
+
+@keyframes scale-up {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
 }
 
 .section .texts {
@@ -45,11 +50,13 @@
 }
 
 .section .texts h2 {
-    font-size: 3.5rem;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .section .texts p {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .active-anim {

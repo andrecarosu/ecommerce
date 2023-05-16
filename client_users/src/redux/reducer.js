@@ -39,7 +39,8 @@ import {
   CLEAN_SHOPPING_CART,
   REMOVE_SHOPPING_CART,
   GET_ALL_USERS,
-  SET_FILTERS_ACTIVE
+  SET_FILTERS_ACTIVE,
+  PATH
 } from "./actions-type.js";
 
 const initialState = {
@@ -68,7 +69,9 @@ const initialState = {
   allUsers: [],
   reviews: [],
   compras: [],
-  page: 1
+  page: 1,
+  permission: localStorage.getItem("permission"),
+  path: ""
 };
 
 function rootReducer(state = initialState, action) {
@@ -269,7 +272,7 @@ function rootReducer(state = initialState, action) {
       };
     
     case REMOVE_SHOPPING_CART: 
-      return {remove: !state.remove}  
+      return {remove: !state.remove};  
     
     // ======================* CONTADOR CARRITO *======================
 
@@ -320,7 +323,7 @@ function rootReducer(state = initialState, action) {
       return { ...state, usuario: action.payload };
 
     case GET_ALL_USERS:
-      return { ...state, allUsers: action.payload }
+      return { ...state, allUsers: action.payload };
 
     // ========================* REVIEWS *========================
 
@@ -363,6 +366,9 @@ function rootReducer(state = initialState, action) {
 
     case NUMBER_PAGE:
       return { ...state, page: action.payload };
+
+    case PATH:
+      return { ...state, path: action.payload };  
 
     default:
       return state;

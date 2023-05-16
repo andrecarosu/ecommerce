@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userId, date, detailOrder, total } from "./assistand";
+import { userEmail, date, detailOrder, total } from "./assistand";
 import swal from 'sweetalert';
 import axios from "axios"
 import { cleanShoppingCart } from '../../redux/actions';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 function PaySuccess () {
   const dispatch = useDispatch();
   const { carrito } = useSelector((state) => state);
-  const location = useLocation()
 
   //REDIRECCIONAMIENTO
 
@@ -22,11 +21,10 @@ function PaySuccess () {
       const venta = {
         date: date(),
         total: total(carrito),
-        user_id : userId(),
         detail_order : detailOrder(carrito),
         state: true
-      }
-      console.log(venta);
+      };
+      
       await axios.post("http://localhost:3001/venta", venta)
         .then(response => {
           console.log(response.data);
@@ -39,6 +37,7 @@ function PaySuccess () {
             timer: "3000"
           })
         })
+      console.log(venta);
       };
       if(carrito.length !== 0) postVenta();
       window.localStorage.setItem("carrito", JSON.stringify([]));

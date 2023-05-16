@@ -30,8 +30,8 @@ const TableVentas = ({ ventas, handleClickDetail }) => {
                         </th>
                         <th>Total</th>
                         <th>Fecha de Orden</th>
-                        <th>User</th>
-                        <th>State</th>
+                        <th>Email user</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,8 +41,9 @@ const TableVentas = ({ ventas, handleClickDetail }) => {
                                 <td style={{ padding: "10px" }}><a>{venta.id}</a></td>
                                 <td><a>{venta.total}</a></td>
                                 <td><a>{venta.fecha}</a></td>
-                                <td><a>{getUser(venta.id_usuario)}</a></td>
-                                <td><a>{venta.estado}</a></td>
+                                {/* <td><a>{getUser(venta.id_usuario)}</a></td> */}
+                                <td><a>{venta.productos[0]?.email}</a></td>
+                                <td><a>{venta.estado ? "Exitoso" : "Cancelado"}</a></td>
                             </tr>
                             {<tr key={index} className={`${s.detail} ${filaActive == index ? s.activeRow : ''}`}>
                                 <td className={`${s.tdDetail} `} colSpan="5">

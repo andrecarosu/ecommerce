@@ -3,24 +3,32 @@ import s from './Calificaciones.module.css'
 import ProductsVertical from "../../components/verticalMenu/ProductsVertical";
 import Loader from '../../../components/loader/loader';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductById } from '../../../redux/actions';
+import { getProductById, getProductByName, getAllProducts } from '../../../redux/actions';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faCommentSlash } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
 
 
 
 const Calificaciones = () => {
     const [flag, setFlag] = useState(false)
     const [load, setLoad] = useState(false)
+    const [reviews, setReviews] = useState([])
+
 
     const dispatch = useDispatch()
-    const handleClickCalificacion = (product) => {
+    const handleClickCalificacion = async (product) => {
         setTimeout(() => {
             setLoad(false)
         }, 500)
         setLoad(true)
         dispatch(getProductById(product))
+
         setFlag(true)
+
+        const response = await axios.get(`http://localhost:3001/review/${product}`)
+
+        setReviews(response.data)
     }
 
     useEffect(() => {
@@ -33,8 +41,9 @@ const Calificaciones = () => {
     const componentBox = () => {
         if (!load) {
 
+
             return product?.Reviews?.length > 0 && !load ?
-                itemsCalificaciones(product) :
+                itemsCalificaciones(reviews) :
                 <div className={s.contInitial}>
                     NO HAY REVIEWS
                     <FontAwesomeIcon size="7x" icon={faCommentSlash} />
@@ -48,10 +57,13 @@ const Calificaciones = () => {
 
 
 
+
     return (
         <div className={s.containerCalificaciones}>
             <h1>Calificaciones</h1>
+
             <div className={s.disContainer}>
+
                 <ProductsVertical handleClickCalificacion={handleClickCalificacion} />
                 <div className={s.boxCalificaciones}>
                     {load ? <div className={s.loadad}><Loader /></div> : ''}
@@ -71,12 +83,22 @@ const Calificaciones = () => {
 }
 
 
-const itemsCalificaciones = (product) => {
+const itemsCalificaciones = (reviews) => {
     const flat = []
+    const stars = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐']
+    //let reviews = []
+    console.log("....", reviews)
 
-    product.Reviews.forEach((rev, index) => {
+
+
+
+
+
+
+
+    reviews.forEach((rev, index) => {
         rev.comments.forEach((c) => {
-            flat.push({ User: rev.User, comment: c })
+            flat.push({ User: rev.Detail_order.email, comment: c, score: rev.scoring })
 
         })
     })
@@ -87,10 +109,11 @@ const itemsCalificaciones = (product) => {
                 return (
                     <div className={s.rev} key={index}>
                         <div>
-                            {rev.User.name}
+                            <span>User: <br /></span> {rev.User}
+                            <span>Score:</span>{stars[rev.score - 1]}
                         </div>
                         <div>
-                            {rev.comment.comment}
+                            <span> Comment: <br /></span>{rev.comment.comment}
                         </div>
                     </div>
                 )
