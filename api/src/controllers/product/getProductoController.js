@@ -14,12 +14,12 @@ const query = {//no es necesario listar los atributos, ya los trae
     {
       model: Review,
       attributes: ["comments", "scoring"],
-      include: [
-        {
-          model: User,
-          attributes: ["name", "email"]
-        }
-      ]
+      // include: [
+      //   {
+      //     model: User,
+      //     attributes: ["name", "email"]
+      //   }
+      // ]
     }
   ],
 }

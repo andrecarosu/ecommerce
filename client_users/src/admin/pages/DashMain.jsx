@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import * as actions from '../../redux/actions-type'
-import { getCategorys, getAllProducts, getFamilies, getAllUsers } from '../../redux/actions';
+import { getCategorys, getAllProducts, getFamilies, getAllUsers, allProducts } from '../../redux/actions';
 
 // import contentLayout from ''
 const type_permission = 2;
@@ -34,11 +34,14 @@ const DashMain = () => {
     useEffect(() => {
         dispatch(getCategorys());
         dispatch(getAllProducts());
+        dispatch(allProducts())
         dispatch(getFamilies())
         dispatch(getAllUsers())
+
     }, [dispatch])
 
     useEffect(() => {
+
         return () => {
             dispatch({ type: actions.GET_ALL_USERS, payload: [] })
         }

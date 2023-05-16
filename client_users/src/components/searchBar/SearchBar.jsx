@@ -18,17 +18,23 @@ const SearchBar = () => {
      setInput("")
   };
 
+  const handle = (e) => {
+    const { value } = e.target
+    setInput(value)
+    dispatch(getProductByName(value));
+  }
+
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
       <input
         className={styles.input}
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={handle}
         type="text"
         required=""
         placeholder="Buscar"
       />
-       <button type="submit" className={styles.button}>
+       <button type="submit" className={styles.button} >
         <FontAwesomeIcon icon={faSearch} />
       </button>
     </form>

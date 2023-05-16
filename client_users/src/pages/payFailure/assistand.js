@@ -2,14 +2,19 @@ import Cookies from "js-cookie";
 
     
     /*ID DE USUARIO*/
-export const userId = () => {
-    const session = Cookies.get("user_session");
-    console.log(session)
-    let values = JSON.parse(session)
-    let userCookie = values.dataValues
-    let  userId = userCookie.user_id 
-    return userId;
-};
+    export const userEmail = () => {
+        const estaLogueado = localStorage.getItem("estaLogueado")
+        let email;
+        if(estaLogueado === "database"){
+           const session = Cookies.get("user_session");
+            let values = JSON.parse(session)
+            let userCookie = values.dataValues
+            email = userCookie.email 
+        } else if(estaLogueado === "google"){
+           email = Cookies.get("user_session"); 
+        };
+        return email;
+    }
 
     /*FECHA DE LA VENTA*/
     export const date = () => {
@@ -31,6 +36,8 @@ export const detailOrder = (carrito) => {
             value: product.amount*product.discount_price,
             product_id: product.product_id,
             unit_value: product.discount_price,
+            email: userEmail(),
+            state: false
         }
     }) 
     return detail;
