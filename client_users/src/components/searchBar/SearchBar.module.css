@@ -1,6 +1,10 @@
+.container {
+    width: 100%;
+}
+
 .input{
-    border-bottom-left-radius: 0.9375rem;
-    border-top-left-radius: 0.9375rem;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
     border: none;
     outline: none;
     background-color:white;
@@ -10,8 +14,9 @@
 }
 
 .button{
-    border-bottom-right-radius: 0.9375rem;
-    border-top-right-radius: 0.9375rem;
+    all: unset;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
     background-color:white;
     border: none;
     color: black;
@@ -22,7 +27,11 @@
     cursor: pointer;
 }
 
+.button:hover{
+    background-color: white;
+}
+
 input, button{
     display: inline-block;
-    vertical-align: middle;
+    max-width: 100%;
 }
