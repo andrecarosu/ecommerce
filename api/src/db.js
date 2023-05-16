@@ -48,6 +48,7 @@ const {
   Supplier,
   Type_user,
   User,
+  PerfilGoogle,
 
 } = sequelize.models;
 
