@@ -23,6 +23,10 @@
     height: 100%;
 }
 
+.eliminar{
+    color: rgb(158, 158, 158);
+}
+
 .eliminar:hover{
     color: red;
     cursor: pointer;

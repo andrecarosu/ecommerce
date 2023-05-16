@@ -4,12 +4,11 @@ import { userId, date, detailOrder, total } from "./assistand";
 import swal from 'sweetalert';
 import axios from "axios"
 import { cleanShoppingCart } from '../../redux/actions';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 function PaySuccess () {
   const dispatch = useDispatch();
   const { carrito } = useSelector((state) => state);
-  const location = useLocation()
 
   //REDIRECCIONAMIENTO
 

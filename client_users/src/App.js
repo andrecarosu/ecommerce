@@ -13,15 +13,15 @@ import Footer from "./components/footer/Footer";
 import ShoppingCart from "./pages/shopping/ShoppingCart";
 import HistorialDeCompra from "./pages/shoppingHistory/ShoppingHistory";
 import DashMain from "./admin/pages/DashMain"
-import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import PaySuccess from "./pages/paySuccess/paySuccess";
 import PayFailure from "./pages/payFailure/PayFailure";
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react";
+import { Redirect } from "react-router-dom/cjs/react-router-dom";
 
 function App() {
   const location = useLocation();
-  const { logIn } = useSelector(state => state)
+  // const { permission } = useSelector(state => state)
 
   useEffect(() => {
 
@@ -29,7 +29,16 @@ function App() {
       top: 0,
       behavior: 'smooth'
     });
+    console.log(location.pathname);
+    if(location.pathname !== "/shopping-cart/success"){
+      localStorage.setItem("permission", false)
+    }
+    if(location.pathname !== "/shopping-cart/failure") {
+      localStorage.setItem("permission", false)
+    }
   }, [location.pathname])
+  const permission = localStorage.getItem("permission")
+  console.log(permission);
   return (
     <div className="App">
 
@@ -50,8 +59,16 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/shopping-cart" component={ShoppingCart} />
         <Route exact path="/historial-de-compra" component={HistorialDeCompra} />
-        <Route exact path="/shopping-cart/success" component={PaySuccess} />
-        <Route exact path="/shopping-cart/failure" component={PayFailure} />
+        {permission === "false" ? (
+            <Redirect to="/" />
+          ) : (
+            <Route exact path="/shopping-cart/success" component={PaySuccess} />
+          )}
+        {permission === "false" ? (
+            <Redirect to="/" />
+          ) : (
+            <Route exact path="/shopping-cart/failure" component={PayFailure} />
+          )}
         <Route path="/dashboard" render={() => <DashMain />} >
           {/* <Route exact path="/usuarios" /> */}
         </Route>
