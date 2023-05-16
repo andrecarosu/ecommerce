@@ -29,10 +29,10 @@ const createReview = async ({detail_order_id, product_id, ...review }) => {
     if (!reviewExistent) {
       const newReview = await Review.create({
         comments: { comment },
-        scoring
+        scoring,
       });
 
-      await newReview.setDetail_order(reviewExistent)
+      await newReview.setDetail_order(detailExistent)
       await newReview.setProduct(productExistent)
     } else {
       //console.log(reviewExistent)
