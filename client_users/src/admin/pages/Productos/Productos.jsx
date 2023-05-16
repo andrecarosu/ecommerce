@@ -6,7 +6,7 @@ import TableProductos from '../../components/TableProductos/TableProductos';
 import Pagination from '../../components/pagination/Pagination';
 import usePagination from '../../components/pagination/PaginationHook';
 import DetailCard from '../../components/DetailCard/DetailCard';
-import { getAllProducts } from '../../../redux/actions';
+import { getAllProducts, allProducts } from '../../../redux/actions';
 import { orderedByNameASC, orderedByNameDESC, orderedByHighestPrice, orderedByLowestPrice, getProductByCategory } from '../../../redux/actions';
 
 const Productos = () => {
@@ -20,8 +20,11 @@ const Productos = () => {
     // }, [AllProducts])
 
     useEffect(() => {
+        dispatch(getAllProducts());
+        dispatch(allProducts())
         return () => {
             dispatch(getAllProducts())
+            dispatch(allProducts())
         }
     }, [])
 
@@ -62,7 +65,7 @@ const Productos = () => {
         setProductos(productsFitered)
         // productos = productsFitered
 
-    }, [dispatch, productsFitered]) 
+    }, [dispatch, productsFitered])
 
 
 

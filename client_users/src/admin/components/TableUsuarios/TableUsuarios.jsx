@@ -1,4 +1,5 @@
 import React from 'react';
+import CheckState from "./CheckBox_user/CheckState"
 import usePagination from '../pagination/PaginationHook';
 import s from './TableUsuarios.module.css'
 
@@ -16,8 +17,10 @@ const TableUsuarios = (props) => {
                     <tr>
                         <th>Nombre</th>
                         <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Ciudad</th>
                         <th>Direccion</th>
-                        <th>Fecha de Creacion</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,12 +28,12 @@ const TableUsuarios = (props) => {
                         <tr key={index}>
                             <td><a>{person.name}</a></td>
                             <td><a>{person.email}</a></td>
+                            <td><a>{person.phone}</a></td>
+                            <td><a>{person.city}</a></td>
                             <td><a>{person.address}</a></td>
-                            <td><a>{new Date(person.fecha).toLocaleString('es-ES', {
-                                day: 'numeric',
-                                month: 'numeric',
-                                year: 'numeric',
-                            })}</a></td>
+                            <td>{
+                                <CheckState user_id={person.user_id} state={person.estado} />
+                            }</td>
                         </tr>
                     ))}
                 </tbody>

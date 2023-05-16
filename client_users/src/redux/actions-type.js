@@ -75,6 +75,10 @@ const MERCADO_PAGO = "MERCADO_PAGO";
 // REVIEWS // COMENTARIOS
 const REVIEWS = "REVIEWS"
 
+//RUTAS
+
+const PATH = "PATH";
+
 module.exports = {
   CREATE_PRODUCT,
   GET_ALL_PRODUCTS,
@@ -131,4 +135,5 @@ module.exports = {
   CLEAN_SHOPPING_CART,
   REMOVE_SHOPPING_CART,
   SET_FILTERS_ACTIVE,
+  PATH
 };

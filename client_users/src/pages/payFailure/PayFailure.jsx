@@ -21,7 +21,6 @@ function PayFailure () {
       const venta = {
         date: date(),
         total: total(carrito),
-        user_id : userId(),
         detail_order : detailOrder(carrito),
         state: false
       }

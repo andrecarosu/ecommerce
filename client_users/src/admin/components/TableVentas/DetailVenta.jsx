@@ -6,9 +6,8 @@ const DetailVenta = ({ active, productos, handleClickDetail }) => {
     const count = productos.length
 
 
-
     return (
-        <div className={`${s.tableDetail} ${active ? s.show : ''}`} style={{ '--d': count }}>
+        <div className={`${s.tableDetail} ${active ? s.show : ''}`} style={{ '--d': count == 1 ? count + 1 : count }}>
             <table className={s.detailTable}>
                 <thead>
                     <tr>

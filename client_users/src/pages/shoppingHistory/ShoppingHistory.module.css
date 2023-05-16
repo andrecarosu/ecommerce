@@ -72,7 +72,7 @@
     align-items: center;
     justify-content: center;
     width:100%;
-    color: goldenrod;
+    color: rgb(213,161,41);
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     padding: 0px;
@@ -153,3 +153,12 @@
     margin-top: 23px;
     right: 0px;
   }
+
+  .back {
+    font-size: 25px;
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    padding: 1px 10px 1px 10px;
+    cursor: pointer;
+}
