@@ -1,4 +1,4 @@
-const { Product, Supplier, User, Review } = require("../../db");
+const { Product, Detail_order, User, Review } = require("../../db");
 const { Op } = require("sequelize")
 
 const getAllReviews = async (req, res) => {
@@ -11,9 +11,9 @@ const getAllReviews = async (req, res) => {
           product_id: product_id,
         },
 
-        // include: [
-        //   { model: User, attributes: ["name"] },
-        // ],
+        include: [
+          { model: Detail_order, attributes: ["email"] },
+        ],
       });
       
     
