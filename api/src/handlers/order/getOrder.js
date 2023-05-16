@@ -1,10 +1,10 @@
-const { getVenta, getVentasUsuario,getDetalle_Venta } = require("../../controllers/order/getOrderController")
+const { getVenta, getVentasUsuario, getDetalle_Venta } = require("../../controllers/order/getOrderController")
 
 
 const getAllVentasHandler = async (req, res, next) => {
-const {email} = req.query
+    const { email } = req.query
     try {
-        const results = email? await getVentasUsuario(email) : await getVenta()
+        const results = email ? await getVentasUsuario(email) : await getVenta()
 
         res.status(200).json(results)
 
