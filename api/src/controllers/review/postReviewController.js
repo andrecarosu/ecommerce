@@ -1,7 +1,7 @@
 const { Product, Detail_order, Review } = require("../../db");
 const { Op } = require("sequelize")
 
-const createReview = async ({detail_order_id, product_id, ...review }) => {
+const createReview = async ({ detail_order_id, product_id, ...review }) => {
   try {
     const { comment, scoring } = review
 
@@ -12,8 +12,8 @@ const createReview = async ({detail_order_id, product_id, ...review }) => {
         detail_order_id: detail_order_id
       }
     })
+    console.log(detail_order_id)
 
-    
     if (!productExistent || !detailExistent) {
       throw new Error('No se encontro el detalle o el producto')
     }
@@ -25,7 +25,7 @@ const createReview = async ({detail_order_id, product_id, ...review }) => {
       }
     })
 
-
+    console.log(reviewExistent)
     if (!reviewExistent) {
       const newReview = await Review.create({
         comments: { comment },
@@ -41,7 +41,7 @@ const createReview = async ({detail_order_id, product_id, ...review }) => {
       await reviewExistent.update(
         {
           comments: { comment },
-          scoring: {scoring}
+          scoring:  scoring 
         }
       )
       //await reviewExistent.save()
@@ -49,7 +49,7 @@ const createReview = async ({detail_order_id, product_id, ...review }) => {
 
     return;
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
     throw new Error('Ocurrio u problema')
   }
 
