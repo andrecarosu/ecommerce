@@ -4,7 +4,7 @@ import styles from "./Cards.module.css";
 import { useDispatch, useSelector } from "react-redux";
 // import {getAllProducts} from '../../redux/actions'
 import Loader from "../loader/loader";
-import { getAllProducts, numberPage } from "../../redux/actions";
+import { allProducts, getAllProducts, numberPage } from "../../redux/actions";
 import { IoAlertCircleOutline } from 'react-icons/io5';
 import BoxFilters from "../showFilters/BoxFilters";
 
@@ -16,6 +16,10 @@ const Cards = () => {
     window.localStorage.setItem("filtered", JSON.stringify(productsFitered));
     window.localStorage.setItem("copyProducts", JSON.stringify(copyProducts));
     window.localStorage.setItem("filtersActive", JSON.stringify(activeFilter))
+
+    return () => {
+      dispatch(allProducts(false))
+    }
   }, [productsFitered, copyProducts, dispatch])
   // PAGINADO
 
@@ -24,10 +28,10 @@ const Cards = () => {
 
 
   const grupo = 12;
-  const conteoFinal = numeroPagina * grupo;
+  const conteoFinal = page * grupo;
   const conteoInicial = conteoFinal - grupo;
 console.log(productsFitered);
-  const aux =
+  const aux = 
     productsFitered.length > 0
       ? productsFitered.slice(conteoInicial, conteoFinal)
       : [];
@@ -42,9 +46,6 @@ console.log(aux);
     handlerScroll()
   }, [aux, numeroPagina])
 
-
-
-
   const paginas = [];
 
   const numPaginas = Math.ceil(productsFitered.length / grupo);
@@ -58,12 +59,13 @@ console.log(aux);
       top: 0,
       behavior: 'smooth'
     });
-  }
+  };
 
   const handlerPage = (page) => {
     setNumeroPagina(page);
     dispatch(numberPage(page));
-  }
+  };
+
   return (
     <div className={styles.container}>
 
@@ -92,7 +94,7 @@ console.log(aux);
                   {/* ------------------------------BOTON ATRAS------------------------------ */}
                   <button
                     className={styles.btnPag}
-                    onClick={() => { handlerPage(numeroPagina - 1); handlerScroll() }}
+                    onClick={() => { handlerPage(page - 1); handlerScroll() }}
                     disabled={numeroPagina === 1}
                   >
                     {/* ◄ */}
@@ -102,7 +104,7 @@ console.log(aux);
                   {paginas.map((pagina) => (
                     <button
                       key={pagina}
-                      className={`${styles.btnPag} ${pagina === numeroPagina ? styles.active : ""
+                      className={`${styles.btnPag} ${pagina === page ? styles.active : ""
                         }`}
                       onClick={() => { handlerPage(pagina); handlerScroll() }}
                     >
@@ -112,7 +114,7 @@ console.log(aux);
                   {/* ------------------------------BOTON PROXIMO------------------------------ */}
                   <button
                     className={styles.btnPag}
-                    onClick={() => { handlerPage(numeroPagina + 1); handlerScroll() }}
+                    onClick={() => { handlerPage(page + 1); handlerScroll() }}
                     disabled={
                       numeroPagina === Math.ceil(productsFitered?.length / grupo)
                     }

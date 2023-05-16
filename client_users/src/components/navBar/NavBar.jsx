@@ -5,7 +5,7 @@ import SearchBar from "../searchBar/SearchBar";
 import DrawerMenu from "../drawerMenu/DrawerMenu";
 import s from "./NavBar.module.css";
 import Cookies from 'js-cookie';
-import { cleanShoppingCart, userLoggedIn } from "../../redux/actions";
+import { allProducts, cleanShoppingCart, getAllProducts, userLoggedIn } from "../../redux/actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -103,7 +103,10 @@ const NavBar = () => {
         <Link
           to="/product"
           className={s.link}
-        // style={{ margin: '0px 10px' }}
+          onClick={() => {
+            dispatch(allProducts(true))
+            dispatch(getAllProducts())
+          }}
         >
           <h4>Productos</h4>
         </Link>
