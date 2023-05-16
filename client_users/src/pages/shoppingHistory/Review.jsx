@@ -10,7 +10,9 @@ const Review = (props) => {
   const { product} = useSelector(state => state)
   const dataProps = props
   const  id  = props.id
-  const email = props.email
+  console.log(14,id);
+  const idDetail = props.idDetail
+  console.log(13,idDetail);
   const [errors, setErrors] = useState({});
   
   const URL = 'http://localhost:3001'
@@ -22,7 +24,7 @@ const Review = (props) => {
 
 
       id: id,
-      email: email,
+      detail_order_id: idDetail,
       comment:"",
       scoring:""
   });
@@ -40,7 +42,7 @@ const Review = (props) => {
  // captura de datos del estado form
     const data = {
       product_id: form.id,
-      email: form.email,
+      detail_order_id: form.detail_order_id,
       comment:form.comment,
       scoring:form.scoring
     }
@@ -96,9 +98,9 @@ if (Object.keys(errors).length > 0) {
     setForm(prevForm => ({
       ...prevForm ,
       id:id,
-      email:email     
+      detail_order_id: idDetail     
     }));
-  }, [id,email]);
+  }, [id,idDetail]);
 
  
 

@@ -17,7 +17,7 @@ import logIn from "../../assets/images/logIn.webp";
 import { useEffect } from "react";
 
 const NavBar = () => {
-  
+
   /* ------------- MENU HAMBURGUESA ------------- */
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -45,6 +45,9 @@ const NavBar = () => {
   //   let userCookie = values.dataValues
   //   console.log(userCookie);
   const estaLogueado = localStorage.getItem("estaLogueado");
+  const token = Cookies.get('user_token');
+  const { usuario } = useSelector(state => state)
+  const session = token ? JSON.parse(Cookies.get('user_session')) : null;
 
   /* ------------- LOGOUT ------------- */
   const dispatch = useDispatch();
@@ -157,12 +160,12 @@ const NavBar = () => {
             <FontAwesomeIcon icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}} onClick={handleLogInClick}/>
             {showProfileMenu && (
               <div className={s.menuDesplegable}>
-                   <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
+                <Link to="/account" className={s.link_menu} onClick={handleLogInClick} >
                   <h4>Ver perfil</h4>
                 </Link>
-                {/* <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
+                <Link to="/historial-de-compra" className={s.link_menu} onClick={handleLogInClick}>
                   <h4>Historial de compras</h4>
-                </Link> */}
+                </Link>
                 <Link to="/" className={s.link_menu} onClick={handleLogOut}>
                   <h4>Cerrar sesión</h4>
                 </Link>
@@ -176,27 +179,32 @@ const NavBar = () => {
         <div style={{ position: "relative" }}>
           <Link to="/shopping-cart" style={{ textDecoration: "none" }}>
             {count !== 0 ? (
-            <div
-              style={{
-                display: "inline-block",
-                position: "absolute",
-                top: "-10px",
-                right: "-25px",
-                width:"25px", 
-                height:"25px", 
-                backgroundColor:"rgb(248,93,91)", 
-                borderRadius:"50%"
-              }}
-            >
-              <h4 style={{ fontSize: "15px", color: "white" }}>
-                {count}
-              </h4>
-            </div>) : ""}
+              <div
+                style={{
+                  display: "inline-block",
+                  position: "absolute",
+                  top: "-10px",
+                  right: "-25px",
+                  width: "25px",
+                  height: "25px",
+                  backgroundColor: "rgb(248,93,91)",
+                  borderRadius: "50%"
+                }}
+              >
+                <h4 style={{ fontSize: "15px", color: "white" }}>
+                  {count}
+                </h4>
+              </div>) : ""}
             <div className={s.button}>
               <FontAwesomeIcon icon={faShoppingCart} style={{ fontSize: "25px" }}/>
             </div>
           </Link>
         </div>
+
+        {session?.dataValues.type_id === 2 && <div className={s.admin}>
+          <Link to="/dashboard"><button>Panel Admin</button></Link>
+        </div>}
+
       </div>
 
     </div>

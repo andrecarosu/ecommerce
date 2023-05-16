@@ -6,12 +6,11 @@ const postVentaHandler = async (req, res) => {
         date,
         total,
         state,
-        user_id,
         detail_order
     } = req.body;
     console.log(1, req.body)
     try {
-        const newVenta = await createVenta(date, total, state, user_id, detail_order);
+        const newVenta = await createVenta(date, total, state, detail_order);
         console.log(200, newVenta);
         const idVenta = await createDetalleVenta(detail_order, newVenta.order_id, state);
         console.log(10, idVenta);

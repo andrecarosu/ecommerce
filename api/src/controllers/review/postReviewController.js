@@ -1,41 +1,38 @@
-const { Product, Supplier, User, Review } = require("../../db");
+const { Product, Detail_order, Review } = require("../../db");
 const { Op } = require("sequelize")
 
-const createReview = async ({ email, product_id, ...review }) => {
+const createReview = async ({ detail_order_id, product_id, ...review }) => {
   try {
     const { comment, scoring } = review
 
     const productExistent = await Product.findByPk(product_id)
 
-
-    const userExistent = await User.findOne({
+    const detailExistent = await Detail_order.findOne({
       where: {
-        email: {
-          [Op.iLike]: `%${email}%`,
-        },
+        detail_order_id: detail_order_id
       }
     })
+    console.log(detail_order_id)
 
-
-    if (!productExistent || !userExistent) {
-      throw new Error('No se encontro el usuario o el producto')
+    if (!productExistent || !detailExistent) {
+      throw new Error('No se encontro el detalle o el producto')
     }
 
     const reviewExistent = await Review.findOne({
       where: {
         product_id: product_id,
-        user_id: userExistent.user_id
+        detail_order_id: detailExistent.detail_order_id
       }
     })
 
-
+    console.log(reviewExistent)
     if (!reviewExistent) {
       const newReview = await Review.create({
         comments: { comment },
-        scoring
+        scoring,
       });
 
-      await newReview.setUser(userExistent)
+      await newReview.setDetail_order(detailExistent)
       await newReview.setProduct(productExistent)
     } else {
       //console.log(reviewExistent)
@@ -43,21 +40,16 @@ const createReview = async ({ email, product_id, ...review }) => {
       // //reviewExistent.comments = [...reviewExistent.comments, comment];
       await reviewExistent.update(
         {
-          comments: { comment }
+          comments: { comment },
+          scoring:  scoring 
         }
       )
       //await reviewExistent.save()
     }
 
-
-
-
-
-
-
     return;
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
     throw new Error('Ocurrio u problema')
   }
 

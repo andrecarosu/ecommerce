@@ -1,23 +1,10 @@
-const { getVenta, getVentasUsuario,getDetalle_Venta } = require("../../controllers/order/getOrderController")
+const { getVenta, getVentasUsuario, getDetalle_Venta } = require("../../controllers/order/getOrderController")
 
 
 const getAllVentasHandler = async (req, res, next) => {
-
+    const { email } = req.query
     try {
-        const results = await getVenta()
-
-        res.status(200).json(results)
-
-    } catch (error) {
-        next(error)
-    }
-}
-
-const getAllVentasUsuarioHandler = async (req, res, next) => {
-    const { user_id } = req.params;
-
-    try {
-        const results = await getVentasUsuario(user_id)
+        const results = email ? await getVentasUsuario(email) : await getVenta()
 
         res.status(200).json(results)
 
@@ -28,6 +15,7 @@ const getAllVentasUsuarioHandler = async (req, res, next) => {
 
 const getDetalleVentaHandler = async (req, res, next) => {
     const { order_id } = req.params;
+
 
     try {
         const results = await getDetalle_Venta(order_id)
@@ -41,5 +29,5 @@ const getDetalleVentaHandler = async (req, res, next) => {
 
 
 module.exports = {
-    getAllVentasHandler, getAllVentasUsuarioHandler,getDetalleVentaHandler
+    getAllVentasHandler, getDetalleVentaHandler
 }
