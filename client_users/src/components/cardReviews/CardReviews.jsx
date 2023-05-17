@@ -1,10 +1,13 @@
 import { FaStar, FaRegStar } from 'react-icons/fa';
 import styles from "./CardReviews.module.css"
 
-function CardReview({comments, scoring, name}) {
+function CardReview({comments, scoring, email}) {
     const maxStars = 5;
     const filledStars = Math.round(scoring);
-    console.log(name);    
+    const arroba = "@";
+    const indice = email.indexOf(arroba);
+    const nombreReview = email.slice(0, indice);
+    console.log(666, nombreReview);    
     const starList = Array(maxStars).fill().map((_, index) => {
       if (index < filledStars) {
         return <FaStar key={index} />;
@@ -20,7 +23,7 @@ function CardReview({comments, scoring, name}) {
             {starList}
           </div>
           <span>
-          <label htmlFor="">Usuario: {name}</label>
+          <label htmlFor="">Usuario: {nombreReview}</label>
           </span>
 
           <div style={{marginBottom: "20px"}}>
