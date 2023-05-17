@@ -22,17 +22,38 @@ const CheckState = ({ user_id, state }) => {
 
     const onCheckState = (e) => {
         swal({
-            title: "¿Seguro que quieres deshabilitar el producto?",
+            title: "¿Seguro que quieres deshabilitar al usuario?",
             icon: 'warning',
-            buttons: ["Aceptar", "Cancelar"],
+            buttons: {
+
+                Aceptar: {
+                    text: "Aceptar",
+                    value: "accept",
+                },
+                Cancelar: {
+                    text: "Cancelar",
+                    value: "cancel"
+                },
+            },
+            // buttons: ["Aceptar", "Cancelar"],
             dangerMode: true,
 
         }).then(value => {
-            if (!value) {
-                setCheck(!check)
-            } else {
-                console.log("Cambio cancelado")
+            console.log(value)
+            switch (value) {
+                case "accept":
+                    setCheck(!check)
+                    break;
+                case "cancel":
+                    break;
+                default:
+                    break;
             }
+            // if (!value) {
+            //     setCheck(!check)
+            // } else {
+            //     console.log("Cambio cancelado")
+            // }
         })
         //setCheck(!check)
     }
