@@ -13,6 +13,7 @@ import s from "./formRegister.module.css";
 export default function FormRegister() {
   const { ciudades } = useSelector(state => state);
   const dispatch = useDispatch();
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
 
   useEffect(() => {
     dispatch(getAllCities());
@@ -83,7 +84,7 @@ export default function FormRegister() {
         setForm({ ...form, password: hashedPassword });
 
         await axios
-          .post("http://localhost:3001/usuario", form)
+          .post(`${url}/usuario`, form)
           .then(res => {
             swal({
               title: 'Registro exitoso',
