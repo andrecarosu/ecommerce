@@ -253,7 +253,7 @@ export default function FormRegister() {
                       value={form.password}
                       onChange={handleInputChange}
                       className={s.formInput}
-                      style={{width:"100%"}}
+                      style={{width:"100%", zIndex:"0"}}
                     />
                     <div onClick={handleShowPassword} style={{ position:"absolute", top:"10px", right:"20px", cursor:"pointer"}}>
                       {!showPassword ? <FiEyeOff /> : <FiEye />}
