@@ -179,7 +179,7 @@ export default function FormLogin() {
 
             <div className='form-input'>
               <Field name='email' type='email' placeholder='Email' className='form-input' />
-              <ErrorMessage name='email' />
+              <ErrorMessage name='email' styles={{color:"red"}} />
             </div>
 
             <div className='form-input' style={{position:"relative"}}>
