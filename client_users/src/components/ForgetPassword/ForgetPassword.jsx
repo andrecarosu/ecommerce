@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 
 const ForgetPassword = ({ setActiveForget }) => {
     const [input, setInput] = useState('')
+    const url = process.env.REACT_APP_DEPLOYBACK_URL
 
     const onChangeInput = (e) => {
         const { value } = e.target
@@ -16,7 +17,7 @@ const ForgetPassword = ({ setActiveForget }) => {
     }
 
     const onClickReset = async () => {
-        await axios.put("https://deploynodejsecommerce.onrender.com/usuario/reset-password", { email: input })
+        await axios.put(`${url}/usuario/reset-password`, { email: input })
             .then((data) => {
                 console.log('here', data.data)
                 setActiveForget(false)

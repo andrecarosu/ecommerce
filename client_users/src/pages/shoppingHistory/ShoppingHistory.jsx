@@ -20,6 +20,7 @@ import { useHistory } from "react-router-dom";
 Modal.setAppElement('#root'); // le decimos a react-modal que nuestro componente principal es #root
 
 const HistorialDeCompra = () => {
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({});
   const estaLogueado = localStorage.getItem("estaLogueado");
@@ -37,7 +38,7 @@ const HistorialDeCompra = () => {
           email = Cookies.get("user_session");
         }
   
-        const response2 = await axios.get(`https://deploynodejsecommerce.onrender.com/venta?email=${email}`);
+        const response2 = await axios.get(`${url}/venta?email=${email}`);
         const ventas = response2.data;
         //console.log(3, ventas);
         if (ventas.length > 0) {

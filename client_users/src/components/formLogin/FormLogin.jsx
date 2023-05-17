@@ -34,7 +34,7 @@ const auth = getAuth(app);
 
 //LAUTARO
 export default function FormLogin() {
-
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
   const [activeForget, setActiveForget] = useState(false)
   const estado = true
 
@@ -44,7 +44,7 @@ export default function FormLogin() {
 
   const iconGoogle = Google;
 
-  const BACK_HOST = 'https://deploynodejsecommerce.onrender.com'
+  const BACK_HOST = url
   const history = useHistory()
   const navigateTo = (url) => {
     history.push(url)

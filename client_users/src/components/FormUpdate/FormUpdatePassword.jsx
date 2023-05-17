@@ -9,13 +9,14 @@ import style from "./UpPassword.module.css";
 export default function FormUpdatePassword(props) {
   const { idUsuario } = props; //recibe por props el id_usuario que se le envía desde el componente Account
   const usuarioId = idUsuario;
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
 
   const [errors, setErrors] = useState({});
 
   const validate = async () => {
     try {
 
-      const response = await axios.get(`https://deploynodejsecommerce.onrender.com/usuario/validate-password?user_id=${idUsuario}&matchPassword=${form.prevPassword}`)
+      const response = await axios.get(`${url}/usuario/validate-password?user_id=${idUsuario}&matchPassword=${form.prevPassword}`)
       console.log('response mathc', response)
       return response
     } catch (error) {
@@ -72,7 +73,7 @@ export default function FormUpdatePassword(props) {
         const hashedPassword = bcrypt.hashSync(data.password, salt);
         setForm({ ...form, password: hashedPassword });
         await axios
-          .put("https://deploynodejsecommerce.onrender.com/usuario", { ...data, password: hashedPassword }) // Actualiza el valor de 'password' en el objeto de datos enviado
+          .put(`${url}/usuario`, { ...data, password: hashedPassword }) // Actualiza el valor de 'password' en el objeto de datos enviado
           .then(res =>
             swal({
               title: "Cambio exitoso",

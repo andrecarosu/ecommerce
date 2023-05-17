@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 
 const CheckState = ({ user_id, state }) => {
     const [check, setCheck] = useState(false)
+    const url = process.env.REACT_APP_DEPLOYBACK_URL
 
     useEffect(() => {
         setCheck(state)
@@ -12,7 +13,7 @@ const CheckState = ({ user_id, state }) => {
 
     useEffect(async () => {
         try {
-            await axios.put(`https://deploynodejsecommerce.onrender.com/usuario`, { user_id: user_id, estado: check });
+            await axios.put(`${url}/usuario`, { user_id: user_id, estado: check });
         } catch (error) {
             console.error(error)
         }

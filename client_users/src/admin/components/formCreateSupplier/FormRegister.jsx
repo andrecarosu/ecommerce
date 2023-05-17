@@ -3,6 +3,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import validations from "./validations";
 import bcrypt from "bcryptjs"; // librería para encriptcar contraseñas
+import { getAllCities } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert"
@@ -10,41 +11,65 @@ import swal from "sweetalert"
 import s from "./formRegister.module.css";
 
 export default function FormRegister() {
+  const { ciudades } = useSelector(state => state);
+  const dispatch = useDispatch();
   const url = process.env.REACT_APP_DEPLOYBACK_URL
-    const [form, setForm] = useState({
-    type_id: 1,
-    name: "",
-    address: "",
-    phone: "",
+
+  useEffect(() => {
+    dispatch(getAllCities());
+  }, [dispatch]);
+
+  console.log(typeof ciudades.id_ciudad);
+  const [form, setForm] = useState({
+    id_tipo_usuario: 1,
+    primer_nombre: "",
+    segundo_nombre: "",
+    primer_apellido: "",
+    segundo_apellido: "",
+    direccion: "",
+    telefono: "",
     email: "",
     password: "",
-    city: "",
+    id_ciudad: null,
     estado: true,
-    image: "",
+    imagen: "",
   });
 
-  const [errors, setErrors] = useState({}); 
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    // Llama a la función validations con el estado del formulario actual
+    const currentErrors = validations(form);
+    // Actualiza el estado de los errores con los errores actuales
+    setErrors(currentErrors);
+  }, [form]);
 
   const handleSubmit = async event => {
     event.preventDefault();
 
     // Obtiene los valores del formulario
-    const { name,      
-      address,
-      phone,
+    const { primer_nombre,
+      segundo_nombre,
+      primer_apellido,
+      segundo_apellido,
+      direccion,
+      telefono,
       email,
       password,
-      city,
+      id_ciudad
     } = form;
 
     // Realiza las validaciones
     const errors = validations({
-      name,
-      address,
-      phone,
+      primer_nombre,
+      segundo_nombre,
+      primer_apellido,
+      segundo_apellido,
+      direccion,
+      telefono,
       email,
       password,
-      city
+      id_ciudad
     });
 
 
@@ -117,7 +142,7 @@ export default function FormRegister() {
         // Actualizar el estado del formulario con la URL de la imagen subida
         setForm({
           ...form, // Copia el estado actual del formulario
-          image: imageUrl // Actualiza la propiedad 'imagen' del estado con la URL de la imagen subida
+          imagen: imageUrl // Actualiza la propiedad 'imagen' del estado con la URL de la imagen subida
         });
       } catch (error) {
         console.error("Error al subir la imagen a Cloudinary:", error);
@@ -129,7 +154,6 @@ export default function FormRegister() {
         ...prevForm,
         [property]: value
       }));
-    }
 
       const currentErrors = validations({ [property]: value });
       // setErrors(prevErrors => ({
@@ -139,19 +163,10 @@ export default function FormRegister() {
       setErrors({ ...errors, [property]: currentErrors[property] });
 
 
+    }
   }
 
-  useEffect(() => {
-    // // Llama a la función validations con el estado del formulario actual
-    // const currentErrors = validations(form);
-    // // Actualiza el estado de los errores con los errores actuales
-    // setErrors(currentErrors);
-    setForm(prevForm => ({
-       ...prevForm 
-      // id:id,
-      // email:email     
-    }));
-    }, []);
+
 
   return (
     <>
@@ -169,60 +184,116 @@ export default function FormRegister() {
                 {/* ----------------------- PRIMER NOMBRE -----------------------*/}
                 <div className={s.nombres}>
                   <div className={s.contenedorDiv}>
-                    <label  className={s.label}>
+                    <label for="" className={s.label}>
                       Nombre
                     </label>
                     <input
                       type="text"
-                      name="name"
-                      value={form.name}
+                      name="primer_nombre"
+                      value={form.primer_nombre}
                       onChange={handleInputChange}
                       className='form-input'
                     />
 
-                    {errors.name && (
-                      <div className={s.errors}>{errors.name}</div>
+                    {errors.primer_nombre && (
+                      <div className={s.errors}>{errors.primer_nombre}</div>
                     )}
                   </div>
+
+                  {/* ----------------------- SEGUNDO NOMBRE -----------------------*/}
+                  <div className={s.contenedorDiv}>
+                    <label for="" className={s.label}>
+                      Segundo nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="segundo_nombre"
+                      value={form.segundo_nombre}
+                      onChange={handleInputChange}
+                      className='form-input'
+                    />
+                    {errors.segundo_nombre && (
+                      <div className={s.errors}>{errors.segundo_nombre}</div>
+                    )}
+
                   </div>
+                </div>
+
+                {/* ----------------------- PRIMER APELLIDO -----------------------*/}
+                <div className={s.apellidos}>
+                  <div className={s.contenedorDiv}>
+
+                    <label for="" className={s.label}>
+                      Apellido
+                    </label>
+                    <input
+                      type="text"
+                      name="primer_apellido"
+                      value={form.primer_apellido}
+                      onChange={handleInputChange}
+                      className='form-input'
+                    />
+                    {errors.primer_apellido && (
+                      <div className={s.errors}>{errors.primer_apellido}</div>
+                    )}
+                  </div>
+
+                  {/* ----------------------- SEGUNDO APELLIDO -----------------------*/}
+                  <div className={s.contenedorDiv}>
+                    <label for="" className={s.label}>
+                      Segundo apellido
+                    </label>
+                    <input
+                      type="text"
+                      name="segundo_apellido"
+                      value={form.segundo_apellido}
+                      onChange={handleInputChange}
+                      className='form-input'
+                    />
+                    {errors.segundo_apellido && (
+                      <div className={s.errors}>{errors.segundo_apellido}</div>
+                    )}
+                  </div>
+                </div>
+
 
                 {/* ----------------------- DIRECCION -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
+                  <label for="" className={s.label}>
                     Dirección
                   </label>
                   <input
                     type="text"
-                    name="address"
-                    value={form.address}
+                    name="direccion"
+                    value={form.direccion}
                     onChange={handleInputChange}
                     className='form-input'
                   />
-                  {errors.address && (
-                    <div className={s.errors}>{errors.address}</div>
+                  {errors.direccion && (
+                    <div className={s.errors}>{errors.direccion}</div>
                   )}
                 </div>
 
                 {/* ----------------------- TELEFONO -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
+                  <label for="" className={s.label}>
                     Teléfono
                   </label>
                   <input
                     type="text"
-                    name="phone"
-                    value={form.phone}
+                    name="telefono"
+                    value={form.telefono}
                     onChange={handleInputChange}
                     className='form-input'
                   />
-                  {errors.phone && (
-                    <div className={s.errors}>{errors.phone}</div>
+                  {errors.telefono && (
+                    <div className={s.errors}>{errors.telefono}</div>
                   )}
                 </div>
 
                 {/* ----------------------- EMAIL -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
+                  <label for="" className={s.label}>
                     Email
                   </label>
                   <input
@@ -239,7 +310,7 @@ export default function FormRegister() {
 
                 {/* ----------------------- CONTRASEÑA -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
+                  <label for="" className={s.label}>
                     Contraseña
                   </label>
                   <input
@@ -256,24 +327,37 @@ export default function FormRegister() {
 
                 {/* ----------------------- CIUDAD -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
+                  <label for="" className={s.label}>
                     Ciudad
                   </label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={form.city}
-                    onChange={handleInputChange}
-                    className='form-input'
-                  />
-                  {errors.city && (
-                    <div className={s.errors}>{errors.city}</div>
-                  )}
+
+                  <div>
+
+                    {errors.id_ciudad && (
+                      <div className={s.errors}>{errors.id_ciudad}</div>
+                    )}
+                    <div className={s.contenedorDiv}>
+                      <select
+                        name="id_ciudad"
+                        onChange={e => handleInputChange(e)}
+                        className='form-input'
+                        style={{ width: '300px' }}
+                      >
+                        <option>Selecciona una ciudad</option>
+                        {ciudades &&
+                          ciudades.map(c => (
+                            <option key={c.id_ciudad} value={c.id_ciudad} primary={c.nombre_ciudad}>
+                              {c.nombre_ciudad}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
                 {/* ----------------------- IMAGEN -----------------------*/}
                 <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
+                  <label htmlFor="" className={s.label}>
                     Imagen
                   </label>
                   <input
@@ -284,11 +368,11 @@ export default function FormRegister() {
                     className='form-input'
                   />
 
-                  {/* ----------------------- VISTA PREVIA image -----------------------*/}
-                  {form.image && (
+                  {/* ----------------------- VISTA PREVIA IMAGEN -----------------------*/}
+                  {form.imagen && (
                     <img
                       className={s.imageFile}
-                      src={form.image}
+                      src={form.imagen}
                       id="imagen"
                       alt="foto perfil"
                     />

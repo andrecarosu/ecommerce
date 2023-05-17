@@ -15,7 +15,7 @@ const Review = (props) => {
   console.log(13,idDetail);
   const [errors, setErrors] = useState({});
   
-  const URL = 'https://deploynodejsecommerce.onrender.com'
+  const URL = process.env.REACT_APP_DEPLOYBACK_URL
 
   const [descripcion_motivo, setDescripcion_motivo] = useState();
   const [valor_calificacion, setValor_calificacion] = useState();

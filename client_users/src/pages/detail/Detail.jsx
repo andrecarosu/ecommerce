@@ -20,8 +20,6 @@ const Detail = (props) => {
 
   const  product_id  = props.id
 
- console.log(23,product_id);
-
   const { id } = useParams()
   const dispatch = useDispatch();
   const estaLogueado = localStorage.getItem("estaLogueado");

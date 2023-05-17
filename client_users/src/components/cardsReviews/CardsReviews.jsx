@@ -13,7 +13,7 @@ function CardsReviews(){
             return ( 
                 <CardReview 
                 review_id={review.review_id}
-                email={review.email}
+                email={review.Detail_order.email}
                 comments={review.comments}
                 scoring={review.scoring}
                 product_id={review.product_id}

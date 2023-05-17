@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 
 function PayFailure () {
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
   const dispatch = useDispatch();
   const { carrito } = useSelector((state) => state);
 
@@ -25,7 +26,7 @@ function PayFailure () {
         state: false
       }
       console.log(venta);
-      await axios.post("https://deploynodejsecommerce.onrender.com/venta", venta)
+      await axios.post(`${url}/venta`, venta)
         .then(response => {
           console.log(response.data);
         })

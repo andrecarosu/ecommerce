@@ -14,6 +14,7 @@ const Calificaciones = () => {
     const [flag, setFlag] = useState(false)
     const [load, setLoad] = useState(false)
     const [reviews, setReviews] = useState([])
+    const url = process.env.REACT_APP_DEPLOYBACK_URL
 
 
     const dispatch = useDispatch()
@@ -26,7 +27,7 @@ const Calificaciones = () => {
 
         setFlag(true)
 
-        const response = await axios.get(`https://deploynodejsecommerce.onrender.com/review/${product}`)
+        const response = await axios.get(`${url}/review/${product}`)
 
         setReviews(response.data)
     }
