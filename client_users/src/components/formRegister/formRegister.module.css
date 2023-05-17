@@ -31,12 +31,23 @@
 .contenedorDiv{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    margin: 15px;
 }
+
+.formInput {
+    width: 95%;
+    height: 35px;
+    /* margin: 20px 10px 10px 10px ; */
+    font-size: 17px;
+    padding: 0px 10px;
+    /* border: solid 1px blue; */
+  }
 
 .label{
     font-size: 20px;
-    margin: 0;
+    margin: 0 0 0 0px;
+    /* border: solid 1px red; */
 }
 
 

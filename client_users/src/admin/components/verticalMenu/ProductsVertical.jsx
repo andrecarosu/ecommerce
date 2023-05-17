@@ -29,7 +29,7 @@ const ProductsVertical = ({ handleClickCalificacion }) => {
 
     console.log('--------------', products)
     return (
-        <div className={s.itemsMenu}>
+        <div className={s.containerItems}>
             <input
                 className={s.searchInput}
                 name="search"
@@ -38,14 +38,17 @@ const ProductsVertical = ({ handleClickCalificacion }) => {
                 onChange={onSearch}
 
             />
-            {products.map((wine, index) => {
-                return (
-                    <div className={s.item} key={index} onClick={() => handleClickCalificacion(wine.product_id)}>
-                        {wine.name}
-                    </div>
-                )
+            <div className={s.itemsMenu}>
 
-            })}
+                {products.map((wine, index) => {
+                    return (
+                        <div className={s.item} key={index} onClick={() => handleClickCalificacion(wine.product_id)}>
+                            {wine.name}
+                        </div>
+                    )
+
+                })}
+            </div>
         </div>
     );
 }
