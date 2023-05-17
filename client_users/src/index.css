@@ -123,3 +123,11 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
   background-color: rgb(207, 161, 53);
 }
+
+.error{
+  color: red;
+}
+
+.divs{
+  padding-bottom: 30px;
+}
