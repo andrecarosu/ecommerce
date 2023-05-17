@@ -10,7 +10,7 @@ import swal from "sweetalert"
 import s from "./formRegister.module.css";
 
 export default function FormRegister() {
-
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
     const [form, setForm] = useState({
     type_id: 1,
     name: "",
@@ -59,7 +59,7 @@ export default function FormRegister() {
         setForm({ ...form, password: hashedPassword });
 
         await axios
-          .post("http://localhost:3001/usuario", form)
+          .post(`${url}/usuario`, form)
           .then(res => {
             swal({
               title: 'Registro exitoso',

@@ -13,6 +13,7 @@ import style from "../formCreateProduct/FormProduct.module.css"
 
 export default function FormCreateProduct() {
   const { categorias } = useSelector(state => state);
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
 
   const dispatch = useDispatch();
 
@@ -82,7 +83,7 @@ export default function FormCreateProduct() {
 
         console.log(formData);
 
-        await axios.post("http://localhost:3001/products", formData).then(res => {
+        await axios.post(`${url}/products`, formData).then(res => {
           swal({
             title: "producto creado correctamente",
             text: "asd",
