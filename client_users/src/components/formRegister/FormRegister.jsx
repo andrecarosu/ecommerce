@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs"; // librería para encriptcar contraseñas
 import { useSelector, useDispatch } from "react-redux";
 import { CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert"
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 import s from "./formRegister.module.css";
 
@@ -152,6 +153,11 @@ export default function FormRegister() {
       // email:email     
     }));
     }, []);
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleShowPassword = () => {
+      setShowPassword(!showPassword);
+    };
 
   return (
     <>
@@ -167,7 +173,6 @@ export default function FormRegister() {
             <CloudinaryContext cloudName="dfmkjxjsf">
               <form onSubmit={handleSubmit}>
                 {/* ----------------------- PRIMER NOMBRE -----------------------*/}
-                <div className={s.nombres}>
                   <div className={s.contenedorDiv}>
                     <label  className={s.label}>
                       Nombre
@@ -177,15 +182,14 @@ export default function FormRegister() {
                       name="name"
                       value={form.name}
                       onChange={handleInputChange}
-                      className='form-input'
+                      className={s.formInput}
+                      style={{marginTop:"0px"}}
                     />
 
                     {errors.name && (
                       <div className={s.errors}>{errors.name}</div>
                     )}
                   </div>
-                  </div>
-
                 {/* ----------------------- DIRECCION -----------------------*/}
                 <div className={s.contenedorDiv}>
                   <label  className={s.label}>
@@ -196,7 +200,7 @@ export default function FormRegister() {
                     name="address"
                     value={form.address}
                     onChange={handleInputChange}
-                    className='form-input'
+                    className={s.formInput}
                   />
                   {errors.address && (
                     <div className={s.errors}>{errors.address}</div>
@@ -213,8 +217,8 @@ export default function FormRegister() {
                     name="phone"
                     value={form.phone}
                     onChange={handleInputChange}
-                    className='form-input'
-                  />
+                    className={s.formInput}
+                    />
                   {errors.phone && (
                     <div className={s.errors}>{errors.phone}</div>
                   )}
@@ -230,7 +234,7 @@ export default function FormRegister() {
                     name="email"
                     value={form.email}
                     onChange={handleInputChange}
-                    className='form-input'
+                    className={s.formInput}
                   />
                   {errors.email && (
                     <div className={s.errors}>{errors.email}</div>
@@ -242,13 +246,19 @@ export default function FormRegister() {
                   <label  className={s.label}>
                     Contraseña
                   </label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={form.password}
-                    onChange={handleInputChange}
-                    className='form-input'
-                  />
+                  <div style={{ position:"relative", width:"95%"}}>
+                    <input
+                      type={showPassword? 'text':'password'}
+                      name="password"
+                      value={form.password}
+                      onChange={handleInputChange}
+                      className={s.formInput}
+                      style={{width:"100%", zIndex:"0"}}
+                    />
+                    <div onClick={handleShowPassword} style={{ position:"absolute", top:"10px", right:"20px", cursor:"pointer"}}>
+                      {!showPassword ? <FiEyeOff /> : <FiEye />}
+                    </div>
+                  </div>
                   {errors.password && (
                     <div className={s.errors}>{errors.password}</div>
                   )}
@@ -264,7 +274,7 @@ export default function FormRegister() {
                     name="city"
                     value={form.city}
                     onChange={handleInputChange}
-                    className='form-input'
+                    className={s.formInput}
                   />
                   {errors.city && (
                     <div className={s.errors}>{errors.city}</div>
@@ -281,7 +291,7 @@ export default function FormRegister() {
                     id="imagen"
                     name="imagen"
                     onChange={handleInputChange}
-                    className='form-input'
+                    className={s.formInput}
                   />
 
                   {/* ----------------------- VISTA PREVIA image -----------------------*/}

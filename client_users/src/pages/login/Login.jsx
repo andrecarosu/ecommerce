@@ -15,8 +15,9 @@ const Login = () => {
   return (
     <div className={s.container}>
       {/* <img className={s.logo} src={logo} alt="texto del logo" /> */}
-      <ButtonBack />
-
+      <div >
+        <ButtonBack />
+      </div>
       <div className={s.formulario}>
         <FormLogin />
       </div>

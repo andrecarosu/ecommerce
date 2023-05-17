@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import s from './ForgetPassword.module.css'
 import axios from "axios"
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const ForgetPassword = ({ setActiveForget }) => {
     const [input, setInput] = useState('')
@@ -44,7 +46,10 @@ const ForgetPassword = ({ setActiveForget }) => {
     return (
         <div onClick={onClose} className={s.gloablContainerTran}>
             <div className={s.emailContainer} onClick={(e) => e.stopPropagation()}>
-                <label onClick={onClose} className={s.close}>X</label>
+                {/* <label onClick={onClose} className={s.close}>X</label> */}
+                <div style={{position: "absolute", right: "30px", top: "15px",fontSize:"20px", cursor: "pointer"}} onClick={onClose}>
+                    <FontAwesomeIcon icon={faTimes}/> 
+                </div>
                 <label>Ingrese el correo de contacto para reestablecer la contraseña</label>
                 <label>Email *</label>
                 <input
