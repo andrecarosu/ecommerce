@@ -40,6 +40,7 @@ const createVenta = async (date, total, state, detail_order) => {
 
 const createDetalleVenta = async (detalle_order, venta_id, state) => {
   try {
+    const estado = state
     const newDetalleVenta = await Promise.all(
       detalle_order.map(async (detalle) => {
         const { product_id, amount,email, state, unit_value, value } = detalle;
@@ -57,7 +58,7 @@ const createDetalleVenta = async (detalle_order, venta_id, state) => {
           image: product.image, // Incluir el nombre del producto en el campo name
         });
         //si el estado es verdadero
-        if (state) {
+        if (estado) {
           product.stock = product.stock - amount;
           await product.save()
         }
