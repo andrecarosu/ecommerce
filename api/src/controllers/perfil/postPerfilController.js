@@ -3,28 +3,26 @@ const { Op } = require("sequelize")
 const {getPerfilByEmail} = require("../perfil/getPerfilController")
 
 
-const createPerfil = async (email, perfil) =>{
- const data = getPerfilByEmail(email)
- if (data) {
-    await PerfilGoogle.update(perfil,{
-        where: {email},
-        returning: true
+const createPerfil = async (name, address,phone,city,email,image,estado,data) =>{
+    const email1= email
+    console.log(111,email1);
+    
+ const datos = await  getPerfilByEmail(email1)
+  console.log(222,datos);
+ if (datos.length === 0) {
+    
+    await PerfilGoogle.create({
+        name, address, phone, city,email,image, estado
     })
+    
  } else {
 
-    let mapPerfil = perfil.map((prop) => ({
-        name: prop.name? prop.name: "",
-        address: prop.address? prop.address: "",
-        phone: prop.phone? prop.phone: "",
-        city: prop.city ? prop.city : "",
-        email: prop.email ? prop.email: "",
-        image: prop.image ? prop.image: "",
-        estado: prop.estado ? prop.estado: false,
-    }));
-
-    await PerfilGoogle.bulkCreate(mapPerfil);
 
 
+await PerfilGoogle.update(data,{
+    where: {email: email1},
+    returning: true
+})
     
  }
 }
