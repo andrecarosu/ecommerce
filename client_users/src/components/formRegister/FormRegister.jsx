@@ -73,9 +73,9 @@ export default function FormRegister() {
           .catch(err => {
             swal({
               title: 'Error',
-              text: 'intente nuevamente',
+              text: 'ese email ya está en uso, intente nuevamente con otro email',
               icon: 'error',
-              timer: '2000',
+              timer: '4000',
               button: 'Accept'
             })
           });
