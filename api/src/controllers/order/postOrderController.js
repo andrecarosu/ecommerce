@@ -38,7 +38,7 @@ const createVenta = async (date, total, state, detail_order) => {
 //   }
 // };
 
-const createDetalleVenta = async (detalle_order, venta_id, state) => {
+const createDetalleVenta = async (detalle_order, venta_id, state_payment) => {
   try {
     const newDetalleVenta = await Promise.all(
       detalle_order.map(async (detalle) => {
@@ -57,7 +57,7 @@ const createDetalleVenta = async (detalle_order, venta_id, state) => {
           image: product.image, // Incluir el nombre del producto en el campo name
         });
         //si el estado es verdadero
-        if (state) {
+        if (state_payment) {
           product.stock = product.stock - amount;
           await product.save()
         }
