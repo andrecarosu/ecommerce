@@ -164,8 +164,8 @@ const Detail = (props) => {
                       </div>
 
                       <div style={{ margin: '15px'}}>
-                        <button style={{ width: '250px', margin:"10px"}} onClick={handlerComprar}>Comprar</button>
-                        <button style={{ width: '250px', margin:"5px" }} onClick={handlerCarrito}>Agregar al carrito</button>
+                        <button style={{ width: '250px'}} onClick={handlerComprar}>Comprar</button>
+                        <button style={{ width: '250px'}} onClick={handlerCarrito}>Agregar al carrito</button>
                       </div>
 
                     </div>
