@@ -54,10 +54,10 @@ export default function FormRegister() {
       setErrors(errors); // Actualiza el estado de los errores
     } else {
       // Si no hay errores, continúa con el proceso de envío del formulario
-      try {
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(form.password, salt);
-        setForm({ ...form, password: hashedPassword });
+      // try {
+      //   const salt = bcrypt.genSaltSync(10);
+      //   const hashedPassword = bcrypt.hashSync(form.password, salt);
+      //   setForm({ ...form, password: hashedPassword });
 
         await axios
           .post(`${url}/usuario`, form)
@@ -80,10 +80,10 @@ export default function FormRegister() {
             })
           });
 
-      } catch (error) {
-        console.error("Error al encriptar la password:", error);
-      }
-    }
+    //   } catch (error) {
+    //     console.error("Error al encriptar la password:", error);
+    //   }
+     }
   };
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -175,7 +175,7 @@ export default function FormRegister() {
                 {/* ----------------------- PRIMER NOMBRE -----------------------*/}
                   <div className={s.contenedorDiv}>
                     <label  className={s.label}>
-                      Nombre
+                      Nombre *
                     </label>
                     <input
                       type="text"
@@ -193,7 +193,7 @@ export default function FormRegister() {
                 {/* ----------------------- DIRECCION -----------------------*/}
                 <div className={s.contenedorDiv}>
                   <label  className={s.label}>
-                    Dirección
+                    Dirección *
                   </label>
                   <input
                     type="text"
@@ -210,7 +210,7 @@ export default function FormRegister() {
                 {/* ----------------------- TELEFONO -----------------------*/}
                 <div className={s.contenedorDiv}>
                   <label  className={s.label}>
-                    Teléfono
+                    Teléfono *
                   </label>
                   <input
                     type="text"
@@ -227,7 +227,7 @@ export default function FormRegister() {
                 {/* ----------------------- EMAIL -----------------------*/}
                 <div className={s.contenedorDiv}>
                   <label  className={s.label}>
-                    Email
+                    Email *
                   </label>
                   <input
                     type="text"
@@ -244,7 +244,7 @@ export default function FormRegister() {
                 {/* ----------------------- CONTRASEÑA -----------------------*/}
                 <div className={s.contenedorDiv}>
                   <label  className={s.label}>
-                    Contraseña
+                    Contraseña *
                   </label>
                   <div style={{ position:"relative", width:"95%"}}>
                     <input
@@ -267,7 +267,7 @@ export default function FormRegister() {
                 {/* ----------------------- CIUDAD -----------------------*/}
                 <div className={s.contenedorDiv}>
                   <label  className={s.label}>
-                    Ciudad
+                    Ciudad *
                   </label>
                   <input
                     type="text"
