@@ -5,14 +5,14 @@ import swal from 'sweetalert';
 
 const CheckState = ({ product_id, state }) => {
     const [check, setCheck] = useState(false)
-
+    const url = process.env.REACT_APP_DEPLOYBACK_URL
     useEffect(() => {
         setCheck(state)
     }, [state])
 
     useEffect(async () => {
         try {
-            await axios.put(`http://localhost:3001/products/${product_id}`, { state: check });
+            await axios.put(`${url}/products/${product_id}`, { state: check });
         } catch (error) {
             console.error(error)
         }

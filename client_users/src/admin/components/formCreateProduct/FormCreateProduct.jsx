@@ -31,6 +31,8 @@ export const modules = {
 export default function FormCreateProduct() {
   const url = useLocation()
 
+  const url2 = process.env.REACT_APP_DEPLOYBACK_URL
+
   //const [flagEdit, setFlagEdit] = useState(false)
 
 
@@ -168,8 +170,8 @@ export default function FormCreateProduct() {
         state: true
       }
       const request = !flagEdit ?
-        axios.post("http://localhost:3001/products", parsed) :
-        axios.put(`http://localhost:3001/products/${id}`, parsed);
+        axios.post(`${url2}/products`, parsed) :
+        axios.put(`${url2}/products/${id}`, parsed);
 
       try {
 
