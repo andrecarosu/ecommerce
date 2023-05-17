@@ -72,7 +72,8 @@ code {
 
 button {
   border: none;
-  font-size: 30px;
+  font-size: 18px;
+
   background-color: black;
   color: white;
   font-weight: 600;
