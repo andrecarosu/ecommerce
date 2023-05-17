@@ -73,7 +73,10 @@ const Productos = () => {
 
     let { currentPage, totalPages, paginatedData, NextPage, PreviousPage } = usePagination(productos, 8)
 
-
+    const onClickAll = () => {
+        dispatch(getAllProducts());
+        dispatch(allProducts())
+    }
 
 
     console.log(productos)
@@ -81,6 +84,7 @@ const Productos = () => {
         <div className={s.productosContainer}>
             <h1>Productos</h1>
             <Link to='/dashboard/productos/crear-producto'><button>Crear Producto</button></Link>
+            <button className={s.allProducts} onClick={onClickAll}>Ver todos</button>
             <TableProductos
                 products={paginatedData}
                 handleClickDetail={handleClickDetail}
