@@ -66,6 +66,9 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/shopping-cart" component={ShoppingCart} />
         <Route exact path="/historial-de-compra" component={HistorialDeCompra} />
+        <Route path="/dashboard" render={() => <DashMain />} >
+          {/* <Route exact path="/usuarios" /> */}
+        </Route>
         {permission === "false" ? (
             <Redirect to="/" />
           ) : (
@@ -76,9 +79,7 @@ function App() {
           ) : (
             <Route exact path="/shopping-cart/failure" component={PayFailure} />
           )}
-        <Route path="/dashboard" render={() => <DashMain />} >
-          {/* <Route exact path="/usuarios" /> */}
-        </Route>
+        
       </Switch>
 
 
