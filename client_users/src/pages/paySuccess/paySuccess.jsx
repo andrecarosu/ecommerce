@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom';
 function PaySuccess () {
   const dispatch = useDispatch();
   const { carrito } = useSelector((state) => state);
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
 
   //REDIRECCIONAMIENTO
 
@@ -25,7 +26,7 @@ function PaySuccess () {
         state: true
       };
       
-      await axios.post("http://localhost:3001/venta", venta)
+      await axios.post(`${url}/venta`, venta)
         .then(response => {
           console.log(response.data);
         })

@@ -12,6 +12,7 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
   const usuario = useSelector(state => state.usuario) ?? [];
   //const [dataUsuario, setDataUsuario] = useState(usuario[0] || {});
   const [dataUsuario, setDataUsuario] = useState({});
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
   const updatedUserData = updateUserData;
   const dispatch = useDispatch();
 
@@ -137,7 +138,7 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
 
       // Verificar si el correo ya existe en la base de datos
       await axios
-        .get(`http://localhost:3001/usuario?email=${filteredData.email}`)
+        .get(`${url}/usuario?email=${filteredData.email}`)
         .then((res) => {
           if (res.data.length > 0) {
             emailExists = true;
@@ -156,7 +157,7 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
       // Si el correo no existe, se actualizan los datos
       if (!emailExists) {
         await axios
-          .put(`http://localhost:3001/usuario`, filteredData)
+          .put(`${url}/usuario`, filteredData)
           .then((res) =>
             swal({
               title: "Actualización Exitosa",

@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom"
 export default function ShoppingCart() {
   const dispatch = useDispatch()
   const { carrito, linkMercadoPago, countCarrito } = useSelector((state) => state);
+  const url = process.env.REACT_APP_DEPLOYBACK_URL
 
   useEffect(() => {
     window.localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -21,7 +22,7 @@ export default function ShoppingCart() {
   
   //Boton de mercadoPago
   const handlerPago = async () => {
-    const response = await fetch('http://localhost:3001/buy-products', {
+    const response = await fetch(`${url}/buy-products`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
