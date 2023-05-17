@@ -133,15 +133,15 @@ const Detail = (props) => {
             : (
             <div>
                 <div className={s.box1}>
-                  <div className={s.container}>
-                    <div style={{ position: "relative" }}>
-                      <div className={s.container_img}>
+                  <div className={s.container} >
+                    <div style={{ position: "relative", width:"50%" }}>
+                      <div className={s.container_img} >
                         <img className={s.image} src={product.image} alt={product.name} />
                       </div>
                     </div>
-                    <hr style={{ height: '90%', margin: '20px' }} />
+                    <hr style={{ height: '100%', margin: '0px 20px 0px 20px' }} />
 
-                    <div style={{ maxWidth: '60%' }}>
+                    <div style={{ maxWidth: '50%' }}>
                       <h2>{product.name}</h2>
 
                       <p className={s.descripcion_producto}>{product.description}</p>
@@ -163,9 +163,9 @@ const Detail = (props) => {
                         />
                       </div>
 
-                      <div style={{ margin: '15px' }}>
-                        <button style={{ width: '250px' }} onClick={handlerComprar}>Comprar</button>
-                        <button style={{ width: '250px' }} onClick={handlerCarrito}>Agregar al carrito</button>
+                      <div style={{ margin: '15px'}}>
+                        <button style={{ width: '250px', margin:"10px"}} onClick={handlerComprar}>Comprar</button>
+                        <button style={{ width: '250px', margin:"5px" }} onClick={handlerCarrito}>Agregar al carrito</button>
                       </div>
 
                     </div>
