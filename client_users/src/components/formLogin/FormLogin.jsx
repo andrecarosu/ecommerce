@@ -92,16 +92,21 @@ export default function FormLogin() {
       console.log(session)
 
       const isUserAuthenticated = await login(true);
-      if (isUserAuthenticated && session.dataValues?.type_id !== 2) {
+      if (isUserAuthenticated && session.dataValues?.estado === true && session.dataValues?.type_id !== 2) {
         localStorage.setItem("estaLogueado", "database")
         navigateTo('/');
-      } else if (isUserAuthenticated && session.dataValues?.type_id === 2) {
+      } else if (isUserAuthenticated && session.dataValues?.estado === true && session.dataValues?.type_id === 2) {
         localStorage.setItem("estaLogueado", "database")
         navigateTo('/dashboard');
       }
-      else {
-        console.log('Login failed');
-      }
+      else {    
+            swal({
+            text: 'por el momento estás inactivo',
+            icon: 'error',
+            timer: '3000'
+          })
+          navigateTo('/')
+        } 
     } catch (error) {
       const err = error.response.data;
       swal({
@@ -177,14 +182,16 @@ export default function FormLogin() {
         >
           <Form className='form-container'>
 
-            <div className='form-input'>
-              <Field name='email' type='email' placeholder='Email' className='form-input' />
-              <ErrorMessage name='email' styles={{color:"red"}} />
+            <div className='form-input' >
+              <Field name='email' type='email' placeholder='Email *' className='form-input' />
+             <div className='divs'>
+             <span className='error'> <ErrorMessage name='email' className='error' />  </span>
+             </div>
             </div>
 
             <div className='form-input' style={{position:"relative"}}>
-              <Field name='password' type={showPassword? 'text':'password'} placeholder='Contraseña' className='form-input' />
-              <ErrorMessage name='password' />
+              <Field name='password' type={showPassword? 'text':'password'} placeholder='Contraseña *' className='form-input' />
+              <span className='error'><ErrorMessage name='password' className='error' /> </span>
               <div onClick={handleShowPassword} style={{position:"absolute", top:"30px", right:"30px", cursor:"pointer"}}>
                 {!showPassword ? <FiEyeOff /> : <FiEye />}
               </div>
