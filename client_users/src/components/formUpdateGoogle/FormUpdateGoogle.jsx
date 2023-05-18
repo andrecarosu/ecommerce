@@ -8,59 +8,29 @@ import validations from "../FormUpdate/validations";
 import style from "../FormUpdate/FormUpdate.module.css";
 import data from "../carouselAbout/data";
 
-export default function FormUpdateGoogle({ emailResult, updateUserData }) {
-  const usuario = useSelector(state => state.usuario) ?? [];
+export default function FormUpdateGoogle({ email}) {
+  //const usuario = useSelector(state => state.usuario) ?? [];
   //const [dataUsuario, setDataUsuario] = useState(usuario[0] || {});
   const [dataUsuario, setDataUsuario] = useState({});
   const url = process.env.REACT_APP_DEPLOYBACK_URL
-  const updatedUserData = updateUserData;
+  //const updatedUserData = updateUserData;
   const dispatch = useDispatch();
+  const dataEmail = {email: email}
 
   useEffect(async () => {
     await axios
-    .get(`${url}/perfil?email=${emailResult}`)
+    .get(`${url}/perfil?email=${email}`)
     .then((res) => {
       if (res.data.length > 0) {
-        setDataUsuario(res[0])
+        setDataUsuario(res.data[0])
+      }
+      else{
+        setDataUsuario(dataEmail)
       }
     })
     .catch((err) => console.log(err));
     
-  }, [emailResult])
-
-
-  // const cargarEstado = () => {
-  //   setDataUsuario({}); // Reinicializar el estado dataUsuario
-
-  //   if (emailResult) {
-  //     dispatch(getUsuarioByEmail(emailResult));
-  //   }
-
-  //   if (usuario.length > 0) {
-  //     setDataUsuario(usuario[0]);
-  //   }
-  // };
-
-
-  // useEffect(() => {
-  //   console.log('entro')
-  //   const cargarEstado = async () => {
-  //     if (emailResult) {
-  //       await dispatch(getUsuarioByEmail(emailResult));
-  //     }
-
-  //     if (usuario.length > 0) {
-  //       setDataUsuario(usuario[0]);
-  //     }
-  //   };
-
-  //   cargarEstado(); // Ejecutar la función cargarEstado inicialmente
-
-  //   if (window.location.reload) {
-  //     cargarEstado(); // Ejecutar la función cargarEstado después de recargar la página
-  //   }
-  // }, [dispatch, emailResult, usuario]);
-
+  }, [email])
   const [form, setForm] = useState({})
 
   useEffect(() => {
@@ -75,21 +45,10 @@ export default function FormUpdateGoogle({ emailResult, updateUserData }) {
       })
     }
 
-  }, [dispatch, dataUsuario, usuario])
+  }, [dispatch, dataUsuario])
 
-  const emailData = emailResult;
+  const emailData = email;
   console.log(15, emailData);
-
-
-  // const [form, setForm] = useState({
-  //   user_id: idUsuario,
-  //   name: dataUsuario.name ? dataUsuario.name : "",
-  //   address: dataUsuario.address ? dataUsuario.address : "",
-  //   phone: dataUsuario.phone ? dataUsuario.phone : "",
-  //   email: dataUsuario.email ? dataUsuario.email : "",
-  //   city: dataUsuario.city ? dataUsuario.city : "",
-  //   image: dataUsuario.image ? dataUsuario.image : "",
-  // });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -118,7 +77,7 @@ export default function FormUpdateGoogle({ emailResult, updateUserData }) {
     };
 
     // Obtiene los valores del formulario
-    const { name, address, phone, email, password, city } = form;
+    const { name, address, phone, email,  city } = form;
 
     // Realiza las validaciones
     const errors = validations({

@@ -18,7 +18,7 @@ const AccountGoogle = () => {
       .then((res) => {
         console.log(123,res.data);
         if (res.data.length > 0) {
-          setDataUsuario(res[0])
+          setDataUsuario(res.data[0])
         }
       })
       .catch((err) => console.log(err));
@@ -31,13 +31,21 @@ const AccountGoogle = () => {
       <div className={s.usuario}>
         <h1 style={{ marginBottom: '15px', textAlign: 'left', fontSize: '30px' }}>Mi cuenta</h1>
         <div className={s.datos}>
-          <img icon={faUser} style={{ color: "white", cursor:"pointer", fontSize:"30px"}} className={s.imagen}/>
+        <div style={{ backgroundImage: `url(${dataUsuario.image})` }} className={s.imagen}></div>
 
           <span className={s.label}>Nombre</span>
           <h3 className={s.dato_nombre}>Usuario: {dataUsuario.name}</h3>
 
           <span className={s.label}>Email</span>
           <h3 className={s.dato}>{email}</h3>
+          <span className={s.label}>Ciudad</span>
+          <h3 className={s.dato}>{dataUsuario.city}</h3>
+
+          <span className={s.label}>Dirección</span>
+          <h3 className={s.dato}>{dataUsuario.address}</h3>
+
+          <span className={s.label}>Teléfono</span>
+          <h3 className={s.dato}>{dataUsuario.phone}</h3> 
 
          
         </div>

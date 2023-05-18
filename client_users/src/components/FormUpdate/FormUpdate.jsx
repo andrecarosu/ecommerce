@@ -142,13 +142,13 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
         .then((res) => {
           if (res.data.length > 0) {
             emailExists = true;
-            swal({
-              text: "Error",
-              text: "Ya existe ese email en la base de datos",
-              icon: "error",
-              timer: "2000",
-              button: "Accept",
-            });
+            // swal({
+            //   text: "Error",
+            //   text: "Ya existe ese email en la base de datos",
+            //   icon: "error",
+            //   timer: "2000",
+            //   button: "Accept",
+            // });
             emailExists = false;
           }
         })
