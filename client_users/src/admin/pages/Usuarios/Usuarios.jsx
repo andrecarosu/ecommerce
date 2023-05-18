@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Pagination from '../../components/pagination/Pagination';
 import TableUsuarios from '../../components/TableUsuarios/TableUsuarios';
 import usePagination from '../../components/pagination/PaginationHook';
 import s from './Usuarios.module.css'
-import { useSelector } from 'react-redux';
+import { getAllUsers } from '../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 const Usuarios = () => {
-
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAllUsers())
+    }, [])
     const { allUsers } = useSelector(state => state)
 
     const { currentPage, totalPages, paginatedData, NextPage, PreviousPage } = usePagination(allUsers, 8)
