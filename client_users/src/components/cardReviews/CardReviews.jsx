@@ -18,28 +18,27 @@ function CardReview({comments, scoring, email}) {
     
     return (
       <div className={styles.container}>
-        <div className={styles.box}>
-          <div className={styles.star}>
-            {starList}
+        <div className={styles.box} >
+          <h4 style={{ padding: "5px", margin:"10px" }}>
+            <label htmlFor="">{nombreReview}</label>
+          </h4>
+          <div style={{display: "flex", justifyContent:"center"}}>
+            <hr style={{width: "90%"}}/>
           </div>
-          <span>
-          <label htmlFor="">Usuario: {nombreReview}</label>
-          </span>
-
-          <div style={{marginBottom: "20px"}}>
-          
-            <p className={styles.texto}>
-            {comments?.map((comment) => (
-    <div key={comment.id}>
-          {comment.comment}
-    </div>
-))}
-
-</p> 
-
-
+          <div style={{marginBottom: "20px", marginTop:"15px", display:"flex", justifyContent:"center" }}>
+            <div style={{width: "90%"}}>
+              <div className={styles.star}>
+                {starList}
+              </div>
+              <p className={styles.texto} style={{padding: "5px"}}>
+                {comments?.map((comment) => (
+                  <div key={comment.id}>
+                    {comment.comment}
+                  </div>
+                ))}
+              </p>
+              </div> 
           </div>
-          <hr />
         </div>
       </div>
     );
