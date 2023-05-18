@@ -42,7 +42,7 @@ const CheckState = ({ user_id, state }) => {
         let bool_state = value === 'true'
 
         swal({
-            title: `¿Seguro que quieres ${value ? 'deshabilitar' : 'habilitar'} al usuario?`,
+            title: `¿Seguro que quieres ${bool_state ? 'deshabilitar' : 'habilitar'} al usuario?`,
             icon: 'warning',
             buttons: {
 

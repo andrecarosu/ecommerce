@@ -12,7 +12,7 @@ import CheckState from '../DetailCard/CheckBox/CheckState';
 const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
     const [nameFilter, setNameFilter] = useState('A-Z')
     const [priceFilter, setPriceFilter] = useState('1-9')
-    const [categoryFilter, setCategoryFilter] = useState('Category')
+    const [categoryFilter, setCategoryFilter] = useState('Varietal')
     const [input, setInput] = useState("")
     const { products } = props
     const dispatch = useDispatch()
@@ -119,7 +119,7 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
                         <th>Stock</th>
                         <th>Fecha de Creacion</th>
                         <th style={{ width: "50px" }}></th>
-                        <th>State</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
