@@ -58,11 +58,6 @@ const createDetalleVenta = async (detalle_order, venta_id, state) => {
           image: product.image, // Incluir el nombre del producto en el campo name
         });
         //si el estado es verdadero
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 7ec18ab2ac56a6a9618838337927195e7580d39e
         if (estado) {
           product.stock = product.stock - amount;
           await product.save()
