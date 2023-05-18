@@ -49,7 +49,7 @@ const Footer = () => {
               <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> Lunes a Domingo
             </p>
             <p>
-              <FontAwesomeIcon icon={faClock}></FontAwesomeIcon> 10 am a 12 am
+              <FontAwesomeIcon icon={faClock}></FontAwesomeIcon> 10 am a 7 pm
             </p>
           </section>
           <section className="payments">
