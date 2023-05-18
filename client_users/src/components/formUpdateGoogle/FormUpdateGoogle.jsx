@@ -8,20 +8,24 @@ import validations from "../FormUpdate/validations";
 import style from "../FormUpdate/FormUpdate.module.css";
 import data from "../carouselAbout/data";
 
-export default function FormUpdateGoogle({ email, updateUserData }) {
-  const usuario = useSelector(state => state.usuario) ?? [];
+export default function FormUpdateGoogle({ email}) {
+  //const usuario = useSelector(state => state.usuario) ?? [];
   //const [dataUsuario, setDataUsuario] = useState(usuario[0] || {});
   const [dataUsuario, setDataUsuario] = useState({});
   const url = process.env.REACT_APP_DEPLOYBACK_URL
-  const updatedUserData = updateUserData;
+  //const updatedUserData = updateUserData;
   const dispatch = useDispatch();
+  const dataEmail = {email: email}
 
   useEffect(async () => {
     await axios
     .get(`${url}/perfil?email=${email}`)
     .then((res) => {
       if (res.data.length > 0) {
-        setDataUsuario(res[0])
+        setDataUsuario(res.data[0])
+      }
+      else{
+        setDataUsuario(dataEmail)
       }
     })
     .catch((err) => console.log(err));
@@ -41,7 +45,7 @@ export default function FormUpdateGoogle({ email, updateUserData }) {
       })
     }
 
-  }, [dispatch, dataUsuario, usuario])
+  }, [dispatch, dataUsuario])
 
   const emailData = email;
   console.log(15, emailData);
