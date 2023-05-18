@@ -18,6 +18,9 @@ import Cookies from 'js-cookie';
 import styles from "../formLogin/FormLogin.module.css"
 import { useState } from 'react';
 
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDIr4a7cej0mw217G8qMwAGMx8R9MEYj2g",
   authDomain: "justoffers-85932.firebaseapp.com",
@@ -89,16 +92,21 @@ export default function FormLogin() {
       console.log(session)
 
       const isUserAuthenticated = await login(true);
-      if (isUserAuthenticated && session.dataValues?.type_id !== 2) {
+      if (isUserAuthenticated && session.dataValues?.estado === true && session.dataValues?.type_id !== 2) {
         localStorage.setItem("estaLogueado", "database")
         navigateTo('/');
-      } else if (isUserAuthenticated && session.dataValues?.type_id === 2) {
+      } else if (isUserAuthenticated && session.dataValues?.estado === true && session.dataValues?.type_id === 2) {
         localStorage.setItem("estaLogueado", "database")
         navigateTo('/dashboard');
       }
-      else {
-        console.log('Login failed');
-      }
+      else {    
+            swal({
+            text: 'por el momento estás inactivo',
+            icon: 'error',
+            timer: '3000'
+          })
+          navigateTo('/')
+        } 
     } catch (error) {
       const err = error.response.data;
       swal({
@@ -147,13 +155,20 @@ export default function FormLogin() {
         timer: '2000'
       });
     }
-  }
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   //carolina final
   return (
     <>
       {activeForget ? <ForgetPassword setActiveForget={setActiveForget} /> : null}
       <div className={styles.container}
-      // style={{ width: '100%', maxWidth: '820px' }}
+      style={{ width: '100%', maxWidth: '820px' }}
       >
         <Formik
           initialValues={{
@@ -167,19 +182,27 @@ export default function FormLogin() {
         >
           <Form className='form-container'>
 
-            <Field name='email' type='email' placeholder='Email' className='form-input' />
-            <ErrorMessage name='email' />
+            <div className='form-input' >
+              <Field name='email' type='email' placeholder='Email *' className='form-input' />
+             <div className='divs'>
+             <span className='error'> <ErrorMessage name='email' className='error' />  </span>
+             </div>
+            </div>
 
-            <Field name='password' type='password' placeholder='Password' className='form-input' />
-            <ErrorMessage name='password' />
+            <div className='form-input' style={{position:"relative"}}>
+              <Field name='password' type={showPassword? 'text':'password'} placeholder='Contraseña *' className='form-input' />
+              <span className='error'><ErrorMessage name='password' className='error' /> </span>
+              <div onClick={handleShowPassword} style={{position:"absolute", top:"30px", right:"30px", cursor:"pointer"}}>
+                {!showPassword ? <FiEyeOff /> : <FiEye />}
+              </div>
+            </div>
 
-            <div className={styles.botones}
-            // style={{ marginTop: '20px' }}
-            >
+            <div className={styles.botones}>
               <button className={styles.boton} type='submit' >Iniciar sesión</button>
-              <h4 className={styles.linkForget} onClick={onClickForget}><u>Olvide mi contraseña</u></h4>
-
-              <div className='or'>
+              <div style={{margin: "20px 0px 30px 0px"}}>
+                <h4 className={styles.linkForget} onClick={onClickForget}><u>Olvide mi contraseña</u></h4>
+              </div>
+              <div className='or' style={{margin:"10px, 10px 10px 25px"}}>
                 <div style={{ border: '1px solid grey', width: '90px' }}></div> <span style={{ margin: '0px 10px' }}>¿No tienes cuenta?</span> <div style={{ border: '1px solid grey', width: '90px' }}></div>
               </div>
 
@@ -188,7 +211,7 @@ export default function FormLogin() {
               </Link>
             </div>
 
-            <div>
+            <div style={{margin:"20px"}}>
               <button type="button" className={styles.botonRedes} onClick={handleGoogleLogin}><img className={styles.btnRedes} src={iconGoogle} /></button>
             </div>
 

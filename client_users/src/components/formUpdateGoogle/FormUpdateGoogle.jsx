@@ -4,63 +4,38 @@ import { getUsuarioByEmail, getUserById } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Image, CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert";
-import validations from "./validations";
-import style from "./FormUpdate.module.css";
+import validations from "../FormUpdate/validations";
+import style from "../FormUpdate/FormUpdate.module.css";
 import data from "../carouselAbout/data";
 
-export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
-  const usuario = useSelector(state => state.usuario) ?? [];
+export default function FormUpdateGoogle({ email}) {
+  //const usuario = useSelector(state => state.usuario) ?? [];
   //const [dataUsuario, setDataUsuario] = useState(usuario[0] || {});
   const [dataUsuario, setDataUsuario] = useState({});
   const url = process.env.REACT_APP_DEPLOYBACK_URL
-  const updatedUserData = updateUserData;
+  //const updatedUserData = updateUserData;
   const dispatch = useDispatch();
+  const dataEmail = {email: email}
 
-  useEffect(() => {
-    if (usuario.length > 0) {
-      setDataUsuario(usuario[0])
-    }
-  }, [idUsuario, usuario])
-
-
-  const cargarEstado = () => {
-    setDataUsuario({}); // Reinicializar el estado dataUsuario
-
-    if (emailResult) {
-      dispatch(getUsuarioByEmail(emailResult));
-    }
-
-    if (usuario.length > 0) {
-      setDataUsuario(usuario[0]);
-    }
-  };
-
-
-  // useEffect(() => {
-  //   console.log('entro')
-  //   const cargarEstado = async () => {
-  //     if (emailResult) {
-  //       await dispatch(getUsuarioByEmail(emailResult));
-  //     }
-
-  //     if (usuario.length > 0) {
-  //       setDataUsuario(usuario[0]);
-  //     }
-  //   };
-
-  //   cargarEstado(); // Ejecutar la función cargarEstado inicialmente
-
-  //   if (window.location.reload) {
-  //     cargarEstado(); // Ejecutar la función cargarEstado después de recargar la página
-  //   }
-  // }, [dispatch, emailResult, usuario]);
-
+  useEffect(async () => {
+    await axios
+    .get(`${url}/perfil?email=${email}`)
+    .then((res) => {
+      if (res.data.length > 0) {
+        setDataUsuario(res.data[0])
+      }
+      else{
+        setDataUsuario(dataEmail)
+      }
+    })
+    .catch((err) => console.log(err));
+    
+  }, [email])
   const [form, setForm] = useState({})
 
   useEffect(() => {
     if (Object.keys(dataUsuario).length > 0) {
       setForm({
-        user_id: idUsuario,
         name: dataUsuario.name,
         phone: dataUsuario.phone,
         address: dataUsuario.address,
@@ -70,22 +45,10 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
       })
     }
 
-  }, [dispatch, dataUsuario, usuario, idUsuario])
+  }, [dispatch, dataUsuario])
 
-  const usuarioId = idUsuario;
-  const emailData = emailResult;
+  const emailData = email;
   console.log(15, emailData);
-
-
-  // const [form, setForm] = useState({
-  //   user_id: idUsuario,
-  //   name: dataUsuario.name ? dataUsuario.name : "",
-  //   address: dataUsuario.address ? dataUsuario.address : "",
-  //   phone: dataUsuario.phone ? dataUsuario.phone : "",
-  //   email: dataUsuario.email ? dataUsuario.email : "",
-  //   city: dataUsuario.city ? dataUsuario.city : "",
-  //   image: dataUsuario.image ? dataUsuario.image : "",
-  // });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -114,7 +77,7 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
     };
 
     // Obtiene los valores del formulario
-    const { name, address, phone, email, password, city } = form;
+    const { name, address, phone, email,  city } = form;
 
     // Realiza las validaciones
     const errors = validations({
@@ -122,7 +85,6 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
       address,
       phone,
       email,
-      password,
       city
     });
 
@@ -134,30 +96,11 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
         Object.entries(data).filter(([_, value]) => !!value)
       );
 
-      let emailExists = false; // Variable para verificar si el email ya existe en la base de datos
+      
 
-      // Verificar si el correo ya existe en la base de datos
-      await axios
-        .get(`${url}/usuario?email=${filteredData.email}`)
-        .then((res) => {
-          if (res.data.length > 0) {
-            emailExists = true;
-            // swal({
-            //   text: "Error",
-            //   text: "Ya existe ese email en la base de datos",
-            //   icon: "error",
-            //   timer: "2000",
-            //   button: "Accept",
-            // });
-            emailExists = false;
-          }
-        })
-        .catch((err) => console.log(err));
-
-      // Si el correo no existe, se actualizan los datos
-      if (!emailExists) {
+      
         await axios
-          .put(`${url}/usuario`, filteredData)
+          .post(`${url}/perfil`, filteredData)
           .then((res) =>
             swal({
               title: "Actualización Exitosa",
@@ -167,23 +110,22 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
             })
           )
           .then(() => {
-            ; // Actualizar el estado antes de recargar la página
+             // Actualizar el estado antes de recargar la página
             //window.onload = () => {
               window.location.reload();
-              cargarEstado()
             //};
           })
           .catch((err) =>
             swal({
               text: "Error",
-              text: "Intente nuevamente, el correo ya existe",
+              text: "Intente nuevamente",
               icon: "error",
               timer: "2000",
               button: "Accept",
             })
           );
       }
-    }
+    
   };
 
 
@@ -236,9 +178,9 @@ export default function FormUpdate({ idUsuario, emailResult, updateUserData }) {
   useEffect(() => {
     setForm(prevForm => ({
       ...prevForm,
-      user_id: usuarioId
+      
     }));
-  }, [usuarioId]);
+  }, []);
 
 
 
