@@ -21,6 +21,9 @@ const TableProductos = ({ handleFilter, handleClickDetail, ...props }) => {
     const categoriasMatch = categorys ? categorys.flat(obj => obj?.categories)?.map(cat => {
         return { category_id: cat.category_id, name: cat.name }
     }) : []
+
+
+
     useEffect(() => {
         dispatch(getCategorys());
     }, [dispatch]);
