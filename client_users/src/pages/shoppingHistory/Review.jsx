@@ -105,48 +105,53 @@ if (Object.keys(errors).length > 0) {
  
 
   return (
-    <>    <form className={s.form} onSubmit={handleSubmit}>     
-          <div style={{marginBottom: '50px'}}>
-            <h1>Deja un comentario</h1>
-            <label>Calificar * </label>
+    <>
+      <form onSubmit={handleSubmit} style={{border: "solid 1px rgb(200, 197, 197)", borderRadius:"3px"}}>     
+        <div style={{ height:"100%" }}>
+          <div style={{display: "flex", justifyContent:"center", fontSize:"30px", margin: "20px 0 0 0", color: "rgb(213, 161, 41)"}}>
+            <h4>Deja un comentario</h4>
+          </div>
+          {/* <label>Calificar * </label> */}
+          <div style={{display: "flex", justifyContent: "center"}}>
             <select
               className='form-input'
               name="scoring"
               style={{ width: '40%' }}
               value={form.scoring}
               onChange={handleInputChange}
-            >
-              <option value="0">Puntaje *</option>
-              <option value="1">⭐</option>
-              <option value="2">⭐⭐</option>
-              <option value="3">⭐⭐⭐</option>
-              <option value="4">⭐⭐⭐⭐</option>
-              <option value="5">⭐⭐⭐⭐⭐</option>
+              >
+                <option value="0">Puntaje *</option>
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
             </select>
-
-            {errors.scoring && (
-              <div className={style.errors}>{errors.scoring}</div>
-            )}
-            
-              <label>¿Qué te pareció este producto? * </label>
-              <textarea 
-                className={s.textarea}
-                name="comment"
-                value={form.comment}
-                onChange={handleInputChange}
-                cols="30" 
-                rows="10"
-                placeholder='Dejanos un comentario aquí...'>
-              </textarea>
-              {errors.comment && (
+          </div>
+          {errors.scoring && (
+            <div className={style.errors}>{errors.scoring}</div>
+          )}
+              
+          {/* <label>¿Qué te pareció este producto? * </label> */}
+          <div style={{display: "flex", justifyContent: "center"}}>
+            <textarea 
+              className={s.textarea}
+              name="comment"
+              value={form.comment}
+              onChange={handleInputChange}
+              cols="30" 
+              rows="10"
+              placeholder='Dejanos un comentario aquí...'>
+            </textarea>
+          </div>
+            {errors.comment && (
               <div className={style.errors}>{errors.comment}</div>
             )}
-
+            <div style={{display:"flex", justifyContent:"center", margin:"10px 0 15px 0"}}>
               <button className={s.btn} type='submit'>Enviar</button>
-          </div>
-            </form>
-          {/* </div> */}
-        
+            </div>
+        </div>
+      </form>        
     </>
   )
 }
