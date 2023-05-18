@@ -43,7 +43,7 @@ const createDetalleVenta = async (detalle_order, venta_id, state) => {
     const estado = state
     const newDetalleVenta = await Promise.all(
       detalle_order.map(async (detalle) => {
-        const { product_id, amount,email, state, unit_value, value } = detalle;
+        const { product_id, amount, email, state, unit_value, value } = detalle;
         const product = await Product.findByPk(product_id); // Buscar el producto por su ID
         console.log(30, product);
         const detalle_venta = await Detail_order.create({

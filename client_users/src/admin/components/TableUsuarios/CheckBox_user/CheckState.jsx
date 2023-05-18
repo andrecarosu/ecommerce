@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useDebugValue, useEffect, useState } from 'react';
 import axios from 'axios';
 import s from './CheckState.module.css'
 import swal from 'sweetalert';
+import { getAllUsers } from '../../../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 const CheckState = ({ user_id, state }) => {
-    const [check, setCheck] = useState(false)
+    const dispatch = useDispatch()
+    const [check, setCheck] = useState(state)
     const url = process.env.REACT_APP_DEPLOYBACK_URL
 
     useEffect(() => {
@@ -14,6 +17,7 @@ const CheckState = ({ user_id, state }) => {
     useEffect(async () => {
         try {
             await axios.put(`${url}/usuario`, { user_id: user_id, estado: check });
+            dispatch(getAllUsers())
         } catch (error) {
             console.error(error)
         }
@@ -21,8 +25,10 @@ const CheckState = ({ user_id, state }) => {
     }, [check])
 
     const onCheckState = (e) => {
+        let { value } = e.target
+        value = value === 'true'
         swal({
-            title: "¿Seguro que quieres deshabilitar al usuario?",
+            title: `¿Seguro que quieres ${value ? 'deshabilitar' : 'habilitar'} al usuario?`,
             icon: 'warning',
             buttons: {
 

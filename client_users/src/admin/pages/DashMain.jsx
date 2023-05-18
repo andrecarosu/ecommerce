@@ -34,7 +34,7 @@ const DashMain = () => {
     useEffect(() => {
         dispatch(getCategorys());
         dispatch(getAllProducts());
-        dispatch(allProducts())
+        dispatch(allProducts(true))
         dispatch(getFamilies())
         dispatch(getAllUsers())
 

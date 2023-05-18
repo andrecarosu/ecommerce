@@ -21,10 +21,10 @@ const Productos = () => {
 
     useEffect(() => {
         dispatch(getAllProducts());
-        dispatch(allProducts())
+        dispatch(allProducts(true))
         return () => {
             dispatch(getAllProducts())
-            dispatch(allProducts())
+            dispatch(allProducts(true))
         }
     }, [])
 
@@ -63,9 +63,12 @@ const Productos = () => {
 
         console.log(productsFitered)
         setProductos(productsFitered)
+        //({ currentPage, totalPages, paginatedData, NextPage, PreviousPage } = usePagination(productsFitered, 8));
+
         // productos = productsFitered
 
     }, [dispatch, productsFitered])
+
 
 
 
@@ -75,7 +78,7 @@ const Productos = () => {
 
     const onClickAll = () => {
         dispatch(getAllProducts());
-        dispatch(allProducts())
+        dispatch(allProducts(true))
     }
 
 
