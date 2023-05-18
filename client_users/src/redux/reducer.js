@@ -263,17 +263,17 @@ function rootReducer(state = initialState, action) {
             : product
         ),
       };
-    
+
     case CLEAN_SHOPPING_CART:
       return {
-        ...state, 
+        ...state,
         countCarrito: 0,
-        carrito:[]
+        carrito: []
       };
-    
-    case REMOVE_SHOPPING_CART: 
-      return {remove: !state.remove};  
-    
+
+    case REMOVE_SHOPPING_CART:
+      return { remove: !state.remove };
+
     // ======================* CONTADOR CARRITO *======================
 
     case COUNT_AGREGAR:
@@ -323,7 +323,16 @@ function rootReducer(state = initialState, action) {
       return { ...state, usuario: action.payload };
 
     case GET_ALL_USERS:
-      return { ...state, allUsers: action.payload };
+      const order_by_id = action.payload.sort((a, b) => {
+        if (a.user_id > b.user_id) {
+          return 1;
+        }
+        if (b.user_id > a.user_id) {
+          return -1;
+        }
+        return 0;
+      })
+      return { ...state, allUsers: order_by_id };
 
     // ========================* REVIEWS *========================
 
@@ -368,7 +377,7 @@ function rootReducer(state = initialState, action) {
       return { ...state, page: action.payload };
 
     case PATH:
-      return { ...state, path: action.payload };  
+      return { ...state, path: action.payload };
 
     default:
       return state;

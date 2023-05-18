@@ -3,7 +3,7 @@ import axios from 'axios';
 import s from './CheckState.module.css'
 import swal from 'sweetalert';
 import { getAllUsers } from '../../../../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CheckState = ({ user_id, state }) => {
     const dispatch = useDispatch()
@@ -14,19 +14,33 @@ const CheckState = ({ user_id, state }) => {
         setCheck(state)
     }, [state])
 
-    useEffect(async () => {
+    // useEffect(async () => {
+    //     try {
+    //         await axios.put(`${url}/usuario`, { user_id: user_id, estado: check });
+    //         dispatch(getAllUsers())
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+
+    // }, [check])
+    const allUsers = useSelector(state => state)
+    const request = async (value) => {
         try {
-            await axios.put(`${url}/usuario`, { user_id: user_id, estado: check });
+            console.log(value)
+            await axios.put(`${url}/usuario`, { user_id: user_id, estado: value });
+            // dispatch({ type: actions.GET_ALL_USERS, payload: [] })
             dispatch(getAllUsers())
+
+
         } catch (error) {
             console.error(error)
         }
-
-    }, [check])
+    }
 
     const onCheckState = (e) => {
         let { value } = e.target
-        value = value === 'true'
+        let bool_state = value === 'true'
+
         swal({
             title: `¿Seguro que quieres ${value ? 'deshabilitar' : 'habilitar'} al usuario?`,
             icon: 'warning',
@@ -44,10 +58,11 @@ const CheckState = ({ user_id, state }) => {
             // buttons: ["Aceptar", "Cancelar"],
             dangerMode: true,
 
-        }).then(value => {
-            console.log(value)
-            switch (value) {
+        }).then(async (res) => {
+            console.log(res)
+            switch (res) {
                 case "accept":
+                    await request(!bool_state)
                     setCheck(!check)
                     break;
                 case "cancel":
@@ -66,7 +81,7 @@ const CheckState = ({ user_id, state }) => {
     return (
         <div onClick={(event) => event.stopPropagation()}>
             <label className={s.switch}>
-                <input type="checkbox" name="state" value={check} onChange={onCheckState} checked={check} />
+                <input type="checkbox" name="state" value={check} onClick={onCheckState} checked={check} />
                 <span className={`${s.slider} ${s.round}`}></span>
             </label>
         </div>
