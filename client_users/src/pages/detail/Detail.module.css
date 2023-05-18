@@ -127,7 +127,7 @@ div>.image {
     resize: none;
     border-radius: 3px;
     color: #202020;
-    outline: none;
+    outline: rgb(200, 197, 197 );
     margin: 10px 0 10px 0px;
 }
 
