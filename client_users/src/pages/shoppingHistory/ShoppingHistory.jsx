@@ -158,7 +158,7 @@ const HistorialDeCompra = () => {
                       overlayClassName={s.modalOverlay}
                     >
                       {selectedDetail && <Detail id={selectedDetail} />}
-                      <div style={{position: "absolute", right: "30px", top: "15px",fontSize:"20px", cursor: "pointer"}} onClick={toggleModalReview}>
+                      <div style={{position: "absolute", right: "30px", top: "15px",fontSize:"20px", cursor: "pointer"}} onClick={toggleModal}>
                         <FontAwesomeIcon icon={faTimes}/> 
                       </div>
                     </Modal>
