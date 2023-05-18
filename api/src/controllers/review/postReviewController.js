@@ -4,6 +4,7 @@ const { Op } = require("sequelize")
 const createReview = async ({ detail_order_id, product_id, ...review }) => {
   try {
     const { comment, scoring } = review
+    const idDetail = detail_order_id
 
     const productExistent = await Product.findByPk(product_id)
 
@@ -34,10 +35,19 @@ const createReview = async ({ detail_order_id, product_id, ...review }) => {
 
       await newReview.setDetail_order(detailExistent)
       await newReview.setProduct(productExistent)
+       // Actualizar el estado a true en Detail_order
+       await Detail_order.update(
+        { state: true },
+        {
+          where: { detail_order_id: idDetail },
+          
+        }
+      );
     } else {
       //console.log(reviewExistent)
       // const b = reviewExistent.comments.push(comment)
       // //reviewExistent.comments = [...reviewExistent.comments, comment];
+      
       await reviewExistent.update(
         {
           comments: { comment },

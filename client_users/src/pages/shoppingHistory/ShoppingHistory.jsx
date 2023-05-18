@@ -126,7 +126,7 @@ const HistorialDeCompra = () => {
                                   <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id)} />
                                 </div>
                                 <h3 className={s.aux}>{detalle.name}</h3>
-                                {venta.estado ? <button className={s.btnReview} onClick={() => toggleModalReview(detalle.detail_order_id, detalle.id)}>Calificar</button>: null}
+                                {venta.estado && !detalle.state ? <button className={s.btnReview} onClick={() => toggleModalReview(detalle.detail_order_id, detalle.id)}>Calificar</button>: null}
                                 <p className={s.aux}>${detalle.valor_unitario} x unidad</p>
                                 {detalle.cantidad === 1
                                 ? <p className={s.aux}>{detalle.cantidad} unidad</p>
