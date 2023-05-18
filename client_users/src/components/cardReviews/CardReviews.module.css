@@ -4,9 +4,10 @@
 }
 
 .box{
-    width: 70%;
+    width: 85%;
     margin-top: 20px;
-    margin-bottom: 20px;
+    border: solid 1px rgb(200, 197, 197);
+    border-radius: 3px;
 }
 .texto{
     text-align: justify;
