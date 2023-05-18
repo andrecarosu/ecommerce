@@ -179,7 +179,7 @@ const HistorialDeCompra = () => {
                         },
                       }}
                     >
-                      {selectCalificar && <Review id={selectCalificar.id} idDetail={selectCalificar.detail_order_id} />}
+                      {selectCalificar && <Review id={selectCalificar.id} idDetail={selectCalificar.detail_order_id} onClose={toggleModalReview} />}
                       <div style={{position: "absolute", right: "35px", top: "30px",fontSize:"20px", cursor: "pointer"}} onClick={toggleModalReview}>
                         <FontAwesomeIcon icon={faTimes}/> 
                       </div>
