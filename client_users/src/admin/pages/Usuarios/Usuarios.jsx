@@ -11,6 +11,7 @@ const Usuarios = () => {
         dispatch(getAllUsers())
     }, [])
     const { allUsers } = useSelector(state => state)
+    console.log('pillllllllle', allUsers)
 
     const { currentPage, totalPages, paginatedData, NextPage, PreviousPage } = usePagination(allUsers, 8)
 

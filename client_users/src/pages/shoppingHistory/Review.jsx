@@ -21,15 +21,11 @@ const Review = (props) => {
   const [valor_calificacion, setValor_calificacion] = useState();
   
   const [form, setForm] = useState({
-
-
       id: id,
       detail_order_id: idDetail,
       comment:"",
       scoring:""
   });
-
-
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -63,7 +59,7 @@ if (Object.keys(errors).length > 0) {
     .then(res =>
       swal({
         title: "Calificación Exitosa",
-        text: "ya pedes ver tu calificación al dar click en la imagen del producto!",
+        // text: "ya pedes ver tu calificación al dar click en la imagen del producto!",
         icon: "success",
         timer: "3000"
       })
@@ -79,6 +75,8 @@ if (Object.keys(errors).length > 0) {
     })
     
    }
+
+   props.onClose()
    
   }}
 
@@ -121,7 +119,7 @@ if (Object.keys(errors).length > 0) {
               onChange={handleInputChange}
               >
                 <option value="0">Puntaje *</option>
-                <option value="1">⭐</option>
+                <option value="1" style={{color: "rgb(213, 161, 41)"}}>⭐</option>
                 <option value="2">⭐⭐</option>
                 <option value="3">⭐⭐⭐</option>
                 <option value="4">⭐⭐⭐⭐</option>
@@ -148,7 +146,7 @@ if (Object.keys(errors).length > 0) {
               <div className={style.errors}>{errors.comment}</div>
             )}
             <div style={{display:"flex", justifyContent:"center", margin:"10px 0 15px 0"}}>
-              <button className={s.btn} type='submit'>Enviar</button>
+              <button className={s.btn} type='submit' >Enviar</button>
             </div>
         </div>
       </form>        
