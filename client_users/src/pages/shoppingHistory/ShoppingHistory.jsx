@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 // ESTILOS
 import s from "./ShoppingHistory.module.css";
@@ -126,7 +127,7 @@ const HistorialDeCompra = () => {
                                   <img className={s.img} src={detalle.image} alt={detalle.name} onClick={() => toggleModal(detalle.id)} />
                                 </div>
                                 <h3 className={s.aux}>{detalle.name}</h3>
-                                {venta.estado ? <button className={s.btnReview} onClick={() => toggleModalReview(detalle.detail_order_id, detalle.id)}>Calificar</button>: null}
+                                {venta.estado && !detalle.state ? <button className={s.btnReview} onClick={() => toggleModalReview(detalle.detail_order_id, detalle.id)}>Calificar</button>: null}
                                 <p className={s.aux}>${detalle.valor_unitario} x unidad</p>
                                 {detalle.cantidad === 1
                                 ? <p className={s.aux}>{detalle.cantidad} unidad</p>
@@ -150,33 +151,44 @@ const HistorialDeCompra = () => {
                   ))}
 
                   {/* Ventana emergente del detalle de la compra */}
-                  <Modal
-                    isOpen={showModal}
-                    onRequestClose={toggleModal}
-                    className={s.modal}
-                    overlayClassName={s.modalOverlay}
-                  >
-                    {selectedDetail && <Detail id={selectedDetail} />}
-                    <button className={s.btnClose} onClick={toggleModal}>
-                      CERRAR
-                    </button>
-                  </Modal>
-
-                  <Modal
-                    isOpen={showModalReview}
-                    onRequestClose={toggleModalReview}
-                    className={s.modal}
-                    overlayClassName={s.modalOverlay}
-                  >
-                    {selectCalificar && <Review id={selectCalificar.id} idDetail={selectCalificar.detail_order_id} />}
-                    <button className={s.btnCloseReview} onClick={toggleModalReview}>
-                      CERRAR
-                    </button>
-                  </Modal>
-
+                    <Modal
+                      isOpen={showModal}
+                      onRequestClose={toggleModal}
+                      className={s.modal}
+                      overlayClassName={s.modalOverlay}
+                    >
+                      {selectedDetail && <Detail id={selectedDetail} />}
+                      <div style={{position: "absolute", right: "30px", top: "15px",fontSize:"20px", cursor: "pointer"}} onClick={toggleModalReview}>
+                        <FontAwesomeIcon icon={faTimes}/> 
+                      </div>
+                    </Modal>
+                    <Modal
+                      isOpen={showModalReview}
+                      onRequestClose={toggleModalReview}
+                      style={{
+                        content: {
+                          width: '60%',
+                          height: '400px',
+                          margin: 'auto',
+                          border: 'none',
+                          borderRadius: '3px',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                        },
+                        overlay: {
+                          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        },
+                      }}
+                    >
+                      {selectCalificar && <Review id={selectCalificar.id} idDetail={selectCalificar.detail_order_id} />}
+                      <div style={{position: "absolute", right: "35px", top: "30px",fontSize:"20px", cursor: "pointer"}} onClick={toggleModalReview}>
+                        <FontAwesomeIcon icon={faTimes}/> 
+                      </div>
+                    </Modal>
                 </div>
               ) : (
-                <p>No se encontraron compras realizadas por el usuario</p>
+                <div style={{width: "100%", height: "100vh"}}>
+                  <p>No se encontraron compras realizadas por el usuario</p>
+                </div>
               )}
 
             </div>
