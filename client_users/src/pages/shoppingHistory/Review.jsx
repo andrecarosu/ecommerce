@@ -75,9 +75,8 @@ if (Object.keys(errors).length > 0) {
     })
     
    }
-
    props.onClose()
-   
+   window.location.reload()
   }}
 
   const handleInputChange = event =>{
