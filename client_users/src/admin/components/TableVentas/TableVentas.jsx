@@ -30,7 +30,7 @@ const TableVentas = ({ ventas, handleClickDetail }) => {
                         </th>
                         <th>Total</th>
                         <th>Fecha de Orden</th>
-                        <th>Email user</th>
+                        <th>Email del usuario</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
