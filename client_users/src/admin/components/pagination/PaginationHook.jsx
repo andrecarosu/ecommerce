@@ -8,6 +8,7 @@ const usePagination = (data, itemsPerPage) => {
         setCurrentPage(0)
     }, [data])
 
+
     const totalPages = Math.ceil(data.length / itemsPerPage)
     // cortamos que se muestre solo de 3
     const paginatedData = data?.slice(
