@@ -1,28 +1,19 @@
 import React from "react";
-import FormLogin from '../../components/formLogin/FormLogin'
-import FondoVerde from "../../assets/images/Fondo3.png"
-import Fondo2 from "../../assets/images/Fondo2.png"
-import Logo from "../../assets/images/LogoCompleto.png"
+import styles from './Login.module.css'
+import FormLogin from "../../components/formLogin/FormLogin";
 import ButtonBack from "../../components/buttonBack/ButtonBack";
-import s from './Login.module.css'
-
 
 const Login = () => {
 
-  const fondo1 = FondoVerde;
-  const fondo2 = Fondo2;
-  const logo = Logo
   return (
-    <div className={s.container}>
-      {/* <img className={s.logo} src={logo} alt="texto del logo" /> */}
-      <div >
-        <ButtonBack />
+    <div className={styles.container} >
+      <div style={{ width: "70%", height:"100vh" }}>
+        <img src="https://s1.1zoom.me/big0/625/Wine_Colored_background_Stemware_Bottle_525370_1280x912.jpg" alt="" className={styles.img}/>
       </div>
-      <div className={s.formulario}>
+      <div style={{ width: "30%", height:"100vh" }}>
         <FormLogin />
+        <ButtonBack/>
       </div>
-
-      {/* <p style={{ marginTop: '25px', color: 'gray' }}>Al continuar, aceptas las Condiciones de uso y el Aviso de privacidad de JustOffers.</p> */}
     </div>
   );
 };
