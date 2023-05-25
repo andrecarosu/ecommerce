@@ -1,44 +1,3 @@
-/* .container {
-    height: 100vh;
-    width: 100%;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.botones {
-    margin-top: 50px;
-    margin-bottom: 0.20rem;
-    padding: 10px;
-}
-
-.botonRedes {
-    border: none;
-    border-radius: 50px;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(75, 75, 75, 0.548);
-    display: flex;
-    align-items: center;
-}
-
-.btnRedes {
-    width: 20px;
-    height: 20px;
-    object-fit: cover;
-    transition: 0.1s;
-}
-
-.botonRedes:hover {
-    transform: scale(1.1);
-    background-color: rgb(230, 230, 230);
-}
-
-.linkForget {
-    font-size: 12px;
-    cursor: pointer;
-    font-weight: 400;
-
-} */
 .containerGlobal{
     width: 100%;
     height: 100vh;
@@ -78,7 +37,6 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    /* margin: 20px 0px 0px 0px; */
 }
 
 .containerInputLabel div{
@@ -130,9 +88,6 @@
     transition: all .5s;
 }
 
-/* .label:not(:focus){
-    color: black;
-} */
 
 .input:focus+.label{
     transform: translateY(-1.0rem);
@@ -261,7 +216,6 @@
     justify-content: center;
     width: 100%;
     padding: 0;
-    /* border: solid red 1px; */
 }
 .error span{
     all: unset;

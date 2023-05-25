@@ -1,27 +1,19 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
-import { Link } from "react-router-dom"
-import { useHistory } from 'react-router-dom';
-import validation from './validation'
+import styles from "../formLogin/FormLogin.module.css"
+import ForgetPassword from '../ForgetPassword/ForgetPassword';
+import CustomerErrorMessage from '../errorMessage/CustomerErrorMessage';
 import swal from 'sweetalert'
 import axios from 'axios'
-import { initializeApp } from "firebase/app";
-import ForgetPassword from '../ForgetPassword/ForgetPassword';
-import Google from "../../assets/images/IconGoogle.png"
-
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
-import { userLoggedIn } from "../../redux/actions";
-
-import Cookies from 'js-cookie';
-
-import styles from "../formLogin/FormLogin.module.css"
 import { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from "react-router-dom"
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import validation from './validation'
+import Cookies from 'js-cookie';
+import { initializeApp } from "firebase/app";
+import Google from "../../assets/images/IconGoogle.png"
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { userLoggedIn } from "../../redux/actions";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import Logo from '../../assets/images/LogoHeader.png';
-
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyDIr4a7cej0mw217G8qMwAGMx8R9MEYj2g",
@@ -179,20 +171,17 @@ export default function FormLogin() {
         validate={(values) => validation(values)}
         onSubmit={(values) => handleLogin(values)}
       >
-        {({ values, errors, touched , handleSubmit, handleChange, handleBlur }) => (
+        {({ errors, touched }) => (
           <div className={styles.containerGlobal}>
             <div className={styles.container}>
-              <form className={styles.form} onSubmit={handleSubmit}>
+              <Form className={styles.form}>
                 <div className={styles.containerInputLabel} >
                   <div>                 
-                    <input 
+                    <Field 
                       type="text" 
                       name="email"
                       id="email"
-                      placeholder=' ' 
-                      value={values.email} 
-                      onChange={handleChange}
-                      onBlur={handleBlur} 
+                      placeholder=' '  
                       className={`${styles.input} ${touched.email && errors.email && styles.inputError}`}
                     /> 
                     <label 
@@ -203,12 +192,13 @@ export default function FormLogin() {
                     </label>
                   </div>
                 </div>
-                {touched.email && errors.email 
+                <ErrorMessage name="email" component={CustomerErrorMessage} additionalProp={errors.email} />
+                {/* {touched.email && errors.email 
                 &&  <div className={styles.error}>
                       <span>
                         <span>{errors.email}</span>
                       </span>
-                    </div>} 
+                    </div>}  */}
                 <div 
                   className={styles.containerInputLabel} 
                   style={{
@@ -218,14 +208,11 @@ export default function FormLogin() {
                   }}
                 >
                   <div>   
-                    <input 
+                    <Field 
                       type= {showPassword? 'text':'password'} 
                       name= "password"
                       id= 'password'
                       placeholder=' ' 
-                      value={values.password} 
-                      onChange={handleChange}
-                      onBlur={handleBlur} 
                       className={`${styles.input} ${touched.password && errors.password && styles.inputError}`}
                     /> 
                     <label 
@@ -239,12 +226,13 @@ export default function FormLogin() {
                     </span>
                   </div> 
                 </div>
-                {touched.password && errors.password 
+                <ErrorMessage name="password" component={CustomerErrorMessage} additionalProp={errors.password}/>
+                {/* {touched.password && errors.password 
                 &&  <div className={styles.error}>
                       <span>
                         <span>{errors.password}</span>
                       </span>
-                    </div>}
+                    </div>} */}
                 <div 
                   onClick={onClickForget} 
                   className={styles.containerForget} 
@@ -286,7 +274,7 @@ export default function FormLogin() {
                     <span>Continuar con Google</span>
                   </div>
                 </div>
-              </form>
+              </Form>
             </div>
           </div>
         )}

@@ -3,12 +3,12 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import validations from "./validations";
 import bcrypt from "bcryptjs"; // librería para encriptcar contraseñas
-import { useSelector, useDispatch } from "react-redux";
 import { CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert"
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-
-import s from "./formRegister.module.css";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import CustomerErrorMessage from '../errorMessage/CustomerErrorMessage';
+import styles from "./formRegister.module.css";
 
 export default function FormRegister() {
   const url = process.env.REACT_APP_DEPLOYBACK_URL
@@ -26,121 +26,150 @@ export default function FormRegister() {
 
   const [errors, setErrors] = useState({}); 
 
-  const handleSubmit = async event => {
-    event.preventDefault();
+  const handlerSubmit = async (values) => {
+    console.log(values);
+    let file = values.image
+    const reader = new FileReader();
+    reader.onload = () => {
+      const fileData = reader.result;
+      const fileName = file.name;
+  
+      const formData = new FormData();
+      formData.append("file", fileData, fileName);
+      formData.append("upload_preset", "ajr7own3"); // Reemplazar con tu upload preset de Cloudinary
+      formData.append("api_key", "581299476786456"); // Reemplazar con tu API Key de Cloudinary
+  
+      console.log(formData);
+  
+      // Aquí puedes enviar el formData a Cloudinary utilizando fetch, axios u otra librería de tu elección.
+    };
+    reader.readAsDataURL(file)
+    // console.log(file);
+    // const formData = new FormData();
+    //   formData.append("file", file);
+    //   console.log(formData.append("file", file));
+    //   formData.append("upload_preset", "ajr7own3"); // Reemplazar con tu upload preset de Cloudinary
+    //   formData.append("api_key", "581299476786456"); // Reemplazar con tu API Key de Cloudinary
+    //   console.log(formData);
+    //   const response = await axios.post(
+    //             "https://api.cloudinary.com/v1_1/dfmkjxjsf/image/upload",
+    //             formData)
+    //   console.log(response.data);          
+    // event.preventDefault();
 
     // Obtiene los valores del formulario
-    const { name,      
-      address,
-      phone,
-      email,
-      password,
-      city,
-    } = form;
+    // const { name,      
+    //   address,
+    //   phone,
+    //   email,
+    //   password,
+    //   city,
+    // } = form;
 
     // Realiza las validaciones
-    const errors = validations({
-      name,
-      address,
-      phone,
-      email,
-      password,
-      city
-    });
+    // const errors = validations({
+    //   name,
+    //   address,
+    //   phone,
+    //   email,
+    //   password,
+    //   city
+    // });
 
 
     // Si hay errores, los muestra y no continúa con la solicitud
-    if (Object.keys(errors).length > 0) {
-      setErrors(errors); // Actualiza el estado de los errores
-    } else {
-      // Si no hay errores, continúa con el proceso de envío del formulario
-      // try {
-      //   const salt = bcrypt.genSaltSync(10);
-      //   const hashedPassword = bcrypt.hashSync(form.password, salt);
-      //   setForm({ ...form, password: hashedPassword });
+    // if (false) {
+    //   // Object.keys(errors).length > 0
+    //   setErrors(errors); // Actualiza el estado de los errores
+    // } else {
+    //   // Si no hay errores, continúa con el proceso de envío del formulario
+    //   // try {
+    //   //   const salt = bcrypt.genSaltSync(10);
+    //   //   const hashedPassword = bcrypt.hashSync(form.password, salt);
+    //   //   setForm({ ...form, password: hashedPassword });
 
-        await axios
-          .post(`${url}/usuario`, form)
-          .then(res => {
-            swal({
-              title: 'Registro exitoso',
-              text: 'Ya puedes navegar con tu cuenta!',
-              icon: 'success',
-              timer: '2000'
-            })
-            setShouldRedirect(true);
-          })
-          .catch(err => {
-            swal({
-              title: 'Error',
-              text: 'ese email ya está en uso, intente nuevamente con otro email',
-              icon: 'error',
-              timer: '4000',
-              button: 'Accept'
-            })
-          });
+    //     // await axios
+    //     //   .post(`${url}/usuario`, form)
+    //     //   .then(res => {
+    //     //     swal({
+    //     //       title: 'Registro exitoso',
+    //     //       text: 'Ya puedes navegar con tu cuenta!',
+    //     //       icon: 'success',
+    //     //       timer: '3000'
+    //     //     })
+    //     //     setShouldRedirect(true);
+    //     //   })
+    //     //   .catch(err => {
+    //     //     swal({
+    //     //       title: 'Error',
+    //     //       text: 'ese email ya está en uso, intente nuevamente con otro email',
+    //     //       icon: 'error',
+    //     //       timer: '4000',
+    //     //       button: 'Accept'
+    //     //     })
+    //     //   });
 
-    //   } catch (error) {
-    //     console.error("Error al encriptar la password:", error);
-    //   }
-     }
+    // //   } catch (error) {
+    // //     console.error("Error al encriptar la password:", error);
+    // //   }
+    //  }
   };
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const handleInputChange = async event => {
-    const property = event.target.name;
-    const value = event.target.value;
-    // Verificar si el input es de tipo file
-    if (event.target.type === "file") {
-      const file = event.target.files[0]; // Obtener el archivo seleccionado
-      let valor = 0;
-      if (file) valor = 1
-      console.log(valor);
-      // Subir la imagen a Cloudinary
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "ajr7own3"); // Reemplazar con tu upload preset de Cloudinary
-      formData.append("api_key", "581299476786456"); // Reemplazar con tu API Key de Cloudinary
+  // const handleInputChange = async event => {
+  //   // const property = event.target.name;
+  //   // const value = event.target.value;
+  //   // Verificar si el input es de tipo file
+  //   if (event.target.type === "file") {
+  //     const file = event.target.files[0]; // Obtener el archivo seleccionado
+  //     let valor = 0;
+  //     if (file) valor = 1
+  //     console.log(valor);
+  //     // Subir la imagen a Cloudinary
+  //     const formData = new FormData();
+  //     formData.append("file", file);
+  //     formData.append("upload_preset", "ajr7own3"); // Reemplazar con tu upload preset de Cloudinary
+  //     formData.append("api_key", "581299476786456"); // Reemplazar con tu API Key de Cloudinary
 
 
-      try {
-        const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dfmkjxjsf/image/upload",
-          formData
-        );
+  //     try {
+  //       const response = await axios.post(
+  //         "https://api.cloudinary.com/v1_1/dfmkjxjsf/image/upload",
+  //         formData
+  //       );
 
-        // Obtener la URL de la imagen subida desde la respuesta de Cloudinary
-        console.log(response.data.secure_url);
-        const imageUrl = response.data.secure_url;
-
-
-        // Actualizar el estado del formulario con la URL de la imagen subida
-        setForm({
-          ...form, // Copia el estado actual del formulario
-          image: imageUrl // Actualiza la propiedad 'imagen' del estado con la URL de la imagen subida
-        });
-      } catch (error) {
-        console.error("Error al subir la imagen a Cloudinary:", error);
-        // Manejar el error aquí, por ejemplo mostrar un mensaje de error al usuario
-      }
-    } else {
-      // Actualizar el estado del formulario para otros tipos de inputs
-      setForm(prevForm => ({
-        ...prevForm,
-        [property]: value
-      }));
-    }
-
-      const currentErrors = validations({ [property]: value });
-      // setErrors(prevErrors => ({
-      //   ...prevErrors,
-      //   [property]: currentErrors[property]
-      // }))  
-      setErrors({ ...errors, [property]: currentErrors[property] });
+  //       // Obtener la URL de la imagen subida desde la respuesta de Cloudinary
+  //       console.log(response.data.secure_url);
+  //       const imageUrl = response.data.secure_url;
 
 
-  }
+  //       // Actualizar el estado del formulario con la URL de la imagen subida
+  //       setForm({
+  //         ...form, // Copia el estado actual del formulario
+  //         image: imageUrl // Actualiza la propiedad 'imagen' del estado con la URL de la imagen subida
+  //       });
+  //     } catch (error) {
+  //       console.error("Error al subir la imagen a Cloudinary:", error);
+  //       // Manejar el error aquí, por ejemplo mostrar un mensaje de error al usuario
+  //     }
+  //   } else {
+  //     // Actualizar el estado del formulario para otros tipos de inputs
+  //     setForm(prevForm => ({
+  //       ...prevForm,
+  //       [property]: value
+  //     }));
+  //   }
+
+  //     const currentErrors = validations({ [property]: value });
+  //     // setErrors(prevErrors => ({
+  //     //   ...prevErrors,
+  //     //   [property]: currentErrors[property]
+  //     // }))  
+  //     setErrors({ ...errors, [property]: currentErrors[property] });
+
+
+  // }
 
   useEffect(() => {
     // // Llama a la función validations con el estado del formulario actual
@@ -159,159 +188,325 @@ export default function FormRegister() {
       setShowPassword(!showPassword);
     };
 
+    const initialValues = {
+      // type_id: 1,
+      name: "",
+      address: "",
+      phone: "",
+      email: "",
+      password: "",
+      city: "",
+      // estado: true,
+      image: "",
+    }
+
   return (
     <>
-
       {shouldRedirect ? (
         <Redirect to="/log-in" />
       ) : (
+        <Formik
+          initialValues={initialValues}
+          validate={(values) => validations(values)}
+          onSubmit={(values) => handlerSubmit(values)}
+        >
+          {({ errors, touched }) => (
+            <div className={styles.containerGlobal}>
+              <div className={styles.container}>
+                <CloudinaryContext cloudName="dfmkjxjsf">
+                  <Form className={styles.form}>
 
-        /* ----------------------- CONTENEDOR GENERAL -----------------------*/
-        <div className={s.contenedor}>
-          {/* ----------------------- CONTENEDOR FORMULARIO -----------------------*/}
-          <div className='form-container' style={{ padding: '15px' }}>
-            <CloudinaryContext cloudName="dfmkjxjsf">
-              <form onSubmit={handleSubmit}>
-                {/* ----------------------- PRIMER NOMBRE -----------------------*/}
-                  <div className={s.contenedorDiv}>
-                    <label  className={s.label}>
-                      Nombre *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={form.name}
-                      onChange={handleInputChange}
-                      className={s.formInput}
-                      style={{marginTop:"0px"}}
-                    />
-
-                    {errors.name && (
-                      <div className={s.errors}>{errors.name}</div>
-                    )}
-                  </div>
-                {/* ----------------------- DIRECCION -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
-                    Dirección *
-                  </label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={form.address}
-                    onChange={handleInputChange}
-                    className={s.formInput}
-                  />
-                  {errors.address && (
-                    <div className={s.errors}>{errors.address}</div>
-                  )}
-                </div>
-
-                {/* ----------------------- TELEFONO -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
-                    Teléfono *
-                  </label>
-                  <input
-                    type="text"
-                    name="phone"
-                    value={form.phone}
-                    onChange={handleInputChange}
-                    className={s.formInput}
-                    />
-                  {errors.phone && (
-                    <div className={s.errors}>{errors.phone}</div>
-                  )}
-                </div>
-
-                {/* ----------------------- EMAIL -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
-                    Email *
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    value={form.email}
-                    onChange={handleInputChange}
-                    className={s.formInput}
-                  />
-                  {errors.email && (
-                    <div className={s.errors}>{errors.email}</div>
-                  )}
-                </div>
-
-                {/* ----------------------- CONTRASEÑA -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
-                    Contraseña *
-                  </label>
-                  <div style={{ position:"relative", width:"95%"}}>
-                    <input
-                      type={showPassword? 'text':'password'}
-                      name="password"
-                      value={form.password}
-                      onChange={handleInputChange}
-                      className={s.formInput}
-                      style={{width:"100%", zIndex:"0"}}
-                    />
-                    <div onClick={handleShowPassword} style={{ position:"absolute", top:"10px", right:"20px", cursor:"pointer"}}>
-                      {!showPassword ? <FiEyeOff /> : <FiEye />}
+                    <div className={styles.containerInputLabel} >
+                      <div>                 
+                        <Field 
+                          type="text" 
+                          name="name"
+                          id="name"
+                          placeholder=' '  
+                          className={`${styles.input} ${touched.name && errors.name && styles.inputError}`}
+                        /> 
+                        <label 
+                          htmlFor= "" 
+                          className={`${styles.label} ${touched.name && errors.name && styles.labelError}`}
+                        >
+                          Nombre
+                        </label>
+                      </div>
                     </div>
-                  </div>
-                  {errors.password && (
-                    <div className={s.errors}>{errors.password}</div>
-                  )}
-                </div>
+                    <ErrorMessage name="name" component={CustomerErrorMessage} additionalProp={errors.name} />
 
-                {/* ----------------------- CIUDAD -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
-                    Ciudad *
-                  </label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={form.city}
-                    onChange={handleInputChange}
-                    className={s.formInput}
-                  />
-                  {errors.city && (
-                    <div className={s.errors}>{errors.city}</div>
-                  )}
-                </div>
+                    <div className={styles.containerInputLabel}>
+                      <div>   
+                        <Field 
+                          type= 'text'
+                          name= "address"
+                          id= 'address'
+                          placeholder=' ' 
+                          className={`${styles.input} ${touched.address && errors.address && styles.inputError}`}
+                        /> 
+                        <label 
+                          htmlFor="" 
+                          className={`${styles.label} ${touched.address && errors.address && styles.labelError}`}
+                        >
+                          Dirección
+                        </label>
+                      </div> 
+                    </div>
+                    <ErrorMessage name="address" component={CustomerErrorMessage} additionalProp={errors.address}/>
 
-                {/* ----------------------- IMAGEN -----------------------*/}
-                <div className={s.contenedorDiv}>
-                  <label  className={s.label}>
-                    Imagen
-                  </label>
-                  <input
-                    type="file"
-                    id="imagen"
-                    name="imagen"
-                    onChange={handleInputChange}
-                    className={s.formInput}
-                  />
+                    <div className={styles.containerInputLabel} >
+                      <div>                 
+                        <Field 
+                          type="text" 
+                          name="phone"
+                          id="phone"
+                          placeholder=' '  
+                          className={`${styles.input} ${touched.phone && errors.phone && styles.inputError}`}
+                        /> 
+                        <label 
+                          htmlFor= "" 
+                          className={`${styles.label} ${touched.phone && errors.phone && styles.labelError}`}
+                        >
+                          Teléfono
+                        </label>
+                      </div>
+                    </div>
+                    <ErrorMessage name="phone" component={CustomerErrorMessage} additionalProp={errors.phone} />
 
-                  {/* ----------------------- VISTA PREVIA image -----------------------*/}
-                  {form.image && (
-                    <img
-                      className={s.imageFile}
-                      src={form.image}
-                      id="imagen"
-                      alt="foto perfil"
-                    />
-                  )}
-                </div>
+                    <div className={styles.containerInputLabel} >
+                      <div>                 
+                        <Field 
+                          type="text" 
+                          name="email"
+                          id="email"
+                          placeholder=' '  
+                          className={`${styles.input} ${touched.email && errors.email && styles.inputError}`}
+                        /> 
+                        <label 
+                          htmlFor= "" 
+                          className={`${styles.label} ${touched.email && errors.email && styles.labelError}`}
+                        >
+                          Email
+                        </label>
+                      </div>
+                    </div>
+                    <ErrorMessage name="email" component={CustomerErrorMessage} additionalProp={errors.email} />
 
-                <button type="submit">Registrase</button>
-              </form>
-            </CloudinaryContext>
-          </div>
-        </div>
+                    <div className={styles.containerInputLabel} >
+                      <div>                 
+                        <Field 
+                          type={showPassword? 'text':'password'} 
+                          name="password"
+                          id="password"
+                          placeholder=' '  
+                          className={`${styles.input} ${touched.password && errors.password && styles.inputError}`}
+                        /> 
+                        <label 
+                          htmlFor= "" 
+                          className={`${styles.label} ${touched.password && errors.password && styles.labelError}`}
+                        >
+                          Contraseña
+                        </label>
+                        <span onClick={handleShowPassword}  className={styles.password} >
+                          {!showPassword ? <FiEyeOff /> : <FiEye />}
+                        </span>
+                      </div>
+                    </div>
+                    <ErrorMessage name="password" component={CustomerErrorMessage} additionalProp={errors.password} />
+
+                    <div className={styles.containerInputLabel} >
+                      <div>                 
+                        <Field 
+                          type="text" 
+                          name="city"
+                          id="city"
+                          placeholder=' '  
+                          className={`${styles.input} ${touched.city && errors.city && styles.inputError}`}
+                        /> 
+                        <label 
+                          htmlFor= "" 
+                          className={`${styles.label} ${touched.city && errors.city && styles.labelError}`}
+                        >
+                          Ciudad
+                        </label>
+                      </div>
+                    </div>
+                    <ErrorMessage name="city" component={CustomerErrorMessage} additionalProp={errors.city} />
+
+                    <div className={styles.containerInputLabel} >
+                      <div>                 
+                        <Field 
+                          type="file" 
+                          name="image"
+                          id="image"
+                          placeholder=' '  
+                          className={`${styles.input} ${touched.image && errors.image && styles.inputError}`}
+                        /> 
+                        <label 
+                          htmlFor= "" 
+                          className={`${styles.label} ${touched.image && errors.image && styles.labelError}`}
+                        >
+                          Imagen
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className={styles.btnContainer} >
+                      <button  className={styles.btn} type='submit'>Resgistrarse</button>
+                    </div>
+                  </Form>
+                </CloudinaryContext>
+              </div>
+            </div>
+          )}
+        </Formik>
       )}
 
     </>
   );
 }
+
+// /* ----------------------- CONTENEDOR GENERAL -----------------------*/
+// <div className={s.contenedor}>
+// {/* ----------------------- CONTENEDOR FORMULARIO -----------------------*/}
+// <div className='form-container' style={{ padding: '15px' }}>
+//   <CloudinaryContext cloudName="dfmkjxjsf">
+//     <form onSubmit={handleSubmit}>
+//       {/* ----------------------- PRIMER NOMBRE -----------------------*/}
+//         <div className={s.contenedorDiv}>
+//           <label  className={s.label}>
+//             Nombre *
+//           </label>
+//           <input
+//             type="text"
+//             name="name"
+//             value={form.name}
+//             onChange={handleInputChange}
+//             className={s.formInput}
+//             style={{marginTop:"0px"}}
+//           />
+
+//           {errors.name && (
+//             <div className={s.errors}>{errors.name}</div>
+//           )}
+//         </div>
+//       {/* ----------------------- DIRECCION -----------------------*/}
+//       <div className={s.contenedorDiv}>
+//         <label  className={s.label}>
+//           Dirección *
+//         </label>
+//         <input
+//           type="text"
+//           name="address"
+//           value={form.address}
+//           onChange={handleInputChange}
+//           className={s.formInput}
+//         />
+//         {errors.address && (
+//           <div className={s.errors}>{errors.address}</div>
+//         )}
+//       </div>
+
+//       {/* ----------------------- TELEFONO -----------------------*/}
+//       <div className={s.contenedorDiv}>
+//         <label  className={s.label}>
+//           Teléfono *
+//         </label>
+//         <input
+//           type="text"
+//           name="phone"
+//           value={form.phone}
+//           onChange={handleInputChange}
+//           className={s.formInput}
+//           />
+//         {errors.phone && (
+//           <div className={s.errors}>{errors.phone}</div>
+//         )}
+//       </div>
+
+//       {/* ----------------------- EMAIL -----------------------*/}
+//       <div className={s.contenedorDiv}>
+//         <label  className={s.label}>
+//           Email *
+//         </label>
+//         <input
+//           type="text"
+//           name="email"
+//           value={form.email}
+//           onChange={handleInputChange}
+//           className={s.formInput}
+//         />
+//         {errors.email && (
+//           <div className={s.errors}>{errors.email}</div>
+//         )}
+//       </div>
+
+//       {/* ----------------------- CONTRASEÑA -----------------------*/}
+//       <div className={s.contenedorDiv}>
+//         <label  className={s.label}>
+//           Contraseña *
+//         </label>
+//         <div style={{ position:"relative", width:"95%"}}>
+//           <input
+//             type={showPassword? 'text':'password'}
+//             name="password"
+//             value={form.password}
+//             onChange={handleInputChange}
+//             className={s.formInput}
+//             style={{width:"100%", zIndex:"0"}}
+//           />
+//           <div onClick={handleShowPassword} style={{ position:"absolute", top:"10px", right:"20px", cursor:"pointer"}}>
+//             {!showPassword ? <FiEyeOff /> : <FiEye />}
+//           </div>
+//         </div>
+//         {errors.password && (
+//           <div className={s.errors}>{errors.password}</div>
+//         )}
+//       </div>
+
+//       {/* ----------------------- CIUDAD -----------------------*/}
+//       <div className={s.contenedorDiv}>
+//         <label  className={s.label}>
+//           Ciudad *
+//         </label>
+//         <input
+//           type="text"
+//           name="city"
+//           value={form.city}
+//           onChange={handleInputChange}
+//           className={s.formInput}
+//         />
+//         {errors.city && (
+//           <div className={s.errors}>{errors.city}</div>
+//         )}
+//       </div>
+
+//       {/* ----------------------- IMAGEN -----------------------*/}
+//       <div className={s.contenedorDiv}>
+//         <label  className={s.label}>
+//           Imagen
+//         </label>
+//         <input
+//           type="file"
+//           id="imagen"
+//           name="imagen"
+//           onChange={handleInputChange}
+//           className={s.formInput}
+//         />
+
+//         {/* ----------------------- VISTA PREVIA image -----------------------*/}
+//         {form.image && (
+//           <img
+//             className={s.imageFile}
+//             src={form.image}
+//             id="imagen"
+//             alt="foto perfil"
+//           />
+//         )}
+//       </div>
+
+//       <button type="submit">Registrase</button>
+//     </form>
+//   </CloudinaryContext>
+// </div>
+// </div>
