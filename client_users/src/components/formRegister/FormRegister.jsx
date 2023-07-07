@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import validations from "./validations";
@@ -6,13 +6,19 @@ import bcrypt from "bcryptjs"; // librería para encriptcar contraseñas
 import { CloudinaryContext } from "cloudinary-react"; // para guardar las imágenes externamente 
 import swal from "sweetalert"
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import CustomerErrorMessage from '../errorMessage/CustomerErrorMessage';
 import styles from "./formRegister.module.css";
+import ProgressBar from "../progressBar/ProgressBar";
 
 export default function FormRegister() {
   const url = process.env.REACT_APP_DEPLOYBACK_URL
-    const [form, setForm] = useState({
+
+  const [image, setImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfwVMnPY9fmRkp19J1tQeeigdaBWi4XFDZGIvjAjEHy2JrE7NPZ0hRiBudfg4zEJ4_wPY&usqp=CAU");
+
+  const initialValues = {
     type_id: 1,
     name: "",
     address: "",
@@ -21,185 +27,68 @@ export default function FormRegister() {
     password: "",
     city: "",
     estado: true,
-    image: "",
-  });
-
-  const [errors, setErrors] = useState({}); 
-
-  const handlerSubmit = async (values) => {
-    console.log(values);
-    let file = values.image
-    const reader = new FileReader();
-    reader.onload = () => {
-      const fileData = reader.result;
-      const fileName = file.name;
-  
-      const formData = new FormData();
-      formData.append("file", fileData, fileName);
-      formData.append("upload_preset", "ajr7own3"); // Reemplazar con tu upload preset de Cloudinary
-      formData.append("api_key", "581299476786456"); // Reemplazar con tu API Key de Cloudinary
-  
-      console.log(formData);
-  
-      // Aquí puedes enviar el formData a Cloudinary utilizando fetch, axios u otra librería de tu elección.
-    };
-    reader.readAsDataURL(file)
-    // console.log(file);
-    // const formData = new FormData();
-    //   formData.append("file", file);
-    //   console.log(formData.append("file", file));
-    //   formData.append("upload_preset", "ajr7own3"); // Reemplazar con tu upload preset de Cloudinary
-    //   formData.append("api_key", "581299476786456"); // Reemplazar con tu API Key de Cloudinary
-    //   console.log(formData);
-    //   const response = await axios.post(
-    //             "https://api.cloudinary.com/v1_1/dfmkjxjsf/image/upload",
-    //             formData)
-    //   console.log(response.data);          
-    // event.preventDefault();
-
-    // Obtiene los valores del formulario
-    // const { name,      
-    //   address,
-    //   phone,
-    //   email,
-    //   password,
-    //   city,
-    // } = form;
-
-    // Realiza las validaciones
-    // const errors = validations({
-    //   name,
-    //   address,
-    //   phone,
-    //   email,
-    //   password,
-    //   city
-    // });
-
-
-    // Si hay errores, los muestra y no continúa con la solicitud
-    // if (false) {
-    //   // Object.keys(errors).length > 0
-    //   setErrors(errors); // Actualiza el estado de los errores
-    // } else {
-    //   // Si no hay errores, continúa con el proceso de envío del formulario
-    //   // try {
-    //   //   const salt = bcrypt.genSaltSync(10);
-    //   //   const hashedPassword = bcrypt.hashSync(form.password, salt);
-    //   //   setForm({ ...form, password: hashedPassword });
-
-    //     // await axios
-    //     //   .post(`${url}/usuario`, form)
-    //     //   .then(res => {
-    //     //     swal({
-    //     //       title: 'Registro exitoso',
-    //     //       text: 'Ya puedes navegar con tu cuenta!',
-    //     //       icon: 'success',
-    //     //       timer: '3000'
-    //     //     })
-    //     //     setShouldRedirect(true);
-    //     //   })
-    //     //   .catch(err => {
-    //     //     swal({
-    //     //       title: 'Error',
-    //     //       text: 'ese email ya está en uso, intente nuevamente con otro email',
-    //     //       icon: 'error',
-    //     //       timer: '4000',
-    //     //       button: 'Accept'
-    //     //     })
-    //     //   });
-
-    // //   } catch (error) {
-    // //     console.error("Error al encriptar la password:", error);
-    // //   }
-    //  }
+    image: image
+  }
+ 
+  const handleInputChange = async event => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "ajr7own3"); 
+    formData.append("api_key", "581299476786456"); 
+    await axios.post(
+      "https://api.cloudinary.com/v1_1/dfmkjxjsf/image/upload", formData)
+      .then(res => {
+        setImage(res.data.secure_url)
+      })
+      .catch(err => {
+        console.log(err);
+      })
   };
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  // const handleInputChange = async event => {
-  //   // const property = event.target.name;
-  //   // const value = event.target.value;
-  //   // Verificar si el input es de tipo file
-  //   if (event.target.type === "file") {
-  //     const file = event.target.files[0]; // Obtener el archivo seleccionado
-  //     let valor = 0;
-  //     if (file) valor = 1
-  //     console.log(valor);
-  //     // Subir la imagen a Cloudinary
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-  //     formData.append("upload_preset", "ajr7own3"); // Reemplazar con tu upload preset de Cloudinary
-  //     formData.append("api_key", "581299476786456"); // Reemplazar con tu API Key de Cloudinary
+  const handlerSubmit = async (values) => {
+    console.log(values);
+   values.image = image
+    console.log(values, "Formulario enviado");
+    await axios.post(`${url}/usuario`, values)
+    .then(res => {
+      console.log(res.data);
+      swal({
+        title: res.data,
+        text: 'Ya puedes navegar con tu cuenta!',
+        icon: 'success',
+        timer: '3000'
+      })
+      setShouldRedirect(true);
+    })
+    .catch(err => {
+      console.log(err.data);
+      swal({
+        title: 'Error',
+        text: 'Este email ya está en uso, intente nuevamente con otro email',
+        icon: 'error',
+        timer: '3000',
+        button: 'Accept'
+      })
+    })
+  };
 
+  const [ showPassword, setShowPassword ] = useState(false);
+  const [ showRepeatPassword, setShowRepeatPassword ] = useState(false);
 
-  //     try {
-  //       const response = await axios.post(
-  //         "https://api.cloudinary.com/v1_1/dfmkjxjsf/image/upload",
-  //         formData
-  //       );
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-  //       // Obtener la URL de la imagen subida desde la respuesta de Cloudinary
-  //       console.log(response.data.secure_url);
-  //       const imageUrl = response.data.secure_url;
+  const [ showSeccion1, setShowSeccion1 ] = useState(true);
+  const [ showSeccion2, setShowSeccion2 ] = useState(false);
+  const [ showSeccion3, setShowSeccion3 ] = useState(false);
 
-
-  //       // Actualizar el estado del formulario con la URL de la imagen subida
-  //       setForm({
-  //         ...form, // Copia el estado actual del formulario
-  //         image: imageUrl // Actualiza la propiedad 'imagen' del estado con la URL de la imagen subida
-  //       });
-  //     } catch (error) {
-  //       console.error("Error al subir la imagen a Cloudinary:", error);
-  //       // Manejar el error aquí, por ejemplo mostrar un mensaje de error al usuario
-  //     }
-  //   } else {
-  //     // Actualizar el estado del formulario para otros tipos de inputs
-  //     setForm(prevForm => ({
-  //       ...prevForm,
-  //       [property]: value
-  //     }));
-  //   }
-
-  //     const currentErrors = validations({ [property]: value });
-  //     // setErrors(prevErrors => ({
-  //     //   ...prevErrors,
-  //     //   [property]: currentErrors[property]
-  //     // }))  
-  //     setErrors({ ...errors, [property]: currentErrors[property] });
-
-
-  // }
-
-  useEffect(() => {
-    // // Llama a la función validations con el estado del formulario actual
-    // const currentErrors = validations(form);
-    // // Actualiza el estado de los errores con los errores actuales
-    // setErrors(currentErrors);
-    setForm(prevForm => ({
-       ...prevForm 
-      // id:id,
-      // email:email     
-    }));
-    }, []);
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleShowPassword = () => {
-      setShowPassword(!showPassword);
-    };
-
-    const initialValues = {
-      // type_id: 1,
-      name: "",
-      address: "",
-      phone: "",
-      email: "",
-      password: "",
-      city: "",
-      // estado: true,
-      image: "",
-    }
-
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 3; 
+console.log(initialValues);
   return (
     <>
       {shouldRedirect ? (
@@ -210,152 +99,339 @@ export default function FormRegister() {
           validate={(values) => validations(values)}
           onSubmit={(values) => handlerSubmit(values)}
         >
-          {({ errors, touched }) => (
-            <div className={styles.containerGlobal}>
-              <div className={styles.container}>
-                <CloudinaryContext cloudName="dfmkjxjsf">
-                  <Form className={styles.form}>
+          {({ errors, touched, values }) => (
+            <div style={{display:"flex", alignItems:"center", height:"100%"}}>
+              <div className={styles.containerGlobal}>
+                <div className={styles.containerProgress}>
+                  <h2 className={styles.heading}>Crea tu cuenta</h2>
+                  <p className={styles.text} >Registrate y accedé a descuentos exclusivos</p>
+                  <div style={{width:"100%", position:"relative" }}>
+                    <div>
+                      <ProgressBar currentStep={currentStep} totalSteps={totalSteps}/>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className={styles.container}>
+                  <CloudinaryContext cloudName="dfmkjxjsf" className={styles.cloudinary}>
+                    <Form className={styles.form}>
+                      <div style={{ width:"100%", height:"100%", display:"flex"}}>
+                        {showSeccion1 && 
+                            <section style={{width:"100%", height:"100%"}}>
+                              <div>
+                                <div style={{display:"flex", alignItems:"center", width:"100%", height:"100%"}}>
+                                  <div style={{width:"100%"}}>
+                                    <div className={styles.containerInputLabel}>
+                                      <div>                 
+                                        <Field 
+                                          type="text" 
+                                          name="name"
+                                          id="name"
+                                          placeholder=' '  
+                                          className={`${styles.input} ${touched.name && errors.name && styles.inputError}`}
+                                        /> 
+                                        <label 
+                                          htmlFor= "" 
+                                          className={`${styles.label} ${touched.name && errors.name && styles.labelError}`}
+                                        >
+                                          Nombre
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <ErrorMessage name="name" component={CustomerErrorMessage} additionalProp={errors.name} />
 
-                    <div className={styles.containerInputLabel} >
-                      <div>                 
-                        <Field 
-                          type="text" 
-                          name="name"
-                          id="name"
-                          placeholder=' '  
-                          className={`${styles.input} ${touched.name && errors.name && styles.inputError}`}
-                        /> 
-                        <label 
-                          htmlFor= "" 
-                          className={`${styles.label} ${touched.name && errors.name && styles.labelError}`}
-                        >
-                          Nombre
-                        </label>
+                                    <div className={`${styles.containerInputLabel} ${touched.name && errors.name && styles.containerInputLabelError}`}>
+                                      <div>   
+                                        <Field 
+                                          type= 'text'
+                                          name= "surname"
+                                          id= 'surname'
+                                          placeholder=' ' 
+                                          className={`${styles.input} ${touched.surname && errors.surname && styles.inputError}`}
+                                        /> 
+                                        <label 
+                                          htmlFor="" 
+                                          className={`${styles.label} ${touched.surname && errors.surname && styles.labelError}`}
+                                        >
+                                          Apellido
+                                        </label>
+                                      </div> 
+                                    </div>
+                                    <ErrorMessage name="surname" component={CustomerErrorMessage} additionalProp={errors.surname}/>
+
+                                    <div className={`${styles.containerInputLabel} ${touched.surname && errors.surname && styles.containerInputLabelError}`}>
+                                      <div>   
+                                        <Field 
+                                          type='date'
+                                          name= "date"
+                                          id= 'date'
+                                          placeholder=' ' 
+                                          className={`${styles.input} ${touched.date && errors.date && styles.inputError}`}
+                                        /> 
+                                        <label 
+                                          htmlFor="" 
+                                          className={`${styles.label} ${touched.date && errors.date && styles.labelError}`}
+                                        >
+                                          Fecha de nacimiento
+                                        </label>
+                                      </div> 
+                                    </div>
+                                    <ErrorMessage name="date" component={CustomerErrorMessage} additionalProp={errors.date}/> 
+
+                                    <div className={`${styles.btnContainer} ${touched.date && errors.date && styles.btnContainerError}`}>
+                                      <button
+                                        style={{width:"100%"}}  
+                                        className={`
+                                          ${styles.btnDisable} 
+                                          ${values.name
+                                            && values.surname
+                                            && values.date
+                                            && !errors.name
+                                            && !errors.surname
+                                            && !errors.date
+                                            && styles.btnNext}
+                                        `}
+                                        disabled={
+                                          !(values.name
+                                          && values.surname
+                                          && values.date
+                                          && !errors.name
+                                          && !errors.surname
+                                          && !errors.date
+                                        )} 
+                                        onClick={() => {
+                                          setShowSeccion1(false); 
+                                          setShowSeccion2(true); 
+                                          setCurrentStep(prevStep => prevStep + 1)}
+                                        }    
+                                      >
+                                        Siguiente
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </section>
+                        }
+
+                        {showSeccion2 &&
+                          <section style={{width:"100%", height:"100%"}}>
+                            <div>
+                              <div style={{display:"flex", alignItems:"center",width:"100%", height:"100%"}}>
+                                <div style={{width:"100%"}}>
+                                  <div className={styles.containerInputLabel} >
+                                    <div>                 
+                                      <Field 
+                                        type="text" 
+                                        name="phone"
+                                        id="phone"
+                                        placeholder=' '  
+                                        className={`${styles.input} ${touched.phone && errors.phone && styles.inputError}`}
+                                      /> 
+                                      <label 
+                                        htmlFor= "" 
+                                        className={`${styles.label} ${touched.phone && errors.phone && styles.labelError}`}
+                                      >
+                                        Teléfono
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <ErrorMessage name="phone" component={CustomerErrorMessage} additionalProp={errors.phone} />
+
+                                  <div className={`${styles.containerInputLabel} ${touched.phone && errors.phone && styles.containerInputLabelError}`}>
+                                    <div>   
+                                        <Field 
+                                          type= 'text'
+                                          name= "address"
+                                          id= 'address'
+                                          placeholder=' ' 
+                                          className={`${styles.input} ${touched.address && errors.address && styles.inputError}`}
+                                        /> 
+                                        <label 
+                                          htmlFor="" 
+                                          className={`${styles.label} ${touched.address && errors.address && styles.labelError}`}
+                                        >
+                                          Dirección
+                                        </label>
+                                    </div> 
+                                  </div>
+                                  <ErrorMessage name="address" component={CustomerErrorMessage} additionalProp={errors.address}/>                                      
+
+                                  <div className={`${styles.containerInputLabel} ${touched.address && errors.address && styles.containerInputLabelError}`} >
+                                    <div>                 
+                                      <Field 
+                                        type="text" 
+                                        name="city"
+                                        id="city"
+                                        placeholder=' '  
+                                        className={`${styles.input} ${touched.city && errors.city && styles.inputError}`}
+                                      /> 
+                                      <label 
+                                        htmlFor= "" 
+                                        className={`${styles.label} ${touched.city && errors.city && styles.labelError}`}
+                                      >
+                                        Ciudad
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <ErrorMessage name="city" component={CustomerErrorMessage} additionalProp={errors.city} />
+
+                                  <div className={`${styles.btnContainer} ${touched.city && errors.city && styles.btnContainerError}`} style={{ justifyContent:"space-between" }}>
+                                    <button  
+                                      className={styles.btnPrev} 
+                                      onClick={() => {
+                                        setShowSeccion2(false); 
+                                        setShowSeccion1(true); 
+                                        setCurrentStep(prevStep => prevStep - 1)}}
+                                    >
+                                      Anterior
+                                    </button>
+                                    <button  
+                                      className={`
+                                        ${styles.btnDisable} 
+                                        ${values.phone 
+                                          && values.address 
+                                          && values.city 
+                                          && !errors.phone 
+                                          && !errors.address 
+                                          && !errors.city  
+                                          && styles.btnNext}
+                                      `}
+                                      disabled={
+                                        !(values.phone
+                                        && values.address
+                                        && values.city
+                                        && !errors.phone
+                                        && !errors.address
+                                        && !errors.city
+                                      )} 
+                                      onClick={() => {
+                                        setShowSeccion2(false); 
+                                        setShowSeccion3(true); 
+                                        setCurrentStep(prevStep => prevStep + 1)}}
+                                      >
+                                        Siguiente
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        }
+
+                        {showSeccion3 && 
+                          <section style={{width:"100%", height:"100%"}}>
+                            <div>
+                              <div style={{display:"flex", alignItems:"center",width:"100%", height:"100%"}}>
+                                <div style={{width:"100%"}}>
+                                  <div className={styles.containerInputLabel} >
+                                    <div>                 
+                                      <Field 
+                                        type="text" 
+                                        name="email"
+                                        id="email"
+                                        placeholder=' '  
+                                        className={`${styles.input} ${touched.email && errors.email && styles.inputError}`}
+                                      /> 
+                                      <label 
+                                        htmlFor= "" 
+                                        className={`${styles.label} ${touched.email && errors.email && styles.labelError}`}
+                                      >
+                                        Email
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <ErrorMessage name="email" component={CustomerErrorMessage} additionalProp={errors.email} />
+
+                                  <div className={`${styles.containerInputLabel} ${touched.email && errors.email && styles.containerInputLabelError}`} >
+                                    <div>                 
+                                      <Field 
+                                        type={showPassword? 'text':'password'} 
+                                        name="password"
+                                        id="password"
+                                        placeholder=' '  
+                                        className={`${styles.input} ${touched.password && errors.password && styles.inputError}`}
+                                      /> 
+                                      <label 
+                                        htmlFor= "" 
+                                        className={`${styles.label} ${touched.password && errors.password && styles.labelError}`}
+                                      >
+                                        Contraseña
+                                      </label>
+                                      <span 
+                                        onClick={
+                                          ()=> {setShowPassword(!showPassword)}
+                                        }  
+                                        className={styles.password} 
+                                      >
+                                        {!showRepeatPassword ? <FiEyeOff /> : <FiEye />}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <ErrorMessage name="password" component={CustomerErrorMessage} additionalProp={errors.password} />
+
+                                  <div className={`${styles.containerInputLabel} ${touched.password && errors.password && styles.containerInputLabelError}`} >
+                                    <div>                 
+                                      <Field 
+                                        type={showRepeatPassword? 'text':'password'} 
+                                        name="repeatPassword"
+                                        id="repeatPassword"
+                                        placeholder=' '  
+                                        className={`${styles.input} ${touched.repeatPassword && errors.repeatPassword && styles.inputError}`}
+                                      /> 
+                                      <label 
+                                        htmlFor= "" 
+                                        className={`${styles.label} ${touched.repeatPassword && errors.repeatPassword && styles.labelError}`}
+                                      >
+                                        Repetir Contraseña
+                                      </label>
+                                      <span 
+                                        onClick={
+                                          ()=> {setShowRepeatPassword(!showRepeatPassword)}
+                                        }  
+                                        className={styles.password} 
+                                      >
+                                        {!showRepeatPassword ? <FiEyeOff /> : <FiEye />}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <ErrorMessage name="repeatPassword" component={CustomerErrorMessage} additionalProp={errors.repeatPassword} />
+
+                                  <div className={`${styles.btnContainer} ${touched.repeatPassword && errors.repeatPassword && styles.btnContainerError}`} style={{justifyContent:"space-between"}}>
+                                    <button  
+                                      className={styles.btnPrev} 
+                                      onClick={() => {
+                                      setShowSeccion3(false); 
+                                      setShowSeccion2(true); 
+                                      setCurrentStep(prevStep => prevStep - 1)}}
+                                    >
+                                        Anterior
+                                    </button>
+                                    <button  
+                                      className={`
+                                        ${styles.btnDisable} 
+                                        ${values.email 
+                                          && values.password 
+                                          && values.repeatPassword 
+                                          && !errors.email 
+                                          && !errors.password 
+                                          && !errors.repeatPassword   
+                                          && styles.btnNext}
+                                    `} 
+                                      type='submit'
+                                    >
+                                      Registrarse
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        }
                       </div>
-                    </div>
-                    <ErrorMessage name="name" component={CustomerErrorMessage} additionalProp={errors.name} />
-
-                    <div className={styles.containerInputLabel}>
-                      <div>   
-                        <Field 
-                          type= 'text'
-                          name= "address"
-                          id= 'address'
-                          placeholder=' ' 
-                          className={`${styles.input} ${touched.address && errors.address && styles.inputError}`}
-                        /> 
-                        <label 
-                          htmlFor="" 
-                          className={`${styles.label} ${touched.address && errors.address && styles.labelError}`}
-                        >
-                          Dirección
-                        </label>
-                      </div> 
-                    </div>
-                    <ErrorMessage name="address" component={CustomerErrorMessage} additionalProp={errors.address}/>
-
-                    <div className={styles.containerInputLabel} >
-                      <div>                 
-                        <Field 
-                          type="text" 
-                          name="phone"
-                          id="phone"
-                          placeholder=' '  
-                          className={`${styles.input} ${touched.phone && errors.phone && styles.inputError}`}
-                        /> 
-                        <label 
-                          htmlFor= "" 
-                          className={`${styles.label} ${touched.phone && errors.phone && styles.labelError}`}
-                        >
-                          Teléfono
-                        </label>
-                      </div>
-                    </div>
-                    <ErrorMessage name="phone" component={CustomerErrorMessage} additionalProp={errors.phone} />
-
-                    <div className={styles.containerInputLabel} >
-                      <div>                 
-                        <Field 
-                          type="text" 
-                          name="email"
-                          id="email"
-                          placeholder=' '  
-                          className={`${styles.input} ${touched.email && errors.email && styles.inputError}`}
-                        /> 
-                        <label 
-                          htmlFor= "" 
-                          className={`${styles.label} ${touched.email && errors.email && styles.labelError}`}
-                        >
-                          Email
-                        </label>
-                      </div>
-                    </div>
-                    <ErrorMessage name="email" component={CustomerErrorMessage} additionalProp={errors.email} />
-
-                    <div className={styles.containerInputLabel} >
-                      <div>                 
-                        <Field 
-                          type={showPassword? 'text':'password'} 
-                          name="password"
-                          id="password"
-                          placeholder=' '  
-                          className={`${styles.input} ${touched.password && errors.password && styles.inputError}`}
-                        /> 
-                        <label 
-                          htmlFor= "" 
-                          className={`${styles.label} ${touched.password && errors.password && styles.labelError}`}
-                        >
-                          Contraseña
-                        </label>
-                        <span onClick={handleShowPassword}  className={styles.password} >
-                          {!showPassword ? <FiEyeOff /> : <FiEye />}
-                        </span>
-                      </div>
-                    </div>
-                    <ErrorMessage name="password" component={CustomerErrorMessage} additionalProp={errors.password} />
-
-                    <div className={styles.containerInputLabel} >
-                      <div>                 
-                        <Field 
-                          type="text" 
-                          name="city"
-                          id="city"
-                          placeholder=' '  
-                          className={`${styles.input} ${touched.city && errors.city && styles.inputError}`}
-                        /> 
-                        <label 
-                          htmlFor= "" 
-                          className={`${styles.label} ${touched.city && errors.city && styles.labelError}`}
-                        >
-                          Ciudad
-                        </label>
-                      </div>
-                    </div>
-                    <ErrorMessage name="city" component={CustomerErrorMessage} additionalProp={errors.city} />
-
-                    <div className={styles.containerInputLabel} >
-                      <div>                 
-                        <Field 
-                          type="file" 
-                          name="image"
-                          id="image"
-                          placeholder=' '  
-                          className={`${styles.input} ${touched.image && errors.image && styles.inputError}`}
-                        /> 
-                        <label 
-                          htmlFor= "" 
-                          className={`${styles.label} ${touched.image && errors.image && styles.labelError}`}
-                        >
-                          Imagen
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className={styles.btnContainer} >
-                      <button  className={styles.btn} type='submit'>Resgistrarse</button>
-                    </div>
-                  </Form>
-                </CloudinaryContext>
+                    </Form>
+                  </CloudinaryContext>
+                </div>
               </div>
             </div>
           )}
