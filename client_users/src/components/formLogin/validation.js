@@ -1,8 +1,12 @@
 export default function validation(values) {
-    const errors = {}
+    let errors = {}
 
-    if(!values.email) errors.email = 'Campo Requerido'
-    if(!values.password) errors.password = 'Campo Requerido'
-
+    if(!values.email) {
+        errors.email = 'Ingrese un email'
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/.test(values.email)){
+        errors.email = 'Ingrese un email válido'
+    }
+    if(!values.password) errors.password = 'Ingrese una contraseña'
+    console.log(errors.email, values.email);
     return errors
 }

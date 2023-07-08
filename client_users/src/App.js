@@ -84,6 +84,7 @@ function App() {
 
 
       {location?.pathname.includes("dashboard")
+        || location?.pathname == "/log-in"
         || location?.pathname === "/shopping-cart/success"
         || location?.pathname === "/shopping-cart/failure"
         ? '' : <Footer />}

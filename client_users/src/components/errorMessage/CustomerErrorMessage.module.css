@@ -1,0 +1,18 @@
+.error{
+    all: unset;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+}
+.error div{
+    all: unset;
+    /* border: solid blue 1px; */
+    padding: 0px;
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+    color: red;
+    /* margin:8px; */
+    /* border: solid red 1px; */
+}

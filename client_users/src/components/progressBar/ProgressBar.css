@@ -1,0 +1,44 @@
+.progress-bar {
+    width: 100%;
+    height: 3px;
+    background-color: #ccc;
+    position: relative;
+  }
+  
+  .progress-bar__fill {
+    height: 3px;
+    background-color: rgb(213, 161, 41);
+    transition: width 1s ease;
+  }
+  
+  .progress-bar__steps {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .progress-bar__step {
+    width: 35px;
+    height: 35px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: width 3s ease-in;
+  }
+
+  .step-label{
+    border: solid 1px red;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .progress-bar__step.active {
+    background-color: rgb(213, 161, 41);
+    color: #fff;
+  }
