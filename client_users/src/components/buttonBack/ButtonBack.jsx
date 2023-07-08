@@ -14,8 +14,13 @@ export default function ButtonBack() {
         onClick={onClick} 
         style={{ borderRadius: '0', position: 'absolute', left: '20px', top: '25px', cursor:"pointer" }}>
            <div style={{display:"flex", padding:"10px"}}>
-            <FontAwesomeIcon icon={faArrowLeft}  style={{color:"grey"}}/>
-            <h3 style={{margin:"0px 0px 0px 10px"}}>Volver al inicio</h3>
+            <h3 
+                style={
+                    {margin:"0px 0px 0px 10px", 
+                    color:"white"
+                }}
+            > <FontAwesomeIcon icon={faArrowLeft}  style={{color:"white"}}/> Inicio
+            </h3>
            </div>
         </div>
     )

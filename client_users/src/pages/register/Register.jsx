@@ -8,9 +8,12 @@ export default function Register() {
 
     return (
         <div className={s.container}>
-            {/* <img className={s.logo} src={logo} alt="texto del logo" /> */}
-            <p style={{padding: '15px', marginBottom: '20px', color: 'gray'}}>Por favor completa la información sobre ti para registrar tu cuenta, <br /> y comenzar a aprovechar nuestras ofertas exclusivas!</p>
-            <FormRegister />
+            <div style={{width:"60%", }}>
+                <img src="https://cdn.shopify.com/s/files/1/0577/5550/0600/articles/los-beneficios-vinos-sin-alcohol.jpg?v=1674154866" alt="" style={{width:"100%", height:"100%"}}/>
+            </div>
+            <div style={{width:"40%", height:"90vh", backgroundColor:"white"}}>
+                <FormRegister />
+            </div>
         </div>
     )
 }
