@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className={styles.container}>
       <div className={styles.proyect}>
-        <div style={{width:"80%", margin:"auto"}}>
+        <div style={{width:"75%", margin:"auto"}}>
           <h2>Acerca de este proyecto</h2>
           <p>
             Esta aplicacción representa el punto culminante de nuestro aprendizaje dentro del bootcamp de SOY HENRY, nos permitió aplicar todos los conocimientos adquiridos a lo largo del programa.<br />
@@ -16,7 +16,7 @@ const About = () => {
           </p>
         </div>
       </div> 
-      <div style={{ width:"100%"}}>
+      <div style={{ width:"40%"}}>
         <Carousel/>
       </div>
     </div>
