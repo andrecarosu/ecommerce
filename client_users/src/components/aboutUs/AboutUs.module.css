@@ -1,0 +1,15 @@
+.card{
+    width: 240px;
+    height: 240px;
+    outline: solid 1px black;
+    border-radius: 3px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}

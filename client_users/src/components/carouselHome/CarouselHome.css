@@ -1,4 +1,4 @@
-.container-carousel {
+.container1 {
     width: 100%;
     height: 100vh;
     position: relative;
@@ -6,16 +6,15 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.section {
+.section1 {
     width: 100%;
     height: 100%;
-    /* border: 1px solid red; */
     position: absolute;
     opacity: 0;
     transition: opacity ease-in-out 0.4s;
 }
 
-.section img {
+.section1 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -24,7 +23,7 @@
     filter: brightness(70%) contrast(130%) saturate(120%);
 }
 
-.section .img-actual {
+.section1 .img-actual1 {
     animation: scale-up 5s ease-in-out;
 }
 
@@ -33,13 +32,12 @@
     100% { transform: scale(1.15); }
 }
 
-.section .texts {
+.section1 .texts1 {
     left: 0;
     right: 0;
     top: 0;
     bottom: 50px;
     margin: auto;
-    /* border: 1px solid #fff; */
     color: #fff;
     position: absolute;
     display: flex;
@@ -49,23 +47,23 @@
     width: 80%;
 }
 
-.section .texts h2 {
+.section1 .texts1 h2 {
     font-size: 4rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.section .texts p {
+.section1 .texts1 p {
     font-size: 2rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.active-anim {
+.active-anim1 {
     opacity: 1;
 }
 
-.btn-carousel {
-    font-size: 40px;
-    color: rgb(240, 232, 232);
+.btn-carousel1 {
+    font-size: 35px;
+    color: rgb(255, 255, 255, 0.5);
     border-radius: 50%;
     position: absolute;
     display: flex;
@@ -74,19 +72,19 @@
     cursor: pointer;
 }
 
-.prev {
+.prev1 {
     top: 50%;
-    left: 20px;
+    left: 15px;
     transform: translateY(-60%);
 }
 
-.next {
+.next1 {
     top: 50%;
-    right: 20px;
+    right: 15px;
     transform: translateY(-60%);
 }
 
-.container-dots {
+.container-dots1 {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -98,76 +96,70 @@
     bottom: 15px;
 }
 
-.dot {
-    width: 17px;
-    height: 17px;
+.dot1 {
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background-color: #000;
-    border: 3px solid #fff;
+    border: none;
+    outline: 1px solid rgb(255, 255, 255, 0.8);
     cursor: pointer;
 }
 
-.active {
-    background-color: rgb(213,161,41);
-}
+.active1 {
+    background-color:rgb(255, 255, 255, 0.8);
+    width: 15px;
+    height: 15px;}
 
 @media only screen and (max-width:768px) {
-    .section .texts h2 {
+    .section1 .texts1 h2 {
         font-size: 3rem;
     }
 
-    .section .texts p {
+    .section1 .texts1 p {
         font-size: 1.3rem;
     }
 
-    .btn-carousel {
+    .btn-carousel1 {
         font-size: 2rem;
     }
 
-    .container-dots {
+    .container-dots1 {
         bottom: 10px;
     }
 
-    .dot {
+    .dot1 {
         width: 20px;
         height: 20px;
     }
 }
 
 @media only screen and (max-width:480px) {
-    .section img {
+    .section1 img {
         filter: brightness(40%);
     }
 
-    .section .texts {
+    .section1 .texts {
         bottom: 0;
     }
 
-    .section .texts h2 {
+    .section1 .texts h2 {
         font-size: 2rem;
     }
 
-    .section .texts p {
+    .section1 .texts p {
         font-size: 1rem;
     }
 
-    .btn-carousel {
+    .btn-carousel1 {
         display: none;
     }
 
-    /* .prev {
-        left: 5px;
-    }
-
-    .next {
-        right: 5px;
-    } */
-
-    .container-dots {
+    
+    .container-dots1 {
         bottom: 5px;
     }
 
-    .dot {
+    .dot1 {
         width: 18px;
         height: 18px;
     }

@@ -1,17 +1,15 @@
-import ImgSlider1 from '../../assets/images/ImgSliderHome1.jpg'
-import ImgSlider2 from '../../assets/images/ImgSliderHome3.jpg'
 import ImgSlider3 from '../../assets/images/ImgSliderHome2.jpg'
 import ImgSlider4 from '../../assets/images/Slider4.jpg'
 
 
 const data = [
     {
-        src: ImgSlider1,
-        title: "PIDE LOS MEJORES VINOS",
-        caption: "De manera online a partir desde $2.000"
+        src: "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1689126911/CarouselHome/Los-mejores-vinos_mydswb.webp",
+        title: "LOS MEJORES VINOS",
+        caption: "De manera online"
     },
     {
-        src: ImgSlider2,
+        src: "https://res.cloudinary.com/dfmkjxjsf/image/upload/v1689124866/CarouselHome/selecionado-por-expertos.webp",
         title: "SELECCIONADO POR EXPERTOS",
         caption: "Catalogamos lo mejor de productores certificados"
     },

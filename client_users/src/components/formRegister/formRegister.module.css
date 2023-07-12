@@ -1,7 +1,7 @@
 .containerGlobal{
     width: 100%;
     height: auto;
-    background-color: white;
+    background-color: #f6f6f6;
 }
 
 .heading {
@@ -15,7 +15,7 @@
 .containerProgress {
     width: 100%;
     padding: 0;
-    background-color: white;
+    background-color: #f6f6f6;
     /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -28,7 +28,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    background-color: white;
+    background-color: #f6f6f6;
 }
 
 .cloudinary{
@@ -72,6 +72,7 @@
 }
 
 .input{
+    background-color: #f6f6f6;
     display: block;
     padding:  .8rem  ;
     border-radius: 1px;
@@ -87,18 +88,16 @@
 }
 
 .input:focus{
-    outline: solid 1px rgb(213, 161, 41);
+    outline: solid 1px #e6c068;
 }
 
 .label{
     position: absolute;
     top: 12px;
     left: 15px;
-    background-color: white;
+    background-color: #f6f6f6;
     padding: 0 4px 0 4px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 18px;
-    font-weight: 200;
     color: #ADADAD;
     transition: all .5s;
 }
@@ -107,7 +106,7 @@
     position: absolute;
     top: 12px;
     left: 15px;
-    background-color: white;
+    background-color: #f6f6f6;
     font-size: 18px;
     font-weight: 200;
     color: red;
@@ -118,7 +117,7 @@
 .input:focus+.label{
     transform: translateY(-1.2rem);
     font-size: 13px;
-    color: rgb(213, 161, 41)
+    color: #e6c068
 }
 
 .input:not(:placeholder-shown)+.label{
