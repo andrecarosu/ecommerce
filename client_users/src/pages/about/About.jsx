@@ -8,7 +8,7 @@ const About = () => {
         <div style={{width:"75%", margin:"auto"}}>
           <h2>Acerca de este proyecto</h2>
           <p>
-            Esta aplicacción representa el punto culminante de nuestro aprendizaje dentro del bootcamp de SOY HENRY, nos permitió aplicar todos los conocimientos adquiridos a lo largo del programa.<br />
+            Esta aplicacción representa el punto culminante, de nuestro aprendizaje dentro del bootcamp de SOY HENRY, nos permitió aplicar todos los conocimientos adquiridos a lo largo del programa.<br />
             <br />
             Nuestro objetivo era crear un eCommerce web intuitivo y atractivo para amantes del vino, trabajando en colaboración y aprovechando nuestras habilidades individuales para complementarnos como equipo. <br />
             <br />

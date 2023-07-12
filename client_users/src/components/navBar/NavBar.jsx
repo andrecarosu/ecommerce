@@ -85,7 +85,10 @@ const NavBar = () => {
       </div> */}
       <div className={s.nav_text}>
         <Link to="/">
-          <img src={Logo} alt="" />
+          <img 
+            src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1689165088/logos/Logo-transparente_msxaas.png" 
+            alt=""
+            style={{width:"80px", height:"80px"}} />
         </Link>
 
         <Link

@@ -1,9 +1,9 @@
 footer {
     width: 100%;
-    padding: 50px;
+    /* padding: 50px; */
     background-color: rgb(10, 10, 10);
-    color: rgb(213,161,41);
-    height: 200px;
+    color: #e6c068;
+    height: auto;
     /* box-shadow: 1px 1px 8px rgb(148, 146, 146) inset; */
 }
 
@@ -24,15 +24,15 @@ footer {
 
 .container-footer .logo {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    /* gap: 10px; */
 }
 
 .container-footer .logo img {
     width: 180px;
-    height: 130px;
+    height: 180px;
 }
 
 .container-footer .logo .redes {
@@ -48,8 +48,15 @@ footer {
 .container-footer .horaries,
 .container-footer .payments {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+}
+
+.container-footer .information > div:first-child,
+.container-footer .horaries > div:first-child,
+.container-footer .payments > div:first-child {
+    display: flex;
     align-items: flex-start;
+    flex-direction: column;
 }
 
 .container-footer .information h3,
@@ -57,15 +64,16 @@ footer {
 .container-footer .payments h3 {
     font-size: 1.2rem;
     color: #fff;
+    margin-bottom: 10px;
 }
 
 .container-footer .information p,
 .container-footer .horaries p {
     font-size: 0.9rem;
-    opacity: 0.9;
+    margin-bottom: 5px;
 }
 
-.container-footer .payments img {
-    width: 100%;
-    height: 110px;
+.mercadopago {
+    width: 180px;
+    height: 40px;
 }

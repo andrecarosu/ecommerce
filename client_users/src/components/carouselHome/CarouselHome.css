@@ -62,8 +62,8 @@
 }
 
 .btn-carousel1 {
-    font-size: 40px;
-    color: rgb(240, 232, 232);
+    font-size: 35px;
+    color: rgb(255, 255, 255, 0.5);
     border-radius: 50%;
     position: absolute;
     display: flex;
@@ -74,13 +74,13 @@
 
 .prev1 {
     top: 50%;
-    left: 20px;
+    left: 15px;
     transform: translateY(-60%);
 }
 
 .next1 {
     top: 50%;
-    right: 20px;
+    right: 15px;
     transform: translateY(-60%);
 }
 
@@ -97,17 +97,18 @@
 }
 
 .dot1 {
-    width: 17px;
-    height: 17px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background-color: #000;
-    border: 3px solid #fff;
+    border: none;
+    outline: 1px solid rgb(255, 255, 255, 0.8);
     cursor: pointer;
 }
 
 .active1 {
-    background-color: rgb(213,161,41);
-}
+    background-color:rgb(255, 255, 255, 0.8);
+    width: 15px;
+    height: 15px;}
 
 @media only screen and (max-width:768px) {
     .section1 .texts1 h2 {
