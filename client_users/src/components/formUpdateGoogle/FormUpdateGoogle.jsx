@@ -6,7 +6,7 @@ import { Image, CloudinaryContext } from "cloudinary-react"; // para guardar las
 import swal from "sweetalert";
 import validations from "../FormUpdate/validations";
 import style from "../FormUpdate/FormUpdate.module.css";
-import data from "../carouselAbout/data";
+// import data from "../carouselAbout/data";
 
 export default function FormUpdateGoogle({ email}) {
   //const usuario = useSelector(state => state.usuario) ?? [];

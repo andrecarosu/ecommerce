@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <div className={styles.container} >
       <div style={{ width: "70%", height:"100vh" }}>
-        <img src="https://s1.1zoom.me/big0/625/Wine_Colored_background_Stemware_Bottle_525370_1280x912.jpg" alt="" className={styles.img}/>
+        <img src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1689124462/CarouselHome/shutterstock_119867932_rdax_65_wiompb.jpg" alt="" className={styles.img}/>
       </div>
       <div style={{ width: "30%", height:"100vh" }}>
         <FormLogin />

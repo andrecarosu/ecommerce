@@ -1,6 +1,9 @@
 .container {
     height: 100vh;
     width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    margin: 65px 0 0 0;
     /* padding: 40px 220px;
     padding-right: 100px;
     display: flex;
@@ -8,12 +11,30 @@
     align-items: center; */
 }
 
-.titulo {
-    width: 100%;
-    margin-top: 80px;
-    margin-bottom: 40px;
-    font-size: 50px;
-    text-align: right;
+.proyect {
+    width: 60%;
+    /* background-image: linear-gradient(rgba(127, 127, 127, 0.2), rgba(127, 127, 127, 0.2)), 
+    url("https://cdn.myportfolio.com/d68683c1-8c8d-4bd6-a988-3a0093df6910/cec5bc7e-16dc-43ed-a931-5cc826675378_rwc_0x0x1916x1080x1916.png?h=e9a118ea407317f061e3a9164820a7b5");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; */
+    background-color: #f6f6f6;
+    display: flex;
+    align-items: center;
+}
+
+.proyect h2 {
+    font-size: 40px;
+    font-weight: 800;
+    color:black;
+    margin:20px
+}
+
+.proyect p {
+    width: 50px 0 20px 0;
+    color:black;
+    font-size: 22px;
+    text-align: justify;
 }
 
 .logo {
@@ -107,4 +128,7 @@
 .textEnd span {
     color: rgb(213,161,41);
     font-size: 1.5rem;
+}
+@media only screen and (max-width:768px)  {
+    
 }

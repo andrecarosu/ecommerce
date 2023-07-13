@@ -1,15 +1,25 @@
-import Logo from "../../assets/images/LogoFooter.png"
 import MetodosPago from '../../assets/images/MetodosDePago.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapLocationDot, faLocationDot, faEnvelope, faPhone, faClock, faCalendar, faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons'
+import { faMapLocationDot, 
+        faEnvelope, 
+        faPhone, 
+        faClock, 
+        faCalendar, 
+        faMoneyBill1Wave,
+       } from '@fortawesome/free-solid-svg-icons'
 import './Footer.css'
 
 const Footer = () => {
     return(
       <footer>
         <div className="container-footer">
-          <section className="logo" >
-            <div><img src={Logo} alt="" style={{border: "solid 1px rgb(213,161,41)", borderRadius:"3px"}}/></div>
+          <section className="logo">
+            <div>
+              <img 
+                src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1689165088/logos/Logo-transparente_msxaas.png" 
+                alt="" 
+                style={{width:"180px", height:"180px"}}/>
+            </div>
             {/* <div className="redes">
               <a href="https://www.facebook.com" target="_blank">
                 <svg fill="#D5A129" width="32" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -28,35 +38,45 @@ const Footer = () => {
             </div> */}
           </section>
           <section className="information">
-            <h3>
-              <FontAwesomeIcon icon={faMapLocationDot}></FontAwesomeIcon> UBICACIÓN
-            </h3>
-            <p>
-              <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Carrera 6 #67-63
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon> contact@thewinecellar.com
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faPhone}></FontAwesomeIcon> +57 321 303 7885
-            </p>
+            <div>
+              <h3>
+                <FontAwesomeIcon icon={faMapLocationDot}></FontAwesomeIcon> CONTACTO
+              </h3>
+              <p>
+                <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon> contact@thewinecellar.com
+              </p>
+              <p>
+                <FontAwesomeIcon icon={faPhone}></FontAwesomeIcon> +99 99 999999
+              </p>
+            </div>
           </section>
           <section className="horaries">
-            <h3>
-              <FontAwesomeIcon icon={faClock}></FontAwesomeIcon> HORARIOS
-            </h3>
-            <p>
-              <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> Lunes a Domingo
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faClock}></FontAwesomeIcon> 10 am a 7 pm
-            </p>
+            <div>
+              <h3>
+                <FontAwesomeIcon icon={faClock}></FontAwesomeIcon> HORARIOS
+              </h3>
+              <p>
+                <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> Lunes a Domingo
+              </p>
+              <p>
+                <FontAwesomeIcon icon={faClock}></FontAwesomeIcon> 10 am a 12 am
+              </p>
+            </div>
           </section>
           <section className="payments">
-            <h3>
-              <FontAwesomeIcon icon={faMoneyBill1Wave}></FontAwesomeIcon> MÉTODOS DE PAGO
-            </h3>
-            <img src={MetodosPago} alt="" />
+            <div >
+              <h3>
+                <FontAwesomeIcon icon={faMoneyBill1Wave}></FontAwesomeIcon> MÉTODOS DE PAGO
+              </h3>
+              <div style={{width:"100%", display:"flex", justifyContent:"center"}}>
+                <div>
+                  <img 
+                    src="https://www.cajademedicos.com.ar/wp-content/uploads/logo-mercado-pago.png" 
+                    alt=""
+                    className='mercadopago' />
+                </div>
+              </div>
+            </div>
           </section>
         </div>
       </footer>
