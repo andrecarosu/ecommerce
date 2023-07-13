@@ -14,6 +14,7 @@ import Google from "../../assets/images/IconGoogle.png"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { userLoggedIn } from "../../redux/actions";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import ButtonBack from "../../components/buttonBack/ButtonBack";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDIr4a7cej0mw217G8qMwAGMx8R9MEYj2g",
@@ -174,8 +175,18 @@ export default function FormLogin() {
         {({ errors, touched }) => (
           <div className={styles.containerGlobal}>
             <div className={styles.container}>
+              <ButtonBack/>
               <Form className={styles.form}>
-                <div className={styles.containerInputLabel} >
+              <img 
+                src="https://res.cloudinary.com/dfmkjxjsf/image/upload/v1689204793/logos/Black_and_Gold_Classy_Minimalist_Circular_Name_Logo_1_kfbf0d.png" 
+                alt="" 
+                style={{width:"200px", height:"200px"}} 
+              />
+
+                <div 
+                  className={styles.containerInputLabel}
+                  style={{margin:"0px"}} 
+                >
                   <div>                 
                     <Field 
                       type="text" 
@@ -192,20 +203,18 @@ export default function FormLogin() {
                     </label>
                   </div>
                 </div>
-                <ErrorMessage name="email" component={CustomerErrorMessage} additionalProp={errors.email} />
-                {/* {touched.email && errors.email 
-                &&  <div className={styles.error}>
-                      <span>
-                        <span>{errors.email}</span>
-                      </span>
-                    </div>}  */}
+                <ErrorMessage 
+                  name="email" 
+                  component={CustomerErrorMessage} 
+                  additionalProp={errors.email} />
+
                 <div 
-                  className={styles.containerInputLabel} 
-                  style={{
-                    margin:`${touched.email && errors.email 
-                    ? '0px'
-                    :'31px 0px 0px 0px'}`
-                  }}
+                  className={`
+                    ${styles.containerInputLabel} 
+                    ${touched.email && 
+                      errors.email && 
+                      styles.containerInputLabelError}
+                  `} 
                 >
                   <div>   
                     <Field 
@@ -226,26 +235,25 @@ export default function FormLogin() {
                     </span>
                   </div> 
                 </div>
-                <ErrorMessage name="password" component={CustomerErrorMessage} additionalProp={errors.password}/>
-                {/* {touched.password && errors.password 
-                &&  <div className={styles.error}>
-                      <span>
-                        <span>{errors.password}</span>
-                      </span>
-                    </div>} */}
+                <ErrorMessage 
+                  name="password" 
+                  component={CustomerErrorMessage} 
+                  additionalProp={errors.password}/>
+              
                 <div 
                   onClick={onClickForget} 
-                  className={styles.containerForget} 
-                  style={{
-                    margin:`${touched.password && errors.password 
-                    ? '1px 0px 0px 0px' 
-                    :'10px 0px 0px 0px'}`
-                  }}
+                  className={`
+                    ${styles.containerForget} 
+                    ${touched.password && 
+                      errors.password && 
+                      styles.containerForgetError}
+                  `} 
                 >
                   <div>
                     <div>Olvide mi contraseña</div>
                   </div>
                 </div>
+
                 <div 
                   className={styles.btnContainer} 
                   style={{
@@ -256,18 +264,21 @@ export default function FormLogin() {
                 >
                   <button  className={styles.btn} type='submit'>Iniciar sesión</button>
                 </div>
+
                 <div style={{ margin:"20px 0 20px 0"}}>
                   <span>¿No tienes una cuenta?</span>
                   <Link to={'/registrar-usuario'}>
                     <span className={styles.register}>Registrarse</span>
                   </Link>
                 </div>
+
                 <div className={styles.containerOr}>
                   <div>
                     <hr />
                     <span>ó</span>
                   </div>
                 </div>
+
                 <div className={styles.containerGoogle}>
                   <div onClick={handleGoogleLogin}>
                     <img src={iconGoogle} alt=''/>
