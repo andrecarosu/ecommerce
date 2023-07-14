@@ -235,11 +235,11 @@ export default function FormLogin() {
                     </span>
                   </div> 
                 </div>
-                <ErrorMessage 
-                  name="password" 
-                  component={CustomerErrorMessage} 
-                  additionalProp={errors.password}/>
-              
+                  <ErrorMessage 
+                    name="password" 
+                    component={CustomerErrorMessage} 
+                    additionalProp={errors.password}/>
+
                 <div 
                   onClick={onClickForget} 
                   className={`
@@ -255,12 +255,12 @@ export default function FormLogin() {
                 </div>
 
                 <div 
-                  className={styles.btnContainer} 
-                  style={{
-                    margin:`${touched.password && errors.password 
-                    ? '9px 0px 0px 0px'
-                    :'30px 0px 0px 0px'}`
-                  }}
+                  className={`
+                    ${styles.btnContainer} 
+                    ${touched.password && 
+                      errors.password && 
+                      styles.btnContainerError}
+                  `} 
                 >
                   <button  className={styles.btn} type='submit'>Iniciar sesión</button>
                 </div>
@@ -273,13 +273,17 @@ export default function FormLogin() {
                 </div>
 
                 <div className={styles.containerOr}>
-                  <div>
+                  <div className={styles.Or}>
+                    <span></span>
+                    <span style={{zIndex:"999"}}>ó</span>
+                    <span></span>
+                  </div>
+                  <div className={styles.hr}>
                     <hr />
-                    <span>ó</span>
                   </div>
                 </div>
 
-                <div className={styles.containerGoogle}>
+                <div className={styles.containerGoogle} style={{position:"initial"}}>
                   <div onClick={handleGoogleLogin}>
                     <img src={iconGoogle} alt=''/>
                     <span>Continuar con Google</span>
