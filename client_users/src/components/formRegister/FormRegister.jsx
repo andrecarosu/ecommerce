@@ -112,15 +112,15 @@ console.log(initialValues);
                   </div>
                 </div>
                 
-                <div className={styles.container}>
+                <div className={styles.containerForm}>
                   <CloudinaryContext cloudName="dfmkjxjsf" className={styles.cloudinary}>
                     <Form className={styles.form}>
-                      <div style={{ width:"100%", height:"100%", display:"flex"}}>
+                      <div className={styles.containerSection}>
                         {showSeccion1 && 
-                            <section style={{width:"100%", height:"100%"}}>
-                              <div>
-                                <div style={{display:"flex", alignItems:"center", width:"100%", height:"100%"}}>
-                                  <div style={{width:"100%"}}>
+                            <section>
+                              <div className={styles.containerSteps}>
+                                <div>
+                                    {/* Nombre */}
                                     <div className={styles.containerInputLabel}>
                                       <div>                 
                                         <Field 
@@ -128,57 +128,119 @@ console.log(initialValues);
                                           name="name"
                                           id="name"
                                           placeholder=' '  
-                                          className={`${styles.input} ${touched.name && errors.name && styles.inputError}`}
+                                          className={`
+                                            ${styles.input} 
+                                            ${touched.name && 
+                                              errors.name && 
+                                              styles.inputError}
+                                          `}
                                         /> 
                                         <label 
                                           htmlFor= "" 
-                                          className={`${styles.label} ${touched.name && errors.name && styles.labelError}`}
+                                          className={`
+                                            ${styles.label} 
+                                            ${touched.name && 
+                                              errors.name && 
+                                              styles.labelError}
+                                          `}
                                         >
                                           Nombre
                                         </label>
                                       </div>
                                     </div>
-                                    <ErrorMessage name="name" component={CustomerErrorMessage} additionalProp={errors.name} />
-
-                                    <div className={`${styles.containerInputLabel} ${touched.name && errors.name && styles.containerInputLabelError}`}>
+                                    <ErrorMessage 
+                                      name="name" 
+                                      component={CustomerErrorMessage} 
+                                      additionalProp={errors.name}
+                                    />
+                                    {/* Apellido */}
+                                    <div 
+                                      className={`
+                                        ${styles.containerInputLabel} 
+                                        ${touched.name && 
+                                          errors.name && 
+                                          styles.containerInputLabelError}
+                                      `}
+                                    >
                                       <div>   
                                         <Field 
                                           type= 'text'
                                           name= "surname"
                                           id= 'surname'
                                           placeholder=' ' 
-                                          className={`${styles.input} ${touched.surname && errors.surname && styles.inputError}`}
+                                          className={`
+                                            ${styles.input} 
+                                            ${touched.surname && 
+                                              errors.surname && 
+                                              styles.inputError}
+                                          `}
                                         /> 
                                         <label 
                                           htmlFor="" 
-                                          className={`${styles.label} ${touched.surname && errors.surname && styles.labelError}`}
+                                          className={`
+                                            ${styles.label} 
+                                            ${touched.surname && 
+                                              errors.surname && 
+                                              styles.labelError}
+                                          `}
                                         >
                                           Apellido
                                         </label>
                                       </div> 
                                     </div>
-                                    <ErrorMessage name="surname" component={CustomerErrorMessage} additionalProp={errors.surname}/>
-
-                                    <div className={`${styles.containerInputLabel} ${touched.surname && errors.surname && styles.containerInputLabelError}`}>
+                                    <ErrorMessage 
+                                      name="surname" 
+                                      component={CustomerErrorMessage} 
+                                      additionalProp={errors.surname}
+                                    />
+                                    {/* Fecha de nacimiento */}
+                                    <div 
+                                      className={`
+                                        ${styles.containerInputLabel} 
+                                        ${touched.surname && 
+                                          errors.surname && 
+                                          styles.containerInputLabelError}
+                                      `}
+                                    >
                                       <div>   
                                         <Field 
                                           type='date'
                                           name= "date"
                                           id= 'date'
                                           placeholder=' ' 
-                                          className={`${styles.input} ${touched.date && errors.date && styles.inputError}`}
+                                          className={`
+                                            ${styles.input} 
+                                            ${touched.date && 
+                                              errors.date && 
+                                              styles.inputError}
+                                          `}
                                         /> 
                                         <label 
                                           htmlFor="" 
-                                          className={`${styles.label} ${touched.date && errors.date && styles.labelError}`}
+                                          className={`
+                                            ${styles.label} 
+                                            ${touched.date && 
+                                              errors.date && 
+                                              styles.labelError}
+                                          `}
                                         >
                                           Fecha de nacimiento
                                         </label>
                                       </div> 
                                     </div>
-                                    <ErrorMessage name="date" component={CustomerErrorMessage} additionalProp={errors.date}/> 
-
-                                    <div className={`${styles.btnContainer} ${touched.date && errors.date && styles.btnContainerError}`}>
+                                    <ErrorMessage 
+                                      name="date" 
+                                      component={CustomerErrorMessage} 
+                                      additionalProp={errors.date}
+                                    /> 
+                                    {/* Botones */}
+                                    <div 
+                                      className={`
+                                        ${styles.btnContainer} 
+                                        ${touched.date && 
+                                          errors.date && 
+                                          styles.btnContainerError}
+                                      `}>
                                       <button
                                         style={{width:"100%"}}  
                                         className={`
@@ -208,17 +270,16 @@ console.log(initialValues);
                                         Siguiente
                                       </button>
                                     </div>
-                                  </div>
                                 </div>
                               </div>
                             </section>
                         }
 
                         {showSeccion2 &&
-                          <section style={{width:"100%", height:"100%"}}>
-                            <div>
-                              <div style={{display:"flex", alignItems:"center",width:"100%", height:"100%"}}>
-                                <div style={{width:"100%"}}>
+                          <section>
+                            <div className={styles.containerSteps}>
+                              <div>
+                                  {/* Telefono */}
                                   <div className={styles.containerInputLabel} >
                                     <div>                 
                                       <Field 
@@ -226,57 +287,119 @@ console.log(initialValues);
                                         name="phone"
                                         id="phone"
                                         placeholder=' '  
-                                        className={`${styles.input} ${touched.phone && errors.phone && styles.inputError}`}
+                                        className={`
+                                          ${styles.input} 
+                                          ${touched.phone && 
+                                            errors.phone && 
+                                            styles.inputError}
+                                        `}
                                       /> 
                                       <label 
                                         htmlFor= "" 
-                                        className={`${styles.label} ${touched.phone && errors.phone && styles.labelError}`}
+                                        className={`
+                                          ${styles.label} 
+                                          ${touched.phone && 
+                                            errors.phone && 
+                                            styles.labelError}
+                                        `}
                                       >
                                         Teléfono
                                       </label>
                                     </div>
                                   </div>
-                                  <ErrorMessage name="phone" component={CustomerErrorMessage} additionalProp={errors.phone} />
-
-                                  <div className={`${styles.containerInputLabel} ${touched.phone && errors.phone && styles.containerInputLabelError}`}>
+                                  <ErrorMessage 
+                                    name="phone" 
+                                    component={CustomerErrorMessage} 
+                                    additionalProp={errors.phone} 
+                                  />
+                                  {/* Dirección */}
+                                  <div 
+                                    className={`
+                                      ${styles.containerInputLabel} 
+                                      ${touched.phone && 
+                                        errors.phone && 
+                                        styles.containerInputLabelError}
+                                    `}
+                                  >
                                     <div>   
                                         <Field 
                                           type= 'text'
                                           name= "address"
                                           id= 'address'
                                           placeholder=' ' 
-                                          className={`${styles.input} ${touched.address && errors.address && styles.inputError}`}
+                                          className={`
+                                            ${styles.input} 
+                                            ${touched.address && 
+                                              errors.address && 
+                                              styles.inputError}
+                                          `}
                                         /> 
                                         <label 
                                           htmlFor="" 
-                                          className={`${styles.label} ${touched.address && errors.address && styles.labelError}`}
+                                          className={`
+                                            ${styles.label} 
+                                            ${touched.address && 
+                                              errors.address && 
+                                              styles.labelError}
+                                          `}
                                         >
                                           Dirección
                                         </label>
                                     </div> 
                                   </div>
-                                  <ErrorMessage name="address" component={CustomerErrorMessage} additionalProp={errors.address}/>                                      
-
-                                  <div className={`${styles.containerInputLabel} ${touched.address && errors.address && styles.containerInputLabelError}`} >
+                                  <ErrorMessage 
+                                    name="address" 
+                                    component={CustomerErrorMessage} 
+                                    additionalProp={errors.address}
+                                  />
+                                  {/*Ciudad  */}
+                                  <div 
+                                    className={`
+                                      ${styles.containerInputLabel} 
+                                      ${touched.address && 
+                                        errors.address && 
+                                        styles.containerInputLabelError}
+                                    `} 
+                                  >
                                     <div>                 
                                       <Field 
                                         type="text" 
                                         name="city"
                                         id="city"
                                         placeholder=' '  
-                                        className={`${styles.input} ${touched.city && errors.city && styles.inputError}`}
+                                        className={`
+                                          ${styles.input} 
+                                          ${touched.city && 
+                                            errors.city && 
+                                            styles.inputError}
+                                        `}
                                       /> 
                                       <label 
                                         htmlFor= "" 
-                                        className={`${styles.label} ${touched.city && errors.city && styles.labelError}`}
+                                        className={`
+                                          ${styles.label} 
+                                          ${touched.city && 
+                                            errors.city && 
+                                            styles.labelError}
+                                        `}
                                       >
                                         Ciudad
                                       </label>
                                     </div>
                                   </div>
-                                  <ErrorMessage name="city" component={CustomerErrorMessage} additionalProp={errors.city} />
-
-                                  <div className={`${styles.btnContainer} ${touched.city && errors.city && styles.btnContainerError}`} style={{ justifyContent:"space-between" }}>
+                                  <ErrorMessage 
+                                    name="city" 
+                                    component={CustomerErrorMessage} 
+                                    additionalProp={errors.city} 
+                                  />
+                                  {/* Botones */}
+                                  <div 
+                                    className={`
+                                      ${styles.btnContainer} 
+                                      ${touched.city && 
+                                        errors.city && 
+                                        styles.btnContainerError}`} 
+                                    style={{ justifyContent:"space-between" }}>
                                     <button  
                                       className={styles.btnPrev} 
                                       onClick={() => {
@@ -313,17 +436,16 @@ console.log(initialValues);
                                         Siguiente
                                     </button>
                                   </div>
-                                </div>
                               </div>
                             </div>
                           </section>
                         }
 
                         {showSeccion3 && 
-                          <section style={{width:"100%", height:"100%"}}>
-                            <div>
-                              <div style={{display:"flex", alignItems:"center",width:"100%", height:"100%"}}>
-                                <div style={{width:"100%"}}>
+                          <section>
+                            <div className={styles.containerSteps}>
+                              <div>
+                                  {/* Email */}
                                   <div className={styles.containerInputLabel} >
                                     <div>                 
                                       <Field 
@@ -331,30 +453,61 @@ console.log(initialValues);
                                         name="email"
                                         id="email"
                                         placeholder=' '  
-                                        className={`${styles.input} ${touched.email && errors.email && styles.inputError}`}
+                                        className={`
+                                          ${styles.input} 
+                                          ${touched.email && 
+                                            errors.email && 
+                                            styles.inputError}
+                                        `}
                                       /> 
                                       <label 
                                         htmlFor= "" 
-                                        className={`${styles.label} ${touched.email && errors.email && styles.labelError}`}
+                                        className={`
+                                          ${styles.label} 
+                                          ${touched.email && 
+                                            errors.email && 
+                                            styles.labelError}
+                                        `}
                                       >
                                         Email
                                       </label>
                                     </div>
                                   </div>
-                                  <ErrorMessage name="email" component={CustomerErrorMessage} additionalProp={errors.email} />
-
-                                  <div className={`${styles.containerInputLabel} ${touched.email && errors.email && styles.containerInputLabelError}`} >
+                                  <ErrorMessage 
+                                    name="email" 
+                                    component={CustomerErrorMessage} 
+                                    additionalProp={errors.email} 
+                                  />
+                                  {/* Contraseña */}
+                                  <div 
+                                    className={`
+                                      ${styles.containerInputLabel} 
+                                      ${touched.email && 
+                                        errors.email && 
+                                        styles.containerInputLabelError}
+                                    `} 
+                                  >
                                     <div>                 
                                       <Field 
                                         type={showPassword? 'text':'password'} 
                                         name="password"
                                         id="password"
                                         placeholder=' '  
-                                        className={`${styles.input} ${touched.password && errors.password && styles.inputError}`}
+                                        className={`
+                                          ${styles.input} 
+                                          ${touched.password && 
+                                            errors.password && 
+                                            styles.inputError}
+                                        `}
                                       /> 
                                       <label 
                                         htmlFor= "" 
-                                        className={`${styles.label} ${touched.password && errors.password && styles.labelError}`}
+                                        className={`
+                                          ${styles.label} 
+                                          ${touched.password && 
+                                            errors.password && 
+                                            styles.labelError}
+                                        `}
                                       >
                                         Contraseña
                                       </label>
@@ -362,15 +515,26 @@ console.log(initialValues);
                                         onClick={
                                           ()=> {setShowPassword(!showPassword)}
                                         }  
-                                        className={styles.password} 
+                                        className={styles.password}
                                       >
-                                        {!showRepeatPassword ? <FiEyeOff /> : <FiEye />}
+                                        {!showPassword ? <FiEyeOff /> : <FiEye />}
                                       </span>
                                     </div>
                                   </div>
-                                  <ErrorMessage name="password" component={CustomerErrorMessage} additionalProp={errors.password} />
-
-                                  <div className={`${styles.containerInputLabel} ${touched.password && errors.password && styles.containerInputLabelError}`} >
+                                  <ErrorMessage 
+                                    name="password" 
+                                    component={CustomerErrorMessage} 
+                                    additionalProp={errors.password} 
+                                  />
+                                  {/* Repetir contraseña */}
+                                  <div 
+                                    className={`
+                                      ${styles.containerInputLabel} 
+                                      ${touched.password && 
+                                        errors.password && 
+                                        styles.containerInputLabelError}
+                                    `} 
+                                  >
                                     <div>                 
                                       <Field 
                                         type={showRepeatPassword? 'text':'password'} 
@@ -395,9 +559,20 @@ console.log(initialValues);
                                       </span>
                                     </div>
                                   </div>
-                                  <ErrorMessage name="repeatPassword" component={CustomerErrorMessage} additionalProp={errors.repeatPassword} />
-
-                                  <div className={`${styles.btnContainer} ${touched.repeatPassword && errors.repeatPassword && styles.btnContainerError}`} style={{justifyContent:"space-between"}}>
+                                  <ErrorMessage 
+                                    name="repeatPassword" 
+                                    component={CustomerErrorMessage} 
+                                    additionalProp={errors.repeatPassword} 
+                                  />
+                                  {/* Botones */}
+                                  <div 
+                                    className={`
+                                      ${styles.btnContainer} 
+                                      ${touched.repeatPassword && 
+                                        errors.repeatPassword && 
+                                        styles.btnContainerError}`} 
+                                    style={{justifyContent:"space-between"}}
+                                  >
                                     <button  
                                       className={styles.btnPrev} 
                                       onClick={() => {
@@ -423,7 +598,6 @@ console.log(initialValues);
                                       Registrarse
                                     </button>
                                   </div>
-                                </div>
                               </div>
                             </div>
                           </section>

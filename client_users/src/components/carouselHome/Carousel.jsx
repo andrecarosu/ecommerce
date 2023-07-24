@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import './Carousel.css'
 import dataCarousel from './data';
 import BtnCarousel from './btnCarousel';
+import './CarouselHome.css'
 
 
 export default function Carousel() {
@@ -36,12 +36,12 @@ export default function Carousel() {
   })
 
   return (
-    <div className='container-carousel'>
+    <div className='container1'>
         {dataCarousel.map((data, index) => {
             return(
-              <div key={index} className={slideIndex === index + 1 ? "section active-anim" : "section"}>
-                  <img src={data.src} className={slideIndex === index + 1 ? 'img-actual' : ''} />
-                  <div className='texts'>
+              <div key={index} className={slideIndex === index + 1 ? "section1 active-anim1" : "section1"}>
+                  <img src={data.src} className={slideIndex === index + 1 ? 'img-actual1' : ''} />
+                  <div className='texts1'>
                     <h2>{data.title}</h2>
                     <p>{data.caption}</p>
                   </div>
@@ -52,9 +52,9 @@ export default function Carousel() {
         <BtnCarousel moveSlide={nextSlide} direction={"next"} />
         <BtnCarousel moveSlide={prevSlide} direction={"prev"} />
 
-        <div className='container-dots'>
+        <div className='container-dots1'>
           {Array.from({length:dataCarousel.length}).map((item, index) => (
-            <div key={index} className={slideIndex === index + 1 ? 'dot active' : 'dot'} onClick={() => moveDot(index + 1)}></div>
+            <div key={index} className={slideIndex === index + 1 ? 'dot1 active1' : 'dot1'} onClick={() => moveDot(index + 1)}></div>
           ))}
         </div>
     </div>

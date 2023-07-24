@@ -11,7 +11,7 @@ export default function Register() {
             <div style={{width:"60%", }}>
                 <img src="https://cdn.shopify.com/s/files/1/0577/5550/0600/articles/los-beneficios-vinos-sin-alcohol.jpg?v=1674154866" alt="" style={{width:"100%", height:"100%"}}/>
             </div>
-            <div style={{width:"40%", height:"90vh", backgroundColor:"white"}}>
+            <div style={{width:"40%", height:"90vh", backgroundColor:"#f6f6f6"}}>
                 <FormRegister />
             </div>
         </div>
