@@ -6,7 +6,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 const sequelize = new Sequelize(
   `postgres://user1:QxYjVhEyC8B83StT3SBRITMGyk64YvyN@dpg-ch9he0jhp8u5mta10g4g-a.oregon-postgres.render.com/wines`,
-  //`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+    //`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
 
  // `postgres://user1:QxYjVhEyC8B83StT3SBRITMGyk64YvyN@${DB_HOST}.oregon-postgres.render.com/wines`,
   {
