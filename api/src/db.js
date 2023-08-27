@@ -5,7 +5,8 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 const sequelize = new Sequelize(
-  `postgres://user1:QxYjVhEyC8B83StT3SBRITMGyk64YvyN@dpg-ch9he0jhp8u5mta10g4g-a.oregon-postgres.render.com/wines`,
+  `postgres://user1:X5yengcEyqUjLRZCmp3BuOg8iALxEoqj@dpg-cjlki30cfp5c73buu830-a.oregon-postgres.render.com/wines_wuut`,
+  //postgres://user1:QxYjVhEyC8B83StT3SBRITMGyk64YvyN@dpg-ch9he0jhp8u5mta10g4g-a.oregon-postgres.render.com/wines
     //`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
 
  // `postgres://user1:QxYjVhEyC8B83StT3SBRITMGyk64YvyN@${DB_HOST}.oregon-postgres.render.com/wines`,
