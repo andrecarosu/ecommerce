@@ -67,7 +67,7 @@ export default function FormRegister() {
       console.log(err.data);
       swal({
         title: 'Error',
-        text: 'Este email ya está en uso, intente nuevamente con otro email',
+        text: err,
         icon: 'error',
         timer: '3000',
         button: 'Accept'
